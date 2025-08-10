@@ -555,7 +555,6 @@ else
   puts "➡️ Migrating special ecosystem integrations"
   verbose "   ➡️ Create folders"
   FileUtils.mkdir_p("docs/ecosystem/alexa")
-  FileUtils.mkdir_p("docs/ecosystem/mycroft")
   FileUtils.mkdir_p("docs/ecosystem/google-assistant")
 
   ecosystem_path = "_ecosystem"
@@ -564,9 +563,6 @@ else
   process_file(".vuepress/openhab-docs/#{ecosystem_path}/alexa-skill", "readme.md", "docs/ecosystem/alexa", "https://github.com/openhab/openhab-alexa/blob/master/USAGE.md")
   verbose "    ➡️ images"
   FileUtils.cp_r(".vuepress/openhab-docs/#{ecosystem_path}/alexa-skill/images", "docs/ecosystem/alexa")
-
-  verbose "   ➡️ Process mycroft-skill docs"
-  process_file(".vuepress/openhab-docs/#{ecosystem_path}/mycroft-skill", "readme.md", "docs/ecosystem/mycroft", "https://github.com/openhab/openhab-mycroft/blob/master/USAGE.md")
 
   verbose "   ➡️ Process google-assistant docs"
   process_file(".vuepress/openhab-docs/#{ecosystem_path}/google-assistant", "readme.md", "docs/ecosystem/google-assistant",
