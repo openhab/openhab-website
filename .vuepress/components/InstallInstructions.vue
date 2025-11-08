@@ -50,12 +50,13 @@
       <p v-if="selectedVersion === 'snapshot'"><strong>Snapshot</strong> versions are at most 1 or 2 days old and include the latest code. Use a snapshot for testing out very recent changes, but be aware some snapshots might be unstable. Use in production at your own risk!</p>
     </div>
 
+    <!-- Raspberry Pi (openHABian with Raspberry Pi Imager) -->
     <div v-if="selectedSystem === 'raspberry-pi'">
       <hr>
-      <h3>{{optionNumber('openhabian')}}Use Raspberry Pi imager</h3>
+      <h3>{{optionNumber('openhabian')}}Use Raspberry Pi Imager</h3>
       <ol>
         <div class="download-button-container">
-          <a class="download-button big" target="_blank" href="https://www.raspberrypi.com/software/">Get Raspberry Pi imager</a>
+          <a class="download-button big" target="_blank" href="https://www.raspberrypi.com/software/">Get Raspberry Pi Imager</a>
         </div>
         <li>Select your openHABian image under <code>Other specific-purpose OS - Home assistants and home automation</code>.</li>
         <li>Insert the SD card in your device, connect the Ethernet cable and turn it on.</li>
@@ -67,6 +68,7 @@
       </ol>
     </div>
 
+    <!-- Linux Deb & Raspberry Pi -->
     <div v-if="(selectedSystem === 'tux' && selectedDistro === 'deb') || selectedSystem === 'raspberry-pi'">
       <hr>
       <h3>{{optionNumber('package')}}Install the APT Packages <span v-if="selectedSystem === 'tux'">(Recommended)</span></h3>
@@ -99,6 +101,7 @@ sudo chmod u=rw,g=r,o=r /usr/share/keyrings/openhab.gpg</code></pre></div>
         <li>Continue by following the <router-link to="/docs/tutorial/">tutorial</router-link> to get started</li>
       </ol>
     </div>
+    <!-- Linux RPM -->
     <div v-if="selectedSystem === 'tux' && selectedDistro === 'rpm'">
       <hr>
       <h3>{{optionNumber('package')}}Install the RPM Packages (Recommended)</h3>
@@ -128,6 +131,7 @@ enabled=1
       </ol>
     </div>
 
+    <!-- Docker -->
     <div v-if="selectedSystem === 'docker'">
       <hr>
       <h3>Docker Container Quick Installation</h3>
@@ -170,6 +174,31 @@ usermod -a -G openhab myownuser
       </ol>
     </div>
 
+    <!-- MacOS Homebrew -->
+    <div v-if="selectedSystem === 'apple' && selectedVersion !== 'snapshot'">
+      <hr>
+      <h3>{{optionNumber('package')}}Install the Homebrew Package (Recommended)</h3>
+      <ol>
+        <li>Install the <a target="_blank" href="https://brew.sh">Homebrew</a> package manager</li>
+        <li>Add the <a target="_blank" href="https://github.com/openhab/homebrew-openhab">openHAB Homebrew tap</a> (taps are third-party repositories in Homebrew)</li>
+        <div class="language-shell"><pre class="language-shell"><code>brew tap openhab/openhab</code></pre></div>
+        <li>Install the openHAB package</li>
+        &#128712; <small> This will automatically install the <code>openjdk@21</code> package.</small>
+        <div class="language-shell"><pre class="language-shell"><code>brew install {{ homebrewPackageName }}</code></pre></div>
+        <li>Pin both the openHAB & Java package versions</li>
+        &#128712; <small> This prevents Homebrew from upgrading those packages when running </small>
+        <div class="language-shell"><pre class="language-shell"><code>brew pin openjdk@21 {{ homebrewPackageName }}</code></pre></div>
+        <li><strong>(Optional)</strong> Install the add-ons for offline use</li>
+        &#128712; <small>	You don't need the add-ons package if your machine has Internet access, openHAB will download add-ons online as necessary.</small>
+        <div>The openHAB homebrew package will provide you with the necessary instructions to install add-ons for offline use, simply type <code>brew info {{ homebrewPackageName }}</code>.</div>
+        <li>Start openHAB as a service, then wait wait for openHAB to perform its initial startup (this can take a few minutes depending on your machine)</li>
+        <div class="language-shell"><pre class="language-shell"><code>brew services start {{ homebrewPackageName }}</code></pre></div>
+        <li>Navigate with a web browser to <code>http://&lt;ip-address&gt;:8080</code></li>
+        <li>Continue by following the <router-link to="/docs/tutorial/">tutorial</router-link> to get started</li>
+      </ol>
+    </div>
+
+    <!-- Manual installation -->
     <div v-if="selectedSystem !== 'docker'">
       <hr>
       <h3>{{optionNumber('manual')}}Manual Installation</h3>
@@ -393,8 +422,10 @@ export default {
       if (type === 'openhabian') return 'Option 1: '
       if (type === 'package' && this.selectedSystem === 'tux') return 'Option 1: '
       if (type === 'package' && this.selectedSystem === 'raspberry-pi') return 'Option 2: '
+      if (type === 'package' && this.selectedSystem === 'apple') return 'Option 1: '
       if (type === 'manual' && this.selectedSystem === 'tux') return 'Option 2: '
       if (type === 'manual' && this.selectedSystem === 'raspberry-pi') return 'Option 3: '
+      if (type === 'manual' && this.selectedSystem === 'apple') return this.selectedVersion === 'snapshot' ? '' : 'Option 2: '
       return ''
     }
   },
@@ -440,6 +471,10 @@ export default {
     },
     javaDownloadInstruction () {
       return `Install a recent Java 21 platform (we recommend your OS package repository provided OpenJDK build, or the <a target="_blank" href="https://adoptium.net/de/temurin/releases/?version=21&package=jre">Eclipse Adoptium Temurin</a> builds of OpenJDK)`
+    },
+    homebrewPackageName () {
+      if (this.selectedVersion === 'stable') return 'openhab'
+      return 'openhab-milestone'
     }
   }
 }
