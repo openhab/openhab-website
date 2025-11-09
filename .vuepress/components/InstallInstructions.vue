@@ -196,6 +196,7 @@ usermod -a -G openhab myownuser
         <li>Navigate with a web browser to <code>http://&lt;ip-address&gt;:8080</code></li>
         <li>Continue by following the <router-link to="/docs/tutorial/">tutorial</router-link> to get started</li>
       </ol>
+      <p>More detailed installation instructions can be found in the <a target="_blank" href="/docs/installation/macos.html">macOS Installation Docs</a>.</p>
     </div>
 
     <!-- Manual installation -->
