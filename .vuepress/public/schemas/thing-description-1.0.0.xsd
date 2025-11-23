@@ -198,6 +198,7 @@
 			<xs:enumeration value="Number:Temperature"/>
 			<xs:enumeration value="Number:Time"/>
 			<xs:enumeration value="Number:Volume"/>
+			<xs:enumeration value="Number:VolumePrice"/>
 			<xs:enumeration value="Number:VolumetricFlowRate"/>
 			<xs:enumeration value="Player"/>
 			<xs:enumeration value="Rollershutter"/>
@@ -318,6 +319,7 @@
 			<xs:enumeration value="Precipitation"/>
 			<xs:enumeration value="Presence"/>
 			<xs:enumeration value="Pressure"/>
+			<xs:enumeration value="Price"/>
 			<xs:enumeration value="Progress"/>
 			<xs:enumeration value="QualityOfService"/>
 			<xs:enumeration value="Radon"/>
