@@ -15,7 +15,7 @@ A new release of openHAB is here!
 openHAB 5.1 arrives with many improvements, most notably a **complete modernisation of Main UI**, the **introduction of a HomeKit Binding** for importing Apple-ecosystem devices, and significant **updates to JavaScript and Python Scripting**.
 
 But that's not all!
-Following the release of [openHAB 5.0](/blog/2025-07-21-openhab-5-0-release.html) this summer, this release includes many enhancements, and bug fixes.
+Following the release of [openHAB 5.0](/blog/2025-07-21-openhab-5-0-release.html) this summer, this release includes many enhancements and bug fixes.
 Several changes of the openHAB 5.1 release are "under the hood", but often those are the important changes that make our codebase ready for the future, so openHAB can continue to develop steadily.
 
 This release again includes breaking changes, but we have worked hard to provide an upgrade script to make the move to 5.1 as smooth as possible.
@@ -145,7 +145,7 @@ The `useTags=true` setting can be applied individually for each channel link of 
 _Florian Hotze ([@florian-h05](https://github.com/florian-h05)), openHAB Maintainer_
 
 The openHAB 5.1 release is an important release for Main UI.
-There may not be as many visible visual changes as in some releases, but as mentioned above, we have focused heavily on working "under the hood".
+There may not be as many visible visual changes as in some other releases, but as mentioned above, we have focused heavily on working "under the hood".
 
 ### Thing & Item Code Tabs
 
@@ -291,7 +291,7 @@ Additionally, a new logic block allows linking multiple _AND_ or _OR_ statements
 
 <img src="/uploads/2025-12-22-openhab-5-1-release/basicui-undef.png" class="img-beside-text-right" alt="Basic UI NULL or UNDEF" />
 
-Basic UI now allows distinguishing a `NULL` or `UNDEF` state when a switch, slider, colour picker, or colour temperature picker element is used by superimposing a question mark on the control.
+Basic UI now allows distinguishing a `NULL` or `UNDEF` state when a switch, slider, color picker, or color temperature picker element is used by superimposing a question mark on the control.
 
 <div style="clear:both;"></div>
 
