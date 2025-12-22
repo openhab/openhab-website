@@ -304,9 +304,9 @@ Some existing bindings also received significant improvements:
 - [Shelly Binding](/addons/bindings/shelly/): We added support for several new Gen3 and ZigBee devices and performed a major refactor of device definitions.
 - [Z-Wave JS Binding](/addons/bindings/zwavejs/): We added roller‑shutter support, notification channels, and unit conversions.
 
-The [Home Assistant MQTT](/addons/bindings/homeassistant/) and [Homie MQTT](/addons/bindings/homie/) conventions have been split from the MQTT binding into separate add-ons.
-This allows users to only install MQTT conventions they actually need.
-The upgrade tool will automatically install the Home Assistant and Homie conventions if there are managed MQTT Home Assistant or Homie things.
+The [Home Assistant](/addons/bindings/homeassistant/) and [Homie](/addons/bindings/homie/) bindings have been split from the MQTT binding into separate add-ons.
+This allows users to only install MQTT add-ons they actually need, reducing confusion and installation size if they are not used.
+The upgrade tool will automatically install the Home Assistant and Homie add-ons if there are managed MQTT Home Assistant or Homie things.
 
 ### HomeKit Binding
 
