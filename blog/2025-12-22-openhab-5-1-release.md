@@ -84,7 +84,25 @@ A huge thanking you to Jeff James ([@jsjames](https://github.com/jsjames)) for s
 
 ## Event Source Tracking
 
-@ccutrer
+_Cody Cutrer ([@ccutrer](https://github.com/ccutrer)), openHAB Maintainer_
+
+Have you ever been stumped as to why a particular item is changing states in your system?
+Have you ever wanted to take different actions in your rules depending on if a command is being sent from an Amazon Echo, the Android app, or from a rule? 
+Event sources let you do that!
+
+Broad-ranging work across many openHAB repositories has been done to **tag several events** — but in particular Item command and update events — and **how they flow through openHAB**.
+Event logging has been updated to include this source information:
+
+```
+2025-12-22 06:40:26.745 [INFO ] [openhab.event.ItemCommandEvent      ] - Item 'NetworkClosetFan_Switch' received command ON (source: org.openhab.automation.jrubyscripting$rule:climate.rb:56)
+2025-12-22 06:40:26.745 [INFO ] [penhab.event.ItemStatePredictedEvent] - Item 'NetworkClosetFan_Switch' predicted to become ON
+2025-12-22 06:40:26.789 [INFO ] [openhab.event.ItemStateChangedEvent ] - Item 'NetworkClosetFan_Switch' changed from OFF to ON (source: org.openhab.core.thing$homie:device:mosquitto:audiopigpio:gpio25#level)
+2025-12-22 06:42:34.678 [INFO ] [openhab.event.ItemCommandEvent      ] - Item 'PorchLights_Dimmer' received command ON (source: org.openhab.ios=>org.openhab.io.openhabcloud$ccutrer@email.com=>org.openhab.core.io.rest)
+2025-12-22 06:42:34.678 [INFO ] [openhab.event.ItemStateChangedEvent ] - Item 'PorchLights_Dimmer' changed from 0 to 100 (source: org.openhab.core.autoupdate)
+```
+
+An advanced use case example would be in one rule to check if the event was generated in another rule, and ignore a command if so, preventing a command loop between two rules.
+More details and examples can be found in the [developer documentation](/docs/developer/utils/events.html#the-core-events).
 
 ## Core Runtime Enhancements
 
