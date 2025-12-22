@@ -97,7 +97,7 @@ _Mark Herwege ([@mherwege](https://github.com/mherwege)), openHAB Contributor_
 
 Persistence services have been able to define default persistence strategies for Items.
 If a persistence service was installed, even without any persistence configuration, all Items would be persisted using those default strategies.
-This sometimes leads to unexpectedly persisting Items, filling databases, using storage, and impacting performance.
+This sometimes led to unexpectedly persisting Items, filling databases, using storage, and impacting performance.
 
 Even when a configuration existed, Items not present in the configuration were sometimes persisted before the configuration finished loading.
 To avoid these issues, we now require an explicit configuration for anything to be persisted.
