@@ -15,9 +15,8 @@ A new release of openHAB is here!
 openHAB 5.1 arrives with many improvements, most notably a **complete modernisation of Main UI**, the **introduction of a HomeKit Binding** for importing Apple-ecosystem devices, and significant **updates to JavaScript and Python Scripting**.
 
 But that's not all!
-Following the release of [openHAB 5.0](/blog/2025-07-21-openhab-5-0-release.html) this summer, this release focuses heavily on **"under the hood" improvements**.
-We have successfully migrated the Main UI to Vue 3, implemented event source tracking, and introduced configuration-as-code for JavaScript Scripting — allowing power users to manage complex setups with programmatic scripts rather than static files.
-These changes ensure that openHAB remains the most flexible and future-proof open-source automation platform available.
+Following the release of [openHAB 5.0](/blog/2025-07-21-openhab-5-0-release.html) this summer, this release includes many enhancements, and bug fixes.
+Several changes of the openHAB 5.1 release are "under the hood", but often those are the important changes that make our codebase ready for the future, so openHAB can continue to develop steadily.
 
 This release again includes breaking changes, but we have worked hard to provide an upgrade script to make the move to 5.1 as smooth as possible.
 Please review our [**official release notes**](https://github.com/openhab/openhab-distro/releases/tag/5.1.0) to learn about all breaking changes, new add-ons, enhancements, and fixes.
