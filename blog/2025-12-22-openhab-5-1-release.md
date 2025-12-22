@@ -527,6 +527,30 @@ The app now supports command Items for device control, local notifications, and 
 
 The watch companion app has received numerous upgrades and backend improvements, including enhanced networking, more consistent icon handling, and improved authentication — resulting in a smoother and more reliable experience.
 
+## openHAB on macOS: Announcing the Official Homebrew Tap
+
+_Florian Hotze ([@florian-h05](https://github.com/florian-h05)), openHAB Maintainer_
+
+For a long time, macOS users have typically run openHAB by manually downloading and extracting the distribution archive.
+With the release of openHAB 5.1, we are making the installation and update process significantly smoother for the Mac community by introducing an openHAB Homebrew Tap.
+
+Homebrew is the de facto standard package manager for macOS.
+Our new tap allows you to install, manage, and run openHAB as a background service, providing packages for both stable and milestone releases.
+By using the tap, openHAB integrates into the macOS system, allowing it to run as a background service (through launchd) that starts automatically at login.
+This eliminates the need to keep a terminal window open or manually run startup scripts.
+
+One of the most significant benefits of this new distribution method is the **inclusion of the openHAB CLI tool**.
+Previously exclusive to our Debian and RPM packages, the openhab-cli is now available on macOS through Homebrew.
+This provides a centralised way to:
+
+- Access the openHAB Console (Karaf).
+- Manage Backups and Restores.
+- Clear the Cache and view logs effortlessly.
+
+While we still recommend our APT or RPM packages for Linux environments, the Homebrew tap provides the most integrated and "Mac-native" experience for those running on Apple hardware.
+
+For installation instructions and a full list of commands, please refer to the [openHAB on macOS documentation](/docs/installation/macos.html#package-installation).
+
 # Enjoy and Get in Touch!
 
 We are excited to see what you will do with the new features and improvements in openHAB 5.1 — your feedback is always welcome!
