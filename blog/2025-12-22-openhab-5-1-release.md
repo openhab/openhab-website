@@ -477,7 +477,7 @@ _Holger Hees ([@HolgerHees](https://github.com/HolgerHees)), openHAB Maintainer_
 
 The Python Scripting add-on has made a major step forward:
 
-- GraalVM has been updated and is now shared between [JavaScript Scripting](/addons/automation/jsscripting/), [Home Assistant](/addons/bindings/homeassistant/), and [Python Scripting](/addons/automation/pythonscripting/).
+- GraalVM has been updated, now supporting Python 3.12, and is now shared between [JavaScript Scripting](/addons/automation/jsscripting/), [Home Assistant](/addons/bindings/homeassistant/), and [Python Scripting](/addons/automation/pythonscripting/).
 - The helper libraries have been updated to the latest version.
 - Support for virtual environments (VEnv) and native modules has been implemented.
 - Console commands for the Karaf console have been added, including access to an interactive Python console.
