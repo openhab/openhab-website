@@ -1,16 +1,15 @@
 <template>
-<time :datetime="date" class="icon">
-  <em>{{weekday}}</em>
-  <strong>{{month}}</strong>
-  <span>{{day}}</span>
-</time>
+  <time :datetime="date" class="icon">
+    <em>{{ weekday }}</em>
+    <strong>{{ month }}</strong>
+    <span>{{ day }}</span>
+  </time>
 </template>
 
 <style>
 /* Styling courtesy of http://www.sitepoint.com/calendar-icon-css3/ by @craigbuckler */
 
-time.icon
-{
+time.icon {
   font-size: 1em; /* change icon size */
   display: block;
   position: relative;
@@ -26,8 +25,7 @@ time.icon
   transform-origin: 50% 10%;
 }
 
-time.icon *
-{
+time.icon * {
   display: block;
   width: 100%;
   font-size: 1em;
@@ -37,8 +35,7 @@ time.icon *
   text-align: center;
 }
 
-time.icon strong
-{
+time.icon strong {
   position: absolute;
   top: 0;
   padding: 0.4em 0;
@@ -48,16 +45,14 @@ time.icon strong
   box-shadow: 0 2px 0 #fd9f1b;
 }
 
-time.icon em
-{
+time.icon em {
   position: absolute;
   bottom: 0.3em;
   color: #fd9f1b;
   font-weight: bold;
 }
 
-time.icon span
-{
+time.icon span {
   width: 100%;
   font-size: 2.3em;
   letter-spacing: -0.05em;
@@ -65,18 +60,18 @@ time.icon span
   color: #2f2f2f;
 }
 
-time.icon:hover, time.icon:focus
-{
+time.icon:hover, time.icon:focus {
   -webkit-animation: swing 0.6s ease-out;
   animation: swing 0.6s ease-out;
 }
 </style>
 
 <script>
-const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const shortDays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+const shortDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
-const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+const shortMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 export default {
   props: ['date', 'endDate'],
@@ -84,8 +79,9 @@ export default {
     const date = new Date(this.date)
     const endDate = new Date(this.endDate)
     const multiple_days = !isNaN(endDate) && (date.getDate() !== endDate.getDate())
+    const multiple_months = multiple_days && (date.getMonth() !== endDate.getMonth())
     return {
-      month: months[date.getMonth()],
+      month: (multiple_months) ? shortMonths[date.getMonth()] + ' - ' + shortMonths[endDate.getMonth()] : months[date.getMonth()],
       weekday: (multiple_days) ? shortDays[date.getDay()] + '	- ' + shortDays[endDate.getDay()] : days[date.getDay()],
       day: (multiple_days) ? date.getDate() + '	- ' + endDate.getDate() : date.getDate()
     }
