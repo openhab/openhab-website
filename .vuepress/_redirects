@@ -32,8 +32,9 @@
 # Dynamic redirects to raw docs source files with versioning support, used in openHAB's main UI
 /link/docs-src/4.2.x/*    https://raw.githubusercontent.com/openhab/openhab-docs/refs/heads/final-4.2.x/:splat 200!
 /link/docs-src/4.3.x/*    https://raw.githubusercontent.com/openhab/openhab-docs/refs/heads/final-4.3.x/:splat 200!
-/link/docs-src/5.0.x/*    https://raw.githubusercontent.com/openhab/openhab-docs/refs/heads/final-stable/:splat 200!
-/link/docs-src/5.1.x/*    https://raw.githubusercontent.com/openhab/openhab-docs/refs/heads/final/:splat 200!
+/link/docs-src/5.0.x/*    https://raw.githubusercontent.com/openhab/openhab-docs/refs/heads/final-5.0.x/:splat 200!
+/link/docs-src/5.1.x/*    https://raw.githubusercontent.com/openhab/openhab-docs/refs/heads/final-stable/:splat 200!
+/link/docs-src/5.2.x/*    https://raw.githubusercontent.com/openhab/openhab-docs/refs/heads/final/:splat 200!
 
 # Redirect download locations
 
