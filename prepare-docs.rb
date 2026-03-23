@@ -416,6 +416,19 @@ end
 verbose "   ➡️ images"
 FileUtils.cp_r(".vuepress/openhab-docs/addons/uis/apps/garmin/images", "docs/apps/garmin")
 
+# TODO: Remove if for the 5.2.0 release
+if $version == "final"
+  puts "➡️ Migrating the Sailfish OS app section"
+  Dir.glob(".vuepress/openhab-docs/addons/uis/apps/sailfishos/*.md") do |path|
+    file = File.basename(path)
+    verbose "   ➡️ #{file}"
+    process_file(".vuepress/openhab-docs/addons/uis/apps/sailfishos", file, "docs/apps/sailfishos",
+                 "#{$docs_repo_root}/addons/uis/apps/sailfishos/#{file}")
+  end
+  verbose "   ➡️ images"
+  FileUtils.cp_r(".vuepress/openhab-docs/addons/uis/apps/sailfishos/images", "docs/apps/sailfishos")
+end
+
 puts "➡️ Migrating the Administration section"
 Dir.glob(".vuepress/openhab-docs/administration/*.md") do |path|
   file = File.basename(path)
