@@ -35,4 +35,5 @@ Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
 Style/TernaryParentheses:
   EnforcedStyle: require_parentheses_when_complex
-
+Style/BlockAlignment:
+  EnforcedStyleAlignWith: start_of_block

@@ -28,9 +28,9 @@
   "scripts": {
     "predev": "npm install && npx update-browserslist-db@latest",
     "dev": "npx vuepress dev",
-    "prepare-docs": "ruby prepare-docs.rb $ARGUMENTS",
-    "add-blog-meta": "ruby add-blog-meta.rb",
-    "build": "npm run prepare-docs && ruby add-blog-meta.rb && vuepress build .",
+    "prepare-docs": "ruby scripts/prepare-docs.rb $ARGUMENTS",
+    "add-blog-meta": "ruby scripts/add-blog-meta.rb",
+    "build": "npm run prepare-docs && ruby scripts/add-blog-meta.rb && vuepress build .",
     "build-only": "vuepress build .",
     "prebuild-local": "npm run prepare-docs",
     "build-local": "npm run dev --silent",

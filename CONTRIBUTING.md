@@ -79,6 +79,6 @@ This will:
 
 1. Run `ruby prepare-docs.rb` as above.
 2. Run `vuepress build` which will output the final static files in `vuepress`.
-3. Run `ruby postbuild.rb` which removes all prefetch directives inserted by VuePress from `index.html`, which optimizes the initial load performance.
+3. Run `ruby scripts/postbuild.rb` which removes all prefetch directives inserted by VuePress from `index.html`, which optimizes the initial load performance.
 
 The complete build will take between 2 and 5 minutes.

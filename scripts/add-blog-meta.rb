@@ -2,12 +2,12 @@
 
 # Adds the OpenGraph & Twitter meta tags to the blog articles
 require "fileutils"
+require "pathname"
+require "tmpdir"
 
-puts "➡️ Adding meta-data to blog posts"
+REPO_ROOT = Pathname(__dir__).parent.realpath
 
-Dir.glob("blog/*.md") do |file|
-  next if file =~ /index\.md/
-
+def process_file(src, dst)
   in_frontmatter = false
   parsing_multiline_excerpt = false
   og_title = "openHAB"
@@ -17,12 +17,8 @@ Dir.glob("blog/*.md") do |file|
   # Feed Meta
   fm_author = nil
 
-  FileUtils.mkdir_p(".vuepress/tmp")
-  FileUtils.mv(file, ".vuepress/tmp/#{File.basename(file)}")
-
-  puts "   ➡️ #{file}"
-  File.open(file, "w+") do |out|
-    File.open(".vuepress/tmp/#{File.basename(file)}").each do |line|
+  File.open(dst, "w+") do |out|
+    File.open(src).each do |line|
       # FIXME: require "yaml" and parse properly one day...
       if parsing_multiline_excerpt
         if line =~ /^  /
@@ -69,8 +65,7 @@ Dir.glob("blog/*.md") do |file|
             out.puts "feed:"
             out.puts "  image: https://www.openhab.org#{og_image}" if og_image
             out.puts "  author:"
-            out.puts "    - "
-            out.puts "      name: #{fm_author}"
+            out.puts "    - name: #{fm_author}"
           end
 
           in_frontmatter = false
@@ -81,5 +76,20 @@ Dir.glob("blog/*.md") do |file|
 
       out.puts line
     end
+  end
+end
+
+puts "➡️ Adding metadata to blog posts"
+
+Dir.mktmpdir do |tmp_dir|
+  tmp_workspace = Pathname(tmp_dir)
+
+  Pathname.glob(REPO_ROOT / "blog/*.md").each do |src|
+    next if src.basename.fnmatch?("index.md")
+
+    dst = tmp_workspace / src.basename
+    puts "   ➡️ #{src.basename}"
+    process_file(src, dst)
+    FileUtils.mv(dst, src) if dst.exist? && !FileUtils.identical?(src, dst)
   end
 end
