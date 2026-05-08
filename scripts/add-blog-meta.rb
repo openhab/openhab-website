@@ -16,6 +16,7 @@ def process_file(src, dst)
 
   # Feed Meta
   fm_author = nil
+  meta_present = false
 
   File.open(dst, "w+") do |out|
     File.open(src).each do |line|
@@ -33,6 +34,9 @@ def process_file(src, dst)
 
       og_title = line.gsub("title: ", "").gsub("\n", "") if in_frontmatter && line =~ /^title:/
 
+      # detect if meta: block already exists in frontmatter to avoid duplicate insertion
+      meta_present = true if in_frontmatter && line =~ /^\s*meta:/
+
       if in_frontmatter && line =~ /^excerpt:/
         og_description = line.gsub("excerpt: ", "").gsub("\n", "").gsub("[", "").gsub("]", "").gsub(%r{\(http[:/\-0-9A-Za-z\.]+\)}, "")
         if og_description == ">-"
@@ -49,28 +53,30 @@ def process_file(src, dst)
       if line =~ /^---$/
         if in_frontmatter
           # Add OpenGraph tags
-          out.puts "meta:"
-          out.puts "  - name: twitter:card"
-          out.puts "    content: summary_large_image"
-          out.puts "  - property: og:title"
-          out.puts "    content: \"#{og_title.gsub('"', '\"')}\""
-          out.puts "  - property: og:description"
-          out.puts "    content: #{og_description}"
-          out.puts "  - property: og:image" if og_image
-          out.puts "    content: https://www.openhab.org#{og_image}" if og_image
+          unless meta_present
+            out.puts "meta:"
+            out.puts "  - name: twitter:card"
+            out.puts "    content: summary_large_image"
+            out.puts "  - property: og:title"
+            out.puts "    content: \"#{og_title.gsub('"', '\\"')}\""
+            out.puts "  - property: og:description"
+            out.puts "    content: #{og_description}"
+            out.puts "  - property: og:image" if og_image
+            out.puts "    content: https://www.openhab.org#{og_image}" if og_image
 
-          # Add feed meta tags, when something relevant is available
-          if !fm_author.nil? || !og_image.nil?
-
-            out.puts "feed:"
-            out.puts "  image: https://www.openhab.org#{og_image}" if og_image
-            out.puts "  author:"
-            out.puts "    - name: #{fm_author}"
+            # Add feed meta tags, when something relevant is available
+            if !fm_author.nil? || !og_image.nil?
+              out.puts "feed:"
+              out.puts "  image: https://www.openhab.org#{og_image}" if og_image
+              out.puts "  author:"
+              out.puts "    - name: #{fm_author}"
+            end
           end
 
           in_frontmatter = false
         else
           in_frontmatter = true
+          meta_present = false
         end
       end
 
