@@ -39,7 +39,7 @@ def clean_ignored_files(path, dry_run: false)
   mode = dry_run ? "-ndX" : "-fdXq"
 
   Dir.chdir(path) do
-    puts "🧹 Cleaning ignored files in #{path} (#{dry_run ? "dry run" : ""})..."
+    puts "🧹 Cleaning ignored files in #{path} #{dry_run ? "(dry run)" : ""}..."
     output = `git clean #{mode}`
     puts output if dry_run
     $CHILD_STATUS.success?
