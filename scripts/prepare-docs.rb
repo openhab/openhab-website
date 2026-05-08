@@ -81,8 +81,10 @@ unless process_utils.exist?
     raise unless e.io.status[0] == "404"
 
     # Temporarily fetch this from my local dev branch until the PR is merged, as process_utils is required to build the docs
-    dev_process_utils = DEV_SRC / "scripts/lib/process_utils.rb"
-    FileUtils.cp(dev_process_utils, process_utils)
+    process_utils.write(URI.open("https://raw.githubusercontent.com/jimtng/openhab-docs/refactor-prepare-docs/scripts/lib/process_utils.rb").read)
+
+    # dev_process_utils = DEV_SRC / "scripts/lib/process_utils.rb"
+    # FileUtils.cp(dev_process_utils, process_utils)
   end
 end
 
