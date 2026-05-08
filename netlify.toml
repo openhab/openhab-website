@@ -1,0 +1,2 @@
+[build.environment]
+  MISE_RUBY_COMPILE = "false"

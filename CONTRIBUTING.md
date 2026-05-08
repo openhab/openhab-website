@@ -4,7 +4,7 @@ This website is made with [VuePress](https://vuepress.vuejs.org/).
 It will be installed as part of the dev dependencies.
 For the used version of vuepress to work correctly, Node.js 16.20.0 or **older** is needed.
 Alternatively on newer versions [the legacy OpenSSL provider can be enabled as described in this StackOverflow thread](https://stackoverflow.com/questions/69692842/error-message-error0308010cdigital-envelope-routinesunsupported).
-For the Ruby scripts used by the website build, Ruby 3.3.2 is needed.
+For the Ruby scripts used by the website build, Ruby 3.3.11 is needed.
 If you are using a Node.js version manager like [fnm](https://github.com/Schniz/fnm), the provided `.node-version` file should automatically set the correct Node.js version needed.
 If you are using a Ruby version manager like [rvm](https://rvm.io/), running `rvm use` should automatically set the correct version according to the `.ruby-version` file.
 
@@ -24,23 +24,23 @@ This chapter describes how to setup a local environment to be able to build the 
 
 The following has been tested on Linux and MacOS (Windows seems to have a few minors that prevent the script to run completely).
 
-#### Ruby 3.3.2
+#### Ruby 3.3.11
 
 It is highly recommended to use the [Ruby Version Manager (RVM)](https://rvm.io).
 Once installed it will help to automatically download and configure `Ruby`:
 
 ```bash
-$ rvm install "ruby-3.3.2"
+$ rvm install "ruby-3.3.11"
 $ rvm use
-Using /home/foo/.rvm/gems/ruby-3.3.2
+Using /home/foo/.rvm/gems/ruby-3.3.11
 ```
 
 If there are no binary packages available for your distribution, `rvm` will compile `Ruby` from the source code:
 
 ```bash
-$ rvm install "ruby-3.3.2"
+$ rvm install "ruby-3.3.11"
 Searching for binary rubies, this might take some time.
-No binary rubies available for: ubuntu/22.04/x86_64/ruby-3.3.2.
+No binary rubies available for: ubuntu/22.04/x86_64/ruby-3.3.11.
 Continuing with compilation.
 # ...
 ```
