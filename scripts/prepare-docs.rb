@@ -205,6 +205,11 @@ else
       <ThingDocRenderer />
     MARKDOWN
   end
+
+  # Custom fixes
+  broken_file = Pathname("addons/bindings/shelly/doc/UseCaseSmartRoller.md")
+  lines = broken_file.readlines.reject { |line| line.include?("uiroller_1.png") }
+  broken_file.write(lines.join)
 end
 
 # Write arrays of addons by type to include in VuePress config.js
