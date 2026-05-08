@@ -65,7 +65,10 @@ elsif !DOCS_SRC.exist?
   else
     puts "➡️ Copying temp source files for development"
     # Temporarily fetch the src from local dev branch until the PR is merged, as the src folder is required to build the docs
-    FileUtils.cp_r(DEV_SRC / "src", DOCS_SRC / "src")
+
+    `git clone --depth 1 --branch refactor-prepare-docs "https://github.com/jimtng/openhab-docs.git" /tmp/openhab-docs-dev`
+    FileUtils.cp_r("/tmp/openhab-docs-dev/src", DOCS_SRC / "src")
+    FileUtils.rm_rf("/tmp/openhab-docs-dev") # Clean up the temporary clone
   end
 end
 
