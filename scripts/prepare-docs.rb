@@ -20,9 +20,6 @@ DOCS_DST = Pathname("docs")
 ADDONS_DST = Pathname("addons")
 LOGOS_DST = Pathname(".vuepress/public/logos")
 
-# Temporary fallback source for development, until the PR is merged
-DEV_SRC = Pathname("../../openhab-docs.worktrees/refactor-prepare-docs")
-
 $verbose = false
 
 IGNORED_ADDONS = %w[transport.modbus transport.feed javasound webaudio oh2].freeze # No longer relevant?
@@ -99,9 +96,6 @@ unless process_utils.exist?
 
     # Temporarily fetch this from my local dev branch until the PR is merged, as process_utils is required to build the docs
     process_utils.write(URI.open("https://raw.githubusercontent.com/jimtng/openhab-docs/refactor-prepare-docs/scripts/lib/process_utils.rb").read)
-
-    # dev_process_utils = DEV_SRC / "scripts/lib/process_utils.rb"
-    # FileUtils.cp(dev_process_utils, process_utils)
   end
 end
 
