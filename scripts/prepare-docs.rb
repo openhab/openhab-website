@@ -68,12 +68,6 @@ elsif !DOCS_SRC.exist?
     FileUtils.cp_r("/tmp/openhab-docs-dev/src", DOCS_SRC / "src")
     FileUtils.rm_rf("/tmp/openhab-docs-dev") # Clean up the temporary clone
 
-    # the openhabian docs were fetched by github action into the final branch
-    # our temporary src is from the main branch, so we need to copy the openhabian docs into
-    # the temporary src to be able to build the docs properly
-    # this is a temporary solution until the PR is merged, as the installation docs are required to build the docs
-    `rsync -a #{DOCS_SRC}/installation/ #{DOCS_SRC}/src/installation/`
-
     if DOCS_REPO_BRANCH == "final-stable"
       # We need to do this because the final-stable branch used in the CI lags behind the contents
       # of the dev branch containing the src folder that we copied above
@@ -81,6 +75,14 @@ elsif !DOCS_SRC.exist?
       sidebar_js.write(URI.open("https://raw.githubusercontent.com/jimtng/openhab-docs/refactor-prepare-docs/.vuepress/docs-sidebar.js").read) # Remove /src/ from the sidebar links, as our temporary src is not in the root of the repository
     end
   end
+end
+
+# Temporarily sync the openhabian docs from the old location
+# Once a new openhabian docs PR is merged, the new action will publish them to src/installation
+# and when that happens, this sync can be removed
+if Dir.exist?(DOCS_SRC / "installation")
+  puts "➡️ Syncing openhabian docs from old location to src/installation"
+  `rsync -a #{DOCS_SRC}/installation/ #{DOCS_SRC}/src/installation/`
 end
 
 raise "Failed to prepare openhab-docs source. Please check if the repository was cloned successfully." unless DOCS_SRC.join("src").exist?
