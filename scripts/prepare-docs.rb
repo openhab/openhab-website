@@ -208,8 +208,11 @@ else
 
   # Custom fixes
   broken_file = Pathname("addons/bindings/shelly/doc/UseCaseSmartRoller.md")
-  lines = broken_file.readlines.reject { |line| line.include?("uiroller_1.png") }
-  broken_file.write(lines.join)
+  if broken_file.exist?
+    puts "   ➡️ Fixing broken Shelly doc"
+    lines = broken_file.readlines.reject { |line| line.include?("uiroller_1.png") }
+    broken_file.write(lines.join)
+  end
 end
 
 # Write arrays of addons by type to include in VuePress config.js
