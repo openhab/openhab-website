@@ -63,12 +63,19 @@ elsif !DOCS_SRC.exist?
   if DOCS_SRC.join("src").exist? # Check if the clone was successful by checking for the existence of the "src" folder
     puts "➡️ Clone successful"
   else
-    puts "➡️ Copying temp source files for development"
     # Temporarily fetch the src from local dev branch until the PR is merged, as the src folder is required to build the docs
+    # This is a fallback before the openhab/openhab-docs#2718 PR is merged
+    puts "➡️ Copying temp source files during development"
 
     `git clone --depth 1 --branch refactor-prepare-docs "https://github.com/jimtng/openhab-docs.git" /tmp/openhab-docs-dev`
     FileUtils.cp_r("/tmp/openhab-docs-dev/src", DOCS_SRC / "src")
     FileUtils.rm_rf("/tmp/openhab-docs-dev") # Clean up the temporary clone
+
+    # the openhabian docs were fetched by github action into the final branch
+    # our temporary src is from the main branch, so we need to copy the openhabian docs into
+    # the temporary src to be able to build the docs properly
+    # this is a temporary solution until the PR is merged, as the installation docs are required to build the docs
+    `rsync -a #{DOCS_SRC}/installation/ #{DOCS_SRC}/src/installation/`
   end
 end
 
@@ -122,15 +129,12 @@ verbose "   ➡️ habot"
 process_directory src: DOCS_SRC / "_addons_uis/habot",
                   dst: DOCS_DST / "ui/habot"
 
-puts "➡️ Migrating the Garmin app section"
-# The Garmin md provides its own source: frontmatter
-process_directory src: DOCS_SRC / "addons/uis/apps/garmin",
-                  dst: DOCS_DST / "apps/garmin"
-
-puts "➡️ Migrating the Sailfish OS app section"
-# The Sailfish OS md provides its own source: frontmatter
-process_directory src: DOCS_SRC / "addons/uis/apps/sailfishos",
-                  dst: DOCS_DST / "apps/sailfishos"
+puts "➡️ Migrating the apps section"
+# The external apps docs provide their own `source:` frontmatter
+# No need to process individual app.
+# This will process everything in the source folder
+process_directory src: DOCS_SRC / "addons/uis/apps",
+                  dst: DOCS_DST / "apps"
 
 ### ADDONS
 
@@ -162,7 +166,11 @@ else
 
   puts "➡️ Migrating add-ons: UI"
   process_directory src: DOCS_SRC / "_addons_uis",
-                    dst: ADDONS_DST / "ui"
+                    dst: ADDONS_DST / "ui" do |current_path|
+                      next if current_path.each_filename.include?("org.openhab.ui")
+
+                      true
+                    end
 
   # Handle those three separately - copy them in the "ecosystem" section
   puts "➡️ Migrating special ecosystem integrations"
@@ -187,8 +195,7 @@ else
       next false # If it is zwave, only include readme.md and doc/things.md
     end
 
-    # For all other addons, include everything
-    true
+    true # For all other addons, include everything
   end
 
   zwave_things_src = zwave_src / "doc/things.md"
