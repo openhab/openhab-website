@@ -76,6 +76,13 @@ elsif !DOCS_SRC.exist?
     # the temporary src to be able to build the docs properly
     # this is a temporary solution until the PR is merged, as the installation docs are required to build the docs
     `rsync -a #{DOCS_SRC}/installation/ #{DOCS_SRC}/src/installation/`
+
+    if DOCS_REPO_BRANCH == "final-stable"
+      # We need to do this because the final-stable branch used in the CI lags behind the contents
+      # of the dev branch containing the src folder that we copied above
+      sidebar_js = DOCS_SRC.join(".vuepress/docs-sidebar.js")
+      sidebar_js.write(URI.open("https://raw.githubusercontent.com/jimtng/openhab-docs/refactor-prepare-docs/.vuepress/docs-sidebar.js").read) # Remove /src/ from the sidebar links, as our temporary src is not in the root of the repository
+    end
   end
 end
 
