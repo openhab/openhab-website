@@ -101,6 +101,9 @@ unless process_utils.exist?
   end
 end
 
+# TEMP:
+# process_utils.write(File.read("../../openhab-docs.worktrees/refactor-prepare-docs/scripts/lib/process_utils.rb"))
+
 # After we've cloned the openhab-docs, we can require process_utils to use its helper functions
 require DOCS_SRC.expand_path / "scripts/lib/process_utils"
 
