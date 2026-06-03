@@ -471,7 +471,7 @@ export default {
       }
     },
     javaDownloadInstruction () {
-      return `Install a recent Java 21 platform (we recommend your OS package repository provided OpenJDK build, or the <a target="_blank" href="https://adoptium.net/de/temurin/releases/?version=21&package=jre">Eclipse Adoptium Temurin</a> builds of OpenJDK)`
+      return `Install a recent Java 21 platform (we recommend your OS package repository provided OpenJDK build, or the <a target="_blank" href="https://adoptium.net/temurin/releases/?version=21&package=jre">Eclipse Adoptium Temurin</a> builds of OpenJDK)`
     },
     homebrewPackageName () {
       if (this.selectedVersion === 'stable') return 'openhab'
