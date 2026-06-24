@@ -19,8 +19,6 @@
 
     <events-section />
 
-    <alternative-to-section />
-
   </div>
 </template>
 
@@ -34,7 +32,6 @@ import OpenhabianSection from './home/OpenhabianSection.vue'
 import OpenSourceSection from './home/OpenSourceSection.vue'
 import CommunitySection from './home/CommunitySection.vue'
 import EventsSection from './home/EventsSection.vue'
-import AlternativeToSection from './home/AlternativeToSection.vue'
 
 export default {
   components: {
@@ -46,8 +43,7 @@ export default {
     OpenhabianSection,
     OpenSourceSection,
     CommunitySection,
-    EventsSection,
-    AlternativeToSection
+    EventsSection
   },
   mounted () {
     if (this.$sr) {
