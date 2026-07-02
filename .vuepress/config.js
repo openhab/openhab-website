@@ -123,8 +123,8 @@ module.exports = {
     logo: `/openhab-logo-empowering.svg`,
     // repo: 'openhab',
     editLinks: false,
-    activeHeaderLinks: false,
-    sidebarDepth: 0,
+    activeHeaderLinks: true,
+    sidebarDepth: 2,
     docsDir: 'docs',
     docsVersion,
     algolia: {
