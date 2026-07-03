@@ -15,9 +15,9 @@ Can you believe it's already been a year since the major release of openHAB 5.0?
 We are thrilled to introduce openHAB 5.2, packed with exciting new features, plenty of bug fixes, and amazing new AI features!
 
 But that's not all!
-Following the release of [openHAB 5.1](/blog/2025-12-22-openhab-5-1-release.html) last winter with many "under the hood" changes, this release focuses on more visual changes.
+Following the release of [openHAB 5.1](/blog/2025-12-22-openhab-5-1-release.html) last winter with many "under the hood" changes, this release focuses on more user-facing changes.
 
-This release includes only a small number of breaking changes, so upgrading from openHAB 5.2 should be really smooth.
+This release includes only a small number of breaking changes, so upgrading from openHAB 5.1 should be really smooth.
 Please review our [**official release notes**](https://github.com/openhab/openhab-distro/releases/tag/5.2.0) to learn about all breaking changes, new add-ons, enhancements, and fixes.
 
 With that being said, we again want to share some statistics that show the progress in numbers and highlight some of the new features that you should not miss.
