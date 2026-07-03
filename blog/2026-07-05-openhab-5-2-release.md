@@ -69,9 +69,42 @@ In the following sections, our maintainers and contributors introduce a section 
 
 _Florian Hotze ([@florian-h05](https://github.com/florian-h05)), openHAB Maintainer_
 
-## MCP Integration
+## The openHAB MCP Server
 
 _Dan Cunningham ([@digitaldan](https://github.com/digitaldan)), openHAB Maintainer_
+
+The Model Context Protocol (MCP) is a standard way for AI assistants to connect with third party systems using the concept of tool calling, specially crafted API endpoints that are tailored for agentic use. Our new MCP binding exposes your openHAB instance using a wide range of tools, giving AI agents a powerful way to control, edit and monitor your home system.
+
+Capabilities:
+
+- Query and control your items using natural language
+- Find the right items through the openHAB semantic model and fuzzy matching
+- Create rules, both traditional recurring and new one shot rules
+- Build and edit Main UI pages, custom widgets, floorplans and more
+- Manage static assets like icons and images
+- Manage things, read logs, and reach the full REST API for advanced setups
+
+### Controlling openHAB
+
+The server uses your semantic model and fuzzy matching to find the right rooms, equipment, and points, so a request for the office lights works even if the item is named office ceiling light. Ask it to dim the bedroom lights to 30 percent and set them to warm white, or set the living room to movie mode and tell you if anything is still on downstairs. You can also ask general questions, like what doors are unlocked right now, or is the garage still open and quickly get an accurate state of your home.
+
+### Creating rules
+
+You can also ask your agent to create traditional recurring rules, like turning on the porch light every day at sunset, or run the sprinklers for twenty minutes on Monday, Wednesday, and Friday mornings. Additionally, the MCP server supports a new one shot style rule for actions that should only fire once, like alarms or reminders. Say turn off the patio heater in one hour, or turn on the outside lights tonight at 7, and the rule will automatically fire once and then delete itself.
+
+### Editing the Main UI
+
+With the UI feature enabled, you can build and modify Main UI pages, floorplans and custom widgets. The MCP server is aware of every widget and control the Main UI supports, so the assistant always knows the full set of components available and how each one is configured. You can ask it to create a page or floorplan for a room and it will lay out the design, place your devices on it, and style the page into something modern and beautiful. Pair this with the optional static asset support and the assistant can create an interactive SVG, say a floorplan of your house, upload it, then use the UI tools to wire it into a page or floorplan so the rooms and devices on it become live controls.
+
+### Advanced tools
+
+For more involved setups the assistant can directly manage your things and items, as well as read your logs to help track down a problem. And when you need something the other tools do not cover, it can optionally have access to the full openHAB REST API, which means anything openHAB exposes is available.
+
+### Security and access
+
+Access is built around an openHAB user token, either generated manually through the Main UI or using the built in OAuth connector, which allows a one click setup option using a web browser for popular clients that support it. Different tools can be enabled or disabled, allowing for granular control of access to sensitive areas like thing configuration or full API access. Agents may connect directly to your local instance for clients that support local access, like Claude Code, Codex or Antigravity. Other agents that need outside access like Claude, Gemini and ChatGPT can use the optional myopenHAB connection option, which is automatically configured through our cloud service when enabled on your local instance.
+
+You can read more about our new MCP binding, including tool use, client setup and example use cases at <https://openhab.org/addons/integrations/mcp/>
 
 ## Core Runtime Enhancements
 
@@ -165,7 +198,7 @@ TODO
 
 ## openHABian Enhancements
 
-# Enjoy and Get in Touch!
+# Enjoy and Get in Touch
 
 We are excited to see what you will do with the new features and improvements in openHAB 5.2 — your feedback is always welcome!
 As always, our [community forum](https://community.openhab.org/) is there for questions, comments, and discussions.
