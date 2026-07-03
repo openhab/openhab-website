@@ -63,21 +63,87 @@ In the following sections, our maintainers and contributors introduce a section 
 
 ## Chat with openHAB
 
+_Florian Hotze ([@florian-h05](https://github.com/florian-h05)), openHAB Maintainer_
+
 ## MCP Integration
+
+_Dan Cunningham ([@digitaldan](https://github.com/digitaldan)), openHAB Maintainer_
 
 ## Core Runtime Enhancements
 
 ### YAML Configuration Files for the UI
 
+TODO @ ??
+
 ### YAML File Format for Rules & Rule Templates
 
-## Main UI Enhancements
+TODO @Nadahar
+
+### Protect your Secrets with Environment Variables
 
 _Florian Hotze ([@florian-h05](https://github.com/florian-h05)), openHAB Maintainer_
 
-## Blockly Enhancements
+Now that our new MCP integration makes it easier than ever before to work on your openHAB configuration with AI agents, you might have already wondered:
 
-## Basic UI Enhancements
+How to protect my secrets? How can I avoid that credentials and API keys are accessed by an AI agent?
+
+To solve this issue, we've added support for referencing environment variables in Thing configuration.
+Using the new `${ENV:MY_API_KEY}` syntax, you can pass the value of the `MY_API_KEY` environment variable to a Thing's configuration property.
+This feature also comes handy when tracking your openHAB configuration with Git — keeping out secrets from Git history is common and best practice.
+
+## Main UI Enhancements
+
+Retaining the incredible momentum from openHAB 5.1 and the big Vue 3 & Framework7 upgrade, we've put much work into refactoring major parts of our codebase from JavaScript to TypeScript.
+Making these "under the hood" changes allowed us improving our overall code quality & stability, as well as enabling us to ship new features easier.
+
+### Access Logs across the UI
+
+_Jimmy Tanagra ([@jimtng](https://github.com/jimtng)), openHAB Maintainer_
+
+TODO @jimtng
+
+### Charting Made More Powerful
+
+_Florian Hotze ([@florian-h05](https://github.com/florian-h05)), openHAB Maintainer_
+
+Main UI includes a charting engine since its initial release with openHAB 3.0, and with openHAB 5.2 charts receive their biggest upgrade yet.
+After refactoring all charting code to type-safe TypeScript code, we've addresses a ton of long-standing feature requests:
+
+- **Display State Support:**<br/>
+  A new series parameter has been added to format chart values according to the Item's state description.
+  For UoM-enabled Items, this will display the chart data in the Item's display unit, and not the "system" unit.
+- **More Sophisticated Tooltips:**<br/>
+  Chart tooltipes have been improved to display the unit of measurement or mapped Item states if defined through state descriptions.
+- **Extended UI Support for Configuration:**<br/>
+  It has always been possible to customize charts by providing ECharts options through the code tab.
+  openHAB 5.2 finally adds UI support for configuring the most common series options, including:
+  - color
+  - series label position (for line/bar charts)
+  - border radius (for bar charts)
+  - x-axis style (label only, label & line, label & line & axis ticks)
+  - y-axis style (axis line, minor lines, areas can be individually enabled or disabled)
+- **Initial Period for Fixed Period Charts:**<br/>
+  The initial period for fixed period charts can now be set.
+- **Fixed Chart Periods over 1 Year:**<br/>
+  Fixed chart periods 2 years, 3 years and five years have been added, extended the chart range.
+- **New Yearly Aggregation:**<br/>
+  A new yearly aggregation has been added, allowing to compare several years in fixed period charts.
+
+### Redesigned Persistence Configuration
+
+TODO @mherwerge/@jsjames
+
+### Persistence Status on the Item page
+
+_Mark Herwege ([@mherwege](https://github.com/mherwege)), openHAB Maintainer_
+
+TODO @mherwege
+
+### Setup Wizard
+
+_Mark Herwege ([@mherwege](https://github.com/mherwege)), openHAB Maintainer_
+
+TODO @mherwege
 
 ## Add-on Enhancements
 
