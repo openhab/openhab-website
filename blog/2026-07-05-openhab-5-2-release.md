@@ -122,7 +122,34 @@ You can read more about our new MCP binding, including tool use, client setup, a
 
 ### YAML Configuration Files for the UI
 
-TODO @ ??
+_Jimmy Tanagra ([@jimtng](https://github.com/jimtng)), openHAB Maintainer_
+
+In this release, file-based YAML support has been introduced for UI pages and custom widgets.
+
+Previously, customized Main UI components were strictly created and managed via Main UI.
+With this update, you can now define, organize, and back up your pages and widgets directly inside your `$OPENHAB_CONF` directory using simple, clean YAML files.
+
+Key details of this new feature include:
+
+- **Marketplace Integration:**<br/>
+  Custom widgets can be easily adapted from the openHAB Marketplace for your configuration files.
+  You simply need to use the UID as the map key and nest the marketplace configuration underneath it.
+- **Read-Only Safeguards:**<br/>
+  Much like file-based Items, Things, and Rules, UI components loaded via configuration files are marked as read-only.
+  Main UI and the REST API treat these as unmanaged entities, displaying a padlock icon and blocking accidental edits to ensure your text files remain the single source of truth.
+- **Broad Page Support:**<br/>
+  The YAML parser natively supports standard page layouts (Layout, Tabs, Map, Floor Plan, and Chart).
+   Additionally, support has been extended to seamlessly handle file-based home page configurations and the Overview page layout.
+
+This change completes an essential missing link for power users who want to back up, version-control (via Git), and deploy their entire openHAB user interface side-by-side with their items, things, and rules.
+
+#### Syntax
+
+The precise syntax rules, structure, and configuration keys are documented in the [Pages YAML Documentation](/docs/configuration/yaml/pages.html) and [Widgets YAML Documentation](/docs/configuration/yaml/widgets.html).
+
+If you have existing UI-managed components that you wish to mirror or move into text files, you can easily view their structure directly within the UI's **Code** tab.
+To streamline this process, a **Copy** button has been added to the page and widget lists.
+By selecting one or more items, you can instantly copy the correct file-ready YAML syntax directly to your clipboard.
 
 ### YAML File Format for Rules & Rule Templates
 
