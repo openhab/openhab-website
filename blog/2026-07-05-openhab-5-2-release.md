@@ -43,15 +43,18 @@ Countless [other repositories](https://github.com/openhab) — from documentatio
 A massive thank you to everyone driving openHAB forward!
 
 We also want to take the moment to shine a spotlight on our top code contributors for this release,
-recognized for landing the most commits in their respective repositories:
+recognized for landing the most commits our incredibly large contributions in their respective repositories:
 
 <!-- https://github.com/florian-h05/github-stats?tab=readme-ov-file#contribution_stats -->
 
 - Holger Friedrich ([@holgerfriedrich](https://github.com/holgerfriedrich)) for openHAB Core & Add-ons
 - Laurent Garnier ([@lolodomo](https://github.com/lolodomo)) for openHAB Core
+- Mark Herwege ([@mherwege](https://github.com/mherwege)) for openHAB Core
+- Ravi Nadahar ([@nadahar](https://github.com/nadahar)) for openHAB Core
 - Leo Siepel ([@lsiepel](https://github.com/lsiepel)) for openHAB Add-ons
 - Jacob Laursen ([@jlaur](https://github.com/jlaur)) for openHAB Add-ons
 - Florian Hotze ([@florian-h05](https://github.com/florian-h05)) for the openHAB Main UI & openHAB Core
+- Jeff James ([@jsjames](https://github.com/jsjames)) for the openHAB Main UI
 
 Beyond coding, many of these individuals pull double duty as maintainers — evaluating pull requests, shaping architectural decisions, and mentoring newcomers.
 As of this release, our team includes **43 active maintainers** across the project.
