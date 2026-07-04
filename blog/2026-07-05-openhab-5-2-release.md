@@ -30,13 +30,13 @@ With that being said, we again want to share some statistics that show the progr
 
 Every new feature in openHAB 5.2 is a testament to the dedication of our vibrant, global community.
 Activity across our GitHub repositories has been non-stop over these past few months.
-Altogether, 141 contributors poured their efforts into a whopping 3.082 commits across our [GitHub repositories](https://github.com/openhab).
+Altogether, 141 contributors poured their efforts into a whopping 3,082 commits across our [GitHub repositories](https://github.com/openhab).
 
 This big release includes impactful work across every part of the ecosystem:
 
-- **[Core](https://github.com/openhab/openhab-core)**: 323 pull requests, including 110 enhancements and 58 bug fixes — adding 44.791 lines of new code.
-- **[Add-ons](https://github.com/openhab/openhab-addons)**: 798 pull requests, including 223 enhancements and 233 bug fixes, resulting in 554.128 lines of new code.
-- **[UIs](https://github.com/openhab/openhab-webui)**: 467 pull requests, including 108 enhancements and 175 bug fixes, totaling in 37.915 lines of new code.
+- **[Core](https://github.com/openhab/openhab-core)**: 323 pull requests, including 110 enhancements and 58 bug fixes — adding 44,791 lines of new code.
+- **[Add-ons](https://github.com/openhab/openhab-addons)**: 798 pull requests, including 223 enhancements and 233 bug fixes, resulting in 554,128 lines of new code.
+- **[UIs](https://github.com/openhab/openhab-webui)**: 467 pull requests, including 108 enhancements and 175 bug fixes, totaling in 37,915 lines of new code.
 
 Countless [other repositories](https://github.com/openhab) — from documentation and automation helper libraries to our mobile apps — also received a steady stream of contributions too extensive to list individually.
 
