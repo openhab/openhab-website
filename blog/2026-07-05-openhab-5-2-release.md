@@ -132,8 +132,9 @@ With this update, you can now define, organize, and back up your pages and widge
 Key details of this new feature include:
 
 - **Marketplace Integration:**<br/>
-  Custom widgets can be easily adapted from the openHAB Marketplace for your configuration files.
-  You simply need to use the UID as the map key and nest the marketplace configuration underneath it.
+  Custom widgets can be easily adapted from the openHAB Marketplace for your configuration files. 
+  With the updated marketplace support, widgets using the new YAML format (which includes top-level `version:` and `widgets:` sections) can be copied directly without any changes.
+  For older marketplace widgets (identified by a top-level `uid:` key), you will need to add the widget's UID as a map key under your file's top-level `widgets:` section and nest the marketplace configuration underneath it.
 - **Read-Only Safeguards:**<br/>
   Much like file-based Items, Things, and Rules, UI components loaded via configuration files are marked as read-only.
   Main UI and the REST API treat these as unmanaged entities, displaying a padlock icon and blocking accidental edits to ensure your text files remain the single source of truth.
