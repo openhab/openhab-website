@@ -50,7 +50,7 @@ recognized for landing the most commits our incredibly large contributions in th
 - Holger Friedrich ([@holgerfriedrich](https://github.com/holgerfriedrich)) for openHAB Core & Add-ons
 - Laurent Garnier ([@lolodomo](https://github.com/lolodomo)) for openHAB Core
 - Mark Herwege ([@mherwege](https://github.com/mherwege)) for openHAB Core
-- Ravi Nadahar ([@nadahar](https://github.com/nadahar)) for openHAB Core
+- Ravi Nadahar ([@Nadahar](https://github.com/Nadahar)) for openHAB Core
 - Leo Siepel ([@lsiepel](https://github.com/lsiepel)) for openHAB Add-ons
 - Jacob Laursen ([@jlaur](https://github.com/jlaur)) for openHAB Add-ons
 - Florian Hotze ([@florian-h05](https://github.com/florian-h05)) for the openHAB Main UI & openHAB Core
@@ -114,7 +114,7 @@ And when you need something the other tools do not cover, it can optionally have
 
 ### Security and access
 
-Access is built around an openHAB user token, either generated manually through the Main UI or using the built in OAuth connector, which allows a one click setup option using a web browser for popular clients that support it. Different tools can be enabled or disabled, allowing for granular control of access to sensitive areas like Thing configuration or full API access. Agents may connect directly to your local instance for clients that support local access, like Claude Code, Codex, or Antigravity. Other agents that need outside access like Claude, Gemini, and ChatGPT can use the optional myopenHAB connection option, which is automatically configured through our cloud service when enabled on your local instance.
+Access is built around an openHAB user token, either generated manually through the Main UI or using the built-in OAuth connector, which allows a one click setup option using a web browser for popular clients that support it. Different tools can be enabled or disabled, allowing for granular control of access to sensitive areas like Thing configuration or full API access. Agents may connect directly to your local instance for clients that support local access, like Claude Code, Codex, or Antigravity. Other agents that need outside access like Claude, Gemini, and ChatGPT can use the optional myopenHAB connection option, which is automatically configured through our cloud service when enabled on your local instance.
 
 You can read more about our new MCP binding, including tool use, client setup, and example use cases at the [MCP integration](/addons/integrations/mcp/) add-on page.
 
@@ -230,10 +230,6 @@ TODO
 But not only were new bindings added, some existing bindings also received massive improvements:
 
 TODO
-
-### JavaScript & Python Debugger Support
-
-### Home Connect Direct Binding
 
 ### YAML Composer: Bring Modularity to Your Configurations
 
@@ -370,6 +366,10 @@ items:
 ```
 
 </details>
+
+### JavaScript & Python Debugger Support
+
+### Home Connect Direct Binding
 
 ## openHABian Enhancements
 
