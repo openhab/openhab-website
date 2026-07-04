@@ -235,6 +235,142 @@ TODO
 
 ### Home Connect Direct Binding
 
+### YAML Composer: Bring Modularity to Your Configurations
+
+_Jimmy Tanagra ([@jimtng](https://github.com/jimtng)), openHAB Maintainer_
+
+As openHAB setups grow, managing massive, repetitive YAML files can quickly become a maintenance headache.
+The newly introduced **[YAML Composer Add-on](/addons/integrations/yamlcomposer/)** completely shifts the paradigm by introducing a powerful, feature-rich preprocessing engine for your YAML configurations.
+Power users familiar with ESPHome will feel right at home, as this system draws heavy inspiration from its modular, package-based configuration architecture.
+
+Instead of dealing with sprawling, repetitive code blocks, YAML Composer lets you build your configuration using modular, reusable building blocks.
+The add-on monitors "enhanced-syntax" YAML files located in `$OPENHAB_CONF/yamlcomposer/` and automatically compiles them into fully resolved, plain YAML files under `OPENHAB_CONF/yaml/composed/` for openHAB to natively consume.
+
+Here are the key features that make this a game-changer for advanced power users:
+
+- **Variables:**<br/>
+  Define reusable key-value pairs within configuration blocks to centralize constants (like IP addresses or structural settings).
+- **Rich Expressions & Interpolation:**<br/>
+  Utilize Jinjava-backed string interpolation (`${...}`) alongside custom filters like `dig` (for safe nested map/list data retrieval), `capitalize`, `upper`, `lower`, `label`, etc.
+- **Modular Files (`!include`):**<br/>
+  Break down massive files into smaller, modular, _reusable_, and highly maintainable snippets with per-invocation variable definitions.
+- **Dynamic Templates (`!insert`):**<br/>
+  Define inline templates once and expand them dynamically with per-invocation variable overrides.
+- **Packages:**<br/>
+  Bundle and merge modular "packages" of related configurations (Things, Items, etc.) into your main model.
+- **Conditional Branching (`!if`):**<br/>
+  Inject structural conditional logic directly into your configuration trees based on your defined variables.
+- **Support for YAML's anchors/aliases and merge keys**
+
+<details>
+
+<summary>Quick Example: Dynamic Package Instantiation</summary>
+
+To showcase the true power of the system, you don't need to manually pass repetitive variables to duplicate configuration blocks.
+YAML Composer treats the `packages` mapping keys natively as a unique `package_id`.
+From that single key, you can automatically derive clean item names, human-readable labels, and MQTT topics using built-in string transformation filters, while still retaining the ability to inject per-instance overrides.
+
+First, define your reusable package component containing a Thing and its related Items:
+
+```yaml
+# Reusable Package: $OPENHAB_CONF/yamlcomposer/packages/smart_plug.inc.yaml
+variables:
+  titlecase: ${package_id | replace("-", " ") | title}
+  name: ${titlecase | replace(" ", "_")}
+  label: ${titlecase}
+
+things:
+  mqtt:topic:${package_id}:
+    bridge: ${broker}
+    channels:
+      power:
+        type: switch
+        config:
+          stateTopic: ${package_id}/state
+          commandTopic: ${package_id}/set/state
+      # ... other channels (uptime, energy consumption, etc.)
+
+items:
+  ${name}_Power:
+    type: Switch
+    label: ${label} Power
+    channel: mqtt:topic:${package_id}:power
+  # ... more items for the smart plug, e.g. uptime, energy, etc.
+```
+
+Now, instead of writing endless lines of boilerplate, you can instantiate this package multiple times in your main file.
+Notice how we cleanly share a global `broker` variable across instances, and override the label for the bedroom heater on the fly:
+
+```yaml
+# Input file: $OPENHAB_CONF/yamlcomposer/main.yaml
+version: 1
+
+variables:
+  broker: mqtt:broker:main
+
+packages:
+  livingroom-lamp: !include packages/smart_plug.inc.yaml
+  kitchen-coffee: !include packages/smart_plug.inc.yaml
+  bedroom-heater: !include
+    file: packages/smart_plug.inc.yaml
+    vars:
+      label: Bedroom Heated Blanket # Custom override
+  # and many more as needed!
+```
+
+The background watch service instantly processes the file structure and generates a completely expanded, native YAML configuration for openHAB to seamlessly load:
+
+```yaml
+# Generated output: $OPENHAB_CONF/yaml/composed/main.yaml
+version: 1
+
+things:
+  mqtt:topic:livingroom-lamp:
+    bridge: mqtt:broker:main
+    channels:
+      power:
+        type: switch
+        config:
+          stateTopic: livingroom-lamp/state
+          commandTopic: livingroom-lamp/set/state
+
+  mqtt:topic:kitchen-coffee:
+    bridge: mqtt:broker:main
+    channels:
+      power:
+        type: switch
+        config:
+          stateTopic: kitchen-coffee/state
+          commandTopic: kitchen-coffee/set/state
+
+  mqtt:topic:bedroom-heater:
+    bridge: mqtt:broker:main
+    channels:
+      power:
+        type: switch
+        config:
+          stateTopic: bedroom-heater/state
+          commandTopic: bedroom-heater/set/state
+
+items:
+  Livingroom_Lamp_Power:
+    type: Switch
+    label: Livingroom Lamp Power
+    channel: mqtt:topic:livingroom-lamp:power
+
+  Kitchen_Coffee_Power:
+    type: Switch
+    label: Kitchen Coffee Power
+    channel: mqtt:topic:kitchen-coffee:power
+
+  Bedroom_Heater_Power:
+    type: Switch
+    label: Bedroom Heated Blanket Power
+    channel: mqtt:topic:bedroom-heater:power
+```
+
+</details>
+
 ## openHABian Enhancements
 
 # Enjoy and Get in Touch
