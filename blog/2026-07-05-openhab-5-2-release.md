@@ -175,9 +175,34 @@ Making these "under the hood" changes allowed us to improve our overall code qua
 
 ### Access Logs across the UI
 
+<img src="/uploads/2026-07-05-openhab-5-2-release/log-viewer-pane.png" class="img-beside-text-right" alt="Code Tab YAML" />
+
 _Jimmy Tanagra ([@jimtng](https://github.com/jimtng)), openHAB Maintainer_
 
-TODO @jimtng
+Debugging your rules, monitoring item changes, and tracking system events just got a whole lot smoother.
+You no longer have to constantly switch back and forth to the dedicated Developer Log Viewer page.
+
+Thanks to a new embedded Log Viewer Pane, administrators can now toggle a persistent log console directly at the bottom of the Main UI.
+It overlays seamlessly across different pages, allowing you to watch your system's behavior in real time while actively configuring your Things, Items, or Rules.
+
+**Key Highlights:**
+
+- **Global & Persistent:**<br/>
+  Once opened, the pane stays visible and maintains your active log stream even as you navigate between different administration pages.
+- **Easy Toggles:**<br/>
+  The pane can be opened or closed instantly by clicking the log icon <f7-icon f7="square_list" /> located in the top-right corner of the screen.
+- **Fully Resizable Workspace:**<br/>
+  You can easily adjust the pane's height by dragging the top handle, and individual column widths can be customized by dragging the borders between them. Double-clicking a column resize handle automatically snaps it to the width of its longest content, and a reset button lets you instantly revert to the default width. Your preferred dimensions are automatically saved to your browser's local storage.
+- **Message Wrapping & Text Controls:**<br/>
+  A new toggle allows you to enable or disable line wrapping for log messages. To prevent accidental clicks while highlighting or copying text, only the Time column will trigger the log detail popup.
+- **Keyboard Shortcuts:**<br/>
+  For power users, you can quickly control the pane without touching your mouse:
+  - <kbd>Shift</kbd> + <kbd>Alt</kbd> + <kbd>L</kbd>: Toggle the visibility of the Log Pane.
+  - <kbd>Shift</kbd> + <kbd>Alt</kbd> + <kbd>F</kbd>: Maximize the pane to fullscreen (automatically collapses back down on page navigation so you don't lose your spot).
+- **Maximize Workspace:**<br/>
+  The pane features a collapsible filter and toolbar header, letting you hide the controls entirely when you want to maximize the vertical screen space dedicated to your logs.
+
+<div style="clear:both;"></div>
 
 ### Charting Made More Powerful
 
