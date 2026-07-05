@@ -297,9 +297,19 @@ TODO @mherwerge/@jsjames
 
 ### Persistence Status on the Item page
 
+<img src="/uploads/2026-07-05-openhab-5-2-release/item-persistence-details.png" class="img-beside-text-right" alt="Thread Network Map" />
+
 _Mark Herwege ([@mherwege](https://github.com/mherwege)), openHAB Maintainer_
 
-TODO @mherwege
+Did you ever wonder if a specific item is being persisted?
+Do you want to know what service is in play?
+What the persistence rules are?
+
+Until now, you had to build a mental model looking at your persistence configuration and interpret all rules to find out.
+It was not always easy to understand what happens.
+openHAB 5.2 does all of that for you and makes it visible on the Item page in the UI.
+
+<div style="clear:both;"></div>
 
 ### Setup Wizard
 
