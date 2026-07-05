@@ -114,7 +114,7 @@ And when you need something the other tools do not cover, it can optionally have
 
 ### Security and access
 
-Access is built around an openHAB user token, either generated manually through the Main UI or using the built-in OAuth connector, which allows a one click setup option using a web browser for popular clients that support it. Different tools can be enabled or disabled, allowing for granular control of access to sensitive areas like Thing configuration or full API access. Agents may connect directly to your local instance for clients that support local access, like Claude Code, Codex, or Antigravity. Other agents that need outside access like Claude, Gemini, and ChatGPT can use the optional myopenHAB connection option, which is automatically configured through our cloud service when enabled on your local instance.
+Access is built around an openHAB user token, either generated manually through Main UI or using the built-in OAuth connector, which allows a one click setup option using a web browser for popular clients that support it. Different tools can be enabled or disabled, allowing for granular control of access to sensitive areas like Thing configuration or full API access. Agents may connect directly to your local instance for clients that support local access, like Claude Code, Codex, or Antigravity. Other agents that need outside access like Claude, Gemini, and ChatGPT can use the optional myopenHAB connection option, which is automatically configured through our cloud service when enabled on your local instance.
 
 You can read more about our new MCP binding, including tool use, client setup, and example use cases at the [MCP integration](/addons/integrations/mcp/) add-on page.
 
@@ -190,14 +190,14 @@ Making these "under the hood" changes allowed us to improve our overall code qua
 
 ### Access Logs across the UI
 
-<img src="/uploads/2026-07-05-openhab-5-2-release/log-viewer-pane.png" class="img-beside-text-right" alt="Code Tab YAML" />
+<img src="/uploads/2026-07-05-openhab-5-2-release/log-viewer-pane.png" class="img-beside-text-right" alt="Embeddded Log Viewer Pane" />
 
 _Jimmy Tanagra ([@jimtng](https://github.com/jimtng)), openHAB Maintainer_
 
 Debugging your rules, monitoring item changes, and tracking system events just got a whole lot smoother.
 You no longer have to constantly switch back and forth to the dedicated Developer Log Viewer page.
 
-Thanks to a new embedded Log Viewer Pane, administrators can now toggle a persistent log console directly at the bottom of the Main UI.
+Thanks to a new embedded Log Viewer Pane, administrators can now toggle a persistent log console directly at the bottom of Main UI.
 It overlays seamlessly across different pages, allowing you to watch your system's behavior in real time while actively configuring your Things, Items, or Rules.
 
 **Key Highlights:**
@@ -270,7 +270,9 @@ TODO
 
 But not only were new bindings added, some existing bindings also received massive improvements:
 
-### Matter improvements
+### Matter Improvements
+
+_Dan Cunningham ([@digitaldan](https://github.com/digitaldan)), openHAB Maintainer_
 
 The Matter binding has improved substantially since our last release in capability, performance, and reliability.
 
@@ -279,7 +281,7 @@ The Matter binding has improved substantially since our last release in capabili
 Matter devices can now be updated directly from openHAB, without the need for a separate manufacturer app.
 openHAB itself acts as a Matter OTA Provider.
 It looks up certified firmware in the CSA Distributed Compliance Ledger, the official blockchain registry where manufacturers publish updates, then downloads and serves the image to your device.
-Matter updates use the openHAB standard core firmware framework, so they show up in the Main UI just like they do for any other binding.
+Matter updates use the standard openHAB Core firmware framework, so they show up in Main UI just like they do for any other binding.
 
 #### Expanded device support
 
@@ -288,7 +290,7 @@ Air quality coverage is now complete, with all 11 concentration measurements sup
 
 #### A new Thread network map
 
-The Main UI now includes a visualization of your Matter and Thread network, much like the existing Z-Wave network view.
+Main UI now includes a visualization of your Matter and Thread network, much like the existing Z-Wave network view.
 It can also handle setups with multiple Thread Border Routers from different vendors, as well as display link quality, mesh roles and more.
 
 #### Thread device improvements
