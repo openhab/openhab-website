@@ -15,7 +15,7 @@ Can you believe it's already been a year since the major release of openHAB 5.0?
 We are thrilled to introduce openHAB 5.2, packed with exciting new features, plenty of bug fixes, and amazing new AI features!
 
 But that's not all!
-Following the release of [openHAB 5.1](/blog/2025-12-22-openhab-5-1-release.html) last winter with many "under the hood" changes, this release focuses on more user-facing changes.
+Following the release of [openHAB 5.1](/blog/2025-12-22-openhab-5-1-release.html) last winter, which brought many "under the hood" changes, this release focuses on more user-facing changes.
 
 This release includes only a small number of breaking changes, so upgrading from openHAB 5.1 should be really smooth.
 Please review our [**official release notes**](https://github.com/openhab/openhab-distro/releases/tag/5.2.0) to learn about all breaking changes, new add-ons, enhancements, and fixes.
@@ -36,14 +36,14 @@ This big release includes impactful work across every part of the ecosystem:
 
 - **[Core](https://github.com/openhab/openhab-core)**: 323 pull requests, including 110 enhancements and 58 bug fixes — adding 44,791 lines of new code.
 - **[Add-ons](https://github.com/openhab/openhab-addons)**: 798 pull requests, including 223 enhancements and 233 bug fixes, resulting in 554,128 lines of new code.
-- **[UIs](https://github.com/openhab/openhab-webui)**: 467 pull requests, including 108 enhancements and 175 bug fixes, totaling in 37,915 lines of new code.
+- **[UIs](https://github.com/openhab/openhab-webui)**: 467 pull requests, including 108 enhancements and 175 bug fixes, totaling 37,915 lines of new code.
 
 Countless [other repositories](https://github.com/openhab) — from documentation and automation helper libraries to our mobile apps — also received a steady stream of contributions too extensive to list individually.
 
 A massive thank you to everyone driving openHAB forward!
 
-We also want to take the moment to shine a spotlight on our top code contributors for this release,
-recognized for landing the most commits our incredibly large contributions in their respective repositories:
+We also want to take a moment to shine a spotlight on our top code contributors for this release,
+recognized for landing the most commits or making incredibly large contributions in their respective repositories:
 
 <!-- https://github.com/florian-h05/github-stats?tab=readme-ov-file#contribution_stats -->
 
@@ -63,10 +63,10 @@ Whether you are squashing bugs, polishing the UI, refining documentation, or arc
 
 # Highlights
 
-As you might have already noticed in the activity statistics, there was much development on openHAB — too much to list everything.
+As you might have already noticed in the activity statistics, there has been a lot of development on openHAB — too much to list it all.
 Please refer to the [**release notes**](https://github.com/openhab/openhab-distro/releases/tag/5.2.0) to check out what's new and noteworthy (e.g., breaking changes).
 
-In the following sections, our maintainers and contributors introduce a section of new features you will not want to miss.
+In the following sections, our maintainers and contributors introduce a selection of new features you will not want to miss.
 
 ## Chat with openHAB
 
@@ -85,7 +85,7 @@ This feature takes natural language interaction with your smart home to a whole 
 
 Instead of relying on rigid, predefined sentence matching rules, this new feature allows leveraging the power of **Large Language Models (LLMs)** to understand and respond to natural language in nearly any language.
 By pairing openHAB with AI services like Google Gemini, OpenAI, or Ollama, you can type (or say) instructions just like you are messaging a friend.
-Whether you ask "Can you make the living room cozy?" or "Are any windows left open downstairs?", the LLM interprets your intent, queries the state or your home, and acts accordingly.
+Whether you ask "Can you make the living room cozy?" or "Are any windows left open downstairs?", the LLM interprets your intent, queries the state of your home, and acts accordingly.
 
 What makes the Chat interface so powerful is its deep integration into Main UI.
 When the LLM decides to interact with a device, the UI doesn't just display the response; it dynamically renders the default card widget for that Item right inside the chat feed!
@@ -101,10 +101,10 @@ The Chat interface and the underlying LLM-based human language interpretation fr
   To support multi-turn, back-and-forth conversations, openHAB retains conversation history, allowing you to continue where you left off.
 - **Customization:**<br/>
   For every interaction, you can select which LLM tools to enable. 
-  You can also customize the LLM's behavior through modifying the system prompt and give it its own, unique "personality."
+  You can also customize the LLM's behavior by modifying the system prompt to give it its own unique "personality."
 - **LLM Provider Agnostic:**<br/>
   The Chat interface and the underlying LLM-based human language interpretation framework are built without a specific AI provider in mind.
-  openHAB 5.2 only comes with support for Google Gemini, but we will extend this soon to OpenAI and OpenAI-compatible providers like Ollama or OpenRouter, giving you the flexibility to choose the best AI model for your use case.
+  openHAB 5.2 initially only supports Google Gemini, but we will soon extend this to OpenAI and OpenAI-compatible providers like Ollama or OpenRouter, giving you the flexibility to choose the best AI model for your use case.
 
 ### Privacy & Security First
 
@@ -114,18 +114,18 @@ openHAB 5.2 introduces a robust [Item Permission Model](/docs/configuration/mult
 Through the `voiceSystem` metadata and a system-default setting, you can explicitly define how individual Items are exposed to human language interpreters using three levels: **No Access**, **Read-Only**, or **Read-Write**.
 Items can also inherit permissions from their parent groups, with the most restrictive setting winning in case of conflicts.
 This makes it incredibly simple to shield security-sensitive devices — like smart locks, garage doors, and alarm systems — from being accessed by the LLM, or restrict them to read-only status.
-Additionally, limiting the scope of exposed Items boosts performance, as the LLM has smaller, more focused context to evaluate.
+Additionally, limiting the scope of exposed Items boosts performance, as the LLM has a smaller, more focused context to evaluate.
 
 ### Getting Started
 
-Ready to start? Setting it up is simple:
+Ready to get started? Setting it up is simple:
 
 1. Install the new [Google Gemini binding](/addons/bindings/gemini/) from the add-on store.
 2. Get an API key from the [Google AI Studio](https://aistudio.google.com/api-keys) and create a Gemini account Thing.
 3. Navigate to _System Settings_ → _Voice_ and configure Gemini as your default human language interpreter.
 4. You are ready to start chatting!
 
-For more details refer to the [Voice: Human Language Interpreter](/docs/configuration/multimedia.html#human-language-interpreter) documentation.
+For more details, refer to the [Voice: Human Language Interpreter](/docs/configuration/multimedia.html#human-language-interpreter) documentation.
 
 <div style="clear:both;"></div>
 
@@ -133,7 +133,7 @@ For more details refer to the [Voice: Human Language Interpreter](/docs/configur
 
 _Dan Cunningham ([@digitaldan](https://github.com/digitaldan)), openHAB Maintainer_
 
-The Model Context Protocol (MCP) is a standard way for AI assistants to connect with third party systems using the concept of tool calling, specially crafted API endpoints that are tailored for agentic use.
+The Model Context Protocol (MCP) is a standard way for AI assistants to connect with third-party systems using the concept of tool calling — specially crafted API endpoints that are tailored for agentic use.
 Our new MCP integration exposes your openHAB instance using a wide range of tools, giving AI agents a powerful way to control, edit, and monitor your home system.
 
 The openHAB MCP server provides these capabilities:
@@ -147,33 +147,36 @@ The openHAB MCP server provides these capabilities:
 
 ### Controlling openHAB
 
-The server uses your semantic model and fuzzy matching to find the right rooms, equipment, and points, so a request for the office lights works even if the Item is named office ceiling light.
+The server uses your semantic model and fuzzy matching to find the right rooms, equipment, and points, so a request for the "office lights" works even if the Item is named "office ceiling light".
 Ask it to dim the bedroom lights to 30 percent and set them to warm white, or set the living room to movie mode and tell you if anything is still on downstairs.
-You can also ask general questions, like what doors are unlocked right now, or is the garage still open and quickly get an accurate state of your home.
+You can also ask general questions, such as which doors are unlocked right now or whether the garage is still open, and quickly get an accurate state of your home.
 
 ### Creating rules
 
-You can also ask your agent to create traditional recurring rules, like turning on the porch light every day at sunset, or run the sprinklers for twenty minutes on Monday, Wednesday, and Friday mornings
+You can also ask your agent to create traditional recurring rules, like turning on the porch light every day at sunset, or running the sprinklers for twenty minutes on Monday, Wednesday, and Friday mornings.
 Additionally, the MCP server supports a new one-shot style rule for actions that should only fire once, like alarms or reminders.
-Say turn off the patio heater in one hour, or turn on the outside lights tonight at 7, and the rule will automatically fire once and then delete itself.
+Say "turn off the patio heater in one hour," or "turn on the outside lights tonight at 7," and the rule will automatically fire once and then delete itself.
 
 ### Editing Main UI
 
 With the UI feature enabled, you can build and modify Main UI pages, floor plans, and custom widgets.
 The MCP server is aware of every widget and all controls Main UI supports, so the assistant always knows the full set of components available and how each one is configured.
 You can ask it to create a page or floor plan for a room, and it will lay out the design, place your devices on it, and style the page into something modern and beautiful.
-Pair this with the optional static asset support and the assistant can create an interactive SVG, say a floor plan of your house, upload it, then use the UI tools to wire it into a page or floor plan so the rooms and devices on it become live controls.
+Pair this with the optional static asset support, and the assistant can create an interactive SVG (such as a floor plan of your house), upload it, and then use the UI tools to wire it into a page or floor plan so the rooms and devices on it become live controls.
 
 ### Advanced tools
 
-For more involved setups the assistant can directly manage your Things and Items, as well as read your logs to help track down a problem.
-And when you need something the other tools do not cover, it can optionally have access to the full openHAB REST API, which means anything openHAB exposes is available.
+For more involved setups, the assistant can directly manage your Things and Items, as well as read your logs to help track down a problem.
+And when you need something that other tools do not cover, it can optionally have access to the full openHAB REST API, which means anything openHAB exposes is available.
 
 ### Security and access
 
-Access is built around an openHAB user token, either generated manually through Main UI or using the built-in OAuth connector, which allows a one click setup option using a web browser for popular clients that support it. Different tools can be enabled or disabled, allowing for granular control of access to sensitive areas like Thing configuration or full API access. Agents may connect directly to your local instance for clients that support local access, like Claude Code, Codex, or Antigravity. Other agents that need outside access like Claude, Gemini, and ChatGPT can use the optional myopenHAB connection option, which is automatically configured through our cloud service when enabled on your local instance.
+Access is built around an openHAB user token, either generated manually through Main UI or using the built-in OAuth connector, which allows a one-click setup option using a web browser for popular clients that support it. Different tools can be enabled or disabled, allowing for granular control over access to sensitive areas like Thing configuration or full API access.
 
-You can read more about our new MCP binding, including tool use, client setup, and example use cases at the [MCP integration](/addons/integrations/mcp/) add-on page.
+Agents can connect directly to your local instance if their clients support local access (such as Claude Code, Codex, or Antigravity).
+Other agents that require external access, like Claude, Gemini, and ChatGPT, can use the optional myopenHAB connection option, which is automatically configured through our cloud service when enabled on your local instance.
+
+You can read more about our new MCP binding, including tool use, client setup, and example use cases, on the [MCP integration](/addons/integrations/mcp/) add-on page.
 
 ## Core Runtime Enhancements
 
@@ -197,7 +200,7 @@ Key details of this new feature include:
   Main UI and the REST API treat these as unmanaged entities, displaying a padlock icon and blocking accidental edits to ensure your text files remain the single source of truth.
 - **Broad Page Support:**<br/>
   The YAML parser natively supports standard page layouts (Layout, Tabs, Map, Floor Plan, and Chart).
-   Additionally, support has been extended to seamlessly handle file-based home page configurations and the Overview page layout.
+  Additionally, support has been extended to seamlessly handle file-based home page configurations and the Overview page layout.
 
 This change completes an essential missing link for power users who want to back up, version-control (via Git), and deploy their entire openHAB user interface side-by-side with their items, things, and rules.
 
@@ -221,10 +224,10 @@ In Main UI the **Code** tab for the rules page has been changed to work similarl
 
 However, not all rules can be expressed in all formats.
 This is evaluated on a per-rule basis, and only the applicable formats are shown.
-If a rule can't be expressed in neither YAML nor DSL, the Code tab will be hidden.
+If a rule cannot be expressed in either YAML or DSL, the Code tab will be hidden.
 
 Rules can also be copied to the clipboard in either YAML or DSL format both from the rules page itself, or from the rules overview page.
-By using the rules overview page, it's possible to copy the definition for many rules at once, but only the rules that can be expressed in the target format.
+Using the rules overview page, it is possible to copy the definitions of multiple rules at once, but only for rules that can be expressed in the target format.
 
 Rule templates don't have Main UI editing support, so there's no visible change for them, but they can still be exported to YAML by using the `/file-format/ruletemplates` endpoint in the REST API, for example using the API Explorer.
 
@@ -242,7 +245,7 @@ Conversion between formats is also available through enhanced REST APIs.
 
 Additionally, it is now possible to define multiple sitemaps in a single YAML or `.sitemaps` file.
 
-Many thanks to Mark Herwege ([@mherwege](https://github.com/mherwege)) for the contribution of this feature!
+Many thanks to Mark Herwege ([@mherwege](https://github.com/mherwege)) for contributing this feature!
 
 ### Powerful Upgrades to Rules DSL
 
@@ -256,8 +259,8 @@ In openHAB 5.2, this text-based rule engine receives a major update designed to 
 Whether you write rules manually in text files or manage them via the Main UI, this release removes several historical limitations and introduces new ways to structure your Rules DSL-based automation:
 
 - **Native Conditions:**<br/>
-  openHAB 5.2 adds support for native condition blocks as known from Main UI.
-  You can now cleanly separate conditions from actions, removing the need to clutter the action with if conditions and guard clauses.
+  openHAB 5.2 adds support for native condition blocks, similar to those in the Main UI.
+  You can now cleanly separate conditions from actions, removing the need to clutter the action with `if` conditions and guard clauses.
 - **Triggerless Rules:**<br/>
   You can now define a DSL rule without triggers, which is perfect for creating reusable scripts meant to be executed manually or called exclusively by other rules.
 - **Convenience Functionality:**<br/>
@@ -267,14 +270,14 @@ Whether you write rules manually in text files or manage them via the Main UI, t
   Rules DSL now supports invoking and executing another rule from within a rule.
   This allows writing more modular and maintainable automation — even across different languages.
 - **Set ID & Tags:**<br/>
-  You can now set an ID and tags to a DSL rule, allowing for easier identification and organization.
+  You can now assign an ID and tags to a DSL rule, allowing for easier identification and organization.
 - **Main UI Code Tab:**<br/>
   Main UI now displays the source code for DSL rules.
 
 Here is an example of a rule with UID, tag, and condition:
 
 ```java
-rule "Play music on arrival, but only on afternoon" uid = "Music-on-arrival" [ Music ]
+rule "Play music on arrival, but only in the afternoon" uid = "Music-on-arrival" [ Music ]
 when
     Item Presence received command ON
 but only if
@@ -290,18 +293,19 @@ end
 
 _Florian Hotze ([@florian-h05](https://github.com/florian-h05)), openHAB Maintainer_
 
-Now that our new MCP integration makes it easier than ever before to work on your openHAB configuration with AI agents, you might have already wondered:
+Now that our new MCP integration makes it easier than ever to work on your openHAB configuration with AI agents, you might be wondering:
 
-How to protect my secrets? How can I avoid that an AI agent accesses credentials and API keys?
+How do I protect my secrets?
+How can I prevent an AI agent from accessing credentials and API keys?
 
 To solve this issue, we've added support for referencing environment variables in Thing configuration.
 Using the new `${ENV:MY_API_KEY}` syntax, you can pass the value of the `MY_API_KEY` environment variable to a Thing's configuration property.
-This feature also comes handy when tracking your openHAB configuration with Git — keeping out secrets from Git history is common and best practice.
+This feature also comes in handy when tracking your openHAB configuration with Git — keeping secrets out of Git history is a common best practice.
 
 ## Main UI Enhancements
 
-Retaining the incredible momentum from openHAB 5.1 and the big Vue 3 & Framework7 upgrade, we've put much work into refactoring major parts of our codebase from JavaScript to TypeScript.
-Making these "under the hood" changes allowed us to improve our overall code quality and stability, as well as enabling us to ship new features easier.
+Building on the incredible momentum from openHAB 5.1 and the major Vue 3 & Framework7 upgrade, we've put a lot of work into refactoring major parts of our codebase from JavaScript to TypeScript.
+Making these "under the hood" changes allowed us to improve our overall code quality and stability, while also enabling us to ship new features more easily.
 
 ### Access Logs across the UI
 
@@ -338,7 +342,7 @@ It overlays seamlessly across different pages, allowing you to watch your system
 
 _Florian Hotze ([@florian-h05](https://github.com/florian-h05)), openHAB Maintainer_
 
-Main UI includes a charting engine since its initial release with openHAB 3.0, and with openHAB 5.2 charts receive their biggest upgrade yet.
+Main UI has included a charting engine since its initial release with openHAB 3.0, and with openHAB 5.2, charts receive their biggest upgrade yet.
 After refactoring all charting code to type-safe TypeScript code, we've addressed a ton of long-standing feature requests:
 
 - **Display State Support:**<br/>
@@ -353,24 +357,24 @@ After refactoring all charting code to type-safe TypeScript code, we've addresse
   - series label position (for line/bar charts)
   - border radius (for bar charts)
   - x-axis style (label only, label & line, label & line & axis ticks)
-  - y-axis style (axis line, minor lines, areas can be individually enabled or disabled)
+  - y-axis style (axis line, minor lines, and areas can be individually enabled or disabled)
 - **Initial Period for Fixed Period Charts:**<br/>
-  The initial period for fixed period charts can now be set.
+  The initial period for fixed-period charts can now be set.
 - **Fixed Chart Periods over 1 Year:**<br/>
-  Fixed chart periods 2 years, 3 years, and five years have been added, extended the chart range.
+  Fixed chart periods of 2, 3, and 5 years have been added, extending the chart range.
 - **New Yearly Aggregation:**<br/>
-  A new yearly aggregation has been added, allowing to compare several years in fixed period charts.
+  A new yearly aggregation has been added, allowing you to compare several years in fixed-period charts.
 
 ### Enhanced Sitemap Management
 
 _Laurent Garnier ([@lolodomo](https://github.com/lolodomo)), openHAB Maintainer_
 
-Main UI now displays the list all available sitemaps in a new dedicated Sitemaps page within the settings section, including those defined in configuration files (DSL and YAML formats).
-You can open the sitemap editor from any existing sitemap, in read-only mode for sitemaps provided as configuration files.
+Main UI now lists all available sitemaps in a new, dedicated Sitemaps page within the settings section, including those defined in configuration files (DSL and YAML formats).
+You can open the sitemap editor from any existing sitemap, which opens in read-only mode for sitemaps provided as configuration files.
 The Code tab now contains file‑compatible syntax for both YAML and DSL formats.
 
-Sitemaps can also be copied to the clipboard in either YAML or DSL format both from the Sitemaps page itself, or from the Code tab in a particular Sitemap page.
-In case you want to move from configuration file to UI managed for a sitemap, the "Duplicate" button in the Design tab can be used to create a new editable sitemap managed by Main UI from a sitemap defined in a configuration file.
+Sitemaps can also be copied to the clipboard in either YAML or DSL format either from the Sitemaps page itself, or from the Code tab in a particular Sitemap page.
+If you want to transition a sitemap from a configuration file to being UI-managed, the "Duplicate" button in the Design tab can be used to create a new, editable sitemap managed by Main UI from the sitemap defined in the configuration file.
 
 Many thanks to Mark Herwege ([@mherwege](https://github.com/mherwege)) for the development of this feature!
 
@@ -381,12 +385,12 @@ _Mark Herwege ([@mherwege](https://github.com/mherwege)), openHAB Maintainer_
 Configuring persistence through Main UI has been streamlined, making it easier to understand and configure:
 
 The main entry point is now the configuration for a specific persistence service.
-From there, you can easily configure items and aliases, allowing to pick existing strategies and filers, or create new ones.
+From there, you can easily configure Items and aliases, allowing you to pick existing strategies and filters, or create new ones.
 
-Strategies and filters are now considered second level configuration and available through a definitions popup.
+Strategies and filters are now considered second-level configuration and are available through a definitions popup.
 When working on cron strategies, the cron strategy editor now fully supports updating an existing cron expression.
 
-Related to this enhancement, we also enhanced the health checks on the persistence configurations, warning you for more inconsistencies or conflicts.
+In addition to this enhancement, we have improved health checks for persistence configurations, warning you about more inconsistencies or conflicts.
 
 ### Persistence Status on the Item page
 
@@ -394,11 +398,9 @@ Related to this enhancement, we also enhanced the health checks on the persisten
 
 _Mark Herwege ([@mherwege](https://github.com/mherwege)), openHAB Maintainer_
 
-Did you ever wonder if a specific item is being persisted?
-Do you want to know what service is in play?
-What the persistence rules are?
+Have you ever wondered if a specific Item is being persisted, which service is in play, or what the persistence rules are?
 
-Until now, you had to build a mental model looking at your persistence configuration and interpret all rules to find out.
+Until now, you had to build a mental model by looking at your persistence configuration and interpreting all rules to find out.
 It was not always easy to understand what happens.
 openHAB 5.2 does all of that for you and makes it visible on the Item page in the UI.
 
@@ -411,12 +413,11 @@ _Mark Herwege ([@mherwege](https://github.com/mherwege)), openHAB Maintainer_
 The setup wizard is the first thing a user sees when setting up a new system.
 This release improves that experience in a number of ways:
 
-- New configuration steps have been added — finally including persistence —, and improving the coverage of the initial wizard configuration.
-- Added a brief overview of openHAB concepts in the context of an initial configuration (can be skipped).
-- Added a breadcrumb display and buttons to navigate back and forth through the wizard and jump to specific steps.
-- Keep track of the steps that have been completed and persist that state across sessions.
-- Added a link to the _Help & About_ page to open the wizard again after initial setup.
-  The wizard will always keep an already existing configuration. Changes are only adding to that.
+- New configuration steps have been added — finally including persistence — improving the coverage of the initial wizard configuration.
+- A brief overview of openHAB concepts has been added in the context of an initial configuration (which can be skipped).
+- A breadcrumb display and buttons to navigate back and forth through the wizard or jump to specific steps have been added.
+- The wizard now keeps track of the steps that have been completed and persists that state across sessions.
+- A link to the _Help & About_ page has been added to open the wizard again after the initial setup. The wizard will always preserve any existing configuration, with changes only adding to it.
 
 ### Voice Support
 
@@ -426,14 +427,14 @@ Instead of being restricted to typing, you can now initiate a real-time voice di
 This turns any browser-equipped device—like a wall-mounted tablet, a laptop, or a smartphone—into an interactive voice satellite.
 Simply enable voice dialog support in the _Help & About_ page, tap the microphone icon in the top navigation bar, and openHAB will listen, process your intent, and respond to you natively using your preferred speech-to-text and text-to-speech engines.
 
-This new feature is based on a new [WebSocket-based API](/docs/configuration/websocket.html#audio-pcm-websocket-api-adapter-id-audio-pcm) that allows streaming voice commands to openHAB and receiving audio responses.
+This new feature is based on a [WebSocket-based API](/docs/configuration/websocket.html#audio-pcm-websocket-api-adapter-id-audio-pcm) that allows streaming voice commands to openHAB and receiving audio responses.
 We are planning to add more voice capabilities in the future — stay tuned!
 
 Kudos to Miguel Álvarez Díez ([@GiviMAD](https://github.com/GiviMAD)) for implementing this new feature!
 
 ## Add-on Enhancements
 
-openHAB 5.2 ships 19 new add-ons, marking a significant milestone by surpassing 500 add-ons:
+openHAB 5.2 ships with 19 new add-ons, marking a significant milestone by surpassing 500 add-ons:
 
 - [Atmo France Binding](/addons/bindings/atmofrance/): Integrates air quality data from Atmo France, the national federation of air quality monitoring associations.
 - [Bluelink Binding](/addons/bindings/bluelink/): Provides vehicle telemetry and control for Hyundai and Genesis vehicles through the Bluelink service.
@@ -455,7 +456,7 @@ openHAB 5.2 ships 19 new add-ons, marking a significant milestone by surpassing 
 - [Worx Landroid Binding](/addons/bindings/worxlandroid/): Connects Worx Landroid robotic lawn mowers to openHAB.
 - [YAML Composer](#yaml-composer-bring-modularity-to-your-configurations): Enables modularity for YAML configuration files, [see below](#yaml-composer-bring-modularity-to-your-configurations).
 
-But not only were new bindings added, some existing bindings also received massive improvements:
+Beyond new additions, several existing bindings received massive improvements:
 
 - [Matter Binding](#matter-improvements): Received significant upgrades, including support for over-the-air firmware updates via openHAB, expanded device support (smoke, CO, CO₂ sensors, and EU style deadbolts), a new Thread network map visualization, and reduced startup connection times, [see below](#matter-improvements).
 - [Ring Binding](/addons/bindings/ring/): Added support for Ring Intercom 'open door' functionality, status and control of light and siren on supported devices, camera snapshot support, and the ability to toggle motion detection on/off.
@@ -473,16 +474,16 @@ _Dan Cunningham ([@digitaldan](https://github.com/digitaldan)), openHAB Maintain
 
 The Matter binding has improved substantially since our last release in capability, performance, and reliability.
 
-#### Over the air firmware updates
+#### Over-the-air firmware updates
 
 Matter devices can now be updated directly from openHAB, without the need for a separate manufacturer app.
 openHAB itself acts as a Matter OTA Provider.
-It looks up certified firmware in the CSA Distributed Compliance Ledger, the official blockchain registry where manufacturers publish updates, then downloads, and serves the image to your device.
+It looks up certified firmware in the CSA Distributed Compliance Ledger, the official blockchain registry where manufacturers publish updates, then downloads and serves the image to your device.
 Matter updates use the standard openHAB Core firmware framework, so they show up in Main UI just like they do for any other binding.
 
 #### Expanded device support
 
-Support was added for smoke, CO, and CO₂ sensors, along with EU style deadbolt locks.
+Support was added for smoke, CO, and CO₂ sensors, along with EU-style deadbolt locks.
 Air quality coverage is now complete, with all 11 concentration measurements supported: CO₂, CO, formaldehyde, NO₂, ozone, PM1, PM2.5, PM10, radon, and TVOC.
 
 #### A new Thread network map
@@ -493,7 +494,7 @@ It can also handle setups with multiple Thread Border Routers from different ven
 #### Thread device improvements
 
 Many changes to both the binding itself and the Matter library it depends on have greatly reduced Thread connection times during system startup and when reconnecting to Thread devices.
-Commissioning of new Thread devices is now more reliable, and several Thread specific crashes and regressions have been resolved.
+Commissioning of new Thread devices is now more reliable, and several Thread-specific crashes and regressions have been resolved.
 
 <div style="clear:both;"></div>
 
@@ -506,7 +507,7 @@ The newly introduced [**YAML Composer Add-on**](/addons/integrations/yamlcompose
 Power users familiar with ESPHome will feel right at home, as this system draws heavy inspiration from its modular, package-based configuration architecture.
 
 Instead of dealing with sprawling, repetitive code blocks, YAML Composer lets you build your configuration using modular, reusable building blocks.
-The add-on monitors "enhanced-syntax" YAML files located in `$OPENHAB_CONF/yamlcomposer/` and automatically compiles them into fully resolved, plain YAML files under `OPENHAB_CONF/yaml/composed/` for openHAB to natively consume.
+The add-on monitors "enhanced-syntax" YAML files located in `$OPENHAB_CONF/yamlcomposer/` and automatically compiles them into fully resolved, plain YAML files under `$OPENHAB_CONF/yaml/composed/` for openHAB to natively consume.
 
 Here are the key features that make this a game-changer for advanced power users:
 
@@ -522,7 +523,7 @@ Here are the key features that make this a game-changer for advanced power users
   Bundle and merge modular "packages" of related configurations (Things, Items, etc.) into your main model.
 - **Conditional Branching (`!if`):**<br/>
   Inject structural conditional logic directly into your configuration trees based on your defined variables.
-- **Support for YAML's anchors/aliases and merge keys**
+- **Support for YAML's anchors/aliases and merge keys.**
 
 <details>
 
@@ -561,7 +562,7 @@ items:
 ```
 
 Now, instead of writing endless lines of boilerplate, you can instantiate this package multiple times in your main file.
-Notice how we cleanly share a global `broker` variable across instances, and override the label for the bedroom heater on the fly:
+Notice how we cleanly share a global `broker` variable across instances and override the label for the bedroom heater on the fly:
 
 ```yaml
 # Input file: $OPENHAB_CONF/yamlcomposer/main.yaml
@@ -640,7 +641,7 @@ _Jonas Brüstel ([@bruestel](https://github.com/bruestel)), openHAB Contributor_
 In this release, the new [**Home Connect Direct Binding**](/addons/bindings/homeconnectdirect/) integrates [Home Connect](https://www.home-connect.com/) enabled appliances into openHAB over your local network.
 It works with the many brands built on the Home Connect platform, including Bosch, Siemens, Gaggenau, NEFF, and more.
 Unlike the existing Home Connect binding, this implementation talks directly to your appliances on the LAN.
-There is no cloud account and no internet connection involved during operation, which results in reliable, low latency control and keeps working even when the manufacturer's cloud is unavailable.
+There is no cloud account and no internet connection involved during operation, which results in reliable, low-latency control and ensures it keeps working even when the manufacturer's cloud is unavailable.
 
 A broad range of appliance types is supported, including dishwashers, washers, dryers, washer/dryer combinations, ovens, warming drawers, coffee makers, cook processors (Cookit), hoods, cooktops, and fridge/freezers.
 Appliances are found automatically on your network via mDNS and show up in the Inbox, so adding them is as simple as accepting the discovery result.
@@ -653,9 +654,9 @@ Beyond that, custom channels let you expose any internal value or capability fro
 
 #### A console for setup and diagnostics
 
-The binding ships with its own built in web console.
-It lists all your appliances with their connection status and hardware details, and provides a real time monitoring view of every message exchanged between openHAB and an appliance.
-A handy openHAB configuration generator produces ready to use YAML or DSL snippets for custom channels directly from the values you see in the live message stream.
+The binding ships with its own built-in web console.
+It lists all your appliances with their connection status and hardware details, and provides a real-time monitoring view of every message exchanged between openHAB and an appliance.
+A handy openHAB configuration generator produces ready-to-use YAML or DSL snippets for custom channels directly from the values you see in the live message stream.
 
 ### JavaScript & Python Debugger Support
 
@@ -667,7 +668,7 @@ In openHAB 5.2, we are thrilled to introduce full debugger support for both the 
 If you've ever found yourself debugging a complex rule by scattering `console.log()` or `self.logger` statements throughout your code, this feature is for you.
 
 The new debugging feature supports the Chrome DevTools protocol, making it incredibly easy to connect your favorite development tools — such as Visual Studio Code.
-To use it, enable it in the JavaScript or Python Scripting add-on configuration and a debugger configuration to your development environment.
+To use it, enable it in the JavaScript or Python Scripting add-on configuration and add a debugger configuration to your development environment.
 Please note that the debugger currently only supports file-based scripts.
 
 Refer to the [JavaScript documentation](/addons/automation/jsscripting/#debugging) for setup instructions.
