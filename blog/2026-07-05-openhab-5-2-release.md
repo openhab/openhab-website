@@ -307,7 +307,7 @@ Commissioning of new Thread devices is now more reliable, and several Thread spe
 _Jimmy Tanagra ([@jimtng](https://github.com/jimtng)), openHAB Maintainer_
 
 As openHAB setups grow, managing massive, repetitive YAML files can quickly become a maintenance headache.
-The newly introduced **[YAML Composer Add-on](/addons/integrations/yamlcomposer/)** completely shifts the paradigm by introducing a powerful, feature-rich preprocessing engine for your YAML configurations.
+The newly introduced [**YAML Composer Add-on**](/addons/integrations/yamlcomposer/) completely shifts the paradigm by introducing a powerful, feature-rich preprocessing engine for your YAML configurations.
 Power users familiar with ESPHome will feel right at home, as this system draws heavy inspiration from its modular, package-based configuration architecture.
 
 Instead of dealing with sprawling, repetitive code blocks, YAML Composer lets you build your configuration using modular, reusable building blocks.
@@ -440,9 +440,9 @@ items:
 
 ### Home Connect Direct Binding
 
-_Jonas Brüstel ([@bruestel](https://github.com/bruestel))_
+_Jonas Brüstel ([@bruestel](https://github.com/bruestel)), openHAB Contributor_
 
-In this release, the new **[Home Connect Direct Binding](/addons/bindings/homeconnectdirect/)** integrates [Home Connect](https://www.home-connect.com/) enabled appliances into openHAB over your local network.
+In this release, the new [**Home Connect Direct Binding**](/addons/bindings/homeconnectdirect/) integrates [Home Connect](https://www.home-connect.com/) enabled appliances into openHAB over your local network.
 It works with the many brands built on the Home Connect platform, including Bosch, Siemens, Gaggenau, NEFF, and more.
 Unlike the existing Home Connect binding, this implementation talks directly to your appliances on the LAN.
 There is no cloud account and no internet connection involved during operation, which results in reliable, low latency control and keeps working even when the manufacturer's cloud is unavailable.
