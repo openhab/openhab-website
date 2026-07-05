@@ -63,7 +63,7 @@ Whether you are squashing bugs, polishing the UI, refining documentation, or arc
 
 # Highlights
 
-As you might have already noticed in the activity statistics, there was much development on openHAB – too much to list everything.
+As you might have already noticed in the activity statistics, there was much development on openHAB — too much to list everything.
 Please refer to the [**release notes**](https://github.com/openhab/openhab-distro/releases/tag/5.2.0) to check out what's new and noteworthy (e.g., breaking changes).
 
 In the following sections, our maintainers and contributors introduce a section of new features you will not want to miss.
@@ -311,11 +311,19 @@ openHAB 5.2 does all of that for you and makes it visible on the Item page in th
 
 <div style="clear:both;"></div>
 
-### Setup Wizard
+### Setup Wizard Improvements
 
 _Mark Herwege ([@mherwege](https://github.com/mherwege)), openHAB Maintainer_
 
-TODO @mherwege
+The setup wizard is the first thing a user sees when setting up a new system.
+This release improves that experience in a number of ways:
+
+- New configuration steps have been added — finally including persistence —, and improving the coverage of the initial wizard configuration.
+- Added a brief overview of openHAB concepts in the context of an initial configuration (can be skipped).
+- Added a breadcrumb display and buttons to navigate back and forth through the wizard and jump to specific steps.
+- Keep track of the steps that have been completed and persist that state across sessions.
+- Added a link to the _Help & About_ page to open the wizard again after initial setup.
+  The wizard will always keep an already existing configuration. Changes are only adding to that.
 
 ## Add-on Enhancements
 
