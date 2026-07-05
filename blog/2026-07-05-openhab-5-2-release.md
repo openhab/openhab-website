@@ -272,7 +272,7 @@ But not only were new bindings added, some existing bindings also received massi
 
 ### Matter Improvements
 
-<img src="/uploads/2026-07-05-openhab-5-2-release/matter-thread-network-tab.png" class="img-beside-text-right" alt="Thread Network Map" />
+<img src="/uploads/2026-07-05-openhab-5-2-release/matter-thread-network-map.png" class="img-beside-text-right" alt="Thread Network Map" />
 
 _Dan Cunningham ([@digitaldan](https://github.com/digitaldan)), openHAB Maintainer_
 
