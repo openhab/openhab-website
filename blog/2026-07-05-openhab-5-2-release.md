@@ -154,7 +154,22 @@ By selecting one or more items, you can instantly copy the correct file-ready YA
 
 ### YAML File Format for Rules & Rule Templates
 
-TODO @Nadahar
+_Ravi Nadahar ([@Nadahar](https://github.com/Nadahar)), openHAB Contributor_
+
+openHAB 5.2 supports [rules](/docs/configuration/yaml/rules.html) and [rule templates](/docs/configuration/yaml/ruletemplates.html) in YAML files.
+
+In Main UI the **Code** tab for the rules page has been changed to work similarly to those for Things and Items — it now contains **file‑compatible syntax** for both YAML and DSL formats.
+
+However, not all rules can be expressed in all formats.
+This is evaluated on a per-rule basis, and only the applicable formats are shown.
+If a rule can't be expressed in neither YAML nor DSL, the Code tab will be hidden.
+
+Rules can also be copied to the clipboard in either YAML or DSL format both from the rules page itself, or from the rules overview page.
+By using the rules overview page, it's possible to copy the definition for many rules at once, but only the rules that can be expressed in the target format.
+
+Rule templates don't have Main UI editing support, so there's no visible change for them, but they can still be exported to YAML by using the `/file-format/ruletemplates` endpoint in the REST API, for example using the API Explorer.
+
+The community marketplace already supports the new YAML format for rule templates, as well as block libraries.
 
 ### Protect your Secrets with Environment Variables
 
