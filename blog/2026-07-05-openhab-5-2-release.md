@@ -257,14 +257,14 @@ Whether you write rules manually in text files or manage them via the Main UI, t
 
 - **Native Conditions:**<br/>
   openHAB 5.2 adds support for native condition blocks as known from Main UI.
-  You can now cleanly separate conditions from actions, removing the need to clutter the action with if conditions and guard clauses:
+  You can now cleanly separate conditions from actions, removing the need to clutter the action with if conditions and guard clauses.
 - **Triggerless Rules:**<br/>
   You can now define a DSL rule without triggers, which is perfect for creating reusable scripts meant to be executed manually or called exclusively by other rules.
 - **Convenience Functionality:**<br/>
   The standard library has been extended with a number of new functions, allowing for more concise and readable code.
   Refer to [Rules DSL: Convenience Functionality](/docs/configuration/rules-dsl.html#convenience-functionality) for more details.
 - **Inter-Rule Execution:**<br/>
-  Rules DSL now officially supports invoking and executing another rule from within a rule.
+  Rules DSL now supports invoking and executing another rule from within a rule.
   This allows writing more modular and maintainable automation — even across different languages.
 - **Set ID & Tags:**<br/>
   You can now set an ID and tags to a DSL rule, allowing for easier identification and organization.
@@ -417,6 +417,19 @@ This release improves that experience in a number of ways:
 - Keep track of the steps that have been completed and persist that state across sessions.
 - Added a link to the _Help & About_ page to open the wizard again after initial setup.
   The wizard will always keep an already existing configuration. Changes are only adding to that.
+
+### Voice Support
+
+Besides the [new Chat interface](#chat-with-openhab), openHAB 5.2 also bridges the gap between text-based chat and physical voice assistants by introducing a way to talk to openHAB's voice system right from the user interface.
+
+Instead of being restricted to typing, you can now initiate a real-time voice dialogue directly inside Main UI.
+This turns any browser-equipped device—like a wall-mounted tablet, a laptop, or a smartphone—into an interactive voice satellite.
+Simply enable voice dialog support in the _Help & About_ page, tap the microphone icon in the top navigation bar, and openHAB will listen, process your intent, and respond to you natively using your preferred speech-to-text and text-to-speech engines.
+
+This new feature is based on a new [WebSocket-based API](/docs/configuration/websocket.html#audio-pcm-websocket-api-adapter-id-audio-pcm) that allows streaming voice commands to openHAB and receiving audio responses.
+We are planning to add more voice capabilities in the future — stay tuned!
+
+Kudos to Miguel Álvarez Díez ([@GiviMAD](https://github.com/GiviMAD)) for implementing this new feature!
 
 ## Add-on Enhancements
 
