@@ -437,16 +437,16 @@ Kudos to Miguel Álvarez Díez ([@GiviMAD](https://github.com/GiviMAD)) for impl
 openHAB 5.2 ships with 19 new add-ons, marking a significant milestone by surpassing 500 add-ons:
 
 - [Atmo France Binding](/addons/bindings/atmofrance/): Integrates air quality data from Atmo France, the national federation of air quality monitoring associations.
-- [Bluelink Binding](/addons/bindings/bluelink/): Provides vehicle telemetry and control for Hyundai and Genesis vehicles through the Bluelink service.
+- [Bluelink Binding](/addons/bindings/bluelink/): Provides vehicle telemetry and control for Hyundai, Kia, and Genesis vehicles through the Bluelink service.
 - [Dahua Door Binding](/addons/bindings/dahuadoor/): Integrates Dahua VTO door stations with support for real-time events, door lock control, image capture, and WebRTC/SIP-based two-way audio/video intercom calls.
 - [DD-WRT Binding](/addons/bindings/ddwrt/): Monitors and manages routers and access points running DD-WRT, OpenWrt, Tomato, or generic Linux via SSH.
-- [Energy Forecast Binding](/addons/bindings/energyforecast/): Integrates with the energyforecast.de service to retrieve AI-based electricity generation and consumption forecasts.
-- [Geocoding Transformation](/addons/transformations/geocoding): Transformation service to convert geo coordinates into human-readable addresses and vice versa.
-- [Google Gemini Binding](#chat-with-openhab): Integrates Google's Gemini Large Language Models to enable natural language control, [see below](#chat-with-openhab).
+- [Energy Forecast Binding](/addons/bindings/energyforecast/): Integrates with the [energyforecast.de](https://energyforecast.de/) service to retrieve AI-based electricity generation and consumption forecasts.
+- [Geocoding Transformation](/addons/transformations/geocoding): Converts geo coordinates into human-readable addresses and vice versa.
+- [Google Gemini Binding](#chat-with-openhab): Integrates Google's Gemini Large Language Models to enable natural language control, [see above](#chat-with-openhab).
 - [Home Connect Direct Binding](#home-connect-direct-binding): Connects Home Connect appliances locally over the LAN without cloud dependencies, [see below](#home-connect-direct-binding).
 - [LinkPlay Binding](/addons/bindings/linkplay/): Integrates Wi-Fi audio devices based on the LinkPlay platform, enabling music playback and multiroom group control.
 - [Math Transformation](/addons/transformations/math/): Evaluates mathematical expressions to transform states and values dynamically.
-- [Model Context Protocol (MCP) Integration](#the-openhab-mcp-server): Exposes openHAB's items, rules, and semantic model to local or cloud-based AI agents, [see below](#the-openhab-mcp-server).
+- [Model Context Protocol (MCP) Integration](#the-openhab-mcp-server): Exposes openHAB's items, rules, and semantic model to local or cloud-based AI agents, [see above](#the-openhab-mcp-server).
 - [ntfy Binding](/addons/bindings/ntfy/): Integrates with the open-source, self-hostable ntfy.sh service to send custom push notifications to mobile devices.
 - [Pirate Weather Binding](/addons/bindings/pirateweather/): Retrieves weather observations and forecasts from the Pirate Weather API (a Dark Sky compatible API).
 - [Remeha Heating Binding](/addons/bindings/remehaheating/): Integrates Remeha Home heating systems, enabling cloud-based monitoring and control of boilers and hot water settings.
