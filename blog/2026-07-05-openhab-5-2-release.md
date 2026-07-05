@@ -70,7 +70,64 @@ In the following sections, our maintainers and contributors introduce a section 
 
 ## Chat with openHAB
 
+<div class="img-beside-text-right">
+  <img style="width: calc(33% - 7px);" src="/uploads/2026-07-05-openhab-5-2-release/chat-suggestions.png"/>
+  <img style="width: calc(33% - 7px);" src="/uploads/2026-07-05-openhab-5-2-release/chat-conversation-1.png"/>
+  <img style="width: calc(33% - 7px);" src="/uploads/2026-07-05-openhab-5-2-release/chat-conversation-2.png"/>
+</div>
+
 _Florian Hotze ([@florian-h05](https://github.com/florian-h05)), openHAB Maintainer_
+
+A major highlight of the openHAB 5.2 release is the introduction of a new **Chat** interface in Main UI along with support for LLM-based human language interpreters.
+This feature takes natural language interaction with your smart home to a whole new level, allowing you to have a conversation with your openHAB instance with back-and-forth exchanges and responses.
+
+### A Smart Home That Truly Understands You
+
+Instead of relying on rigid, predefined sentence matching rules, this new feature allows leveraging the power of **Large Language Models (LLMs)** to understand and respond to natural language in nearly any language.
+By pairing openHAB with AI services like Google Gemini, OpenAI, or Ollama, you can type (or say) instructions just like you are messaging a friend.
+Whether you ask "Can you make the living room cozy?" or "Are any windows left open downstairs?", the LLM interprets your intent, queries the state or your home, and acts accordingly.
+
+What makes the Chat interface so powerful is its deep integration into Main UI.
+When the LLM decides to interact with a device, the UI doesn't just display the response; it dynamically renders the default card widget for that Item right inside the chat feed!
+This allows you to immediately see the state of your smart plug, dim a light, or adjust a thermostat slider directly inside the conversation thread.
+
+### Powerful Control & Extensibility
+
+The Chat interface and the underlying LLM-based human language interpretation framework are built to give you full control over how the AI interacts with your server:
+
+- **LLM Tooling Framework:**<br/>
+  openHAB equips the LLM with built-in tools like retrieving the current date & time, checking device states, or issuing commands.
+- **Persistent Conversations:**<br/>
+  To support multi-turn, back-and-forth conversations, openHAB retains conversation history, allowing you to continue where you left off.
+- **Customization:**<br/>
+  For every interaction, you can select which LLM tools to enable. 
+  You can also customize the LLM's behavior through modifying the system prompt and give it its own, unique "personality."
+- **LLM Provider Agnostic:**<br/>
+  The Chat interface and the underlying LLM-based human language interpretation framework are built without a specific AI provider in mind.
+  openHAB 5.2 only comes with support for Google Gemini, but we will extend this soon to OpenAI and OpenAI-compatible providers like Ollama or OpenRouter, giving you the flexibility to choose the best AI model for your use case.
+
+### Privacy & Security First
+
+Entrusting an AI model with your home doesn't mean giving up control.
+openHAB 5.2 introduces a robust [Item Permission Model](/docs/configuration/multimedia.html#item-permission-model) designed specifically to protect your privacy and ensure security-critical parts remain safe.
+
+Through the `voiceSystem` metadata and a system-default setting, you can explicitly define how individual Items are exposed to human language interpreters using three levels: **No Access**, **Read-Only**, or **Read-Write**.
+Items can also inherit permissions from their parent groups, with the most restrictive setting winning in case of conflicts.
+This makes it incredibly simple to shield security-sensitive devices — like smart locks, garage doors, and alarm systems — from being accessed by the LLM, or restrict them to read-only status.
+Additionally, limiting the scope of exposed Items boosts performance, as the LLM has smaller, more focused context to evaluate.
+
+### Getting Started
+
+Ready to start? Setting it up is simple:
+
+1. Install the new [Google Gemini binding](/addons/bindings/gemini/) from the add-on store.
+2. Get an API key from the [Google AI Studio](https://aistudio.google.com/api-keys) and create a Gemini account Thing.
+3. Navigate to _System Settings_ → _Voice_ and configure Gemini as your default human language interpreter.
+4. You are ready to start chatting!
+
+For more details refer to the [Voice: Human Language Interpreter](/docs/configuration/multimedia.html#human-language-interpreter) documentation.
+
+<div style="clear:both;"></div>
 
 ## The openHAB MCP Server
 
