@@ -272,6 +272,8 @@ But not only were new bindings added, some existing bindings also received massi
 
 ### Matter Improvements
 
+<img src="/uploads/2026-07-05-openhab-5-2-release/matter-thread-network-tab.png" class="img-beside-text-right" alt="Thread Network Map" />
+
 _Dan Cunningham ([@digitaldan](https://github.com/digitaldan)), openHAB Maintainer_
 
 The Matter binding has improved substantially since our last release in capability, performance, and reliability.
@@ -297,6 +299,8 @@ It can also handle setups with multiple Thread Border Routers from different ven
 
 Many changes to both the binding itself and the Matter library it depends on have greatly reduced Thread connection times during system startup and when reconnecting to Thread devices.
 Commissioning of new Thread devices is now more reliable, and several Thread specific crashes and regressions have been resolved.
+
+<div style="clear:both;"></div>
 
 ### YAML Composer: Bring Modularity to Your Configurations
 
