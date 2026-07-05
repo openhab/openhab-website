@@ -171,6 +171,38 @@ Rule templates don't have Main UI editing support, so there's no visible change 
 
 The community marketplace already supports the new YAML format for rule templates, as well as block libraries.
 
+### YAML/DSL File Formats for Sitemap UI
+
+_Laurent Garnier ([@lolodomo](https://github.com/lolodomo)), openHAB Maintainer_
+
+In this release, file-based YAML support has been introduced for sitemap UI.
+This format offers an alternative to the existing DSL format.
+Conversion between formats is also available through enhanced REST APIs.
+
+Additionally, it is now possible to define multiple sitemaps in a single YAML or `.sitemaps` file.
+
+Many thanks to Mark Herwege ([@mherwege](https://github.com/mherwege)) for the contribution of this feature!
+
+### Enhanced DSL File Format for Rules
+
+_Laurent Garnier ([@lolodomo](https://github.com/lolodomo)), openHAB Maintainer_
+
+The DSL syntax has been enhanced to support features that were already available when defining rules in Main UI.
+It includes the ability to set an ID and tags to a rule and to define execution conditions for a rule using the keyword `but only if`.
+
+```java
+rule "Play music on arrival, but only on afternoon" uid = "Music-on-arrival" [ Music ]
+when
+    Item Presence received command ON
+but only if
+    Time is between 13:00 and 18:00
+then
+    Soundbar.sendCommand(ON)
+end
+```
+
+You can now also view the DSL syntax associated with any of your DSL rule managed in Main UI in the Code tab from that rule page.
+
 ### Protect your Secrets with Environment Variables
 
 _Florian Hotze ([@florian-h05](https://github.com/florian-h05)), openHAB Maintainer_
@@ -245,6 +277,19 @@ After refactoring all charting code to type-safe TypeScript code, we've addresse
   Fixed chart periods 2 years, 3 years, and five years have been added, extended the chart range.
 - **New Yearly Aggregation:**<br/>
   A new yearly aggregation has been added, allowing to compare several years in fixed period charts.
+
+### Enhanced Sitemap Management
+
+_Laurent Garnier ([@lolodomo](https://github.com/lolodomo)), openHAB Maintainer_
+
+Main UI now displays the list all available sitemaps in a new dedicated Sitemaps page within the settings section, including those defined in configuration files (DSL and YAML formats).
+You can open the sitemap editor from any existing sitemap, in read-only mode for sitemaps provided as configuration files.
+The Code tab now contains file‑compatible syntax for both YAML and DSL formats.
+
+Sitemaps can also be copied to the clipboard in either YAML or DSL format both from the Sitemaps page itself, or from the Code tab in a particular Sitemap page.
+In case you want to move from configuration file to UI managed for a sitemap, the "Duplicate" button in the Design tab can be used to create a new editable sitemap managed by Main UI from a sitemap defined in a configuration file.
+
+Many thanks to Mark Herwege ([@mherwege](https://github.com/mherwege)) for the development of this feature!
 
 ### Redesigned Persistence Configuration
 
