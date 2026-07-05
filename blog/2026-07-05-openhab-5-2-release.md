@@ -293,7 +293,17 @@ Many thanks to Mark Herwege ([@mherwege](https://github.com/mherwege)) for the d
 
 ### Redesigned Persistence Configuration
 
-TODO @mherwerge/@jsjames
+_Mark Herwege ([@mherwege](https://github.com/mherwege)), openHAB Maintainer_
+
+Configuring persistence through Main UI has been streamlined, making it easier to understand and configure:
+
+The main entry point is now the configuration for a specific persistence service.
+From there, you can easily configure items and aliases, allowing to pick existing strategies and filers, or create new ones.
+
+Strategies and filters are now considered second level configuration and available through a definitions popup.
+When working on cron strategies, the cron strategy editor now fully supports updating an existing cron expression.
+
+Related to this enhancement, we also enhanced the health checks on the persistence configurations, warning you for more inconsistencies or conflicts.
 
 ### Persistence Status on the Item page
 
@@ -345,7 +355,7 @@ The Matter binding has improved substantially since our last release in capabili
 
 Matter devices can now be updated directly from openHAB, without the need for a separate manufacturer app.
 openHAB itself acts as a Matter OTA Provider.
-It looks up certified firmware in the CSA Distributed Compliance Ledger, the official blockchain registry where manufacturers publish updates, then downloads and serves the image to your device.
+It looks up certified firmware in the CSA Distributed Compliance Ledger, the official blockchain registry where manufacturers publish updates, then downloads, and serves the image to your device.
 Matter updates use the standard openHAB Core firmware framework, so they show up in Main UI just like they do for any other binding.
 
 #### Expanded device support
@@ -356,7 +366,7 @@ Air quality coverage is now complete, with all 11 concentration measurements sup
 #### A new Thread network map
 
 Main UI now includes a visualization of your Matter and Thread network, much like the existing Z-Wave network view.
-It can also handle setups with multiple Thread Border Routers from different vendors, as well as display link quality, mesh roles and more.
+It can also handle setups with multiple Thread Border Routers from different vendors, as well as display link quality, mesh roles, and more.
 
 #### Thread device improvements
 
