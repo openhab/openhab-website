@@ -436,7 +436,7 @@ Kudos to Miguel Álvarez Díez ([@GiviMAD](https://github.com/GiviMAD)) for impl
 
 openHAB 5.2 ships with 19 new add-ons, marking a significant milestone by surpassing 500 add-ons:
 
-- [Atmo France Binding](/addons/bindings/atmofrance/): Integrates air quality data from Atmo France, the national federation of air quality monitoring associations.
+- [Atmo France Binding](/addons/bindings/atmofrance/): Integrates air quality data from [Atmo France](https://www.atmo-france.org/), the French national federation of air quality monitoring associations.
 - [Bluelink Binding](/addons/bindings/bluelink/): Provides vehicle telemetry and control for Hyundai, Kia, and Genesis vehicles through the Bluelink service.
 - [Dahua Door Binding](/addons/bindings/dahuadoor/): Integrates Dahua VTO door stations with support for real-time events, door lock control, image capture, and WebRTC/SIP-based two-way audio/video intercom calls.
 - [DD-WRT Binding](/addons/bindings/ddwrt/): Monitors and manages routers and access points running DD-WRT, OpenWrt, Tomato, or generic Linux via SSH.
@@ -446,13 +446,13 @@ openHAB 5.2 ships with 19 new add-ons, marking a significant milestone by surpas
 - [Home Connect Direct Binding](#home-connect-direct-binding): Connects Home Connect appliances locally over the LAN without cloud dependencies, [see below](#home-connect-direct-binding).
 - [LinkPlay Binding](/addons/bindings/linkplay/): Integrates Wi-Fi audio devices based on the LinkPlay platform, enabling music playback and multiroom group control.
 - [Math Transformation](/addons/transformations/math/): Evaluates mathematical expressions to transform states and values dynamically.
-- [Model Context Protocol (MCP) Integration](#the-openhab-mcp-server): Exposes openHAB's items, rules, and semantic model to local or cloud-based AI agents, [see above](#the-openhab-mcp-server).
+- [Model Context Protocol (MCP) Integration](#the-openhab-mcp-server): Exposes openHAB's items, rules, semantic model, and configuration to local or cloud-based AI agents, [see above](#the-openhab-mcp-server).
 - [ntfy Binding](/addons/bindings/ntfy/): Integrates with the open-source, self-hostable ntfy.sh service to send custom push notifications to mobile devices.
-- [Pirate Weather Binding](/addons/bindings/pirateweather/): Retrieves weather observations and forecasts from the Pirate Weather API (a Dark Sky compatible API).
+- [Pirate Weather Binding](/addons/bindings/pirateweather/): Retrieves weather observations and forecasts from the [Pirate Weather API](https://pirate-weather.apiable.io/).
 - [Remeha Heating Binding](/addons/bindings/remehaheating/): Integrates Remeha Home heating systems, enabling cloud-based monitoring and control of boilers and hot water settings.
 - [TimescaleDB Persistence Service](/addons/persistence/timescaledb/): A dedicated persistence service that utilizes the time-series features of TimescaleDB (PostgreSQL) for improved performance and efficiency.
 - [Twilio Binding](/addons/bindings/twilio/): Connects with the Twilio cloud communications platform to send/receive SMS, WhatsApp messages, and make voice calls with text-to-speech.
-- [UniFi Access Binding](/addons/bindings/unifiaccess/): Connects to Ubiquiti UniFi Access controllers to monitor door events and control locks.
+- [UniFi Access Binding](/addons/bindings/unifi/doc/access.html): Connects to Ubiquiti UniFi Access controllers to monitor door events and control locks.
 - [Worx Landroid Binding](/addons/bindings/worxlandroid/): Connects Worx Landroid robotic lawn mowers to openHAB.
 - [YAML Composer](#yaml-composer-bring-modularity-to-your-configurations): Enables modularity for YAML configuration files, [see below](#yaml-composer-bring-modularity-to-your-configurations).
 
