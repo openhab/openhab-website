@@ -438,9 +438,31 @@ items:
 
 </details>
 
-### JavaScript & Python Debugger Support
-
 ### Home Connect Direct Binding
+
+_Jonas Brüstel ([@bruestel](https://github.com/bruestel))_
+
+In this release, the new **[Home Connect Direct Binding](/addons/bindings/homeconnectdirect/)** integrates [Home Connect](https://www.home-connect.com/) enabled appliances into openHAB over your local network.
+It works with the many brands built on the Home Connect platform, including Bosch, Siemens, Gaggenau, NEFF, and more.
+Unlike the existing Home Connect binding, this implementation talks directly to your appliances on the LAN.
+There is no cloud account and no internet connection involved during operation, which results in reliable, low latency control and keeps working even when the manufacturer's cloud is unavailable.
+
+A broad range of appliance types is supported, including dishwashers, washers, dryers, washer/dryer combinations, ovens, warming drawers, coffee makers, cook processors (Cookit), hoods, cooktops, and fridge/freezers.
+Appliances are found automatically on your network via mDNS and show up in the Inbox, so adding them is as simple as accepting the discovery result.
+
+#### Rich channel support
+
+Each appliance type comes with a set of preconfigured channels for common functions such as power state, door contact, operation state, remaining program time, program progress, and program control.
+Many channels are added dynamically based on the exact features your appliance model reports, for example the different oven cavities, i-Dos dosing on washers, or the individual cooling compartments of a fridge/freezer.
+Beyond that, custom channels let you expose any internal value or capability from the appliance profile, so even functions that are not covered by the standard channels remain accessible.
+
+#### A console for setup and diagnostics
+
+The binding ships with its own built in web console.
+It lists all your appliances with their connection status and hardware details, and provides a real time monitoring view of every message exchanged between openHAB and an appliance.
+A handy openHAB configuration generator produces ready to use YAML or DSL snippets for custom channels directly from the values you see in the live message stream.
+
+### JavaScript & Python Debugger Support
 
 ## openHABian Enhancements
 
