@@ -132,7 +132,7 @@ With this update, you can now define, organize, and back up your pages and widge
 Key details of this new feature include:
 
 - **Marketplace Integration:**<br/>
-  Custom widgets can be easily adapted from the openHAB Marketplace for your configuration files. 
+  Custom widgets can be easily adapted from the openHAB Marketplace for your configuration files.
   With the updated marketplace support, widgets using the new YAML format (which includes top-level `version:` and `widgets:` sections) can be copied directly without any changes.
   For older marketplace widgets (identified by a top-level `uid:` key), you will need to add the widget's UID as a map key under your file's top-level `widgets:` section and nest the marketplace configuration underneath it.
 - **Read-Only Safeguards:**<br/>
@@ -230,7 +230,31 @@ TODO
 
 But not only were new bindings added, some existing bindings also received massive improvements:
 
-TODO
+### Matter improvements
+
+The Matter binding has improved substantially since our last release in capability, performance, and reliability.
+
+#### Over the air firmware updates
+
+Matter devices can now be updated directly from openHAB, without the need for a separate manufacturer app.
+openHAB itself acts as a Matter OTA Provider.
+It looks up certified firmware in the CSA Distributed Compliance Ledger, the official blockchain registry where manufacturers publish updates, then downloads and serves the image to your device.
+Matter updates use the openHAB standard core firmware framework, so they show up in the Main UI just like they do for any other binding.
+
+#### Expanded device support
+
+Support was added for smoke, CO, and CO₂ sensors, along with EU style deadbolt locks.
+Air quality coverage is now complete, with all 11 concentration measurements supported: CO₂, CO, formaldehyde, NO₂, ozone, PM1, PM2.5, PM10, radon, and TVOC.
+
+#### A new Thread network map
+
+The Main UI now includes a visualization of your Matter and Thread network, much like the existing Z-Wave network view.
+It can also handle setups with multiple Thread Border Routers from different vendors, as well as display link quality, mesh roles and more.
+
+#### Thread device improvements
+
+Many changes to both the binding itself and the Matter library it depends on have greatly reduced Thread connection times during system startup and when reconnecting to Thread devices.
+Commissioning of new Thread devices is now more reliable, and several Thread specific crashes and regressions have been resolved.
 
 ### YAML Composer: Bring Modularity to Your Configurations
 
