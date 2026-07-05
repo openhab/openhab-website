@@ -433,11 +433,37 @@ Kudos to Miguel Álvarez Díez ([@GiviMAD](https://github.com/GiviMAD)) for impl
 
 ## Add-on Enhancements
 
-openHAB 5.2 ships TODO new-addons, marking a significant milestone by surpassing 500 add-ons:
+openHAB 5.2 ships 19 new add-ons, marking a significant milestone by surpassing 500 add-ons:
 
-TODO
+- [Atmo France Binding](/addons/bindings/atmofrance/): Integrates air quality data from Atmo France, the national federation of air quality monitoring associations.
+- [Bluelink Binding](/addons/bindings/bluelink/): Provides vehicle telemetry and control for Hyundai and Genesis vehicles through the Bluelink service.
+- [Dahua Door Binding](/addons/bindings/dahuadoor/): Integrates Dahua VTO door stations with support for real-time events, door lock control, image capture, and WebRTC/SIP-based two-way audio/video intercom calls.
+- [DD-WRT Binding](/addons/bindings/ddwrt/): Monitors and manages routers and access points running DD-WRT, OpenWrt, Tomato, or generic Linux via SSH.
+- [Energy Forecast Binding](/addons/bindings/energyforecast/): Integrates with the energyforecast.de service to retrieve AI-based electricity generation and consumption forecasts.
+- [Geocoding Transformation](/addons/transformations/geocoding): Transformation service to convert geo coordinates into human-readable addresses and vice versa.
+- [Google Gemini Binding](#chat-with-openhab): Integrates Google's Gemini Large Language Models to enable natural language control, [see below](#chat-with-openhab).
+- [Home Connect Direct Binding](#home-connect-direct-binding): Connects Home Connect appliances locally over the LAN without cloud dependencies, [see below](#home-connect-direct-binding).
+- [LinkPlay Binding](/addons/bindings/linkplay/): Integrates Wi-Fi audio devices based on the LinkPlay platform, enabling music playback and multiroom group control.
+- [Math Transformation](/addons/transformations/math/): Evaluates mathematical expressions to transform states and values dynamically.
+- [Model Context Protocol (MCP) Integration](#the-openhab-mcp-server): Exposes openHAB's items, rules, and semantic model to local or cloud-based AI agents, [see below](#the-openhab-mcp-server).
+- [ntfy Binding](/addons/bindings/ntfy/): Integrates with the open-source, self-hostable ntfy.sh service to send custom push notifications to mobile devices.
+- [Pirate Weather Binding](/addons/bindings/pirateweather/): Retrieves weather observations and forecasts from the Pirate Weather API (a Dark Sky compatible API).
+- [Remeha Heating Binding](/addons/bindings/remehaheating/): Integrates Remeha Home heating systems, enabling cloud-based monitoring and control of boilers and hot water settings.
+- [TimescaleDB Persistence Service](/addons/persistence/timescaledb/): A dedicated persistence service that utilizes the time-series features of TimescaleDB (PostgreSQL) for improved performance and efficiency.
+- [Twilio Binding](/addons/bindings/twilio/): Connects with the Twilio cloud communications platform to send/receive SMS, WhatsApp messages, and make voice calls with text-to-speech.
+- [UniFi Access Binding](/addons/bindings/unifiaccess/): Connects to Ubiquiti UniFi Access controllers to monitor door events and control locks.
+- [Worx Landroid Binding](/addons/bindings/worxlandroid/): Connects Worx Landroid robotic lawn mowers to openHAB.
+- [YAML Composer](#yaml-composer-bring-modularity-to-your-configurations): Enables modularity for YAML configuration files, [see below](#yaml-composer-bring-modularity-to-your-configurations).
 
 But not only were new bindings added, some existing bindings also received massive improvements:
+
+- [Matter Binding](#matter-improvements): Received significant upgrades, including support for over-the-air firmware updates via openHAB, expanded device support (smoke, CO, CO₂ sensors, and EU style deadbolts), a new Thread network map visualization, and reduced startup connection times, [see below](#matter-improvements).
+- [Ring Binding](/addons/bindings/ring/): Added support for Ring Intercom 'open door' functionality, status and control of light and siren on supported devices, camera snapshot support, and the ability to toggle motion detection on/off.
+- [Roborock Binding](/addons/bindings/roborock/): Introduced local protocol support, Roborock map rendering, routines as channel options, and support for Roborock Q7 and Q10 vacuums.
+- [Roku Binding](/addons/bindings/roku/): Refactored discovery to use UPnP, improved TV status polling and refresh job timing, and improved offline handling.
+- [Shelly Binding](/addons/bindings/shelly/): Added support for Shelly BLU Zigbee devices (Motion, H&T Display, Door/Window, Remote), new Gen3 and Gen4 devices (Plug M Gen3, Pro Dimmer 2PM, Plug US Gen4, Plus Plug CPM Gen4), and implemented WebSockets keep-alive for Gen2+ devices.
+- [Tesla Binding](/addons/bindings/tesla/): Added a new "share" channel for setting navigation destinations directly from rules/scripts, added representation properties, and improved offline status messages.
+- [Tuya Binding](/addons/bindings/tuya/): Added support for configurable TCP ports, better handling of battery devices, a new bitmap data type, immediate discovery after cloud login, and improved protocol 3.1 decryption detection.
 
 ### Matter Improvements
 
