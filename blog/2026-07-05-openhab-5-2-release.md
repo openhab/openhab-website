@@ -537,6 +537,19 @@ A handy openHAB configuration generator produces ready to use YAML or DSL snippe
 
 ### JavaScript & Python Debugger Support
 
+_Florian Hotze ([@florian-h05](https://github.com/florian-h05)), openHAB Maintainer_
+
+Writing complex automation rules just got a massive upgrade.
+In openHAB 5.2, we are thrilled to introduce full debugger support for both the popular JavaScript (GraalVM) and Python Scripting add-ons!
+
+If you've ever found yourself debugging a complex rule by scattering `console.log()` or `self.logger` statements throughout your code, this feature is for you.
+
+The new debugging feature supports the Chrome DevTools protocol, making it incredibly easy to connect your favorite development tools — such as Visual Studio Code.
+To use it, enable it in the JavaScript or Python Scripting add-on configuration and a debugger configuration to your development environment.
+Please note that the debugger currently only supports file-based scripts.
+
+Refer to the [JavaScript documentation](/addons/automation/jsscripting/#debugging) for setup instructions.
+
 ## openHABian Enhancements
 
 # Enjoy and Get in Touch
