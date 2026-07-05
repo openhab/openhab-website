@@ -154,6 +154,8 @@ By selecting one or more items, you can instantly copy the correct file-ready YA
 
 ### YAML File Format for Rules & Rule Templates
 
+<img src="/uploads/2026-07-05-openhab-5-2-release/rules-yaml-example.png" class="img-beside-text-right" alt="YAML Rule Example" />
+
 _Ravi Nadahar ([@Nadahar](https://github.com/Nadahar)), openHAB Contributor_
 
 openHAB 5.2 supports [rules](/docs/configuration/yaml/rules.html) and [rule templates](/docs/configuration/yaml/ruletemplates.html) in YAML files.
@@ -171,6 +173,8 @@ Rule templates don't have Main UI editing support, so there's no visible change 
 
 The community marketplace already supports the new YAML format for rule templates, as well as block libraries.
 
+<div style="clear:both;"></div>
+
 ### YAML/DSL File Formats for Sitemap UI
 
 _Laurent Garnier ([@lolodomo](https://github.com/lolodomo)), openHAB Maintainer_
@@ -183,12 +187,34 @@ Additionally, it is now possible to define multiple sitemaps in a single YAML or
 
 Many thanks to Mark Herwege ([@mherwege](https://github.com/mherwege)) for the contribution of this feature!
 
-### Enhanced DSL File Format for Rules
+### Powerful Upgrades to Rules DSL
 
-_Laurent Garnier ([@lolodomo](https://github.com/lolodomo)), openHAB Maintainer_
+<img src="/uploads/2026-07-05-openhab-5-2-release/rules-dsl-code-tab.gif" class="img-beside-text-right" alt="Rules DSL Code Tab" />
 
-The DSL syntax has been enhanced to support features that were already available when defining rules in Main UI.
-It includes the ability to set an ID and tags to a rule and to define execution conditions for a rule using the keyword `but only if`.
+_Ravi Nadahar ([@Nadahar](https://github.com/Nadahar)), openHAB Contributor_
+
+Rules DSL has been a core part of openHAB since its initial release many years ago.
+In openHAB 5.2, this text-based rule engine receives a major update designed to improve flexibility, modularity, and feature parity with standard rules.
+
+Whether you write rules manually in text files or manage them via the Main UI, this release removes several historical limitations and introduces new ways to structure your Rules DSL-based automation:
+
+- **Native Conditions:**<br/>
+  openHAB 5.2 adds support for native condition blocks as known from Main UI.
+  You can now cleanly separate conditions from actions, removing the need to clutter the action with if conditions and guard clauses:
+- **Triggerless Rules:**<br/>
+  You can now define a DSL rule without triggers, which is perfect for creating reusable scripts meant to be executed manually or called exclusively by other rules.
+- **Convenience Functionality:**<br/>
+  The standard library has been extended with a number of new functions, allowing for more concise and readable code.
+  Refer to [Rules DSL: Convenience Functionality](/docs/configuration/rules-dsl.html#convenience-functionality) for more details.
+- **Inter-Rule Execution:**<br/>
+  Rules DSL now officially supports invoking and executing another rule from within a rule.
+  This allows writing more modular and maintainable automation — even across different languages.
+- **Set ID & Tags:**<br/>
+  You can now set an ID and tags to a DSL rule, allowing for easier identification and organization.
+- **Main UI Code Tab:**<br/>
+  Main UI now displays the source code for DSL rules.
+
+Here is an example of a rule with UID, tag, and condition:
 
 ```java
 rule "Play music on arrival, but only on afternoon" uid = "Music-on-arrival" [ Music ]
@@ -201,7 +227,7 @@ then
 end
 ```
 
-You can now also view the DSL syntax associated with any of your DSL rule managed in Main UI in the Code tab from that rule page.
+<div style="clear:both;"></div>
 
 ### Protect your Secrets with Environment Variables
 
@@ -222,7 +248,7 @@ Making these "under the hood" changes allowed us to improve our overall code qua
 
 ### Access Logs across the UI
 
-<img src="/uploads/2026-07-05-openhab-5-2-release/log-viewer-pane.png" class="img-beside-text-right" alt="Embeddded Log Viewer Pane" />
+<img src="/uploads/2026-07-05-openhab-5-2-release/log-viewer-pane.png" class="img-beside-text-right" alt="Embedded Log Viewer Pane" />
 
 _Jimmy Tanagra ([@jimtng](https://github.com/jimtng)), openHAB Maintainer_
 
