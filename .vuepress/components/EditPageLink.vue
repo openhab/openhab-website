@@ -31,8 +31,7 @@ export default {
     },
     editUrl () {
       if (!this.$page || !this.$page.frontmatter.source) return null
-      return this.$page.frontmatter.source.replace('/blob/', '/edit/')
-    }
+      return this.$page.frontmatter.source.replace('/blob/', '/edit/').replace('/developer/', '/developers/')    }
   }
 }
 </script>
