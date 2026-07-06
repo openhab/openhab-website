@@ -28,11 +28,11 @@
   "scripts": {
     "predev": "npm install && npx update-browserslist-db@latest",
     "dev": "npx vuepress dev",
-    "prepare-docs": "ruby scripts/prepare-docs.rb $ARGUMENTS",
+    "prepare-website": "ruby scripts/prepare-website.rb $ARGUMENTS",
     "add-blog-meta": "ruby scripts/add-blog-meta.rb",
-    "build": "npm run prepare-docs && ruby scripts/add-blog-meta.rb && vuepress build .",
+    "build": "npm run prepare-website && ruby scripts/add-blog-meta.rb && vuepress build .",
     "build-only": "vuepress build .",
-    "prebuild-local": "npm run prepare-docs",
+    "prebuild-local": "npm run prepare-website",
     "build-local": "npm run dev --silent",
     "build-local-latest": "OH_DOCS_VERSION=final npm run build-local",
     "build-local-stable": "OH_DOCS_VERSION=final-stable npm run build-local"

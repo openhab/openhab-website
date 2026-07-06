@@ -26,7 +26,7 @@ IGNORED_ADDONS = %w[transport.modbus transport.feed javasound webaudio oh2].free
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: prepare-docs.rb [options]"
+  opts.banner = "Usage: prepare-website.rb [options]"
   opts.on("--no-clone", "Don't clone the openhab-docs repository, but use an existing clone if available") do
     options[:no_clone] = true
     verbose "➡️ no-clone: existing clone will be used"

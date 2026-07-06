@@ -77,7 +77,7 @@ You can however build it manually with the command: `npm run build`.
 
 This will:
 
-1. Run `ruby prepare-docs.rb` as above.
+1. Run `ruby prepare-website.rb` as above.
 2. Run `vuepress build` which will output the final static files in `vuepress`.
 
 The complete build will take between 2 and 5 minutes.
