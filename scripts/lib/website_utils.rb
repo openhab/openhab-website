@@ -29,6 +29,8 @@ def checkout_pull_request(pull_request, target_directory)
 end
 
 def clean_ignored_files(path, dry_run: false)
+  return true unless Dir.exist?(path)
+
   # -f: Force (delete)
   # -n: Dry-run (show what would happen)
   # -d: Remove directories
