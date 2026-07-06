@@ -59,6 +59,7 @@ elsif !DOCS_SRC.exist?
 
   if DOCS_SRC.join("src").exist? # Check if the clone was successful by checking for the existence of the "src" folder
     puts "➡️ Clone successful"
+###### BEGIN TEMP ######
   else
     # Temporarily fetch the src from local dev branch until the PR is merged, as the src folder is required to build the docs
     # This is a fallback before the openhab/openhab-docs#2718 PR is merged
@@ -72,20 +73,23 @@ elsif !DOCS_SRC.exist?
       # We need to do this because the final-stable branch used in the CI lags behind the contents
       # of the dev branch containing the src folder that we copied above
       sidebar_js = DOCS_SRC.join(".vuepress/docs-sidebar.js")
-      sidebar_js.write(URI.open("https://raw.githubusercontent.com/jimtng/openhab-docs/refactor-prepare-docs/.vuepress/docs-sidebar.js").read) # Remove /src/ from the sidebar links, as our temporary src is not in the root of the repository
+      sidebar_js.write(URI.open("https://raw.githubusercontent.com/jimtng/openhab-docs/refactor-prepare-docs/.vuepress/docs-sidebar.js").read)
     end
+###### END TEMP ######
   end
 end
 
+###### BEGIN TEMP ######
 # Temporarily sync the openhabian docs from the old location
-# Once a new openhabian docs PR is merged, the new action will publish them to src/installation
+# Once the openhab/openhab-docs#2718 PR is merged, its new action will publish openhabian docs to src/installation
 # and when that happens, this sync can be removed
 if Dir.exist?(DOCS_SRC / "installation")
   puts "➡️ Syncing openhabian docs from old location to src/installation"
   `rsync -a #{DOCS_SRC}/installation/ #{DOCS_SRC}/src/installation/`
 end
+###### END TEMP ######
 
-raise "Failed to prepare openhab-docs source. Please check if the repository was cloned successfully." unless DOCS_SRC.join("src").exist?
+raise "Cannot find openhab-docs source. Please check if the repository was cloned successfully." unless DOCS_SRC.join("src").exist?
 
 # Fetch process_utils from the openhab-docs repository if we haven't already - we need it to process the documentation files
 process_utils = DOCS_SRC / "scripts/lib/process_utils.rb"
@@ -96,13 +100,12 @@ unless process_utils.exist?
   rescue OpenURI::HTTPError => e
     raise unless e.io.status[0] == "404"
 
+###### BEGIN TEMP ######
     # Temporarily fetch this from my local dev branch until the PR is merged, as process_utils is required to build the docs
     process_utils.write(URI.open("https://raw.githubusercontent.com/jimtng/openhab-docs/refactor-prepare-docs/scripts/lib/process_utils.rb").read)
+###### END TEMP ######
   end
 end
-
-# TEMP:
-# process_utils.write(File.read("../../openhab-docs.worktrees/refactor-prepare-docs/scripts/lib/process_utils.rb"))
 
 # After we've cloned the openhab-docs, we can require process_utils to use its helper functions
 require DOCS_SRC.expand_path / "scripts/lib/process_utils"
@@ -171,11 +174,10 @@ else
                     dst: ADDONS_DST / "integrations"
 
   puts "➡️ Migrating add-ons: UI"
-  process_directory src: DOCS_SRC / "_addons_uis",
-                    dst: ADDONS_DST / "ui" do |current_path|
-                      next if current_path.each_filename.include?("org.openhab.ui")
-
-                      true
+  addon_uis = DOCS_SRC / "_addons_uis"
+  process_directory src: addon_uis,
+                    dst: ADDONS_DST / "ui" do |src_path|
+                      !src_path.ascend.include?(addon_uis / "org.openhab.ui")
                     end
 
   # Handle those three separately - copy them in the "ecosystem" section
