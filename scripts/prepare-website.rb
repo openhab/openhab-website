@@ -133,11 +133,6 @@ verbose "   ➡️ habpanel"
 process_directory src: DOCS_SRC / "_addons_uis/habpanel/doc",
                   dst: DOCS_DST / "ui/habpanel"
 
-verbose "   ➡️ habot"
-# habot repo is archived, so we don't set a source root link
-process_directory src: DOCS_SRC / "_addons_uis/habot",
-                  dst: DOCS_DST / "ui/habot"
-
 puts "➡️ Migrating the apps section"
 # The external apps docs provide their own `source:` frontmatter
 # No need to process individual app.
