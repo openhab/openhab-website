@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-# This will clone https://github.com/openhab/openhab-docs
-# and migrate content into the website with some changes
+# This will clone https://github.com/openhab/openhab-docs and migrate content into the website
 
 require "optparse"
 require "fileutils"
@@ -21,8 +20,6 @@ ADDONS_DST = Pathname("addons")
 LOGOS_DST = Pathname(".vuepress/public/logos")
 
 $verbose = false
-
-IGNORED_ADDONS = %w[transport.modbus transport.feed javasound webaudio oh2].freeze # No longer relevant?
 
 options = {}
 OptionParser.new do |opts|
@@ -44,185 +41,64 @@ end.parse!
 
 puts "➡️ Generating docs from openhab-docs branch '#{DOCS_REPO_BRANCH}'"
 
+unless options[:no_clone]
+  verbose "🧹 Cleaning existing docs from openhab-docs ..."
+  FileUtils.rm_rf(DOCS_DST)
+  %w[bindings persistence automation integrations transformations voice ui].each do |type|
+    FileUtils.rm_rf(ADDONS_DST / type)
+  end
+end
+
 if options[:no_clone] && DOCS_SRC.exist?
   puts "➡️ Re-using existing clone"
 else
-  puts "➡️ Cleaning #{DOCS_SRC}..."
+  puts "🧹 Cleaning #{DOCS_SRC} ..."
   DOCS_SRC.rmtree if DOCS_SRC.exist?
 end
 
 if options[:pull_request]
+  DOCS_SRC.mkpath
   checkout_pull_request(options[:pull_request], DOCS_SRC)
 elsif !DOCS_SRC.exist?
   puts "➡️ Cloning repository #{DOCS_REPO_URL}/#{DOCS_REPO_BRANCH} into #{DOCS_SRC} 📦 ..."
   `git clone --depth 1 --branch #{DOCS_REPO_BRANCH} #{DOCS_REPO_URL} #{DOCS_SRC}`
+end
 
-  if DOCS_SRC.join("src").exist? # Check if the clone was successful by checking for the existence of the "src" folder
-    puts "➡️ Clone successful"
-###### BEGIN TEMP ######
-  else
-    # Temporarily fetch the src from local dev branch until the PR is merged, as the src folder is required to build the docs
-    # This is a fallback before the openhab/openhab-docs#2718 PR is merged
-    puts "➡️ Copying temp source files during development"
+raise "Cannot find openhab-docs repository directory. Please check if cloning/checkout was successful." unless DOCS_SRC.exist?
 
-    `git clone --depth 1 --branch refactor-prepare-docs "https://github.com/jimtng/openhab-docs.git" /tmp/openhab-docs-dev`
-    FileUtils.cp_r("/tmp/openhab-docs-dev/src", DOCS_SRC / "src")
-    FileUtils.rm_rf("/tmp/openhab-docs-dev") # Clean up the temporary clone
-
-    if DOCS_REPO_BRANCH == "final-stable"
-      # We need to do this because the final-stable branch used in the CI lags behind the contents
-      # of the dev branch containing the src folder that we copied above
-      sidebar_js = DOCS_SRC.join(".vuepress/docs-sidebar.js")
-      sidebar_js.write(URI.open("https://raw.githubusercontent.com/jimtng/openhab-docs/refactor-prepare-docs/.vuepress/docs-sidebar.js").read)
-    end
-###### END TEMP ######
+if options[:pull_request]
+  puts "➡️ Processing docs and addons for the pull request..."
+  Dir.chdir(DOCS_SRC) do
+    # Run the prepare-docs.rb to generate processed docs
+    system("ruby scripts/prepare-docs.rb")
   end
 end
 
-###### BEGIN TEMP ######
-# Temporarily sync the openhabian docs from the old location
-# Once the openhab/openhab-docs#2718 PR is merged, its new action will publish openhabian docs to src/installation
-# and when that happens, this sync can be removed
-if Dir.exist?(DOCS_SRC / "installation")
-  puts "➡️ Syncing openhabian docs from old location to src/installation"
-  `rsync -a #{DOCS_SRC}/installation/ #{DOCS_SRC}/src/installation/`
-end
-###### END TEMP ######
-
-raise "Cannot find openhab-docs source. Please check if the repository was cloned successfully." unless DOCS_SRC.join("src").exist?
-
-# Fetch process_utils from the openhab-docs repository if we haven't already - we need it to process the documentation files
-process_utils = DOCS_SRC / "scripts/lib/process_utils.rb"
-unless process_utils.exist?
-  process_utils.parent.mkpath
-  begin
-    process_utils.write(URI.open("https://raw.githubusercontent.com/openhab/openhab-docs/main/scripts/lib/process_utils.rb").read)
-  rescue OpenURI::HTTPError => e
-    raise unless e.io.status[0] == "404"
-
-###### BEGIN TEMP ######
-    # Temporarily fetch this from my local dev branch until the PR is merged, as process_utils is required to build the docs
-    process_utils.write(URI.open("https://raw.githubusercontent.com/jimtng/openhab-docs/refactor-prepare-docs/scripts/lib/process_utils.rb").read)
-###### END TEMP ######
-  end
-end
-
-# After we've cloned the openhab-docs, we can require process_utils to use its helper functions
-require DOCS_SRC.expand_path / "scripts/lib/process_utils"
+raise "Cannot find openhab-docs docs folder. Please check if the processing scripts ran successfully." unless (DOCS_SRC / "docs").exist?
 
 clean_ignored_files(DOCS_DST)
 clean_ignored_files(ADDONS_DST)
 
 puts "➡️ Migrating logos"
 LOGOS_DST.rmtree if LOGOS_DST.exist?
-FileUtils.cp_r(DOCS_SRC / "images/addons", LOGOS_DST)
+if Dir.exist?(DOCS_SRC / "images/addons")
+  FileUtils.cp_r(DOCS_SRC / "images/addons", LOGOS_DST)
+end
 
-puts "➡️ Migrating the main documentation sections"
-process_directory src: DOCS_SRC / "src",
-                  dst: DOCS_DST,
-                  source_root: "https://github.com/openhab/openhab-docs/blob/main/src"
+puts "➡️ Copying pre-processed docs from openhab-docs"
+FileUtils.cp_r(DOCS_SRC / "docs/.", DOCS_DST)
 
-puts "➡️ Migrating the UI section"
-verbose "   ➡️ components"
-process_directory src: DOCS_SRC.join("_addons_uis/org.openhab.ui/doc/components"), # use join to avoid syntax highlighting bug in vscode
-                  dst: DOCS_DST / "ui/components",
-                  source_root: "https://github.com/openhab/openhab-webui/blob/main/bundles/org.openhab.ui/doc/components"
-
-verbose "   ➡️ habpanel"
-# habpanel.md provides its own source: frontmatter
-process_directory src: DOCS_SRC / "_addons_uis/habpanel/doc",
-                  dst: DOCS_DST / "ui/habpanel"
-
-puts "➡️ Migrating the apps section"
-# The external apps docs provide their own `source:` frontmatter
-# No need to process individual app.
-# This will process everything in the source folder
-process_directory src: DOCS_SRC / "addons/uis/apps",
-                  dst: DOCS_DST / "apps"
-
-### ADDONS
-
-# External content is not included for PRs - therefore the _addons_*** folders are not present for PR checks - this section will be skipped.
-if options[:pull_request]
-  puts ""
-  puts "⚠️  Add-on documentation depends on Jenkins job - will be skipped ..."
-  puts ""
-else
-  puts "➡️ Migrating add-ons: Automation"
-  process_directory src: DOCS_SRC / "_addons_automation",
-                    dst: ADDONS_DST / "automation"
-
-  puts "➡️ Migrating add-ons: Persistence"
-  process_directory src: DOCS_SRC / "_addons_persistences",
-                    dst: ADDONS_DST / "persistence"
-
-  puts "➡️ Migrating add-ons: Transformations"
-  process_directory src: DOCS_SRC / "_addons_transformations",
-                    dst: ADDONS_DST / "transformations"
-
-  puts "➡️ Migrating add-ons: Voice"
-  process_directory src: DOCS_SRC / "_addons_voices",
-                    dst: ADDONS_DST / "voice"
-
-  puts "➡️ Migrating add-ons: IO"
-  process_directory src: DOCS_SRC / "_addons_ios",
-                    dst: ADDONS_DST / "integrations"
-
-  puts "➡️ Migrating add-ons: UI"
-  addon_uis = DOCS_SRC / "_addons_uis"
-  process_directory src: addon_uis,
-                    dst: ADDONS_DST / "ui" do |src_path|
-                      !src_path.ascend.include?(addon_uis / "org.openhab.ui")
-                    end
-
-  # Handle those three separately - copy them in the "ecosystem" section
-  puts "➡️ Migrating special ecosystem integrations"
-  verbose "   ➡️ Process alexa-skill docs"
-  process_directory src: DOCS_SRC / "_ecosystem/alexa-skill",
-                    dst: DOCS_DST / "ecosystem/alexa"
-
-  verbose "   ➡️ Process google-assistant docs"
-  process_directory src: DOCS_SRC / "_ecosystem/google-assistant",
-                    dst: DOCS_DST / "ecosystem/google-assistant"
-
-  puts "➡️ Migrating add-ons: Bindings"
-  bindings_src = DOCS_SRC / "_addons_bindings"
-  zwave_src = bindings_src / "zwave"
-  zwave_docs = [zwave_src / "readme.md", zwave_src / "doc/things.md"] # Only include the readme and the things doc for zwave, as the rest is quite outdated and not maintained anymore
-  process_directory(src: bindings_src, dst: ADDONS_DST / "bindings") do |current_path|
-    # Grab the first path that is a child of bindings_src
-    addon = current_path.descend.find { |p| p.parent == bindings_src }&.basename.to_s
-    next false if IGNORED_ADDONS.include?(addon)
-
-    if addon == "zwave" && !zwave_docs.include?(current_path)
-      next false # If it is zwave, only include readme.md and doc/things.md
-    end
-
-    true # For all other addons, include everything
-  end
-
-  zwave_things_src = zwave_src / "doc/things.md"
-  if zwave_things_src.exist?
-    puts "   ➡️ Creating Z-Wave thing viewer"
-
-    zwave_thing_dst = ADDONS_DST / "bindings/zwave/thing.md"
-    zwave_thing_dst.write <<~MARKDOWN
-      ---
-      title: ZWave Thing
-      prev: ./
-      ---
-
-      <ThingDocRenderer />
-    MARKDOWN
-  end
-
-  # Custom fixes
-  broken_file = Pathname("addons/bindings/shelly/doc/UseCaseSmartRoller.md")
-  if broken_file.exist?
-    puts "   ➡️ Fixing broken Shelly doc"
-    lines = broken_file.readlines.reject { |line| line.include?("uiroller_1.png") }
-    broken_file.write(lines.join)
-  end
+unless options[:pull_request]
+  ADDONS_DST.mkpath
+  # Map pre-processed addon folders to their correct destination names
+  FileUtils.cp_r(DOCS_SRC / "addons/automation/.", ADDONS_DST / "automation")
+  FileUtils.cp_r(DOCS_SRC / "addons/bindings/.", ADDONS_DST / "bindings")
+  FileUtils.cp_r(DOCS_SRC / "addons/integrations/.", ADDONS_DST / "integrations")
+  FileUtils.cp_r(DOCS_SRC / "addons/persistences/.", ADDONS_DST / "persistence")
+  FileUtils.cp_r(DOCS_SRC / "addons/transformations/.", ADDONS_DST / "transformations")
+  FileUtils.cp_r(DOCS_SRC / "addons/uis/.", ADDONS_DST / "ui")
+  FileUtils.rm_rf(ADDONS_DST / "ui/org.openhab.ui")
+  FileUtils.cp_r(DOCS_SRC / "addons/voices/.", ADDONS_DST / "voice")
 end
 
 # Write arrays of addons by type to include in VuePress config.js
@@ -258,22 +134,6 @@ puts "➡️ Writing add-ons arrays to files for sidebar navigation"
   JS
 end
 
-# External content is not included for PRs - therefore the _addons_iconsets folder is not present for PR checks - this section will be skipped.
-if options[:pull_request]
-  puts ""
-  puts "⚠️  Iconsets depend on Jenkins job - will be skipped ..."
-  puts ""
-else
-  # Regenerate the classic iconset docs
-  puts "➡️ Generating iconset"
-  process_iconset(
-    iconset: "classic",
-    src: DOCS_SRC / "_addons_iconsets",
-    dst: DOCS_DST / "configuration/iconsets",
-    data: DOCS_SRC / "_data"
-  )
-end
-
 # Clean-Ups required for repeated local build
 verbose "🧹 Cleaning existing JavaDoc ..."
 FileUtils.rm Dir.glob("javadoc-latest.*"), force: true
@@ -281,17 +141,26 @@ FileUtils.rm_rf(".vuepress/public/javadoc/latest")
 
 # Publish latest Javadoc
 puts "➡️ Downloading and extracting latest Javadoc from Jenkins"
-`wget -nv https://ci.openhab.org/job/openHAB-JavaDoc/lastSuccessfulBuild/artifact/target/javadoc-latest.tgz`
-`tar xzvf javadoc-latest.tgz --strip 2 && mv apidocs/ .vuepress/public/javadoc/latest`
-FileUtils.rm "javadoc-latest.tgz"
-
-# External content is not included for PRs - therefore thing-types.json is not present for PR checks - this section will be skipped.
-if options[:pull_request]
-  puts ""
-  puts "⚠️  Thing types depend on Jenkins job - will be skipped ..."
-  puts ""
-else
-  # Copy the thing-types.json file to the proper location
-  puts "➡️ Copying Thing types"
-  FileUtils.cp(DOCS_SRC / ".vuepress/thing-types.json", ".vuepress")
+begin
+  `wget -nv https://ci.openhab.org/job/openHAB-JavaDoc/lastSuccessfulBuild/artifact/target/javadoc-latest.tgz`
+  if File.exist?("javadoc-latest.tgz")
+    `tar xzvf javadoc-latest.tgz --strip 2 && mv apidocs/ .vuepress/public/javadoc/latest`
+    FileUtils.rm "javadoc-latest.tgz"
+    puts "✅ Downloaded and extracted Javadoc"
+  else
+    puts "⚠️ Could not download Javadoc - skipping"
+  end
+rescue => e
+  puts "⚠️ Javadoc download failed: #{e.message} - skipping"
 end
+
+# Copy the thing-types.json file to the proper location
+thing_types_src = DOCS_SRC / ".vuepress/thing-types.json"
+if thing_types_src.exist?
+  FileUtils.cp(thing_types_src, ".vuepress")
+  puts "✅ Copied Thing Types"
+else
+  puts "⏭ Thing Types not found - skipping"
+end
+
+puts "✅ Website prepared"
