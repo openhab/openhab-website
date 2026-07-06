@@ -41,14 +41,6 @@ end.parse!
 
 puts "➡️ Generating docs from openhab-docs branch '#{DOCS_REPO_BRANCH}'"
 
-unless options[:no_clone]
-  verbose "🧹 Cleaning existing docs from openhab-docs ..."
-  FileUtils.rm_rf(DOCS_DST)
-  %w[bindings persistence automation integrations transformations voice ui].each do |type|
-    FileUtils.rm_rf(ADDONS_DST / type)
-  end
-end
-
 if options[:no_clone] && DOCS_SRC.exist?
   puts "➡️ Re-using existing clone"
 else
@@ -105,29 +97,33 @@ end
 puts "➡️ Writing add-ons arrays to files for sidebar navigation"
 %w[bindings persistence automation integrations transformations voice ui].each do |type|
   type_dir = ADDONS_DST / type
-  next unless type_dir.directory?
 
-  # Find all subdirectories excluding hidden ones
-  module_exports = type_dir.children.select(&:directory?).filter_map do |addon_path|
-    readme = addon_path / "readme.md"
-    next unless readme.exist?
+  module_exports = []
+  if type_dir.directory?
+    # Find all subdirectories excluding hidden ones
+    module_exports = type_dir.children.select(&:directory?).filter_map do |addon_path|
+      readme = addon_path / "readme.md"
+      next unless readme.exist?
 
-    # Find the first line starting with "label: "
-    label_line = readme.each_line.find { |line| line.start_with?("label: ") }
-    next unless label_line
+      # Find the first line starting with "label: "
+      label_line = readme.each_line.find { |line| line.start_with?("label: ") }
+      next unless label_line
 
-    title = label_line.delete_prefix("label: ").strip
-    next if title.include?("1.x")
+      title = label_line.delete_prefix("label: ").strip
+      next if title.include?("1.x")
 
-    path = "#{type}/#{addon_path.basename}/"
+      path = "#{type}/#{addon_path.basename}/"
 
-    # Return the pair for the module_exports array
-    [path, title]
+      # Return the pair for the module_exports array
+      [path, title]
+    end
   end
 
   formatted_exports = module_exports.map { |path, title| "  [ '#{path}', '#{title}' ]" }.join(",\n")
 
-  File.write(".vuepress/addons-#{type}.js", <<~JS)
+  dest_file = ".vuepress/addons-#{type}.js"
+  puts "   ↪️ Writing #{dest_file} (#{module_exports.size} items)"
+  File.write(dest_file, <<~JS)
     module.exports = [
     #{formatted_exports}
     ]
@@ -160,7 +156,7 @@ if thing_types_src.exist?
   FileUtils.cp(thing_types_src, ".vuepress")
   puts "✅ Copied Thing Types"
 else
-  puts "⏭ Thing Types not found - skipping"
+  puts "⏩ Thing Types not found - skipping"
 end
 
 puts "✅ Website prepared"
