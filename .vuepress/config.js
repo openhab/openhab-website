@@ -6,7 +6,7 @@ const AddonsTransformations = require('./addons-transformations.js')
 const AddonsVoice = require('./addons-voice.js')
 const AddonsUserInterface = require('./addons-ui.js')
 
-const fs = require ('fs-extra')
+const fs = require('fs-extra')
 const path = require('path')
 const _ = require('lodash');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -20,7 +20,7 @@ const DocsSidebarNavigation = require('./openhab-docs/.vuepress/docs-sidebar.js'
 const feedOptions = {
   canonical_base: 'https://openhab.org',
   posts_directories: ['/blog/'],
-  sort: entries => _.reverse( _.sortBy( entries, 'date' ) ),
+  sort: entries => _.reverse(_.sortBy(entries, 'date')),
 }
 
 const noAddons = process.env.OH_NOADDONS
@@ -114,8 +114,8 @@ module.exports = {
   },
   configureWebpack: (config, isServer) => {
     config.plugins.push(new CopyWebpackPlugin([
-      { from: '.vuepress/_redirects', to: '.'},
-      { from: '.vuepress/_headers', to: '.'},
+      { from: '.vuepress/_redirects', to: '.' },
+      { from: '.vuepress/_headers', to: '.' },
     ]))
   },
   serviceWorker: false,
@@ -242,37 +242,37 @@ module.exports = {
         {
           title: 'Bindings',
           collapsible: false,
-          children: AddonsBindings.sort((a,b) => a[1].localeCompare(b[1]))
+          children: AddonsBindings
         },
         {
           title: 'System Integrations',
           collapsible: false,
-          children: AddonsIntegrations.sort((a,b) => a[1].localeCompare(b[1]))
+          children: AddonsIntegrations
         },
         {
           title: 'Automation',
           collapsible: false,
-          children: AddonsAutomation.sort((a,b) => a[1].localeCompare(b[1]))
+          children: AddonsAutomation
         },
         {
           title: 'Data Persistence',
           collapsible: false,
-          children: AddonsPersistence.sort((a,b) => a[1].localeCompare(b[1]))
+          children: AddonsPersistence
         },
         {
           title: 'Data Transformation',
           collapsible: false,
-          children: AddonsTransformations.sort((a,b) => a[1].localeCompare(b[1]))
+          children: AddonsTransformations
         },
         {
           title: 'Voice',
           collapsible: false,
-          children: AddonsVoice.sort((a,b) => a[1].localeCompare(b[1]))
+          children: AddonsVoice
         },
         {
           title: 'User Interface',
           collapsible: false,
-          children: AddonsUserInterface.sort((a,b) => a[1].localeCompare(b[1]))
+          children: AddonsUserInterface
         }
       ]
     }

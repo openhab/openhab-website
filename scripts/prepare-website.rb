@@ -37,6 +37,10 @@ OptionParser.new do |opts|
   opts.on("--verbose", "Run the script with verbose output") do
     $verbose = true
   end
+
+  opts.on("--prettify", "Run Prettier to format the generated JS files") do
+    options[:prettify] = true
+  end
 end.parse!
 
 puts "➡️ Generating docs from openhab-docs branch '#{DOCS_REPO_BRANCH}'"
@@ -73,24 +77,22 @@ clean_ignored_files(ADDONS_DST)
 
 puts "➡️ Migrating logos"
 LOGOS_DST.rmtree if LOGOS_DST.exist?
-if Dir.exist?(DOCS_SRC / "images/addons")
-  FileUtils.cp_r(DOCS_SRC / "images/addons", LOGOS_DST)
-end
+FileUtils.cp_r(DOCS_SRC / "images/addons", LOGOS_DST) if Dir.exist?(DOCS_SRC / "images/addons")
 
 puts "➡️ Copying pre-processed docs from openhab-docs"
-FileUtils.cp_r(DOCS_SRC / "docs/.", DOCS_DST)
+FileUtils.cp_r(DOCS_SRC.join("docs/."), DOCS_DST)
 
 unless options[:pull_request]
   ADDONS_DST.mkpath
   # Map pre-processed addon folders to their correct destination names
-  FileUtils.cp_r(DOCS_SRC / "addons/automation/.", ADDONS_DST / "automation")
-  FileUtils.cp_r(DOCS_SRC / "addons/binding/.", ADDONS_DST / "bindings")
-  FileUtils.cp_r(DOCS_SRC / "addons/integration/.", ADDONS_DST / "integrations")
-  FileUtils.cp_r(DOCS_SRC / "addons/persistence/.", ADDONS_DST / "persistence")
-  FileUtils.cp_r(DOCS_SRC / "addons/transformation/.", ADDONS_DST / "transformations")
-  FileUtils.cp_r(DOCS_SRC / "addons/ui/.", ADDONS_DST / "ui")
-  FileUtils.rm_rf(ADDONS_DST / "ui/org.openhab.ui")
-  FileUtils.cp_r(DOCS_SRC / "addons/voice/.", ADDONS_DST / "voice")
+  FileUtils.cp_r(DOCS_SRC.join("addons/automation/."), ADDONS_DST.join("automation"))
+  FileUtils.cp_r(DOCS_SRC.join("addons/binding/."), ADDONS_DST.join("bindings"))
+  FileUtils.cp_r(DOCS_SRC.join("addons/integration/."), ADDONS_DST.join("integrations"))
+  FileUtils.cp_r(DOCS_SRC.join("addons/persistence/."), ADDONS_DST.join("persistence"))
+  FileUtils.cp_r(DOCS_SRC.join("addons/transformation/."), ADDONS_DST.join("transformations"))
+  FileUtils.cp_r(DOCS_SRC.join("addons/ui/."), ADDONS_DST.join("ui"))
+  FileUtils.rm_rf(ADDONS_DST.join("ui/org.openhab.ui"))
+  FileUtils.cp_r(DOCS_SRC.join("addons/voice/."), ADDONS_DST.join("voice"))
 end
 
 # Write arrays of addons by type to include in VuePress config.js
@@ -100,34 +102,21 @@ puts "➡️ Writing add-ons arrays to files for sidebar navigation"
 
   module_exports = []
   if type_dir.directory?
-    # Find all subdirectories excluding hidden ones
-    module_exports = type_dir.children.select(&:directory?).filter_map do |addon_path|
-      readme = addon_path / "readme.md"
-      next unless readme.exist?
-
-      # Find the first line starting with "label: "
-      label_line = readme.each_line.find { |line| line.start_with?("label: ") }
-      next unless label_line
-
-      title = label_line.delete_prefix("label: ").strip
-      next if title.include?("1.x")
-
-      path = "#{type}/#{addon_path.basename}/"
-
-      # Return the pair for the module_exports array
-      [path, title]
-    end
+    module_exports = type_dir.children.select(&:directory?)
+                             .filter_map { |dir| extract_addon_metadata(dir, type) }
+                             .sort_by { |_, title, _| title.downcase }
+                             .map { |path, title, children| create_addon_entry(path, title, children) }
   end
-
-  formatted_exports = module_exports.map { |path, title| "  [ '#{path}', '#{title}' ]" }.join(",\n")
 
   dest_file = ".vuepress/addons-#{type}.js"
   puts "   ↪️ Writing #{dest_file} (#{module_exports.size} items)"
-  File.write(dest_file, <<~JS)
-    module.exports = [
-    #{formatted_exports}
-    ]
-  JS
+  File.write(dest_file, "module.exports = #{JSON.generate(module_exports)}")
+end
+
+if options[:prettify]
+  # Make it easier to read the generated JS files during development
+  puts "➡️ Formatting the generated sidebar navigation files"
+  system("npx prettier --write '.vuepress/addons-*.js' --print-width 300") # Format the generated JS files
 end
 
 # Clean-Ups required for repeated local build

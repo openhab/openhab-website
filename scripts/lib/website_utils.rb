@@ -2,6 +2,10 @@
 
 require "English"
 require "fileutils"
+require "json"
+require "yaml"
+require "uri"
+require "open-uri"
 
 def verbose(message)
   puts message if $verbose
@@ -48,4 +52,146 @@ def clean_ignored_files(path, dry_run: false)
 rescue Errno::ENOENT, Errno::EACCES => e
   puts "Error accessing #{path}: #{e.message}"
   false
+end
+
+def extract_addon_metadata(addon_path, type)
+  readme = addon_path / "readme.md"
+  return nil unless readme.exist?
+
+  path = "#{type}/#{addon_path.basename}/"
+
+  front_matter = extract_front_matter(readme)
+  front_matter = {} unless front_matter.is_a?(Hash)
+
+  title = front_matter[:label]
+  return nil unless title.is_a?(String) && !title.include?("1.x")
+
+  children = front_matter[:children]
+
+  [path, title, children]
+end
+
+def extract_front_matter(pathname)
+  content = pathname.read
+
+  match = content.match(/\A---(?<yaml>.*?)^---/m)
+  return nil unless match
+
+  begin
+    YAML.safe_load(match[:yaml], symbolize_names: true)
+  rescue Psych::Exception => e
+    puts "⚠️  YAML parsing error in front-matter of #{pathname}: #{e.message}"
+    label = extract_title(content)
+    if label
+      puts "    Manually parsed label: #{label}"
+    else
+      puts "    Could not find a label in the front-matter of #{pathname}"
+    end
+    { label: }
+  end
+rescue Errno::ENOENT
+  nil
+end
+
+def extract_title(content)
+  # Find the first line starting with "label: "
+  label_line = content.each_line.find { |line| line.start_with?("label: ") }
+  return nil unless label_line
+
+  label_line.delete_prefix("label: ").strip
+end
+
+def create_addon_entry(path, title, children)
+  children = [children] unless children.is_a?(Array)
+  children = normalize_child_path(path, children).compact
+  if children && !children.empty?
+    {
+      path: "/addons/#{path}",
+      title:,
+      children: [[path, "Overview"]] + children
+    }
+  else
+    [path, title]
+  end
+end
+
+def path_exists?(path)
+  ADDONS_DST.join("#{path}.md").exist?
+end
+
+def normalize_path(prefix, path)
+  (path.start_with?("/") || path.start_with?(prefix)) ? path : "#{prefix}#{path}"
+end
+
+#
+# Loop through the children and normalize their paths, ensuring they exist in the destination.
+#
+# The children define their path relative to itself, e.g. "doc/filename".
+# We need to prepend the prefix to this path so vuepress can find it.
+# The children can be a mix of strings, arrays, and hashes, so we need to handle each case accordingly.
+#
+# Case 1:
+#   children:
+#     - "doc/filename"
+#
+# Case 2:
+#   children:
+#     - ["doc/filename", "Title"]
+#
+# Case 3 (mixed - nested children is possible but untested!):
+#   children:
+#     - "doc/filename"
+#     - ["doc/filename", "Title"]
+#     - path: "doc/filename"
+#       title: "Title"
+#
+def normalize_child_path(prefix, item)
+  return if item.nil?
+
+  case item
+  when Array
+    # If it is a flat [path, title] pair, treat it as a single node
+    if item.size == 2 && item.all? { |el| el.is_a?(String) }
+      process_single_node(prefix, item[0], item[1])
+    else
+      # Otherwise, it is a list of children to recursively map and clean
+      item.map { |child| normalize_child_path(prefix, child) }.compact
+    end
+  when String
+    process_single_node(prefix, item)
+  when Hash
+    process_hash_node(prefix, item)
+  else
+    puts "⚠️  Unknown child node type in #{prefix}: #{item.class} - #{item.inspect}"
+    nil
+  end
+end
+
+def process_single_node(prefix, path, title = nil)
+  normalized_path = normalize_path(prefix, path)
+
+  if path_exists?(normalized_path)
+    title ? [normalized_path, title] : normalized_path
+  else
+    puts "⚠️  Skipping #{normalized_path} as the file does not exist"
+    nil
+  end
+end
+
+def process_hash_node(prefix, node)
+  updated = node.dup
+
+  if updated[:path]
+    normalized_path = normalize_path(prefix, updated[:path])
+    return nil unless path_exists?(normalized_path)
+
+    updated[:path] = normalized_path
+  end
+
+  if updated[:children]
+    children_list = updated[:children].is_a?(Array) ? updated[:children] : [updated[:children]]
+    updated[:children] = normalize_child_path(prefix, children_list).compact
+  end
+
+  updated
 end
