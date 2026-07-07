@@ -75,8 +75,8 @@ def extract_front_matter(pathname)
 
   begin
     YAML.safe_load(match[:yaml], symbolize_names: true)
-  rescue Psych::SyntaxError => e
-    puts "⚠️  YAML syntax error in front-matter of #{pathname} - skipping front-matter extraction: #{e.message}"
+  rescue Psych::Exception => e
+    puts "⚠️  YAML parsing error in front-matter of #{pathname} - skipping front-matter extraction: #{e.message}"
     nil
   end
 rescue Errno::ENOENT
