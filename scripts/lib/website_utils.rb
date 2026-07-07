@@ -76,11 +76,25 @@ def extract_front_matter(pathname)
   begin
     YAML.safe_load(match[:yaml], symbolize_names: true)
   rescue Psych::Exception => e
-    puts "⚠️  YAML parsing error in front-matter of #{pathname} - skipping front-matter extraction: #{e.message}"
-    nil
+    puts "⚠️  YAML parsing error in front-matter of #{pathname}: #{e.message}"
+    label = extract_title(content)
+    if label
+      puts "    Manually parsed label: #{label}"
+    else
+      puts "    Could not find a label in the front-matter of #{pathname}"
+    end
+    { label: }
   end
 rescue Errno::ENOENT
   nil
+end
+
+def extract_title(content)
+  # Find the first line starting with "label: "
+  label_line = content.each_line.find { |line| line.start_with?("label: ") }
+  return nil unless label_line
+
+  label_line.delete_prefix("label: ").strip
 end
 
 def create_addon_entry(path, title, children)
