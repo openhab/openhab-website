@@ -4,6 +4,8 @@ require "English"
 require "fileutils"
 require "json"
 require "yaml"
+require "uri"
+require "open-uri"
 
 def verbose(message)
   puts message if $verbose
@@ -56,9 +58,9 @@ def extract_addon_metadata(addon_path, type)
   readme = addon_path / "readme.md"
   return nil unless readme.exist?
 
-  front_matter = extract_front_matter(readme)
+  front_matter = extract_front_matter(readme) || {}
 
-  title = front_matter[:label] if front_matter.is_a?(Hash)
+  title = front_matter[:label]
   return nil unless title && !title.include?("1.x")
 
   path = "#{type}/#{addon_path.basename}/"

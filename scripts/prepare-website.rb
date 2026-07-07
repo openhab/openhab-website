@@ -8,7 +8,6 @@ require "pathname"
 require "uri"
 require "open-uri"
 require "json"
-require "open3"
 
 require_relative "lib/website_utils"
 
