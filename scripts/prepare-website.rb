@@ -119,6 +119,24 @@ if options[:prettify]
   system("npx prettier --write '.vuepress/addons-*.js' --print-width 300") # Format the generated JS files
 end
 
+puts "➡️ Fetching the latest XSD files"
+SCHEMAS = [
+  "https://raw.githubusercontent.com/openhab/openhab-core/main/bundles/org.openhab.core.addon/schema/addon-1.0.0.xsd",
+  "https://raw.githubusercontent.com/openhab/openhab-core/main/bundles/org.openhab.core.addon/schema/addon-info-list-1.0.0.xsd",
+  "https://raw.githubusercontent.com/openhab/openhab-core/main/bundles/org.openhab.core.thing/schema/update/update-description-1.0.0.xsd",
+  "https://raw.githubusercontent.com/openhab/openhab-core/main/bundles/org.openhab.core.thing/schema/thing/thing-description-1.0.0.xsd",
+  "https://raw.githubusercontent.com/openhab/openhab-core/main/bundles/org.openhab.core.config.core/schema/config-description-1.0.0.xsd"
+].freeze
+
+SCHEMAS.each do |url|
+  filename = File.basename(URI.parse(url).path)
+  dest_path = ".vuepress/public/schemas/#{filename}"
+  puts "   ↪️ Fetching #{dest_path}"
+  URI.open(url) do |remote_file|
+    File.binwrite(dest_path, remote_file.read)
+  end
+end
+
 # Clean-Ups required for repeated local build
 verbose "🧹 Cleaning existing JavaDoc ..."
 FileUtils.rm Dir.glob("javadoc-latest.*"), force: true
