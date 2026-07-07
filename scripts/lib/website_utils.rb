@@ -146,6 +146,8 @@ end
 #       title: "Title"
 #
 def normalize_child_path(prefix, item)
+  return if item.nil?
+
   case item
   when Array
     # If it is a flat [path, title] pair, treat it as a single node
@@ -160,7 +162,8 @@ def normalize_child_path(prefix, item)
   when Hash
     process_hash_node(prefix, item)
   else
-    item
+    puts "⚠️  Unknown child node type in #{prefix}: #{item.class} - #{item.inspect}"
+    nil
   end
 end
 
