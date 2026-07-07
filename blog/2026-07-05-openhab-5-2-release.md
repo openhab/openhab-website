@@ -251,8 +251,6 @@ Many thanks to Mark Herwege ([@mherwege](https://github.com/mherwege)) for contr
 
 <img src="/uploads/2026-07-05-openhab-5-2-release/rules-dsl-code-tab.gif" class="img-beside-text-right" alt="Rules DSL Code Tab" />
 
-_Ravi Nadahar ([@Nadahar](https://github.com/Nadahar)), openHAB Contributor_
-
 Rules DSL has been a core part of openHAB since its initial release many years ago.
 In openHAB 5.2, this text-based rule engine receives a major update designed to improve flexibility, modularity, and feature parity with standard rules.
 
@@ -286,6 +284,8 @@ then
     Soundbar.sendCommand(ON)
 end
 ```
+
+Many thanks to Laurent Garnier ([@lolodomo](https://github.com/lolodomo)) for contributing a major part of these updates!
 
 <div style="clear:both;"></div>
 
