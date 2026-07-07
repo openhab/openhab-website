@@ -84,11 +84,13 @@ rescue Errno::ENOENT
 end
 
 def create_addon_entry(path, title, children)
+  children = [children] unless children.is_a?(Array)
+  children = normalize_child_path(path, children).compact
   if children && !children.empty?
     {
       path: "/addons/#{path}",
       title:,
-      children: [[path, "Overview"]] + normalize_child_path(path, children)
+      children: [[path, "Overview"]] + children
     }
   else
     [path, title]
@@ -165,7 +167,10 @@ def process_hash_node(prefix, node)
     updated[:path] = normalized_path
   end
 
-  updated[:children] = normalize_child_path(prefix, updated[:children]).compact if updated[:children]
+  if updated[:children]
+    children_list = updated[:children].is_a?(Array) ? updated[:children] : [updated[:children]]
+    updated[:children] = normalize_child_path(prefix, children_list).compact
+  end
 
   updated
 end
