@@ -58,12 +58,14 @@ def extract_addon_metadata(addon_path, type)
   readme = addon_path / "readme.md"
   return nil unless readme.exist?
 
-  front_matter = extract_front_matter(readme) || {}
+  path = "#{type}/#{addon_path.basename}/"
+
+  front_matter = extract_front_matter(readme)
+  front_matter = {} unless front_matter.is_a?(Hash)
 
   title = front_matter[:label]
-  return nil unless title && !title.include?("1.x")
+  return nil unless title.is_a?(String) && !title.include?("1.x")
 
-  path = "#{type}/#{addon_path.basename}/"
   children = front_matter[:children]
 
   [path, title, children]
