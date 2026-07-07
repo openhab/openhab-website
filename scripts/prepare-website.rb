@@ -102,7 +102,6 @@ puts "➡️ Writing add-ons arrays to files for sidebar navigation"
 
   module_exports = []
   if type_dir.directory?
-    # Find all subdirectories excluding hidden ones
     module_exports = type_dir.children.select(&:directory?)
                              .filter_map { |dir| extract_addon_metadata(dir, type) }
                              .sort_by { |_, title, _| title.downcase }
