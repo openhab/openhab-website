@@ -1,0 +1,6 @@
+# These files will be downloaded from their corresponding GitHub repositories by prepare-website.rb
+addon-1.0.0.xsd
+addon-info-list-1.0.0.xsd
+update-description-1.0.0.xsd
+thing-description-1.0.0.xsd
+config-description-1.0.0.xsd
