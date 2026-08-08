@@ -270,7 +270,7 @@ def process_file(indir, file, outdir, source)
 end
 
 puts "➡️ Migrating the introduction article"
-process_file(".vuepress/openhab-docs", "introduction.md", "docs", "#{$docs_repo_root}/introduction.md")
+process_file(".vuepress/openhab-docs", "introduction.md", "docs", "#{$docs_repo_root}/index.md")
 FileUtils.mv("docs/introduction.md", "docs/readme.md")
 
 # puts "➡️ Migrating common images"
@@ -306,7 +306,7 @@ Dir.glob(".vuepress/openhab-docs/tutorials/getting_started/*.md") do |path|
   file = File.basename(path)
   verbose "   ➡️ #{file}"
   process_file(".vuepress/openhab-docs/tutorials/getting_started", file, "docs/tutorial",
-               "#{$docs_repo_root}/tutorials/getting_started/#{file}")
+               "#{$docs_repo_root}/tutorial#{file}")
 end
 verbose "   ➡️ images"
 FileUtils.cp_r(".vuepress/openhab-docs/tutorials/getting_started/images", "docs/tutorial")
