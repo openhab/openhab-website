@@ -1,0 +1,62 @@
+backend:
+  name: git-gateway
+  branch: main
+  accept_roles: #optional - accepts all users if left out
+    - admin
+    - editors
+
+publish_mode: editorial_workflow # optional, enables publishing workflow
+
+display_url: https://www.openhab.org
+media_folder: ".vitepress/public/uploads"
+public_folder: "/uploads"
+
+collections: # A list of collections the CMS should be able to edit
+  - name: "posts" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "Blog Posts" # Used in the UI
+    label_singular: "Blog Post" # Used in the UI, ie: "New Post"
+    description: >
+      A blog post for the openHAB Blog
+    folder: "blog"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    format: yaml-frontmatter
+    extension: md
+    create: true # Allow users to create new documents in this collection
+    filter: {field: "layout", value: "BlogPost"}
+    fields: # The fields each document in this collection have
+      - {label: "Layout", name: "layout", widget: "hidden", default: "BlogPost"}
+      - {label: "Category", name: "category", widget: "hidden", default: "blog"}
+      - {label: "Title", name: "title", widget: "string", tagname: "h1", required: true}
+      - {label: "Author", name: "author", widget: "string", required: true}
+      - {label: "Publish Date", name: "date", widget: "datetime", required: true}
+      - {label: "Cover Image", name: "previewimage", widget: "image", required: true, tagname: ""}
+      - {label: "Tags", name: "tags", widget: "list", default: ["news"]}
+      - {label: "Excerpt", name: "excerpt", widget: "string", required: true}
+      - {label: "Body", name: "body", widget: "markdown"}
+    meta:
+      - {label: "SEO Description", name: "description", widget: "text"}
+  - name: "events" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "Events" # Used in the UI
+    label_singular: "Event" # Used in the UI, ie: "New Post"
+    description: >
+      An event
+    folder: "about/events"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    format: yaml-frontmatter
+    extension: md
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - {label: "Layout", name: "layout", widget: "hidden", default: "Event"}
+      - {label: "Category", name: "category", widget: "hidden", default: "event"}
+      - {label: "Title", name: "title", widget: "string", tagname: "h1", required: true}
+      - {label: "Organizer", name: "organizer", widget: "string", required: true}
+      - {label: "Link", name: "link", widget: "string", required: false}
+      - {label: "Event Start Date", name: "date", widget: "datetime", required: true}
+      - {label: "Event End Date", name: "end_date", widget: "datetime", required: false}
+      - {label: "Location", name: "location", widget: "string", required: true}
+      - {label: "Cover Image", name: "event_image", widget: "image", required: false, tagname: ""}
+      - {label: "Abstract", name: "abstract", widget: "string", required: false}
+      - {label: "Tags", name: "tags", widget: "list"}
+      - {label: "Body", name: "body", widget: "markdown"}
+    meta:
+      - {label: "SEO Description", name: "description", widget: "text"}

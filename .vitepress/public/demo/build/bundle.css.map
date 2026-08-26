@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "bundle.css",
+  "sources": [
+    "..\\..\\demo.svelte"
+  ],
+  "sourcesContent": [
+    "<Page name=\"demo\" class=\"demo\">\r\n  <!-- Top Navbar -->\r\n  <img src=\"openhab-logo-square.svg\" alt=\"logo\" class=\"logo-bg\" />\r\n  <BlockTitle large>Try Me!</BlockTitle>\r\n  <p class=\"margin-bottom\">Discover openHAB by exploring our demo installation.</p>\r\n  <Button large color=\"blue\" fill class=\"demo-button margin\" external href=\"https://demo.openhab.org\">Launch the Demo</Button>\r\n  <Button large color=\"blue\" class=\"demo-button margin\" external target=\"_blank\" href=\"https://demo.openhab.org\">Launch in a New Tab</Button>\r\n  <BlockTitle class=\"admin-info\">Administrator Access</BlockTitle>\r\n  <BlockFooter><small><small>Tip: </small>To explore the settings, unlock them on the left side menu of the app. You will not be able to modify the demo system configuration.</small></BlockFooter>\r\n  <BlockFooter>Username: <Badge>demo</Badge> - Password: <Badge>demo</Badge></BlockFooter>\r\n</Page>\r\n\r\n<script>\r\n  import {\r\n    Page,\r\n    Navbar,\r\n    BlockTitle,\r\n    BlockFooter,\r\n    Button,\r\n    Badge\r\n  } from 'framework7-svelte';\r\n</script>\r\n\r\n<style>\r\n  :global(html:not(.theme-dark) .demo) {\r\n    background-color: #fff;\r\n  }\r\n  :global(.demo) {\r\n    text-align: center;\r\n  }\r\n  :global(.logo-bg) {\r\n    width: 100px;\r\n    margin-top: 30px !important;\r\n  }\r\n  :global(.admin-info) {\r\n    margin-top: 50px !important;\r\n  }\r\n  :global(.badge) {\r\n    vertical-align: baseline;\r\n  }\r\n</style>\r\n"
+  ],
+  "names": [],
+  "mappings": "AAwBU,2BAA2B,AAAE,CAAC,AACpC,gBAAgB,CAAE,IAAI,AACxB,CAAC,AACO,KAAK,AAAE,CAAC,AACd,UAAU,CAAE,MAAM,AACpB,CAAC,AACO,QAAQ,AAAE,CAAC,AACjB,KAAK,CAAE,KAAK,CACZ,UAAU,CAAE,IAAI,CAAC,UAAU,AAC7B,CAAC,AACO,WAAW,AAAE,CAAC,AACpB,UAAU,CAAE,IAAI,CAAC,UAAU,AAC7B,CAAC,AACO,MAAM,AAAE,CAAC,AACf,cAAc,CAAE,QAAQ,AAC1B,CAAC"
+}

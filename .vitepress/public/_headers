@@ -1,0 +1,14 @@
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/logos/*
+  Cache-Control: public, max-age=604800, s-maxage=604800
+/uploads/*
+  Cache-Control: public, max-age=604800, s-maxage=604800
+/os/*
+  Cache-Control: public, max-age=604800, s-maxage=604800
+/:image.png
+  Cache-Control: public, max-age=604800, s-maxage=604800
+/:image.jpg
+  Cache-Control: public, max-age=604800, s-maxage=604800
+/v2*
+  Cache-Control: public, max-age=604800, s-maxage=604800
