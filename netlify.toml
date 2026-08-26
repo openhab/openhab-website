@@ -1,2 +1,7 @@
+[build]
+  command = "npm run build"
+  publish = ".vitepress/dist"
+
 [build.environment]
   MISE_RUBY_COMPILE = "false"
+
