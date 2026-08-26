@@ -67,3 +67,8 @@ typings/
 
 # VuePress dist
 vuepress
+
+# VitePress cache and dist
+.vitepress/cache
+.vitepress/dist
+

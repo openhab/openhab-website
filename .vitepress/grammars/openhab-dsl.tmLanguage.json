@@ -1,0 +1,131 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "openHAB DSL",
+  "scopeName": "source.openhab-dsl",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#icons"
+    },
+    {
+      "include": "#tags"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#operators"
+    },
+    {
+      "include": "#punctuation"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.block.openhab-dsl",
+          "begin": "/\\*",
+          "end": "\\*/"
+        },
+        {
+          "name": "comment.line.double-slash.openhab-dsl",
+          "match": "//.*$"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.openhab-dsl",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.openhab-dsl",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.openhab-dsl",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.openhab-dsl",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.openhab-dsl",
+          "match": "\\b(Color|Contact|DateTime|Dimmer|Group|Number|Player|Rollershutter|String|Switch|Location|Frame|Default|Text|Selection|Setpoint|Slider|Colorpicker|Chart|Webview|Mapview|Image|Video|Item|Thing|Bridge|Channels|Time|Type|Sitemap|sitemap|Strategies|Items|Length|Temperature|Pressure|Speed|Intensity|Dimensionless|DimensionLess|Angle|Power|Energy|Illuminance)\\b"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.boolean.openhab-dsl",
+          "match": "\\b(true|false)\\b"
+        },
+        {
+          "name": "support.constant.openhab-dsl",
+          "match": "\\b(label|icon|item|mappings|minValue|maxValue|step|switchSupport|height|url|refresh|encoding|visibility|period|service|begin|end|legend|labelcolor|valuecolor|AVG|MIN|MAX|SUM|AND|OR|NAND|NOR|EQUAL)\\b"
+        }
+      ]
+    },
+    "icons": {
+      "name": "entity.name.function.icon.openhab-dsl",
+      "match": "<[a-zA-Z0-9_]+>"
+    },
+    "tags": {
+      "name": "entity.name.tag.openhab-dsl",
+      "match": "\\([a-zA-Z0-9_, ]+\\)"
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.binary.openhab-dsl",
+          "match": "\\b0b[01]+\\b"
+        },
+        {
+          "name": "constant.numeric.hex.openhab-dsl",
+          "match": "\\b0x[0-9a-fA-F]+\\b"
+        },
+        {
+          "name": "constant.numeric.float.openhab-dsl",
+          "match": "\\b\\d+\\.\\d+([eE][+-]?\\d+)?[dfDF]?\\b"
+        },
+        {
+          "name": "constant.numeric.integer.openhab-dsl",
+          "match": "\\b\\d+([eE][+-]?\\d+)?[dfDF]?\\b"
+        }
+      ]
+    },
+    "operators": {
+      "name": "keyword.operator.openhab-dsl",
+      "match": "(\\+|-|\\*|/|%|=|==|!=|<|<=|>|>=|&&|\\|\\||\\||&|\\^|~|\\?|:)"
+    },
+    "punctuation": {
+      "name": "punctuation.separator.openhab-dsl",
+      "match": "[{}[\\],.:;()]"
+    }
+  }
+}

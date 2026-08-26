@@ -1,0 +1,126 @@
+/* Open Sans font weights 300-400 */
+/* latin-ext */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(/fonts/mem5YaGs126MiZpBA-UN_r8OXOhpOqc.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(/fonts/mem5YaGs126MiZpBA-UN_r8OUuhp.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(/fonts/mem8YaGs126MiZpBA-UFW50bbck.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(/fonts/mem8YaGs126MiZpBA-UFVZ0b.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  --vp-c-brand-1: #ff6600;
+  --vp-c-brand-2: #e55d00;
+  --vp-c-brand-3: #cc5200;
+  --vp-c-brand-soft: rgba(255, 102, 0, 0.14);
+
+  --vp-home-hero-name-color: #ff6600;
+  --vp-home-hero-name-background: transparent;
+
+  --vp-font-family-base: 'Open Sans', sans-serif;
+  --vp-font-family-mono: monospace;
+
+  --vp-nav-logo-height: 36px;
+}
+
+.dark {
+  --vp-c-bg: #111111;
+  --vp-c-bg-alt: #181818;
+  --vp-c-bg-elv: #202020;
+  --vp-c-text-1: #dddddd;
+  --vp-c-text-2: #aaaaaa;
+  --vp-c-border: #444444;
+  --vp-c-divider: #333333;
+}
+
+/* Headroom and navbar shadow */
+.VPNav:not(.headroom--top):not(.transparent) {
+  box-shadow: rgba(10%, 10%, 10%, 25%) 0 0 10px;
+}
+
+/* Homepage navbar transparent overlay */
+.homepage .VPNav:not(.ready) {
+  opacity: 0;
+  background: transparent;
+  color: white;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+/* Tip / Warning styling */
+.custom-block.tip {
+  border-color: #2196f3 !important;
+}
+
+/* Dark mode overrides for custom components */
+.dark .VPNavBar {
+  background-color: rgba(0, 0, 0, 0.9) !important;
+}
+
+.dark .VPSidebar {
+  background-color: #000000 !important;
+  border-right: 1px solid #444444 !important;
+}
+
+/* Summary element disclosure */
+details summary {
+  color: #ff6600;
+  cursor: pointer;
+}
+details summary:hover {
+  text-decoration: underline;
+}
+
+/* Image beside text utility */
+.img-beside-text-right {
+  float: right;
+  max-width: 30% !important;
+  min-width: 330px;
+  margin-left: 1em;
+  margin-top: 1em;
+}
+
+@media (max-width: 768px) {
+  .img-beside-text-right {
+    float: none;
+    max-width: 100% !important;
+    min-width: 330px;
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .img-beside-text-right {
+    min-width: 380px;
+  }
+}
+
+@media (min-width: 2048px) {
+  .img-beside-text-right {
+    min-width: 430px;
+  }
+}
