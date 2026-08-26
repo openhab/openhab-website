@@ -20,6 +20,7 @@ import EditPageLink from '../components/EditPageLink.vue'
 import AddonLogo from '../components/AddonLogo.vue'
 import AddonSearch from '../components/AddonSearch.vue'
 import BlogPostList from '../components/BlogPostList.vue'
+import EventsList from '../components/EventsList.vue'
 import CalendarIcon from '../components/CalendarIcon.vue'
 import CommunityTutorials from '../components/CommunityTutorials.vue'
 import ConsentBanner from '../components/ConsentBanner.vue'
@@ -62,6 +63,7 @@ export default {
   },
   enhanceApp({ app }) {
     enhanceAppWithTabs(app)
+    app.config.globalProperties.$withBase = (url: string) => url
 
     // Register layouts
     app.component('HomeLayout', HomeLayout)
@@ -78,6 +80,7 @@ export default {
     app.component('AddonLogo', AddonLogo)
     app.component('AddonSearch', AddonSearch)
     app.component('BlogPostList', BlogPostList)
+    app.component('EventsList', EventsList)
     app.component('CalendarIcon', CalendarIcon)
     app.component('CommunityTutorials', CommunityTutorials)
     app.component('ConsentBanner', ConsentBanner)

@@ -53,8 +53,10 @@ What happens on the MQTT level for the command topic is:
 <ol>
   <li>The target device <b>subscribes</b> to the command topic <code>home/office/lamp/set</code>:
 <p align="center"> <img src="/uploads/2018-12_esh_mqtt-mqttpublishsubscribe1.png" alt="MQTT Command Topic Subscribe"> </p>
+  </li>
   <li>openHAB <b>publishes</b> via the MQTT connection to the command topic <code>home/office/lamp/set</code>:
 <p align="center"> <img src="/uploads/2018-12_esh_mqtt-mqttpublishsubscribe2.png" alt="MQTT Command Topic Publish"> </p>
+  </li>
 </ol>
 
 MQTT doesn't restrict you on what to publish as topic values and it is not part of the standard how to express a boolean or enumeration value.

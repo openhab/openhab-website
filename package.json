@@ -1,6 +1,7 @@
 {
   "name": "openhab-website",
   "version": "3.0.0",
+  "type": "module",
   "description": "openHAB Website",
   "engines": {
     "node": ">=24"

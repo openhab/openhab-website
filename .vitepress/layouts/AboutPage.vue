@@ -1,21 +1,21 @@
 <template>
-  <DefaultTheme.Layout>
-    <template #page-top>
-      <div class="page-header">
-        <img draggable="false" class="header-pattern" :src="withBase('/pattern.png')" alt="" />
-        <h1 class="page-title">
-          {{ frontmatter.title }}
-        </h1>
+  <div class="about-page">
+    <div class="page-header">
+      <img draggable="false" class="header-pattern" :src="withBase('/pattern.png')" alt="" />
+      <h1 class="page-title">
+        {{ frontmatter.title }}
+      </h1>
+    </div>
+    <div class="content-wrapper">
+      <div class="vp-doc">
+        <Content />
       </div>
-    </template>
-    <template #page-bottom>
-      <Footer />
-    </template>
-  </DefaultTheme.Layout>
+    </div>
+    <Footer />
+  </div>
 </template>
 
 <script setup lang="ts">
-import DefaultTheme from 'vitepress/theme'
 import { useData, withBase } from 'vitepress'
 import Footer from '../components/Footer.vue'
 
@@ -23,57 +23,50 @@ const { frontmatter } = useData()
 </script>
 
 <style scoped>
-@keyframes headerSlideIn {
-  0% {
-    transform: translateX(-10px);
-    opacity: 0;
-  }
-  40% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+.about-page {
+  width: 100%;
 }
-
 .page-header {
   background: var(--vp-c-brand-1, #ff6600);
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin-bottom: 4rem;
-  height: 130px;
-  top: var(--vp-nav-height, 3.6rem);
-  padding-top: 80px;
+  height: 250px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
 }
-
-.page-header .header-pattern {
-  opacity: 0.15;
-  width: 100vw;
-  height: 100vh;
+.header-pattern {
   position: absolute;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  user-select: none;
+  opacity: 0.15;
+  pointer-events: none;
 }
-
-.page-header .page-title {
-  animation: 1s ease-out 0s 1 headerSlideIn;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
-  font-size: 40px;
+.page-title {
   color: white;
-  text-shadow: 0px 0px 10px #999;
-  margin: 25px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 300;
+  z-index: 1;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  margin: 0;
+  padding: 0 1rem;
+  text-align: center;
 }
-
-@media (max-width: 419px) {
-  .page-header .page-title {
-    font-size: 30px;
+.content-wrapper {
+  max-width: 900px;
+  margin: 2rem auto 4rem;
+  padding: 0 1.5rem;
+}
+@media (max-width: 768px) {
+  .page-header {
+    height: 180px;
   }
-}
-
-:deep(.vp-doc) {
-  margin-top: calc(var(--vp-nav-height, 3.6rem) + 150px) !important;
-  min-height: 80vh !important;
+  .page-title {
+    font-size: 2rem;
+  }
 }
 </style>

@@ -31,31 +31,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { computed } from 'vue'
 import { withBase } from 'vitepress'
 import parallax from '@lucien144/vue3-parallaxy'
 import CalendarIcon from '../CalendarIcon.vue'
+import { data as allEvents } from '../../theme/events.data'
 
-interface EventItem {
-  url: string
-  title: string
-  date: string
-  end_date?: string
-  location?: string
-  link?: string
-}
-
-const events = ref<EventItem[]>([])
-
-onMounted(async () => {
-  try {
-    // Look up event pages dynamically
-    const eventsData = await import('../../about/events.md')
-    // If events list is in frontmatter or page data
-    events.value = []
-  } catch {
-    events.value = []
-  }
+const events = computed(() => {
+  const now = new Date()
+  return (allEvents || [])
+    .filter((p) => {
+      if (p.end_date) return new Date(p.end_date) >= now
+      return p.date ? new Date(p.date) >= now : false
+    })
+    .slice(0, 2)
 })
 </script>
 

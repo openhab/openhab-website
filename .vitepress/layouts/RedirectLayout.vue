@@ -1,17 +1,28 @@
 <template>
-  <div class="redirect-container"></div>
+  <div class="redirect-page">
+    <p>Redirecting to <a :href="targetUrl">{{ targetUrl }}</a>...</p>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useData } from 'vitepress'
 
 const { frontmatter } = useData()
 
+const targetUrl = computed(() => frontmatter.value.target || '/')
+
 onMounted(() => {
-  const target = frontmatter.value.redirect_to
-  if (target) {
-    window.location.href = target
+  if (typeof window !== 'undefined' && targetUrl.value) {
+    window.location.replace(targetUrl.value)
   }
 })
 </script>
+
+<style scoped>
+.redirect-page {
+  padding: 4rem 2rem;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+</style>

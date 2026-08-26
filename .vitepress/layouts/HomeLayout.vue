@@ -1,23 +1,18 @@
 <template>
-  <DefaultTheme.Layout>
-    <template #page-top>
-      <div class="home-header">
-        <Jumbotron />
-        <div class="after-jumbotron">
-          <div class="placeholder"></div>
-        </div>
+  <div class="home-layout">
+    <div class="home-header">
+      <Jumbotron />
+      <div class="after-jumbotron">
+        <div class="placeholder"></div>
       </div>
-    </template>
-    <template #page-bottom>
-      <HomeSections />
-      <Footer />
-      <ConsentBanner />
-    </template>
-  </DefaultTheme.Layout>
+    </div>
+    <HomeSections />
+    <Footer />
+    <ConsentBanner />
+  </div>
 </template>
 
 <script setup lang="ts">
-import DefaultTheme from 'vitepress/theme'
 import { onMounted, onUnmounted } from 'vue'
 
 import Jumbotron from '../components/home/Jumbotron.vue'
@@ -59,9 +54,7 @@ onUnmounted(() => {
 .after-jumbotron .placeholder {
   height: 760px;
 }
-
-:deep(.vp-doc) {
-  padding: 0 !important;
-  max-width: 100% !important;
+.home-layout {
+  width: 100%;
 }
 </style>

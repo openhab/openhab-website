@@ -59,14 +59,14 @@ A special version is the "works with openHAB" logo, which is intended to be used
 
 <div class="downloads">
   <div>
-    <a href="openHAB-logo.zip">
-      <img src="openhab-logo-square.svg" width="150" style="padding-top: 1em" /><br/>
+    <a href="/openHAB-logo.zip">
+      <img src="/openhab-logo-square.svg" width="150" style="padding-top: 1em" /><br/>
       <center>Download the openHAB Logos</center>
     </a>
   </div>
   <div>
-    <a href="workswith-openHAB-logo.zip">
-      <img src="workswith-openhab.svg" width="400" style="padding-top: 2em" /><br/>
+    <a href="/workswith-openHAB-logo.zip">
+      <img src="/workswith-openhab.svg" width="400" style="padding-top: 2em" /><br/>
       <center>Download the "works with openHAB" Logos</center>
     </a>
   </div>

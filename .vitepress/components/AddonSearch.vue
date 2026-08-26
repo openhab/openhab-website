@@ -181,10 +181,11 @@ const resultsText = computed(() => {
 
 onMounted(async () => {
   try {
-    const thingTypesModule = await import('../thing-types.json')
-    things.value = thingTypesModule.default || []
+    const res = await fetch(withBase('/thing-types.json'))
+    if (res.ok) {
+      things.value = await res.json()
+    }
   } catch {
-    // If thing-types.json is not yet generated, fallback to empty array
     things.value = []
   }
 })
