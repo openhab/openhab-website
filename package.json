@@ -3,35 +3,29 @@
   "version": "3.0.0",
   "description": "openHAB Website",
   "engines": {
-    "node": "<17"
+    "node": ">=24"
   },
   "dependencies": {
-    "headroom.js": "^0.9.4",
-    "markdown-it": "^8.4.2",
-    "scrollreveal": "^3.4.0",
-    "sockjs-client": "^1.6.1",
-    "vue-parallax": "^1.1.1",
-    "vue-parallax-js": "github:jsnanigans/vue-parallax-js",
-    "vue-parallaxy": "^1.1.1",
-    "vue-tabs-component": "^1.5.0",
-    "vue-tweet-embed": "^2.4.0",
-    "vuepress-plugin-tabs": "^0.3.0"
+    "@lucien144/vue3-parallaxy": "^0.1.2",
+    "headroom.js": "^0.12.0",
+    "markdown-it": "^14.1.0",
+    "scrollreveal": "^4.0.9"
   },
   "devDependencies": {
-    "@vuepress/plugin-google-analytics": "^1.7.1",
-    "copy-webpack-plugin": "^4.6.0",
-    "fs-extra": "^6.0.1",
-    "vuepress": "^1.0.0",
-    "vuepress-plugin-container": "^2.1.2",
-    "vuepress-plugin-feed": "^0.1.9"
+    "fs-extra": "^11.3.0",
+    "vite-plugin-static-copy": "^2.3.1",
+    "vitepress": "^1.6.4",
+    "vitepress-plugin-rss": "^0.2.1",
+    "vitepress-plugin-tabs": "^0.5.0",
+    "vue": "^3.5.40"
   },
   "scripts": {
-    "predev": "npm install && npx update-browserslist-db@latest",
-    "dev": "npx vuepress dev",
+    "dev": "vitepress dev",
     "prepare-website": "ruby scripts/prepare-website.rb $ARGUMENTS",
     "add-blog-meta": "ruby scripts/add-blog-meta.rb",
-    "build": "npm run prepare-website && ruby scripts/add-blog-meta.rb && vuepress build .",
-    "build-only": "vuepress build .",
+    "build": "npm run prepare-website && ruby scripts/add-blog-meta.rb && vitepress build",
+    "build-only": "vitepress build",
+    "preview": "vitepress preview",
     "prebuild-local": "npm run prepare-website",
     "build-local": "npm run dev --silent",
     "build-local-latest": "OH_DOCS_VERSION=final npm run build-local",
