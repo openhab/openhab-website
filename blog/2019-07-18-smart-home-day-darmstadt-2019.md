@@ -10,6 +10,19 @@ tags:
   - smarthome
   - smarthomeday
 excerpt: ' '
+meta:
+  - name: twitter:card
+    content: summary_large_image
+  - property: og:title
+    content: "Smart Home Day @ Hochschule Darmstadt 2019"
+  - property: og:description
+    content: ' '
+  - property: og:image
+    content: https://www.openhab.org/uploads/2019-05-smart-home-day-2019.jpg
+feed:
+  image: https://www.openhab.org/uploads/2019-05-smart-home-day-2019.jpg
+  author:
+    - name: Jerome Luckenbach
 ---
 Already on May 25, the [openHAB Foundation](https://www.openhabfoundation.org/) hosted another **Smart Home Day** colocated with its yearly general assembly.
 The event took place at Hochschule Darmstadt and was packed with some interesting talks before the Foundations general assembly was held.

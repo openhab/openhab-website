@@ -9,42 +9,6 @@ meta:
     content: a vendor and technology agnostic open source automation software for your home
 ---
 
-<style>
-.big-title {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 2rem;
-  font-weight: 400;
-  text-align: center;
-}
-img.illustration {
-  width: 30%;
-  align: center;
-}
-@media (max-width: 719px) {
-  img.illustration {
-    width: 100%;
-    align: center;
-  }
-}
-.downloads {
-  display: flex;
-  text-align: center;
-  align-items: flex-end;
-  align-content: center;
-  justify-content: space-between;
-  max-width: 750px;
-  margin: 0 auto;
-}
-
-@media (max-width: 719px) {
-  .downloads {
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;  }
-}
-
-</style>
-
 ## Our Logo
 
 Our logo is our most recognizable asset. We therefore ask you to respect our [trademark policy](/about/trademark) when you reuse it - please read through it in detail and do not hesitate to [reach out to us](/about/trademark.html#contact) in case of any doubts.
@@ -57,17 +21,21 @@ A special version is the "works with openHAB" logo, which is intended to be used
 
 ## Downloads
 
-<div class="downloads">
-  <div>
+<div class="artwork-downloads">
+  <div class="artwork-download-card">
     <a href="/openHAB-logo.zip">
-      <img src="/openhab-logo-square.svg" width="150" style="padding-top: 1em" /><br/>
-      <center>Download the openHAB Logos</center>
+      <div class="artwork-image-wrapper">
+        <img src="/openhab-logo-square.svg" width="140" alt="openHAB Logo" />
+      </div>
+      <p class="artwork-caption">Download the openHAB Logos</p>
     </a>
   </div>
-  <div>
+  <div class="artwork-download-card">
     <a href="/workswith-openHAB-logo.zip">
-      <img src="/workswith-openhab.svg" width="400" style="padding-top: 2em" /><br/>
-      <center>Download the "works with openHAB" Logos</center>
+      <div class="artwork-image-wrapper">
+        <img src="/workswith-openhab.svg" width="340" alt="Works with openHAB Logo" />
+      </div>
+      <p class="artwork-caption">Download the "works with openHAB" Logos</p>
     </a>
   </div>
 </div>

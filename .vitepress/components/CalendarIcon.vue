@@ -96,11 +96,17 @@ time.icon em {
 }
 
 time.icon span {
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding-top: 0.7em;
+  padding-bottom: 0.4em;
   font-size: 2.3em;
   letter-spacing: -0.05em;
-  padding-top: 1.1em;
   color: #2f2f2f;
+  line-height: 1;
+  box-sizing: border-box;
 }
 
 time.icon:hover, time.icon:focus {

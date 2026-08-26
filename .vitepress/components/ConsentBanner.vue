@@ -107,7 +107,7 @@ onMounted(() => {
 
 p,
 button {
-  font-family: verdana, arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   line-height: 21px;
 }

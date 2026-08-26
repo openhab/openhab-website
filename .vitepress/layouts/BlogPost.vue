@@ -1,34 +1,31 @@
 <template>
   <div class="blog-post">
-    <div class="blog-header">
-      <div class="header-inner">
-        <h1 class="post-title">{{ frontmatter.title }}</h1>
-        <div class="post-meta">
-          <span v-if="frontmatter.author" class="meta-item">
-            <strong>Author:</strong> {{ frontmatter.author }}
-          </span>
-          <span v-if="formattedDate" class="meta-item">
-            <strong>Published:</strong> {{ formattedDate }}
-          </span>
-        </div>
+    <div
+      class="post-header"
+      :style="frontmatter.previewimage ? { backgroundImage: 'url(' + withBase(frontmatter.previewimage) + ')' } : undefined"
+    >
+      <div class="post-cover">
+        <h1 class="post-title">
+          {{ frontmatter.title }}
+        </h1>
       </div>
     </div>
     <div class="post-body">
-      <div v-if="frontmatter.previewimage" class="preview-image-container">
-        <img :src="withBase(frontmatter.previewimage)" :alt="frontmatter.title" class="preview-image" />
+      <div v-if="frontmatter.author || formattedDate" class="page-author">
+        <span v-if="frontmatter.author"><strong>{{ frontmatter.author }}</strong></span>
+        <span v-if="frontmatter.author && formattedDate"> posted on </span>
+        <span v-if="formattedDate" style="white-space: nowrap">{{ formattedDate }}</span>
       </div>
       <div class="vp-doc">
         <Content />
       </div>
     </div>
-    <Footer />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useData, withBase } from 'vitepress'
-import Footer from '../components/Footer.vue'
 
 const { frontmatter } = useData()
 
@@ -36,7 +33,7 @@ const formattedDate = computed(() => {
   if (!frontmatter.value.date) return ''
   try {
     const d = new Date(frontmatter.value.date)
-    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+    return d.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
   } catch {
     return frontmatter.value.date
   }
@@ -47,46 +44,67 @@ const formattedDate = computed(() => {
 .blog-post {
   width: 100%;
 }
-.blog-header {
-  background: var(--vp-c-brand-1, #ff6600);
-  padding: 3.5rem 1.5rem 2.5rem;
-  color: white;
+
+.post-header {
+  background-color: var(--vp-c-brand-1, #ff6600);
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  height: 280px;
+  position: relative;
+  overflow: hidden;
   text-align: center;
 }
-.header-inner {
-  max-width: 800px;
-  margin: 0 auto;
+
+.post-cover {
+  background-color: rgba(255, 102, 0, 0.72);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
 }
+
+:deep(.dark) .post-cover,
+.dark .post-cover {
+  background-color: rgba(127, 51, 0, 0.72);
+}
+
 .post-title {
+  color: white;
   font-family: 'Open Sans', sans-serif;
-  font-size: 2.4rem;
-  font-weight: 400;
-  margin: 0 0 1rem;
+  font-weight: 300;
+  font-size: 2.5rem;
+  margin: 0;
+  text-align: center;
+  max-width: 900px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
   line-height: 1.25;
 }
-.post-meta {
-  font-size: 0.95rem;
-  opacity: 0.9;
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
+
 .post-body {
-  max-width: 800px;
+  max-width: 850px;
   margin: 2rem auto 4rem;
   padding: 0 1.5rem;
 }
-.preview-image-container {
-  margin-bottom: 2rem;
+
+.page-author {
+  font-size: 0.95rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  color: var(--vp-c-text-2, #666);
   text-align: center;
+  margin-bottom: 2rem;
 }
-.preview-image {
-  max-width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
+
 @media (max-width: 768px) {
+  .post-header {
+    height: 200px;
+  }
   .post-title {
     font-size: 1.8rem;
   }

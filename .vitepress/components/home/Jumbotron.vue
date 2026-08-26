@@ -8,8 +8,10 @@
       </div>
       <h1 class="hero">empowering the smart home</h1>
       <h2 class="lead">a vendor and technology agnostic open source automation software for your home</h2>
-      <a :href="withBase('/docs/')" class="action-button">Get Started ➜</a>
-      <a class="demo-button" target="_blank" href="https://demo.openhab.org" rel="noopener noreferrer">Try It ➜</a>
+      <div class="hero-actions">
+        <a :href="withBase('/docs/')" class="action-button">Get Started ➜</a>
+        <a class="demo-button" target="_blank" href="https://demo.openhab.org" rel="noopener noreferrer">Try It ➜</a>
+      </div>
     </div>
     <div class="phone">
       <div class="iframe-wrapper">
@@ -24,6 +26,47 @@ import { withBase } from 'vitepress'
 </script>
 
 <style scoped>
+@keyframes slideIn1 {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  40% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn2 {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  40% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn3 {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .jumbotron {
   background: var(--vp-c-brand-1, #ff6600);
   position: absolute;
@@ -62,8 +105,10 @@ h1.hero {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   font-size: 60px;
+  line-height: 1.2;
   text-shadow: 0px 0px 10px #666;
-  margin-top: 10px;
+  margin-top: 15px;
+  margin-bottom: 1.5rem;
 }
 h2.lead {
   animation: 0.75s ease-out 0s 1 slideIn2;
@@ -71,46 +116,56 @@ h2.lead {
   border: none;
   font-family: 'Open Sans', sans-serif;
   font-weight: normal;
-  font-size: 1.125em;
+  font-size: 1.25rem;
+  line-height: 1.5;
   text-shadow: 0px 0px 10px #333;
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+  max-width: 650px;
+}
+.hero-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
 }
 .action-button {
   animation: 1s ease-out 0s 1 slideIn3;
-  margin-top: 3rem;
   display: inline-block;
   font-family: 'Open Sans', sans-serif;
   font-size: 1.2rem;
   color: #fff;
   background-color: rgba(255, 51, 0, 0.87);
-  padding: 0.8rem 1.6rem;
+  padding: 0.9rem 1.8rem;
   border-radius: 4px;
   box-sizing: border-box;
   border: 1px solid #fff;
-  text-decoration: none;
+  text-decoration: none !important;
   transition: all 0.2s;
 }
 .action-button:hover {
   background-color: #fff;
   color: #ff3300;
+  text-decoration: none !important;
 }
 .demo-button {
   animation: 1.25s ease-out 0s 1 slideIn3;
-  margin-top: 3rem;
-  margin-left: 0.5em;
   display: inline-block;
   font-family: 'Open Sans', sans-serif;
   font-size: 1.2rem;
   color: #fff;
-  padding: 0.8rem 1.6rem;
+  padding: 0.9rem 1.8rem;
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.2);
   box-sizing: border-box;
   border: 1px solid #fff;
-  text-decoration: none;
+  text-decoration: none !important;
   transition: all 0.2s;
 }
 .demo-button:hover {
   background-color: rgba(255, 255, 255, 0.4);
+  text-decoration: none !important;
 }
 .phone {
   animation: 2s ease-out 0s 1 slideIn3;
@@ -156,9 +211,25 @@ h2.lead {
     display: none;
   }
 }
+@media (max-width: 768px) {
+  h1.hero {
+    font-size: 42px;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  h2.lead {
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+}
 @media (max-width: 419px) {
   h1.hero {
-    font-size: 36px;
+    font-size: 32px;
+    line-height: 1.25;
+  }
+  h2.lead {
+    font-size: 1rem;
+    line-height: 1.4;
   }
 }
 </style>

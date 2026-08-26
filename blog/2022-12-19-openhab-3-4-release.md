@@ -7,9 +7,19 @@ date: '2022-12-19T14:38:57+01:00'
 previewimage: /uploads/winter22.jpg
 tags:
   - news
-excerpt: >-
-  As every year before the festive season, we are happy to announce another
-  stable release of openHAB that brings many additions, improvements and fixes!
+meta:
+  - name: twitter:card
+    content: summary_large_image
+  - property: og:title
+    content: "openHAB 3.4 Release"
+  - property: og:description
+    content: As every year before the festive season, we are happy to announce another stable release of openHAB that brings many additions, improvements and fixes!
+  - property: og:image
+    content: https://www.openhab.org/uploads/winter22.jpg
+feed:
+  image: https://www.openhab.org/uploads/winter22.jpg
+  author:
+    - name: Kai Kreuzer
 ---
 openHAB continues to steadily evolve - since our summer release 3.3 the community continued contributing with undiminished speed, which has led to openHAB 3.4 being the best openHAB release ever.
 

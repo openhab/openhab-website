@@ -9,14 +9,12 @@
     <div class="content-wrapper">
       <BlogPostList />
     </div>
-    <Footer />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useData, withBase } from 'vitepress'
 import BlogPostList from '../components/BlogPostList.vue'
-import Footer from '../components/Footer.vue'
 
 const { frontmatter } = useData()
 </script>

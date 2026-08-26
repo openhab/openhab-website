@@ -49,7 +49,7 @@ onMounted(async () => {
 
 <style scoped>
 .cloud-section {
-  background-color: var(--vp-c-bg-alt, #f2f2f2);
+  background-color: #f2f2f2;
   width: 100%;
   overflow: hidden;
   display: flex;
@@ -79,6 +79,10 @@ onMounted(async () => {
 }
 .cloud-text a {
   color: #5599ff;
+  text-decoration: none;
+}
+.cloud-text a:hover {
+  text-decoration: underline;
 }
 .cloud-bkg {
   height: 28vw;

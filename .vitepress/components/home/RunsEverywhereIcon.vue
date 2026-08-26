@@ -33,15 +33,18 @@ onUnmounted(() => {
   height: 150px;
   margin: 0 auto;
   position: relative;
+  flex-shrink: 0;
 }
 .home-icon.runs-everywhere {
   position: absolute;
-  width: 70px;
-  height: 70px;
-  left: 40px;
-  top: 40px;
+  width: 60px;
+  height: 60px;
+  left: 45px;
+  top: 60px;
   opacity: 0;
   transition: opacity 1s ease-in-out;
+  z-index: 1;
+  object-fit: contain;
 }
 .home-icon.frame {
   position: absolute;
