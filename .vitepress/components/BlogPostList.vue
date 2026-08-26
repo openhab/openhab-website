@@ -7,15 +7,12 @@
             <div class="post-frame">
               <div
                 class="post-cover"
-                :style="post.previewimage ? { background: 'url(' + post.previewimage + ') no-repeat center' } : undefined"
+                :style="post.previewimage ? { background: 'url(' + withBase(post.previewimage) + ') no-repeat center' } : undefined"
               ></div>
               <h3 class="post-title">{{ post.title }}</h3>
               <div class="post-author">
                 <strong>{{ post.author }}</strong> posted on
                 <span style="white-space: nowrap">{{ formatDate(post.date) }}</span>
-              </div>
-              <div class="post-excerpt" v-if="post.excerpt">
-                <div v-html="post.excerpt"></div>
               </div>
               <div class="read-more">
                 <div class="read-more-button">Read more ➜</div>
@@ -55,7 +52,7 @@ onMounted(async () => {
 
 <style scoped>
 .posts-list {
-  margin-top: calc(var(--vp-nav-height, 3.6rem) + 350px) !important;
+  margin-top: 0;
   min-height: 80vh;
 }
 
@@ -68,6 +65,10 @@ onMounted(async () => {
 .posts .post {
   list-style: none;
   width: 100%;
+}
+
+.posts .post:first-child .post-frame {
+  margin-top: 0;
 }
 
 .posts .post a {
@@ -90,7 +91,7 @@ onMounted(async () => {
 
 .posts .post .post-frame:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 .posts .post .post-cover {
@@ -105,24 +106,20 @@ onMounted(async () => {
   font-weight: 400;
   line-height: 42px;
   margin-top: 1rem;
+  margin-bottom: 0.25rem;
 }
 
 .posts .post .post-author {
   font-size: 14px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
-  margin-top: -0.5rem;
-  margin-bottom: 1.2rem;
+  margin-top: 0.35rem;
+  margin-bottom: 0.5rem;
   color: var(--vp-c-text-2, #666);
 }
 
-.posts .post .post-excerpt {
-  font-weight: normal;
-  color: var(--vp-c-text-1, #333);
-}
-
 .read-more {
-  margin-top: 2rem;
+  margin-top: 1.2rem;
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;
   font-size: 1.2rem;
@@ -150,7 +147,7 @@ onMounted(async () => {
 
 @media (max-width: 719px) {
   .posts-list {
-    margin-top: calc(var(--vp-nav-height, 3.6rem) + 200px);
+    margin-top: 0;
   }
   .posts .post .post-cover {
     height: 200px !important;

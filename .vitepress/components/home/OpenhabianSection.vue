@@ -4,11 +4,7 @@
       <small class="case-attribution">
         <a target="_blank" href="https://www.thingiverse.com/thing:3859848" rel="noopener noreferrer">3d printed case by sumpfing</a>
       </small>
-      <ClientOnly>
-        <parallax :speed-factor="0.15">
-          <img class="openhabian-background" :src="withBase('/components/home/images/pi_case.jpg')" alt="raspberry pi" />
-        </parallax>
-      </ClientOnly>
+      <img class="openhabian-background" :src="withBase('/components/home/images/pi_case.jpg')" alt="raspberry pi" />
       <div class="openhabian-text">
         <h2 class="slide-seq">Set up your own openHAB system in just a few steps</h2>
         <p class="slide-seq">
@@ -23,7 +19,6 @@
 
 <script setup lang="ts">
 import { withBase } from 'vitepress'
-import parallax from '@lucien144/vue3-parallaxy'
 </script>
 
 <style scoped>
@@ -70,17 +65,20 @@ import parallax from '@lucien144/vue3-parallaxy'
   top: 0;
   text-align: center;
   z-index: 12;
-  padding-top: 3rem;
+  padding-top: 2rem;
 }
 .openhabian-text h2 {
-  margin: 1.5rem;
-  font-size: 2.2em;
+  margin: 1.5rem 2rem;
+  font-size: 2.3rem;
+  line-height: 1.25;
   font-weight: 300;
   border: none;
   text-shadow: 2px 2px 8px #777;
 }
 .openhabian-text p {
   margin: 0 2rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
   text-shadow: 2px 2px 10px #333;
 }
 .learn-how-button {
@@ -94,11 +92,12 @@ import parallax from '@lucien144/vue3-parallaxy'
   transition: all 0.2s;
   box-sizing: border-box;
   border: 1px solid #fff;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 .learn-how-button:hover {
   background-color: #fff;
   color: black;
+  text-decoration: none !important;
 }
 @media (max-width: 1024px) {
   .openhabian-section {
@@ -121,6 +120,10 @@ import parallax from '@lucien144/vue3-parallaxy'
 @media (max-width: 480px) {
   .openhabian-section {
     height: 550px;
+  }
+  .openhabian-text h2 {
+    font-size: 1.8rem;
+    margin: 1rem;
   }
 }
 </style>

@@ -11,9 +11,19 @@ tags:
   - docs
   - vuepress
   - netlify
-excerpt: >-
-  How the openHAB website and its 450 pages of docs was rebuilt from the ground
-  up in a month with VuePress and Netlify
+meta:
+  - name: twitter:card
+    content: summary_large_image
+  - property: og:title
+    content: "Building the New openHAB Website"
+  - property: og:description
+    content: How the openHAB website and its 450 pages of docs was rebuilt from the ground up in a month with VuePress and Netlify
+  - property: og:image
+    content: https://www.openhab.org/uploads/website-build.jpg
+feed:
+  image: https://www.openhab.org/uploads/website-build.jpg
+  author:
+    - name: Yannick Schaus
 ---
 Let me start by saying a word about this new blog: this post is going to break away from announcements invariably made by Kai :smile: - in fact, it's not even about home automation at all... and that's fine! This space is also for you, the community, and is aimed at providing a new front-and-center communication tool besides community.openhab.org for anything openHAB-related which might be worthwhile or interesting to share. There is an easy-to-use editor to help guests write content even if they don't have a GitHub account or aren't familiar with Git; so if you want to contribute a post, just get in touch and we'll make it happen!
 

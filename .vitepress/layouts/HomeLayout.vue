@@ -1,5 +1,5 @@
 <template>
-  <div class="home-layout">
+  <div class="home-layout homepage">
     <div class="home-header">
       <Jumbotron />
       <div class="after-jumbotron">
@@ -7,8 +7,6 @@
       </div>
     </div>
     <HomeSections />
-    <Footer />
-    <ConsentBanner />
   </div>
 </template>
 

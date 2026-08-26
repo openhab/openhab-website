@@ -12,9 +12,6 @@
       </div>
       <div class="feature">
         <RotatingGearsIcon />
-        <div class="home-icon-container">
-          <img :src="withBase('/components/home/images/icons/empty.png')" class="home-icon current" alt="" />
-        </div>
         <h3>Automate with Ease</h3>
         <p>
           Use a powerful and flexible engine to design
@@ -60,10 +57,10 @@ import RunsEverywhereIcon from './RunsEverywhereIcon.vue'
   font-family: 'Open Sans', sans-serif;
   background: var(--vp-c-bg, white);
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 4.5rem 1.5rem 3.5rem;
 }
 .section2 h2 {
-  margin: 1rem 0 2rem;
+  margin: 1rem 0 3rem;
   text-align: center;
   font-family: 'Open Sans', sans-serif;
   font-weight: normal;
@@ -77,12 +74,15 @@ import RunsEverywhereIcon from './RunsEverywhereIcon.vue'
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 .feature {
   flex-grow: 1;
   flex-basis: 28%;
   max-width: 32%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .feature h3 {
   font-size: 1.4rem;
@@ -90,33 +90,30 @@ import RunsEverywhereIcon from './RunsEverywhereIcon.vue'
   border-bottom: none;
   padding-bottom: 0;
   color: var(--vp-c-text-1, #222);
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 .feature p {
-  margin: 0.5rem 0;
+  margin: 0;
   color: var(--vp-c-text-2, #555);
   line-height: 1.6;
 }
 .feature a {
   color: var(--vp-c-brand-1, #ff6600);
+  text-decoration: none;
 }
-.home-icon-container {
-  width: 150px;
-  height: 80px;
-  margin: 0 auto;
-  position: relative;
-}
-.home-icon {
-  width: 150px;
-  height: 80px;
-  object-fit: contain;
+.feature a:hover {
+  color: var(--vp-c-brand-2, #e55d00);
+  text-decoration: underline;
 }
 @media (max-width: 768px) {
   .features {
     flex-direction: column;
+    align-items: center;
   }
   .feature {
     max-width: 100%;
+    margin-top: 1.5rem;
   }
 }
 </style>

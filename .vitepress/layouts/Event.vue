@@ -15,20 +15,15 @@
       </div>
     </div>
     <div class="event-body">
-      <div v-if="frontmatter.event_image" class="preview-image-container">
-        <img :src="withBase(frontmatter.event_image)" :alt="frontmatter.title" class="preview-image" />
-      </div>
       <div class="vp-doc">
         <Content />
       </div>
     </div>
-    <Footer />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useData, withBase } from 'vitepress'
-import Footer from '../components/Footer.vue'
+import { useData } from 'vitepress'
 
 const { frontmatter } = useData()
 </script>
@@ -65,13 +60,5 @@ const { frontmatter } = useData()
   max-width: 800px;
   margin: 2rem auto 4rem;
   padding: 0 1.5rem;
-}
-.preview-image-container {
-  margin-bottom: 2rem;
-  text-align: center;
-}
-.preview-image {
-  max-width: 100%;
-  border-radius: 8px;
 }
 </style>

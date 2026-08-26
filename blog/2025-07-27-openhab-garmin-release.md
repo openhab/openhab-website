@@ -7,8 +7,19 @@ date: "2025-07-27T10:00:00+01:00"
 previewimage: /uploads/2025-07-27-openhab-garmin-release/header.jpg
 tags:
   - news
-excerpt: >-
-  The openHAB Garmin app has been released — bringing smart home control to your wrist or bike computer.
+meta:
+  - name: twitter:card
+    content: summary_large_image
+  - property: og:title
+    content: "openHAB Garmin App"
+  - property: og:description
+    content: The openHAB Garmin app has been released — bringing smart home control to your wrist or bike computer.
+  - property: og:image
+    content: https://www.openhab.org/uploads/2025-07-27-openhab-garmin-release/header.jpg
+feed:
+  image: https://www.openhab.org/uploads/2025-07-27-openhab-garmin-release/header.jpg
+  author:
+    - name: Robert Pollai
 ---
 <style>
 .garmin-screenshot-container {

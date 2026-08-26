@@ -50,7 +50,7 @@
         :class="{ selected: selectedVersion === version[0] }"
         @click="selectVersion(version[0])"
       >
-        <strong>{{ version[1] }}</strong><br />
+        <strong>{{ version[1] }}</strong>
         <small v-if="version[0] === 'stable'">{{ frontmatter.currentVersion }}</small>
         <small v-if="version[0] === 'testing'">{{ frontmatter.currentMilestoneVersion }}</small>
         <small v-if="version[0] === 'snapshot'">{{ frontmatter.currentSnapshotVersion }}</small>
@@ -73,12 +73,12 @@
     <div v-if="selectedSystem === 'raspberry-pi'">
       <hr />
       <h3>{{ optionNumber('openhabian') }}Use Raspberry Pi Imager</h3>
+      <div class="download-button-container">
+        <a class="download-button big" target="_blank" href="https://www.raspberrypi.com/software/" rel="noopener noreferrer">
+          Get Raspberry Pi Imager
+        </a>
+      </div>
       <ol>
-        <div class="download-button-container">
-          <a class="download-button big" target="_blank" href="https://www.raspberrypi.com/software/" rel="noopener noreferrer">
-            Get Raspberry Pi Imager
-          </a>
-        </div>
         <li>Select your openHABian image under <code>Other specific-purpose OS - Home assistants and home automation</code>.</li>
         <li>Insert the SD card in your device, connect the Ethernet cable and turn it on.</li>
         <li>
@@ -124,31 +124,41 @@
         </p>
       </div>
       <ol>
-        <li v-html="javaDownloadInstruction" />
-        <li>Add the repository key</li>
-        <div class="language-shell">
-          <pre class="language-shell"><code>curl -fsSL "https://openhab.jfrog.io/artifactory/api/gpg/key/public" | gpg --dearmor &gt; openhab.gpg
+        <li v-html="javaDownloadInstruction"></li>
+        <li>
+          Add the repository key
+          <div class="language-shell">
+            <pre class="language-shell"><code>curl -fsSL "https://openhab.jfrog.io/artifactory/api/gpg/key/public" | gpg --dearmor &gt; openhab.gpg
 sudo mkdir /usr/share/keyrings
 sudo mv openhab.gpg /usr/share/keyrings
 sudo chmod u=rw,g=r,o=r /usr/share/keyrings/openhab.gpg</code></pre>
-        </div>
-        <li>Add the HTTPS transport for APT</li>
-        <div class="language-shell">
-          <pre class="language-shell"><code>sudo apt-get install apt-transport-https</code></pre>
-        </div>
-        <li>Add the repository</li>
-        <div class="language-shell">
-          <pre class="language-shell"><code v-if="selectedVersion === 'stable'">echo 'deb [signed-by=/usr/share/keyrings/openhab.gpg] https://openhab.jfrog.io/artifactory/openhab-linuxpkg stable main' | sudo tee /etc/apt/sources.list.d/openhab.list</code><code v-else-if="selectedVersion === 'testing'">echo 'deb [signed-by=/usr/share/keyrings/openhab.gpg] https://openhab.jfrog.io/artifactory/openhab-linuxpkg testing main' | sudo tee /etc/apt/sources.list.d/openhab.list</code><code v-else>echo 'deb [signed-by=/usr/share/keyrings/openhab.gpg] https://openhab.jfrog.io/artifactory/openhab-linuxpkg unstable main' | sudo tee /etc/apt/sources.list.d/openhab.list</code></pre>
-        </div>
-        <li>Update the package lists and install the openHAB distribution package</li>
-        <div class="language-shell">
-          <pre class="language-shell"><code>sudo apt-get update &amp;&amp; sudo apt-get install openhab</code></pre>
-        </div>
-        <li><strong>(Optional)</strong> Install the add-ons for offline use</li>
-        &#128712; <small>You don't need the add-ons package if your machine has Internet access, openHAB will download add-ons online as necessary.</small>
-        <div class="language-shell">
-          <pre class="language-shell"><code>sudo apt-get install openhab-addons</code></pre>
-        </div>
+          </div>
+        </li>
+        <li>
+          Add the HTTPS transport for APT
+          <div class="language-shell">
+            <pre class="language-shell"><code>sudo apt-get install apt-transport-https</code></pre>
+          </div>
+        </li>
+        <li>
+          Add the repository
+          <div class="language-shell">
+            <pre class="language-shell"><code v-if="selectedVersion === 'stable'">echo 'deb [signed-by=/usr/share/keyrings/openhab.gpg] https://openhab.jfrog.io/artifactory/openhab-linuxpkg stable main' | sudo tee /etc/apt/sources.list.d/openhab.list</code><code v-else-if="selectedVersion === 'testing'">echo 'deb [signed-by=/usr/share/keyrings/openhab.gpg] https://openhab.jfrog.io/artifactory/openhab-linuxpkg testing main' | sudo tee /etc/apt/sources.list.d/openhab.list</code><code v-else>echo 'deb [signed-by=/usr/share/keyrings/openhab.gpg] https://openhab.jfrog.io/artifactory/openhab-linuxpkg unstable main' | sudo tee /etc/apt/sources.list.d/openhab.list</code></pre>
+          </div>
+        </li>
+        <li>
+          Update the package lists and install the openHAB distribution package
+          <div class="language-shell">
+            <pre class="language-shell"><code>sudo apt-get update &amp;&amp; sudo apt-get install openhab</code></pre>
+          </div>
+        </li>
+        <li>
+          <strong>(Optional)</strong> Install the add-ons for offline use<br />
+          &#128712; <small>You don't need the add-ons package if your machine has Internet access, openHAB will download add-ons online as necessary.</small>
+          <div class="language-shell">
+            <pre class="language-shell"><code>sudo apt-get install openhab-addons</code></pre>
+          </div>
+        </li>
         <li>Navigate with a web browser to <code>http://&lt;ip-address&gt;:8080</code></li>
         <li>
           Continue by following the <a :href="withBase('/docs/tutorial/')">tutorial</a> to get started
@@ -165,26 +175,32 @@ sudo chmod u=rw,g=r,o=r /usr/share/keyrings/openhab.gpg</code></pre>
         <p>openHAB 5 requires Java 21!</p>
       </div>
       <ol>
-        <li v-html="javaDownloadInstruction" />
-        <li>Create a new <code>/etc/yum.repos.d/openhab.repo</code> file with the following content:</li>
-        <div class="language-ini">
-          <pre class="language-ini"><code>[openHAB-{{ selectedVersion === 'stable' ? 'Stable' : selectedVersion === 'testing' ? 'Testing' : 'Snapshots' }}]
+        <li v-html="javaDownloadInstruction"></li>
+        <li>
+          Create a new <code>/etc/yum.repos.d/openhab.repo</code> file with the following content:
+          <div class="language-ini">
+            <pre class="language-ini"><code>[openHAB-{{ selectedVersion === 'stable' ? 'Stable' : selectedVersion === 'testing' ? 'Testing' : 'Snapshots' }}]
 name=openHAB {{ selectedVersion === 'stable' ? 'Stable' : selectedVersion === 'testing' ? 'Testing' : 'Snapshots' }}
 baseurl={{ selectedVersion === 'stable' ? 'https://openhab.jfrog.io/artifactory/openhab-linuxpkg-rpm/stable' : selectedVersion === 'testing' ? 'https://openhab.jfrog.io/artifactory/openhab-linuxpkg-rpm/testing' : 'https://openhab.jfrog.io/artifactory/openhab-linuxpkg-rpm/unstable' }}
 gpgcheck=1
 gpgkey=https://openhab.jfrog.io/artifactory/api/gpg/key/public
 enabled=1
 </code></pre>
-        </div>
-        <li>Install the openHAB distribution package</li>
-        <div class="language-shell">
-          <pre class="language-shell"><code>sudo yum install openhab</code></pre>
-        </div>
-        <li><strong>(Optional)</strong> Install the add-ons for offline use</li>
-        &#128712; <small>You don't need the add-ons package if your machine has Internet access, openHAB will download add-ons online as necessary.</small>
-        <div class="language-shell">
-          <pre class="language-shell"><code>sudo yum install openhab-addons</code></pre>
-        </div>
+          </div>
+        </li>
+        <li>
+          Install the openHAB distribution package
+          <div class="language-shell">
+            <pre class="language-shell"><code>sudo yum install openhab</code></pre>
+          </div>
+        </li>
+        <li>
+          <strong>(Optional)</strong> Install the add-ons for offline use<br />
+          &#128712; <small>You don't need the add-ons package if your machine has Internet access, openHAB will download add-ons online as necessary.</small>
+          <div class="language-shell">
+            <pre class="language-shell"><code>sudo yum install openhab-addons</code></pre>
+          </div>
+        </li>
         <li>Navigate with a web browser to <code>http://&lt;ip-address&gt;:8080</code></li>
         <li>
           Continue by following the <a :href="withBase('/docs/tutorial/')">tutorial</a> to get started
@@ -205,16 +221,19 @@ enabled=1
         for more information.
       </p>
       <ol>
-        <li>Create the <code>openhab</code> user:</li>
-        <div class="language-shell">
-          <pre class="language-shell"><code>groupadd -g 9001 openhab
+        <li>
+          Create the <code>openhab</code> user:
+          <div class="language-shell">
+            <pre class="language-shell"><code>groupadd -g 9001 openhab
 useradd -g 9001 openhab
 usermod -a -G openhab myownuser
 </code></pre>
-        </div>
-        <li>Pull and run the container (command line version):</li>
-        <div class="language-shell">
-          <pre class="language-shell"><code>docker run \
+          </div>
+        </li>
+        <li>
+          Pull and run the container (command line version):
+          <div class="language-shell">
+            <pre class="language-shell"><code>docker run \
         --name openhab \
         --net=host \
         -v /etc/localtime:/etc/localtime:ro \
@@ -226,23 +245,26 @@ usermod -a -G openhab myownuser
         --restart=always \
         openhab/openhab:{{ selectedVersion === 'stable' ? frontmatter.currentVersion : selectedVersion === 'testing' ? frontmatter.currentMilestoneVersion : (frontmatter.currentSnapshotVersion || '').toLowerCase() }}
 </code></pre>
-        </div>
-        <li><strong>(Optional)</strong> Download the add-on archives for offline use:</li>
-        &#128712; <small>You don't need the add-ons archives if your machine has Internet access.</small>
-        <div v-if="selectedVersion === 'stable' || selectedVersion === 'testing'">
-          <div class="download-button-container">
-            <a class="download-button" style="margin-bottom: 0" :href="addonsDownloadLink" download>
-              Download openHAB {{ currentDownloadVersion }} {{ currentVersionLabel }} Add-ons
-            </a>
           </div>
-        </div>
-        <div v-if="selectedVersion === 'snapshot'">
-          <div class="download-button-container">
-            <a class="download-button" style="margin-bottom: 0" :href="addonsDownloadLink" download>
-              Download openHAB {{ frontmatter.currentSnapshotVersion }} Add-ons
-            </a>
+        </li>
+        <li>
+          <strong>(Optional)</strong> Download the add-on archives for offline use:<br />
+          &#128712; <small>You don't need the add-ons archives if your machine has Internet access.</small>
+          <div v-if="selectedVersion === 'stable' || selectedVersion === 'testing'">
+            <div class="download-button-container">
+              <a class="download-button" style="margin-bottom: 0" :href="addonsDownloadLink" download>
+                Download openHAB {{ currentDownloadVersion }} {{ currentVersionLabel }} Add-ons
+              </a>
+            </div>
           </div>
-        </div>
+          <div v-if="selectedVersion === 'snapshot'">
+            <div class="download-button-container">
+              <a class="download-button" style="margin-bottom: 0" :href="addonsDownloadLink" download>
+                Download openHAB {{ frontmatter.currentSnapshotVersion }} Add-ons
+              </a>
+            </div>
+          </div>
+        </li>
       </ol>
     </div>
 
@@ -257,26 +279,34 @@ usermod -a -G openhab myownuser
           <a target="_blank" href="https://github.com/openhab/homebrew-openhab" rel="noopener noreferrer">
             openHAB Homebrew tap
           </a>
+          <div class="language-shell">
+            <pre class="language-shell"><code>brew tap openhab/openhab</code></pre>
+          </div>
         </li>
-        <div class="language-shell">
-          <pre class="language-shell"><code>brew tap openhab/openhab</code></pre>
-        </div>
-        <li>Install the openHAB package</li>
-        &#128712; <small>This will automatically install the <code>openjdk@21</code> package.</small>
-        <div class="language-shell">
-          <pre class="language-shell"><code>brew install {{ homebrewPackageName }}</code></pre>
-        </div>
-        <li>Pin both the openHAB &amp; Java package versions</li>
-        &#128712; <small>This prevents Homebrew from upgrading those packages when running</small>
-        <div class="language-shell">
-          <pre class="language-shell"><code>brew pin openjdk@21 {{ homebrewPackageName }}</code></pre>
-        </div>
-        <li><strong>(Optional)</strong> Install the add-ons for offline use</li>
-        &#128712; <small>Type <code>brew info {{ homebrewPackageName }}</code> for instructions.</small>
-        <li>Start openHAB as a service</li>
-        <div class="language-shell">
-          <pre class="language-shell"><code>brew services start {{ homebrewPackageName }}</code></pre>
-        </div>
+        <li>
+          Install the openHAB package<br />
+          &#128712; <small>This will automatically install the <code>openjdk@21</code> package.</small>
+          <div class="language-shell">
+            <pre class="language-shell"><code>brew install {{ homebrewPackageName }}</code></pre>
+          </div>
+        </li>
+        <li>
+          Pin both the openHAB &amp; Java package versions<br />
+          &#128712; <small>This prevents Homebrew from upgrading those packages when running</small>
+          <div class="language-shell">
+            <pre class="language-shell"><code>brew pin openjdk@21 {{ homebrewPackageName }}</code></pre>
+          </div>
+        </li>
+        <li>
+          <strong>(Optional)</strong> Install the add-ons for offline use<br />
+          &#128712; <small>Type <code>brew info {{ homebrewPackageName }}</code> for instructions.</small>
+        </li>
+        <li>
+          Start openHAB as a service
+          <div class="language-shell">
+            <pre class="language-shell"><code>brew services start {{ homebrewPackageName }}</code></pre>
+          </div>
+        </li>
         <li>Navigate with a web browser to <code>http://&lt;ip-address&gt;:8080</code></li>
         <li>
           Continue by following the <a :href="withBase('/docs/tutorial/')">tutorial</a> to get started
@@ -297,20 +327,24 @@ usermod -a -G openhab myownuser
         <p>openHAB 5 requires Java 21!</p>
       </div>
       <ol>
-        <li v-html="javaDownloadInstruction" />
-        <li>Download and extract the openHAB runtime distribution:</li>
-        <div class="download-button-container">
-          <a class="download-button big" :href="runtimeDownloadLink" download>
-            Download openHAB {{ currentDownloadVersion }} {{ currentVersionLabel }} Runtime
-          </a>
-        </div>
-        <li><strong>(Optional)</strong> Download the add-on archives for offline use:</li>
-        &#128712; <small>You don't need the add-ons archives if your machine has Internet access.</small>
-        <div class="download-button-container">
-          <a class="download-button" style="margin-bottom: 0" :href="addonsDownloadLink" download>
-            Download openHAB {{ currentDownloadVersion }} {{ currentVersionLabel }} Add-ons
-          </a>
-        </div>
+        <li v-html="javaDownloadInstruction"></li>
+        <li>
+          Download and extract the openHAB runtime distribution:
+          <div class="download-button-container">
+            <a class="download-button big" :href="runtimeDownloadLink" download>
+              Download openHAB {{ currentDownloadVersion }} {{ currentVersionLabel }} Runtime
+            </a>
+          </div>
+        </li>
+        <li>
+          <strong>(Optional)</strong> Download the add-on archives for offline use:<br />
+          &#128712; <small>You don't need the add-ons archives if your machine has Internet access.</small>
+          <div class="download-button-container">
+            <a class="download-button" style="margin-bottom: 0" :href="addonsDownloadLink" download>
+              Download openHAB {{ currentDownloadVersion }} {{ currentVersionLabel }} Add-ons
+            </a>
+          </div>
+        </li>
         <li v-if="selectedSystem === 'apple'">
           Open <em>System Preferences &gt; Keyboard &gt; Shortcuts</em> and check the <em>New Terminal at Folder</em> option under <em>Services</em>:<br />
           <img class="img-center" :src="withBase('/components/images/macos-settings.png')" alt="" />
@@ -507,18 +541,42 @@ const homebrewPackageName = computed(() => {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: stretch;
   gap: 12px;
   margin-top: 0.5rem;
 }
 .version-tabs .version-tab {
   width: 20%;
-  padding: 8px;
+  min-width: 120px;
+  min-height: 48px;
+  padding: 6px 10px;
   text-align: center;
   border: 2px solid transparent;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 15px;
   background: var(--vp-c-bg-elv, #fafafa);
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+.version-tabs .version-tab strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.version-tabs .version-tab small {
+  display: block;
+  font-size: 11px;
+  color: var(--vp-c-text-2, #666);
+  margin: 2px 0 0 0 !important;
+  line-height: 1.2;
+  padding: 0 !important;
 }
 .version-tabs .version-tab:hover {
   background: var(--vp-c-bg-alt, #f0f0f0);

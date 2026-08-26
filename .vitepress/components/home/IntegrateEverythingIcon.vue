@@ -39,6 +39,7 @@ onUnmounted(() => {
   height: 150px;
   margin: 0 auto;
   position: relative;
+  flex-shrink: 0;
 }
 .home-icon {
   position: absolute;

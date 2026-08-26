@@ -79,6 +79,10 @@ onMounted(async () => {
 }
 .cloud-text a {
   color: #5599ff;
+  text-decoration: none;
+}
+.cloud-text a:hover {
+  text-decoration: underline;
 }
 .cloud-bkg {
   height: 28vw;

@@ -7,11 +7,19 @@ date: '2018-12-17T00:57:45+01:00'
 previewimage: /uploads/2018-12_xmas.jpg
 tags:
   - news
-excerpt: >-
-  As for the past few years, the openHAB maintainers have decided to do a new
-  release just in time for the holiday season, which is the busiest time of the
-  year in our community. So what could be more welcome than a brand new stable
-  release?
+meta:
+  - name: twitter:card
+    content: summary_large_image
+  - property: og:title
+    content: "openHAB 2.4 Release"
+  - property: og:description
+    content: As for the past few years, the openHAB maintainers have decided to do a new release just in time for the holiday season, which is the busiest time of the year in our community. So what could be more welcome than a brand new stable release?
+  - property: og:image
+    content: https://www.openhab.org/uploads/2018-12_xmas.jpg
+feed:
+  image: https://www.openhab.org/uploads/2018-12_xmas.jpg
+  author:
+    - name: Kai Kreuzer
 ---
 As for the past few years, the openHAB maintainers have decided to do a new release just in time for the holiday season, which is the busiest time of the year in our community. So what could be more welcome than a brand new stable release?
 

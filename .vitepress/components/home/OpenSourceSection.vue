@@ -72,7 +72,12 @@ import { withBase } from 'vitepress'
   line-height: 1.6;
 }
 .right a {
-  color: #5599ff;
+  color: var(--vp-c-brand-1, #ff6600);
+  text-decoration: none;
+}
+.right a:hover {
+  color: var(--vp-c-brand-2, #e55d00);
+  text-decoration: underline !important;
 }
 @media (max-width: 768px) {
   .section-opensource {

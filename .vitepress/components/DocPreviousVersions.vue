@@ -59,7 +59,7 @@ onMounted(async () => {
   currentVersion.value = (theme.value as any).docsVersion || 'Latest'
   try {
     // Attempt to load download page frontmatter if present
-    const downloadData = await import('../../download/README.md')
+    const downloadData = await import('../../download/index.md')
     if (downloadData && downloadData.frontmatter) {
       stableVersion.value = downloadData.frontmatter.currentVersion || ''
       latestVersion.value = (downloadData.frontmatter.currentSnapshotVersion || '').replace('-SNAPSHOT', '')

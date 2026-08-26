@@ -8,7 +8,6 @@
     <OpenSourceSection />
     <CommunitySection />
     <EventsSection />
-    <AlternativeToSection />
   </div>
 </template>
 

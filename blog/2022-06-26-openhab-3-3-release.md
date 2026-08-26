@@ -7,10 +7,19 @@ date: '2022-06-27T00:30:48-07:00'
 previewimage: /uploads/summer.jpg
 tags:
   - news
-excerpt: >-
-  We are pleased to announce our summer release of openHAB 3.3 is out! This
-  latest version contains many new add-ons, enhanced features, automation
-  improvements and more!
+meta:
+  - name: twitter:card
+    content: summary_large_image
+  - property: og:title
+    content: "openHAB 3.3 Release"
+  - property: og:description
+    content: We are pleased to announce our summer release of openHAB 3.3 is out! This latest version contains many new add-ons, enhanced features, automation improvements and more!
+  - property: og:image
+    content: https://www.openhab.org/uploads/summer.jpg
+feed:
+  image: https://www.openhab.org/uploads/summer.jpg
+  author:
+    - name: Dan Cunningham
 ---
 Summer is here, and with it comes the next version of our smart home platform, openHAB 3.3. The last six months have shown an impressive amount of activity across our different components including openHAB Core, Add-ons, UI, Android, iOS and Javascript library to name just a few. 
 

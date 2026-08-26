@@ -11,13 +11,11 @@
         <Content />
       </div>
     </div>
-    <Footer />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useData, withBase } from 'vitepress'
-import Footer from '../components/Footer.vue'
 
 const { frontmatter } = useData()
 </script>

@@ -7,15 +7,17 @@
           <div class="calendar">
             <CalendarIcon :date="item.date" :end-date="item.end_date" />
           </div>
-          <a v-if="item.link" :href="item.link" target="_blank" class="event-link" rel="noopener noreferrer">
-            <img class="event-image" :src="withBase('/openhab-logo-empowering.svg')" alt="" />
+          <!--
+          <a :href="item.link || item.url" target="_blank" class="event-link" rel="noopener noreferrer">
+            <img class="event-image" :src="withBase(item.event_image || '/openhab-logo-empowering.svg')" alt="" />
           </a>
+          -->
           <div class="event-info">
-            <a v-if="item.link" :href="item.link" target="_blank" rel="noopener noreferrer">
+            <a :href="item.link || item.url" target="_blank" rel="noopener noreferrer">
               <h3 class="event-title">{{ item.title }}</h3>
             </a>
-            <h3 v-else class="event-title">{{ item.title }}</h3>
             <div v-if="item.location" class="event-location">{{ item.location }}</div>
+            <p v-if="item.excerpt || item.abstract" v-html="item.excerpt || item.abstract"></p>
           </div>
         </li>
       </ul>
@@ -31,12 +33,17 @@
             <div class="calendar">
               <CalendarIcon :date="item.date" :end-date="item.end_date" />
             </div>
+            <!--
+            <a :href="item.link || item.url" target="_blank" class="event-link" rel="noopener noreferrer">
+              <img class="event-image" :src="withBase(item.event_image || '/openhab-logo-empowering.svg')" alt="" />
+            </a>
+            -->
             <div class="event-info">
-              <a v-if="item.link" :href="item.link" target="_blank" rel="noopener noreferrer">
+              <a :href="item.link || item.url" target="_blank" rel="noopener noreferrer">
                 <h3 class="event-title">{{ item.title }}</h3>
               </a>
-              <h3 v-else class="event-title">{{ item.title }}</h3>
               <div v-if="item.location" class="event-location">{{ item.location }}</div>
+              <p v-if="item.excerpt || item.abstract" v-html="item.excerpt || item.abstract"></p>
             </div>
           </li>
         </ul>
@@ -98,31 +105,40 @@ function pastEventsByYear(year: number) {
   clear: both;
   display: flex;
   margin-bottom: 2rem;
-  align-items: center;
-  gap: 1.5rem;
 }
 .event-list .event .event-link {
   display: flex;
-  height: 6rem;
-  width: 100px;
+  height: 8rem;
+  width: 128px;
+  margin-right: 2rem;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 .event-list .event .event-image {
-  max-height: 6em;
-  max-width: 6em;
+  max-height: 8em;
+  max-width: 8em;
+  margin-left: 1rem;
+  margin-right: 1rem;
   object-fit: contain;
 }
 .event-list .event .event-info {
+  margin-left: 1rem;
   flex: 1;
 }
 .event-list .event .event-info .event-title {
-  margin: 0;
+  margin-bottom: 0;
+  margin-top: 0;
   font-family: 'Open Sans', sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.35rem;
 }
 .event-list .event .event-info .event-location {
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;
-  color: var(--vp-c-text-2, #666);
+}
+.event-list .event .event-info p {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
 }
 @media (max-width: 719px) {
   .event-list .event {

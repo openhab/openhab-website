@@ -17,7 +17,7 @@ DOCS_REPO_BRANCH = ENV.fetch("OH_DOCS_VERSION", "final").then { |v| (v.count("."
 DOCS_SRC = Pathname(".vitepress/openhab-docs")
 DOCS_DST = Pathname("docs")
 ADDONS_DST = Pathname("addons")
-LOGOS_DST = Pathname(".vitepress/public/logos")
+LOGOS_DST = Pathname("public/logos")
 
 $verbose = false
 
@@ -130,7 +130,7 @@ SCHEMAS = [
 
 SCHEMAS.each do |url|
   filename = File.basename(URI.parse(url).path)
-  dest_path = ".vitepress/public/schemas/#{filename}"
+  dest_path = "public/schemas/#{filename}"
   puts "   ↪️ Fetching #{dest_path}"
   URI.open(url) do |remote_file|
     File.binwrite(dest_path, remote_file.read)
@@ -140,14 +140,14 @@ end
 # Clean-Ups required for repeated local build
 verbose "🧹 Cleaning existing JavaDoc ..."
 FileUtils.rm Dir.glob("javadoc-latest.*"), force: true
-FileUtils.rm_rf(".vitepress/public/javadoc/latest")
+FileUtils.rm_rf("public/javadoc/latest")
 
 # Publish latest Javadoc
 puts "➡️ Downloading and extracting latest Javadoc from Jenkins"
 begin
   `wget -nv https://ci.openhab.org/job/openHAB-JavaDoc/lastSuccessfulBuild/artifact/target/javadoc-latest.tgz`
   if File.exist?("javadoc-latest.tgz")
-    `tar xzvf javadoc-latest.tgz --strip 2 && mv apidocs/ .vitepress/public/javadoc/latest`
+    `tar xzvf javadoc-latest.tgz --strip 2 && mv apidocs/ public/javadoc/latest`
     FileUtils.rm "javadoc-latest.tgz"
     puts "✅ Downloaded and extracted Javadoc"
   else

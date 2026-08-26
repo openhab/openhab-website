@@ -7,8 +7,19 @@ date: "2025-12-22T20:00:00+01:00"
 previewimage: /uploads/2025-12-22-openhab-5-1-release/header.webp
 tags:
   - news
-excerpt: >-
-  A new release of openHAB is here! openHAB 5.1 arrives with many improvements, most notably a **complete modernisation of Main UI**, the **introduction of a HomeKit Binding** for importing Apple-ecosystem devices, and significant **updates to JavaScript and Python Scripting**.
+meta:
+  - name: twitter:card
+    content: summary_large_image
+  - property: og:title
+    content: "openHAB 5.1 Release"
+  - property: og:description
+    content: A new release of openHAB is here! openHAB 5.1 arrives with many improvements, most notably a **complete modernisation of Main UI**, the **introduction of a HomeKit Binding** for importing Apple-ecosystem devices, and significant **updates to JavaScript and Python Scripting**.
+  - property: og:image
+    content: https://www.openhab.org/uploads/2025-12-22-openhab-5-1-release/header.webp
+feed:
+  image: https://www.openhab.org/uploads/2025-12-22-openhab-5-1-release/header.webp
+  author:
+    - name: Florian Hotze and others
 ---
 
 A new release of openHAB is here!

@@ -89,6 +89,9 @@ export default defineConfig({
     ['link', { rel: 'apple-touch-icon', href: '/apple-icon.png' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:image', content: 'https://www.openhab.org/og-image.png' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
+    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap' }],
   ],
   markdown: {
     languages: [
@@ -102,12 +105,74 @@ export default defineConfig({
     },
     config(md) {
       md.use(tabsMarkdownPlugin)
+
+      const KNOWN_TAGS = new Set([
+        'a', 'abbr', 'address', 'article', 'aside', 'audio', 'b', 'bdi', 'bdo', 'blockquote', 'br', 'button',
+        'canvas', 'caption', 'cite', 'code', 'col', 'colgroup', 'data', 'datalist', 'dd', 'del', 'details',
+        'dfn', 'dialog', 'div', 'dl', 'dt', 'em', 'embed', 'fieldset', 'figcaption', 'figure', 'footer',
+        'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'i', 'iframe', 'img', 'input',
+        'ins', 'kbd', 'label', 'legend', 'li', 'main', 'map', 'mark', 'menu', 'meter', 'nav', 'noscript',
+        'object', 'ol', 'optgroup', 'option', 'output', 'p', 'picture', 'pre', 'progress', 'q', 'rp', 'rt',
+        'ruby', 's', 'samp', 'section', 'select', 'small', 'source', 'span', 'strong', 'style', 'sub',
+        'summary', 'sup', 'table', 'tbody', 'td', 'template', 'textarea', 'tfoot', 'th', 'thead', 'time',
+        'tr', 'track', 'u', 'ul', 'var', 'video', 'wbr', 'svg', 'path', 'g', 'animatetransform', 'use',
+        'clientonly', 'client-only', 'editpagelink', 'edit-page-link', 'footer', 'docpreviousversions',
+        'doc-previous-versions', 'addonlogo', 'addon-logo', 'addonsearch', 'addon-search', 'blogpostlist',
+        'blog-post-list', 'eventslist', 'events-list', 'calendaricon', 'calendar-icon', 'communitytutorials',
+        'community-tutorials', 'consentbanner', 'consent-banner', 'homesections', 'home-sections',
+        'iconsetdisplay', 'iconset-display', 'inlineimage', 'inline-image', 'installinstructions',
+        'install-instructions', 'propblock', 'prop-block', 'propdescription', 'prop-description',
+        'propgroup', 'prop-group', 'propoption', 'prop-option', 'propoptions', 'prop-options',
+        'scrollonreveal', 'scroll-on-reveal', 'thingdocrenderer', 'thing-doc-renderer', 'tab', 'tabs',
+        'content', 'badge', 'vphome', 'vpdoc', 'vpnav', 'vpsidebar', 'vpfooter'
+      ])
+
+      function escapeText(text: string) {
+        return text
+          .replace(/\{\{/g, '&#123;&#123;')
+          .replace(/\}\}/g, '&#125;&#125;')
+      }
+
+      function escapeUnknownTags(html: string) {
+        return html.replace(/<(\/?)([a-zA-Z0-9_\-:]+)([^>]*)>/g, (match, closeSlash, tagName, rest) => {
+          const lowerName = tagName.toLowerCase()
+          if (KNOWN_TAGS.has(lowerName)) {
+            return match
+          }
+          return `&lt;${closeSlash}${tagName}${rest}&gt;`
+        })
+      }
+
+      const defaultTextRender = md.renderer.rules.text || ((tokens, idx) => md.utils.escapeHtml(tokens[idx].content))
+      md.renderer.rules.text = (tokens, idx, options, env, self) => {
+        const rendered = defaultTextRender(tokens, idx, options, env, self)
+        return escapeText(rendered)
+      }
+
+      const defaultHtmlInlineRender = md.renderer.rules.html_inline || ((tokens, idx) => tokens[idx].content)
+      md.renderer.rules.html_inline = (tokens, idx, options, env, self) => {
+        const content = tokens[idx].content
+        if (content.startsWith('<!--')) return content
+        const processed = escapeUnknownTags(content)
+        return escapeText(processed)
+      }
+
+      const defaultHtmlBlockRender = md.renderer.rules.html_block || ((tokens, idx) => tokens[idx].content)
+      md.renderer.rules.html_block = (tokens, idx, options, env, self) => {
+        const content = tokens[idx].content
+        if (content.startsWith('<!--')) return content
+        const processed = escapeUnknownTags(content)
+        return escapeText(processed)
+      }
     },
   },
   vue: {
     template: {
       transformAssetUrls: {
         includeAbsolute: false,
+      },
+      compilerOptions: {
+        isCustomElement: (tag) => tag.includes('-'),
       },
     },
   },

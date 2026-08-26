@@ -110,25 +110,50 @@ footer {
 }
 
 /* Dark mode tweaks for homepage sections */
+.dark .section2,
 .dark .homepage .section2 {
   background: #111111;
 }
 
+.dark .section2 .gears,
+.dark .section2 .home-icon,
 .dark .homepage .section2 .gears,
 .dark .homepage .section2 .home-icon {
-  filter: invert();
+  filter: invert(1);
 }
 
+.dark .section2 .feature h3,
 .dark .homepage .section2 .feature h3 {
   color: #dddddd;
 }
 
+.dark .section2 p,
 .dark .homepage .section2 p {
   color: #aaaaaa !important;
 }
 
-.dark .homepage .section2 a {
-  color: #ffffff;
+.dark .section2 a,
+.dark .homepage .section2 a,
+.dark .section2 .feature a {
+  color: #ffffff !important;
+}
+
+/* Dark mode tweaks for cloud section */
+.dark .cloud-section,
+.dark .homepage .cloud-section {
+  background-color: #0d0d0d;
+}
+
+.dark .cloud-section .cloud-left-bkg-img,
+.dark .cloud-section .cloud-right-bkg-img,
+.dark .homepage .cloud-section .cloud-left-bkg-img,
+.dark .homepage .cloud-section .cloud-right-bkg-img {
+  filter: invert(1);
+}
+
+.dark .cloud-section p,
+.dark .homepage .cloud-section p {
+  color: #aaaaaa;
 }
 
 .dark .homepage .featured-addons-section {
@@ -184,3 +209,69 @@ footer {
   color: #f7f7f7;
   background-color: rgb(47, 53, 60);
 }
+
+/* Artwork Page Downloads */
+.artwork-downloads {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: flex-end !important;
+  gap: 4rem !important;
+  margin: 3rem auto !important;
+  max-width: 850px !important;
+  text-align: center !important;
+}
+
+.artwork-download-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  min-width: 260px !important;
+}
+
+.artwork-download-card a {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-decoration: none !important;
+}
+
+.artwork-image-wrapper {
+  height: 130px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 0.75rem !important;
+  width: 100% !important;
+}
+
+.artwork-image-wrapper img {
+  max-height: 120px !important;
+  max-width: 100% !important;
+  height: auto !important;
+  width: auto !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+.artwork-caption {
+  margin: 0 !important;
+  text-align: center !important;
+  font-weight: 600 !important;
+  font-size: 1.1rem !important;
+  color: var(--vp-c-brand-1, #ff6600) !important;
+}
+
+.artwork-download-card a:hover .artwork-caption {
+  text-decoration: underline !important;
+}
+
+@media (max-width: 719px) {
+  .artwork-downloads {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 2.5rem !important;
+  }
+}
+
