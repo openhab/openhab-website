@@ -81,6 +81,7 @@ export default defineConfig({
   title: 'openHAB',
   description: 'openHAB - a vendor and technology agnostic open source automation software for your home',
   srcExclude: noAddons ? ['addons/**'] : [],
+  ignoreDeadLinks: true,
   head: [
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1' }],
     ['link', { rel: 'icon', href: '/favicon.ico' }],
@@ -95,15 +96,19 @@ export default defineConfig({
       openhabRulesGrammar as any,
     ],
     languageAlias: {
-      dsl: 'openhab-dsl',
-      conf: 'openhab-dsl',
-      rules: 'openhab-rules',
       shell: 'bash',
       sh: 'bash',
       shell_session: 'bash',
     },
     config(md) {
       md.use(tabsMarkdownPlugin)
+    },
+  },
+  vue: {
+    template: {
+      transformAssetUrls: {
+        includeAbsolute: false,
+      },
     },
   },
   vite: {
@@ -122,6 +127,11 @@ export default defineConfig({
       dark: '/openhab-logo-empowering.svg',
     },
     siteTitle: false,
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/openhab' },
+      { icon: 'x', link: 'https://x.com/openhab' },
+      { icon: 'youtube', link: 'https://www.youtube.com/channel/UC7OK88DW0La_BJlcXZg8ydQ' },
+    ],
     search: {
       provider: 'local',
       options: {

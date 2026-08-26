@@ -81,6 +81,7 @@ is not possible.
 
 The party responsible for processing data on this website is:
 
+<address>
 <p>openHAB Foundation e.V.<br />Kollwitzweg 10<br />64372 Ober-Ramstadt</p>
 </address>
 

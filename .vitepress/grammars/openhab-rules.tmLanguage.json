@@ -1,6 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-  "name": "openHAB Rules",
+  "name": "openhab-rules",
+  "aliases": ["rules"],
   "scopeName": "source.openhab-rules",
   "patterns": [
     {
