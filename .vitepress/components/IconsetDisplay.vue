@@ -29,7 +29,7 @@
     <h2>Other Icons</h2>
     <div class="iconset-icons">
       <div class="iconset-icon" v-for="icon in icons_without_category.sort()" :key="icon">
-        <img :src="withBase(`/iconsets/classic/${icon}`)" :title="iconTooltip(icon.replace('.svg', ''))" :alt="icon" />
+        <img :src="iconFile(icon)" :title="iconTooltip(icon.replace('.svg', ''))" :alt="icon" />
         <span>{{ icon.replace('.svg', '') }}</span>
       </div>
     </div>
@@ -46,17 +46,39 @@ const props = defineProps<{
 
 const { frontmatter } = useData()
 
-const allIconsList = computed(() => (props.icons ? props.icons.split(',') : []))
+// Load all icon SVG assets directly via Vite
+const iconModules = import.meta.glob<string>(
+  '../../docs/configuration/iconsets/classic/icons/*.svg',
+  { eager: true, import: 'default' }
+)
+
+// Map simple filename (e.g. "alarm.svg") to resolved asset URL
+const iconMap = new Map<string, string>()
+for (const [key, value] of Object.entries(iconModules)) {
+  const filename = key.split('/').pop()
+  if (filename && typeof value === 'string') {
+    iconMap.set(filename, value)
+  }
+}
+
+const allIconsList = computed(() => {
+  if (props.icons) {
+    return props.icons.split(',')
+  }
+  return Array.from(iconMap.keys())
+})
+
 const categories = computed(() => frontmatter.value.categories || { places: [], things: [], channels: {} })
 const channelSubcategories = computed(() => Object.keys(categories.value.channels || {}))
 
 function existingIcons(category: string[]) {
   if (!Array.isArray(category)) return []
-  return category.filter((i) => allIconsList.value.includes(i + '.svg'))
+  return category.filter((i) => allIconsList.value.includes(i + '.svg') || iconMap.has(i + '.svg'))
 }
 
 function iconFile(icon: string) {
-  return withBase(`/iconsets/classic/${icon}.svg`)
+  const filename = icon.endsWith('.svg') ? icon : `${icon}.svg`
+  return iconMap.get(filename) || withBase(`/iconsets/classic/${filename}`) || withBase(`/docs/configuration/iconsets/classic/icons/${filename}`)
 }
 
 function iconTooltip(icon: string) {

@@ -79,6 +79,16 @@ puts "➡️ Migrating logos"
 LOGOS_DST.rmtree if LOGOS_DST.exist?
 FileUtils.cp_r(DOCS_SRC / "images/addons", LOGOS_DST) if Dir.exist?(DOCS_SRC / "images/addons")
 
+puts "➡️ Migrating iconsets"
+ICONSETS_DST = Pathname("public/iconsets/classic")
+ICONSETS_DST.rmtree if ICONSETS_DST.exist?
+FileUtils.mkdir_p(ICONSETS_DST)
+if Dir.exist?(DOCS_SRC / "docs/configuration/iconsets/classic/icons")
+  FileUtils.cp_r(DOCS_SRC.join("docs/configuration/iconsets/classic/icons/."), ICONSETS_DST)
+elsif Dir.exist?("docs/configuration/iconsets/classic/icons")
+  FileUtils.cp_r(Pathname("docs/configuration/iconsets/classic/icons/."), ICONSETS_DST)
+end
+
 puts "➡️ Copying pre-processed docs from openhab-docs"
 FileUtils.cp_r(DOCS_SRC.join("docs/."), DOCS_DST)
 
@@ -158,7 +168,7 @@ rescue => e
 end
 
 # Copy the thing-types.json file to the proper location
-thing_types_src = DOCS_SRC / ".vitepress/thing-types.json"
+thing_types_src = DOCS_SRC / ".vuepress/thing-types.json"
 if thing_types_src.exist?
   FileUtils.cp(thing_types_src, ".vitepress")
   puts "✅ Copied Thing Types"

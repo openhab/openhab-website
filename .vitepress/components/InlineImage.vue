@@ -1,5 +1,14 @@
 <template>
-  <img :src="src ? withBase(src) : undefined" :style="{ height: imgHeight, verticalAlign: imgVerticalAlign }" :alt="alt || ''" />
+  <img
+    class="inline-image"
+    :src="src ? withBase(src) : undefined"
+    :style="{
+      display: 'inline-block',
+      height: imgHeight,
+      verticalAlign: imgVerticalAlign,
+    }"
+    :alt="alt || ''"
+  />
 </template>
 
 <script setup lang="ts">
@@ -14,5 +23,13 @@ const props = defineProps<{
 }>()
 
 const imgHeight = computed(() => props.height || '1.5em')
-const imgVerticalAlign = computed(() => props.verticalAlign || 'text-bottom')
+const imgVerticalAlign = computed(() => props.verticalAlign || 'middle')
 </script>
+
+<style scoped>
+.inline-image,
+img {
+  display: inline-block !important;
+  max-width: none;
+}
+</style>

@@ -15,18 +15,59 @@ function safeRequire(filePath: string, fallback: any = []) {
   const resolved = path.resolve(__dirname, filePath)
   if (fs.existsSync(resolved)) {
     try {
-      // In ESM, read or parse JSON/JS
       const content = fs.readFileSync(resolved, 'utf-8')
-      if (content.includes('module.exports =')) {
-        const jsonStr = content.replace('module.exports =', '').trim()
-        return JSON.parse(jsonStr)
-      }
-      return fallback
+      const fn = new Function('module', 'exports', content)
+      const module = { exports: {} as any }
+      fn(module, module.exports)
+      return module.exports || fallback
     } catch {
       return fallback
     }
   }
   return fallback
+}
+
+// Convert VuePress docs sidebar structure to VitePress sidebar items
+function transformDocsSidebar(items: any[]): any[] {
+  if (!Array.isArray(items)) return []
+  return items.map((item) => {
+    if (Array.isArray(item) && item.length === 2) {
+      const [p, title] = item
+      const link = p.startsWith('/') ? p : ('/docs/' + p).replace(/\/+/g, '/')
+      return { text: title, link }
+    }
+    if (typeof item === 'string') {
+      const p = item.trim()
+      const link = p === '' ? '/docs/' : (p.startsWith('/') ? p : ('/docs/' + p)).replace(/\/+/g, '/')
+      const text = p === '' ? 'Introduction' : p.split('/').pop()?.replace(/[_-]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+      return { text, link }
+    }
+    if (item && typeof item === 'object') {
+      const children = item.children || item.items
+      let collapsed: boolean | undefined = undefined
+      if (item.collapsable === false || item.collapsible === false) {
+        collapsed = item.collapsed !== undefined ? Boolean(item.collapsed) : undefined
+      } else if (item.collapsed !== undefined) {
+        collapsed = Boolean(item.collapsed)
+      } else if (item.expanded !== undefined) {
+        collapsed = !item.expanded
+      } else if (item.open !== undefined) {
+        collapsed = !item.open
+      } else if (item.initialOpen !== undefined) {
+        collapsed = !item.initialOpen
+      } else if (children) {
+        collapsed = true
+      }
+
+      return {
+        text: item.title || item.text,
+        link: item.path || item.link ? (item.path || item.link).replace(/\/+/g, '/') : undefined,
+        items: children ? transformDocsSidebar(children) : undefined,
+        collapsed,
+      }
+    }
+    return item
+  })
 }
 
 // Convert VuePress sidebar structure to VitePress sidebar items
@@ -43,20 +84,34 @@ function transformAddonSidebar(items: any[]): any[] {
       return { text: item, link }
     }
     if (item && typeof item === 'object') {
+      const children = item.children || item.items
+      let collapsed: boolean | undefined = undefined
+      if (item.collapsable === false || item.collapsible === false) {
+        collapsed = item.collapsed !== undefined ? Boolean(item.collapsed) : undefined
+      } else if (item.collapsed !== undefined) {
+        collapsed = Boolean(item.collapsed)
+      } else if (item.expanded !== undefined) {
+        collapsed = !item.expanded
+      } else if (item.open !== undefined) {
+        collapsed = !item.open
+      } else if (item.initialOpen !== undefined) {
+        collapsed = !item.initialOpen
+      } else if (children) {
+        collapsed = true
+      }
+
       return {
         text: item.title || item.text,
         link: item.path || item.link,
-        items: item.children ? transformAddonSidebar(item.children) : (item.items ? transformAddonSidebar(item.items) : undefined),
-        collapsed: item.collapsible !== false ? false : undefined,
+        items: children ? transformAddonSidebar(children) : undefined,
+        collapsed,
       }
     }
     return item
   })
 }
 
-const noAddons = process.env.OH_NOADDONS
-
-const docsSidebar = safeRequire('./openhab-docs/.vuepress/docs-sidebar.js', [])
+const docsSidebar = transformDocsSidebar(safeRequire('./openhab-docs/.vuepress/docs-sidebar.js', []))
 const addonsBindings = transformAddonSidebar(safeRequire('./addons-bindings.js', []))
 const addonsIntegrations = transformAddonSidebar(safeRequire('./addons-integrations.js', []))
 const addonsAutomation = transformAddonSidebar(safeRequire('./addons-automation.js', []))
@@ -68,7 +123,6 @@ const addonsUi = transformAddonSidebar(safeRequire('./addons-ui.js', []))
 export default defineConfig({
   title: 'openHAB',
   description: 'openHAB - a vendor and technology agnostic open source automation software for your home',
-  srcExclude: noAddons ? ['addons/**'] : [],
   ignoreDeadLinks: true,
   head: [
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1' }],
@@ -94,9 +148,67 @@ export default defineConfig({
     config(md) {
       md.use(tabsMarkdownPlugin)
 
-      // Pre-processing rule to clean up legacy Jekyll/Liquid syntax
+      // Transform legacy VuePress tab syntax (::: tabs / ::: tab Title / :::) to vitepress-plugin-tabs syntax (:::tabs / == Title)
+      function transformLegacyTabs(src: string): string {
+        const lines = src.split('\n')
+        const result: string[] = []
+        let inTabsBlock = false
+        let tabsIndent = ''
+        let inTab = false
+
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i]
+          const trimmed = line.trim()
+
+          const startTabsMatch = trimmed.match(/^:{3,}\s*tabs\b/)
+          if (startTabsMatch && !inTabsBlock) {
+            inTabsBlock = true
+            tabsIndent = line.match(/^[ \t]*/)?.[0] || ''
+            result.push(`${tabsIndent}:::tabs`)
+            inTab = false
+            continue
+          }
+
+          if (inTabsBlock) {
+            const tabMatch = trimmed.match(/^:{3,}\s*tab(?:\s+(.*))?$/)
+            if (tabMatch) {
+              let title = tabMatch[1] ? tabMatch[1].trim() : 'Tab'
+              if ((title.startsWith('"') && title.endsWith('"')) || (title.startsWith("'") && title.endsWith("'"))) {
+                title = title.slice(1, -1)
+              }
+              result.push(`${tabsIndent}== ${title}`)
+              inTab = true
+              continue
+            }
+
+            if (trimmed.match(/^:{3,}$/)) {
+              if (inTab) {
+                inTab = false
+                continue
+              } else {
+                inTabsBlock = false
+                result.push(`${tabsIndent}:::`)
+                continue
+              }
+            }
+
+            result.push(line)
+            continue
+          }
+
+          result.push(line)
+        }
+
+        if (inTabsBlock) {
+          result.push(`${tabsIndent}:::`)
+        }
+
+        return result.join('\n')
+      }
+
+      // Pre-processing rule to clean up legacy Jekyll/Liquid syntax and legacy tabs
       md.core.ruler.before('normalize', 'clean_jekyll_syntax', (state) => {
-        state.src = state.src
+        state.src = transformLegacyTabs(state.src)
           // Remove Jekyll includes and tags: {% include ... %}, {% raw %}, etc.
           .replace(/\{%\s*include\s+[^%]+\s*%\}/g, '')
           .replace(/\{%[^{}%]*%\}/g, '')
@@ -143,7 +255,7 @@ export default defineConfig({
         'time', 'title', 'tr', 'track', 'u', 'ul', 'var', 'video', 'wbr',
       ]
 
-      const BUILTIN_TAGS = ['clientonly', 'client-only', 'content', 'badge', 'tab', 'tabs', 'outboundlink', 'outbound-link']
+      const BUILTIN_TAGS = ['clientonly', 'client-only', 'content', 'badge', 'tab', 'tabs', 'outboundlink', 'outbound-link', 'plugintabs', 'plugintabstab', 'plugin-tabs', 'plugin-tabs-tab']
       const customComponents = getComponentTags('./components', '../components', './.vuepress/components', '../.vuepress/components')
 
       const KNOWN_TAGS = new Set([
@@ -185,7 +297,7 @@ export default defineConfig({
         return escapeText(rendered)
       }
 
-      // Post-processing rule to clean up unmatched / stray closing tags and balance unclosed elements
+      // Post-processing rule to escape unknown tags, clean up unmatched / stray closing tags and balance unclosed elements
       md.core.ruler.push('clean_unmatched_html', (state) => {
         const VOID_TAGS = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'])
 
@@ -197,25 +309,31 @@ export default defineConfig({
               const idx = openTags.lastIndexOf('a')
               if (idx !== -1) openTags.splice(idx, 1)
             } else if (token.type === 'html_inline' || token.type === 'html_block') {
-              token.content = token.content.replace(/<(\/?)([a-zA-Z][a-zA-Z0-9_\-:]*)([^>]*)>/g, (match: string, closeSlash: string, tagName: string, rest: string) => {
-                const lower = tagName.toLowerCase()
-                if (VOID_TAGS.has(lower) || rest.trim().endsWith('/')) {
-                  return match
-                }
-                if (closeSlash === '/') {
-                  const idx = openTags.lastIndexOf(lower)
-                  if (idx !== -1) {
-                    const unclosed = openTags.splice(idx)
-                    unclosed.shift()
-                    const closingPrefix = unclosed.reverse().map((t) => `</${t}>`).join('')
-                    return closingPrefix + match
+              if (!token.content.startsWith('<!--')) {
+                token.content = token.content.replace(/<(\/?)([a-zA-Z][a-zA-Z0-9_\-:]*)([^>]*)>/g, (match: string, closeSlash: string, tagName: string, rest: string) => {
+                  const lower = tagName.toLowerCase()
+                  // Unknown tag -> escape as text
+                  if (!KNOWN_TAGS.has(lower)) {
+                    return `&lt;${closeSlash}${tagName}${rest}&gt;`
                   }
-                  return `&lt;/${tagName}${rest}&gt;`
-                } else {
-                  openTags.push(lower)
-                  return match
-                }
-              })
+                  if (VOID_TAGS.has(lower) || rest.trim().endsWith('/')) {
+                    return match
+                  }
+                  if (closeSlash === '/') {
+                    const idx = openTags.lastIndexOf(lower)
+                    if (idx !== -1) {
+                      const unclosed = openTags.splice(idx)
+                      unclosed.shift()
+                      const closingPrefix = unclosed.reverse().map((t) => `</${t}>`).join('')
+                      return closingPrefix + match
+                    }
+                    return `&lt;/${tagName}${rest}&gt;`
+                  } else {
+                    openTags.push(lower)
+                    return match
+                  }
+                })
+              }
             }
             if (token.children) {
               processTokens(token.children, openTags)
@@ -261,6 +379,7 @@ export default defineConfig({
         baseUrl: 'https://www.openhab.org',
         description: 'openHAB News and Announcements',
         filter: (post: any) => post.filepath && post.filepath.startsWith('blog/'),
+        copyright: 'Copyright by the openHAB Community and the openHAB Foundation e.V.'
       }),
     ],
   },
@@ -275,6 +394,10 @@ export default defineConfig({
       { icon: 'x', link: 'https://x.com/openhab' },
       { icon: 'youtube', link: 'https://www.youtube.com/channel/UC7OK88DW0La_BJlcXZg8ydQ' },
     ],
+    outline: {
+      level: [2, 3],
+      label: 'On this page',
+    },
     search: {
       provider: 'local',
       options: {
@@ -330,17 +453,15 @@ export default defineConfig({
           ],
         },
       ],
-      '/addons/': noAddons
-        ? []
-        : [
-            { text: 'Bindings', collapsed: false, items: addonsBindings },
-            { text: 'System Integrations', collapsed: false, items: addonsIntegrations },
-            { text: 'Automation', collapsed: false, items: addonsAutomation },
-            { text: 'Data Persistence', collapsed: false, items: addonsPersistence },
-            { text: 'Data Transformation', collapsed: false, items: addonsTransformations },
-            { text: 'Voice', collapsed: false, items: addonsVoice },
-            { text: 'User Interface', collapsed: false, items: addonsUi },
-          ],
+      '/addons/': [
+        { text: 'Bindings', collapsed: false, items: addonsBindings },
+        { text: 'System Integrations', collapsed: true, items: addonsIntegrations },
+        { text: 'Automation', collapsed: true, items: addonsAutomation },
+        { text: 'Data Persistence', collapsed: true, items: addonsPersistence },
+        { text: 'Data Transformation', collapsed: true, items: addonsTransformations },
+        { text: 'Voice', collapsed: true, items: addonsVoice },
+        { text: 'User Interface', collapsed: true, items: addonsUi },
+      ],
     },
   },
 })
