@@ -55,7 +55,7 @@ rescue Errno::ENOENT, Errno::EACCES => e
 end
 
 def extract_addon_metadata(addon_path, type)
-  readme = addon_path / "readme.md"
+  readme = addon_path / "index.md"
   return nil unless readme.exist?
 
   path = "#{type}/#{addon_path.basename}/"
