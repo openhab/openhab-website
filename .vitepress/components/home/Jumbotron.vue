@@ -76,7 +76,7 @@ import { withBase } from 'vitepress'
   height: 760px;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   overflow: hidden;
 }
 .jumbotron-pattern {
@@ -88,7 +88,8 @@ import { withBase } from 'vitepress'
   user-select: none;
 }
 .hero-content {
-  margin: 90px 2rem;
+  align-self: center;
+  margin: 0 2rem;
   z-index: 1;
   max-width: 960px;
 }
@@ -106,9 +107,9 @@ h1.hero {
   font-weight: 300;
   font-size: 60px;
   line-height: 1.2;
-  text-shadow: 0px 0px 10px #666;
+  text-shadow: 0 0 10px #666;
   margin-top: 15px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 h2.lead {
   animation: 0.75s ease-out 0s 1 slideIn2;
@@ -118,7 +119,7 @@ h2.lead {
   font-weight: normal;
   font-size: 1.25rem;
   line-height: 1.5;
-  text-shadow: 0px 0px 10px #333;
+  text-shadow: 0 0 10px #333;
   margin-top: 0;
   margin-bottom: 2.5rem;
   max-width: 650px;
@@ -170,7 +171,7 @@ h2.lead {
 .phone {
   animation: 2s ease-out 0s 1 slideIn3;
   flex-shrink: 0;
-  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.2);
   width: 385px;
   height: 640px;
   padding: 5px;
