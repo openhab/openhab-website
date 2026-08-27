@@ -88,9 +88,9 @@ Looking for an earlier version of openHAB? Download directly from the links belo
 
 
 <div class="apps-buttons">
-  <a target="_blank" href="https://play.google.com/store/apps/details?id=org.openhab.habdroid" rel="noopener noreferrer"><img height="48" src="/download/images/android.svg" alt="Get it on Google Play" /></a>
-  <a target="_blank" href="https://itunes.apple.com/us/app/openhab/id492054521?mt=8" rel="noopener noreferrer"><img height="48" src="/download/images/ios.svg" alt="Download on the App Store" /></a>
-  <a target="_blank" href="https://www.microsoft.com/en-us/store/p/openhab/9nmq39ctwxgt" rel="noopener noreferrer"><img height="48" src="/download/images/win10.png" alt="Get it from Microsoft" /></a>
+  <a target="_blank" href="https://play.google.com/store/apps/details?id=org.openhab.habdroid" rel="noopener noreferrer"><img height="48" src="./images/android.svg" alt="Get it on Google Play" /></a>
+  <a target="_blank" href="https://itunes.apple.com/us/app/openhab/id492054521?mt=8" rel="noopener noreferrer"><img height="48" src="./images/ios.svg" alt="Download on the App Store" /></a>
+  <a target="_blank" href="https://www.microsoft.com/en-us/store/p/openhab/9nmq39ctwxgt" rel="noopener noreferrer"><img height="48" src="./images/win10.png" alt="Get it from Microsoft" /></a>
 </div>
 
 
@@ -104,8 +104,8 @@ Looking for an earlier version of openHAB? Download directly from the links belo
 </ul>
 
 <div class="acknowledgements-logos">
-  <a target="_blank" href="https://www.jfrog.com" rel="noopener noreferrer"><img height="48" src="/download/images/acknowledgements/jfrog.svg" alt="JFrog" /></a>
-  <a target="_blank" href="https://www.digitalocean.com" rel="noopener noreferrer"><img height="48" src="/download/images/acknowledgements/digitalocean.png" alt="DigitalOcean" /></a>
-  <a target="_blank" href="https://www.ej-technologies.com/products/jprofiler/overview.html" rel="noopener noreferrer"><img height="48" src="/download/images/acknowledgements/jprofiler.png" alt="JProfiler" /></a>
-  <a target="_blank" href="https://www.netlify.com" rel="noopener noreferrer"><img height="48" src="/download/images/acknowledgements/netlify.svg" alt="Netlify" /></a>
+  <a target="_blank" href="https://www.jfrog.com" rel="noopener noreferrer"><img height="48" src="./images/acknowledgements/jfrog.svg" alt="JFrog" /></a>
+  <a target="_blank" href="https://www.digitalocean.com" rel="noopener noreferrer"><img height="48" src="./images/acknowledgements/digitalocean.png" alt="DigitalOcean" /></a>
+  <a target="_blank" href="https://www.ej-technologies.com/products/jprofiler/overview.html" rel="noopener noreferrer"><img height="48" src="./images/acknowledgements/jprofiler.png" alt="JProfiler" /></a>
+  <a target="_blank" href="https://www.netlify.com" rel="noopener noreferrer"><img height="48" src="./images/acknowledgements/netlify.svg" alt="Netlify" /></a>
 </div>
