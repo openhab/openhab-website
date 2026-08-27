@@ -7,19 +7,8 @@ date: '2020-12-21T11:00:00+01:00'
 previewimage: /uploads/wintertrees.jpg
 tags:
   - news
-meta:
-  - name: twitter:card
-    content: summary_large_image
-  - property: og:title
-    content: "openHAB 3.0 Release"
-  - property: og:description
-    content: The next major release has arrived with openHAB 3! This is exciting news for our community, as it makes openHAB more modern, simpler and yet more powerful.
-  - property: og:image
-    content: https://www.openhab.org/uploads/wintertrees.jpg
-feed:
-  image: https://www.openhab.org/uploads/wintertrees.jpg
-  author:
-    - name: Kai Kreuzer and Yannick Schaus
+excerpt: >-
+  The next major release has arrived with openHAB 3! This is exciting news for our community, as it makes openHAB more modern, simpler and yet more powerful.
 ---
 The next major release has arrived with openHAB 3! This is exciting news for our community, as it makes openHAB more modern, simpler and yet more powerful.
 

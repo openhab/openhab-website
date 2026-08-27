@@ -9,16 +9,6 @@ tags:
 modified_time: '2017-05-28T00:00:00.001+00:00'
 previewimage : /uploads/2017-05_smarthomeday.jpg
 excerpt_separator: <!-- more -->
-meta:
-  - name: twitter:card
-    content: summary_large_image
-  - property: og:title
-    content: "Smart Home Day 2017"
-  - property: og:description
-    content: a vendor and technology agnostic open source automation software for your home
-feed:
-  author:
-    - name: Kai Kreuzer
 ---
 
 On May 20, 2017, the openHAB Foundation organised its first own event, the [Smart Home Day](https://www.eventbrite.com/e/smart-home-day-registrierung-33411227882) in Darmstadt at the local [University of Applied Sciences](https://www.h-da.com/), which was co-located with the first annual assembly of the openHAB Foundation members.

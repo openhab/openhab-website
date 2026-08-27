@@ -7,19 +7,9 @@ date: '2021-12-20T12:00:00-08:00'
 previewimage: /uploads/2021-winter-snow.jpg
 tags:
   - news
-meta:
-  - name: twitter:card
-    content: summary_large_image
-  - property: og:title
-    content: "openHAB 3.2 Release"
-  - property: og:description
-    content: Our winter release of openHAB 3.2 is out! This latest version contains many new add-ons, enhanced voice features, automation improvements and more!
-  - property: og:image
-    content: https://www.openhab.org/uploads/2021-winter-snow.jpg
-feed:
-  image: https://www.openhab.org/uploads/2021-winter-snow.jpg
-  author:
-    - name: Kai Kreuzer and others
+excerpt: >-
+  Our winter release of openHAB 3.2 is out! This latest version contains many
+  new add-ons, enhanced voice features, automation improvements and more!
 ---
 Our winter release of openHAB 3.2 is out! This latest version contains many new add-ons, enhanced voice features, automation improvements and more!
 

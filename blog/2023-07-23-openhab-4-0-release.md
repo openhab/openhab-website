@@ -7,19 +7,8 @@ date: '2023-07-23T18:00:00+02:00'
 previewimage: /uploads/2023-07-23-openhab-4-0-release/header.jpg
 tags:
   - news
-meta:
-  - name: twitter:card
-    content: summary_large_image
-  - property: og:title
-    content: "openHAB 4.0 Release"
-  - property: og:description
-    content: A new major release has arrived! openHAB 4 brings some exciting new features and several improvements for our users as well as our developers!
-  - property: og:image
-    content: https://www.openhab.org/uploads/2023-07-23-openhab-4-0-release/header.jpg
-feed:
-  image: https://www.openhab.org/uploads/2023-07-23-openhab-4-0-release/header.jpg
-  author:
-    - name: Florian Hotze and others
+excerpt: >-
+  A new major release has arrived! openHAB 4 brings some exciting new features and several improvements for our users as well as our developers!
 ---
 A new major release has arrived! openHAB 4 brings some exciting new features and several improvements for our users as well as our developers!
 
