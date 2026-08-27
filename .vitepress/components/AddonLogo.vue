@@ -24,9 +24,14 @@ const logoSrc = computed(() => {
   }
 }
 .addon-logo {
+  position: relative;
+  z-index: 2;
   width: 200px;
   height: 200px;
   object-fit: contain;
-  padding: 5px;
+  background-color: #ffffff;
+  padding: 12px;
+  border-radius: 8px;
+  box-sizing: border-box;
 }
 </style>

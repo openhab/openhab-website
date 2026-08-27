@@ -34,9 +34,9 @@ const editUrl = computed(() => {
 <style scoped>
 .editLink {
   border-top: 1px solid var(--vp-c-divider, #eee);
-  padding: 1rem;
+  padding: 1rem 0 1rem 0;
   font-size: 10pt;
-  margin-bottom: -3rem;
+  margin-top: 2rem;
 }
 .esh-note {
   color: #999;

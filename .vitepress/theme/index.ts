@@ -57,7 +57,6 @@ export default {
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
       'sidebar-nav-before': () => h(DocPreviousVersions),
-      'doc-after': () => h(EditPageLink),
       'layout-bottom': () => [h(Footer), h(ConsentBanner)],
     })
   },
