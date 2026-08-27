@@ -34,7 +34,7 @@ img.illustration {
 image source: https://pixabay.com/en/smart-home-home-technology-2769239/
 license: CC0
 -->
-<img class="illustration" src="/about/images/smart-home-2769239_1920.jpg" />
+<img class="illustration" src="./images/smart-home-2769239_1920.jpg" />
 
 There are many home automation solutions and Internet-of-Things (IoT) gadgets on the market, which are all useful on their own. They come with their own way on how to setup and configure devices and are perfect for their intended use cases.
 
@@ -76,7 +76,7 @@ Please see our [documentation](/docs/concepts/index.html) for further details ab
 image source: https://pixabay.com/en/group-team-feedback-confirming-3354366/
 license: CC0
 -->
-<img class="illustration" src="/about/images/group-3354366_1920.png" />
+<img class="illustration" src="./images/group-3354366_1920.png" />
 
 We want to keep the openHAB community awesome, growing and collaborative.
 We need your help to keep it that way.
