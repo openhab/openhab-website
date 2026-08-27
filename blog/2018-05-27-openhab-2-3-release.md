@@ -9,19 +9,6 @@ previewimage: /uploads/homepage.jpg
 tags:
   - news
   - release
-meta:
-  - name: twitter:card
-    content: summary_large_image
-  - property: og:title
-    content: "openHAB 2.3 Release"
-  - property: og:description
-    content: "Time flies! The last openHAB release is already more than 5 months old and much has happened since then. It is therefore clearly time to pack and ship all the nice new updates as a stable release: Here comes openHAB 2.3!"
-  - property: og:image
-    content: https://www.openhab.org/uploads/homepage.jpg
-feed:
-  image: https://www.openhab.org/uploads/homepage.jpg
-  author:
-    - name: Kai Kreuzer
 ---
 Time flies! The last openHAB release is already more than 5 months old and much has happened since then. It is therefore clearly time to pack and ship all the nice new updates as a stable release: Here comes [openHAB 2.3](/download/)!
 
