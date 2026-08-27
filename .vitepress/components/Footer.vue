@@ -1,8 +1,11 @@
 <template>
   <footer>
     <a href="#app">
-      <img :src="withBase('/openhab-logo-square.svg')" class="footer-logo VPImage light" alt="openHAB logo" />
-      <img :src="withBase('/openhab-logo-square-dark.svg')" class="footer-logo VPImage dark" alt="openHAB logo" />
+      <img
+        :src="withBase(isDark ? '/openhab-logo-square-dark.svg' : '/openhab-logo-square.svg')"
+        class="footer-logo"
+        alt="openHAB logo"
+      />
     </a>
     <div class="legal">
       <span class="copyright">Copyright © {{ year }} by the openHAB Community and the openHAB Foundation e.V.</span>
@@ -33,20 +36,27 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { withBase } from 'vitepress'
+import { onMounted, onUnmounted, ref } from 'vue'
+import { useData, withBase } from 'vitepress'
 
+const { isDark } = useData()
+const srRef = ref<any>(null)
 const year = new Date().getFullYear()
 
 onMounted(async () => {
-  try {
-    const ScrollReveal = (await import('scrollreveal')).default
-    const sr = ScrollReveal()
-    sr.reveal('.footer-logo', { scale: 0.5 })
-    sr.reveal('.legal', { scale: 1.0 })
-    sr.reveal('.social-icons', { duration: 1000 })
-  } catch {
-    // Ignore if scrollreveal fails in SSR/certain environments
+  const ScrollReveal = (await import('scrollreveal')).default
+  const sr = ScrollReveal()
+  srRef.value = sr
+  sr.reveal('.footer-logo', { scale: 0.5 })
+  sr.reveal('.legal', { scale: 1.0 })
+  sr.reveal('.social-icons', { duration: 1000 })
+})
+
+onUnmounted(() => {
+  if (srRef.value) {
+    srRef.value.clean('.footer-logo')
+    srRef.value.clean('.legal')
+    srRef.value.clean('.social-icons')
   }
 })
 </script>
@@ -67,14 +77,7 @@ footer {
   margin: 0 auto;
   filter: grayscale(100%);
   opacity: 0.4;
-}
-
-html:not(.dark) .footer-logo.dark {
-  display: none;
-}
-
-.dark .footer-logo.light {
-  display: none;
+  display: block;
 }
 
 .social-icons {

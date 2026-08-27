@@ -13,9 +13,11 @@
           </a>
           -->
           <div class="event-info">
-            <a :href="item.link || item.url" target="_blank" rel="noopener noreferrer">
-              <h3 class="event-title">{{ item.title }}</h3>
-            </a>
+            <h3 class="event-title">
+              <a :href="item.link || item.url" target="_blank" rel="noopener noreferrer">
+                {{ item.title }}
+              </a>
+            </h3>
             <div v-if="item.location" class="event-location">{{ item.location }}</div>
             <p v-if="item.excerpt || item.abstract" v-html="item.excerpt || item.abstract"></p>
           </div>
@@ -39,9 +41,11 @@
             </a>
             -->
             <div class="event-info">
-              <a :href="item.link || item.url" target="_blank" rel="noopener noreferrer">
-                <h3 class="event-title">{{ item.title }}</h3>
-              </a>
+              <h3 class="event-title">
+                <a :href="item.link || item.url" target="_blank" rel="noopener noreferrer">
+                  {{ item.title }}
+                </a>
+              </h3>
               <div v-if="item.location" class="event-location">{{ item.location }}</div>
               <p v-if="item.excerpt || item.abstract" v-html="item.excerpt || item.abstract"></p>
             </div>

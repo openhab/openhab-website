@@ -6,7 +6,7 @@
         {{ frontmatter.title }}
       </h1>
     </div>
-    <div class="content-wrapper">
+    <div class="content-wrapper" :class="{ 'full-width': frontmatter.fullWidth }">
       <div class="vp-doc">
         <Content />
       </div>
@@ -58,6 +58,9 @@ const { frontmatter } = useData()
   max-width: 900px;
   margin: 2rem auto 4rem;
   padding: 0 1.5rem;
+}
+.content-wrapper.full-width {
+  max-width: 1400px;
 }
 @media (max-width: 768px) {
   .page-header {

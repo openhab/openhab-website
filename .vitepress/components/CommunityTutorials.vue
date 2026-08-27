@@ -5,11 +5,6 @@
         <h3 class="post-title">{{ topic.title }}</h3>
         <img v-if="topic.image_url && topic.image_url.indexOf('favicon.ico') < 0" :src="topic.image_url" alt="" />
         <div class="post-stats">{{ topic.views }} views - {{ topic.posts_count }} posts</div>
-        <ul class="tags">
-          <li v-for="tag in topic.tags" :key="tag" class="tag">
-            <a target="_blank" :href="'https://community.openhab.org/tags/' + tag" rel="noopener noreferrer">{{ tag }}</a>
-          </li>
-        </ul>
         <div class="read-more">
           <div class="read-more-button">Read more ➜</div>
         </div>
@@ -48,21 +43,23 @@ onMounted(async () => {
 
 <style scoped>
 .topics {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1rem;
-  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 1.5rem;
 }
 .topic {
-  width: calc(33.333% - 1rem);
-  min-width: 280px;
+  width: 100%;
   border: 1px solid var(--vp-c-border, #ddd);
   border-radius: 8px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.08);
-  padding: 1rem;
+  padding: 1.25rem;
   background: var(--vp-c-bg-elv, #fff);
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 .topic-link {
   color: var(--vp-c-text-1, #000);
@@ -84,24 +81,7 @@ h3 {
   margin-top: 0.4rem;
   font-size: 1.1rem;
 }
-.tags {
-  list-style-type: none;
-  padding: 0;
-  margin: 0.5rem 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-.tags .tag {
-  font-size: 8pt;
-  background: var(--vp-c-bg-alt, #eee);
-  padding: 2px 6px;
-  border-radius: 3px;
-}
-.tags .tag a {
-  color: var(--vp-c-text-2, #333);
-  text-decoration: none;
-}
+
 .read-more {
   margin-top: auto;
   padding-top: 1rem;
