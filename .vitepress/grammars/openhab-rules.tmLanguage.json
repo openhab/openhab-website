@@ -11,6 +11,9 @@
       "include": "#strings"
     },
     {
+      "include": "#types-and-classes"
+    },
+    {
       "include": "#keywords"
     },
     {
@@ -69,6 +72,36 @@
         }
       ]
     },
+    "types-and-classes": {
+      "patterns": [
+        {
+          "match": "\\b(import)\\s+([a-zA-Z0-9_.]+(\\.[A-Z][a-zA-Z0-9_]*|\\*))",
+          "captures": {
+            "1": {
+              "name": "keyword.control.import.openhab-rules"
+            },
+            "2": {
+              "name": "entity.name.type.class.openhab-rules"
+            }
+          }
+        },
+        {
+          "match": "(?:\\b(instanceof|as|new|val|var)\\s+|(?:catch\\s*\\()\\s*)([A-Z][a-zA-Z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "keyword.control.openhab-rules"
+            },
+            "2": {
+              "name": "entity.name.type.class.openhab-rules"
+            }
+          }
+        },
+        {
+          "name": "entity.name.type.class.openhab-rules",
+          "match": "\\b[A-Z][a-zA-Z0-9_]*(?=[.:])"
+        }
+      ]
+    },
     "keywords": {
       "patterns": [
         {
@@ -76,12 +109,12 @@
           "match": "\\b(rule|when|then|end)\\b"
         },
         {
-          "name": "keyword.control.openhab-rules",
-          "match": "\\b(if|else|while|do|for|return|in|instanceof|import|function|new|try|throw|catch|finally|break|continue|switch|case|default|synchronized)\\b"
+          "name": "keyword.other.trigger.openhab-rules",
+          "match": "\\b(Time cron|Time is midnight|Time is noon|System started|System shuts down|received update|received command|changed to|changed from|changed|updated|triggered|Item|Thing|Channel|from|to|or|as)\\b"
         },
         {
-          "name": "keyword.other.trigger.openhab-rules",
-          "match": "\\b(Item|Thing|Channel|changed|updated|Time cron|Time is midnight|Time is noon|System started|System shuts down|received update|received command|triggered|from|to|or|as)\\b"
+          "name": "keyword.control.openhab-rules",
+          "match": "\\b(if|else|while|do|for|return|in|instanceof|import|function|new|try|throw|catch|finally|break|continue|switch|case|default|synchronized)\\b"
         },
         {
           "name": "storage.type.openhab-rules",
@@ -129,17 +162,17 @@
         },
         {
           "name": "constant.numeric.float.openhab-rules",
-          "match": "\\b\\d+\\.\\d+([eE][+-]?\\d+)?[dfDF]?\\b"
+          "match": "(?:\\b\\d+\\.\\d+|\\.\\d+)(?:[eE][+-]?\\d+)?[dfDF]?\\b"
         },
         {
           "name": "constant.numeric.integer.openhab-rules",
-          "match": "\\b\\d+([eE][+-]?\\d+)?[dfDF]?\\b"
+          "match": "\\b\\d+(?:[eE][+-]?\\d+)?[dfDF]?\\b"
         }
       ]
     },
     "operators": {
       "name": "keyword.operator.openhab-rules",
-      "match": "(\\+|-|\\*|/|%|=|==|!=|<|<=|>|>=|&&|\\|\\||\\||&|\\^|~|\\?|:)"
+      "match": "(->|=>|===|!==|==|!=|<=|>=|\\+\\+|--|\\+=|-=|\\*=|/=|&&|\\|\\||\\+|-|\\*|/|%|=|<|>|\\||&|\\^|~|\\?|:)"
     },
     "punctuation": {
       "name": "punctuation.separator.openhab-rules",

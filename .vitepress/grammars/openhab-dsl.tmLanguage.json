@@ -11,6 +11,9 @@
       "include": "#strings"
     },
     {
+      "include": "#item-declarations"
+    },
+    {
       "include": "#keywords"
     },
     {
@@ -72,11 +75,33 @@
         }
       ]
     },
+    "item-declarations": {
+      "match": "(?i)\\b(Color|Contact|DateTime|Dimmer|Group|Number|Player|Rollershutter|String|Switch|Location|Frame|Default|Text|Selection|Setpoint|Slider|Colorpicker|Chart|Webview|Image|Video|Item|Thing|Bridge|Time|Type)([\\w:\\(,\\)]*)\\s+([\\w.:\\\\]+)",
+      "captures": {
+        "1": {
+          "name": "storage.type.openhab-dsl"
+        },
+        "2": {
+          "name": "storage.type.dimension.openhab-dsl"
+        },
+        "3": {
+          "name": "variable.other.declaration.openhab-dsl"
+        }
+      }
+    },
     "keywords": {
       "patterns": [
         {
+          "name": "storage.type.openhab-dsl",
+          "match": "\\b(Color|Contact|DateTime|Dimmer|Group|Number|Player|Rollershutter|String|Switch|Location|Image|Video)\\b"
+        },
+        {
           "name": "keyword.control.openhab-dsl",
-          "match": "\\b(Color|Contact|DateTime|Dimmer|Group|Number|Player|Rollershutter|String|Switch|Location|Frame|Default|Text|Selection|Setpoint|Slider|Colorpicker|Chart|Webview|Mapview|Image|Video|Item|Thing|Bridge|Channels|Time|Type|Sitemap|sitemap|Strategies|Items|Length|Temperature|Pressure|Speed|Intensity|Dimensionless|DimensionLess|Angle|Power|Energy|Illuminance)\\b"
+          "match": "\\b(Frame|Default|Text|Selection|Setpoint|Slider|Colorpicker|Chart|Webview|Mapview|Item|Thing|Bridge|Channels|Time|Type|Sitemap|sitemap|Strategies|Items)\\b"
+        },
+        {
+          "name": "support.type.dimension.openhab-dsl",
+          "match": "\\b(Length|Temperature|Pressure|Speed|Intensity|Dimensionless|DimensionLess|Angle|Power|Energy|Illuminance)\\b"
         }
       ]
     },
@@ -112,11 +137,11 @@
         },
         {
           "name": "constant.numeric.float.openhab-dsl",
-          "match": "\\b\\d+\\.\\d+([eE][+-]?\\d+)?[dfDF]?\\b"
+          "match": "(?:\\b\\d+\\.\\d+|\\.\\d+)(?:[eE][+-]?\\d+)?[dfDF]?\\b"
         },
         {
           "name": "constant.numeric.integer.openhab-dsl",
-          "match": "\\b\\d+([eE][+-]?\\d+)?[dfDF]?\\b"
+          "match": "\\b\\d+(?:[eE][+-]?\\d+)?[dfDF]?\\b"
         }
       ]
     },
