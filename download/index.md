@@ -72,7 +72,9 @@ meta:
 
 <h2 class="big-title">openHAB Distribution</h2>
 
-<InstallInstructions />
+<ClientOnly>
+  <InstallInstructions />
+</ClientOnly>
 
 <h2 class="big-title">Previous Versions</h2>
 
