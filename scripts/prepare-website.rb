@@ -158,7 +158,7 @@ rescue => e
 end
 
 # Copy the thing-types.json file to the proper location
-thing_types_src = (DOCS_SRC / ".vitepress/thing-types.json").exist? ? DOCS_SRC / ".vitepress/thing-types.json" : DOCS_SRC / ".vuepress/thing-types.json"
+thing_types_src = DOCS_SRC / ".vitepress/thing-types.json"
 if thing_types_src.exist?
   FileUtils.cp(thing_types_src, ".vitepress")
   puts "✅ Copied Thing Types"
