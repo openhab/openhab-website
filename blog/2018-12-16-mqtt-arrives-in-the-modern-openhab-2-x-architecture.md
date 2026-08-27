@@ -25,9 +25,7 @@ If you haven't heard about MQTT yet, it is probably time to have a [look](https:
 > 
 > Information is organized in a hierarchy of topics."
 
-<p align="center">
-<img src="/uploads/2018-12_esh_mqtt-MQTT-Overview.png" title="MQTT Overview with Broker and clients">
-</p>
+![MQTT Overview with Broker and Clients](/uploads/2018-12_esh_mqtt-mqtt-overview.png)
 
 In recent years MQTT got a lot of attention for the Internet of Things,
 Maker and DIY culture as well as home automation purposes.
@@ -52,9 +50,11 @@ What happens on the MQTT level for the command topic is:
 
 <ol>
   <li>The target device <b>subscribes</b> to the command topic <code>home/office/lamp/set</code>:
-<p align="center"> <img src="/uploads/2018-12_esh_mqtt-mqttpublishsubscribe1.png" alt="MQTT Command Topic Subscribe"> </p>
+    <p align="center"><img src="/uploads/2018-12_esh_mqtt-mqttpublishsubscribe1.png" alt="MQTT Command Topic Subscribe" /></p>
+  </li>
   <li>openHAB <b>publishes</b> via the MQTT connection to the command topic <code>home/office/lamp/set</code>:
-<p align="center"> <img src="/uploads/2018-12_esh_mqtt-mqttpublishsubscribe2.png" alt="MQTT Command Topic Publish"> </p>
+    <p align="center"><img src="/uploads/2018-12_esh_mqtt-mqttpublishsubscribe2.png" alt="MQTT Command Topic Publish" /></p>
+  </li>
 </ol>
 
 MQTT doesn't restrict you on what to publish as topic values and it is not part of the standard how to express a boolean or enumeration value.
