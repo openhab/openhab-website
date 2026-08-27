@@ -1,16 +1,16 @@
 <template>
   <div class="cloud-section">
     <div class="cloud-text">
-      <div class="cloud-left">
-        <h2 class="slide">No Cloud Required...</h2>
-        <p class="slide">
+      <ScrollOnReveal classes="cloud-left" :delay="0" :scale="1.0">
+        <h2>No Cloud Required...</h2>
+        <p>
           openHAB runs on your hardware, doesn't require any cloud service to work, keeps your data privately at home and talks directly to your local devices whenever possible.
           At the core of our <a :href="withBase('/about/who-we-are.html')">philosophy</a> is that you always remain in control.
         </p>
-      </div>
-      <div class="cloud-right">
-        <h2 class="slide">...but Cloud-Friendly</h2>
-        <p class="slide">
+      </ScrollOnReveal>
+      <ScrollOnReveal classes="cloud-right" :delay="200" :scale="1.0">
+        <h2>...but Cloud-Friendly</h2>
+        <p>
           Integrations are available for the most popular cloud-based smart home platforms, including
           <a :href="withBase('/docs/ecosystem/google-assistant')">Google Assistant</a>,
           <a :href="withBase('/docs/ecosystem/alexa')">Amazon Alexa</a>,
@@ -18,29 +18,26 @@
           Use the openHAB Cloud connector with the free
           <a target="_blank" href="https://www.myopenhab.org/" rel="noopener noreferrer">myopenhab.org</a> service or host your own.
         </p>
-      </div>
+      </ScrollOnReveal>
     </div>
     <div class="cloud-bkg">
       <div class="cloud-left-bkg">
-        <img class="cloud-left-bkg-img" src="./images/lock-bkg.png" alt="" />
+        <ScrollOnReveal origin="left" distance="120px" :duration="800" :delay="400" :scale="1.0">
+          <img class="cloud-left-bkg-img" src="./images/lock-bkg.png" alt="" />
+        </ScrollOnReveal>
       </div>
       <div class="cloud-right-bkg">
-        <img class="cloud-right-bkg-img" src="./images/cloud-bkg.png" alt="" />
+        <ScrollOnReveal origin="right" distance="120px" :duration="800" :delay="400" :scale="1.0">
+          <img class="cloud-right-bkg-img" src="./images/cloud-bkg.png" alt="" />
+        </ScrollOnReveal>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import { withBase } from 'vitepress'
-
-onMounted(async () => {
-  const ScrollReveal = (await import('scrollreveal')).default
-  const sr = ScrollReveal()
-  sr.reveal('.cloud-left-bkg-img', { origin: 'left', scale: 1.0, distance: '120px', duration: 1000 })
-  sr.reveal('.cloud-right-bkg-img', { origin: 'right', scale: 1.0, distance: '120px', duration: 1000 })
-})
+import ScrollOnReveal from '../ScrollOnReveal.vue'
 </script>
 
 <style scoped>

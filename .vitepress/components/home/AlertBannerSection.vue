@@ -1,25 +1,30 @@
 <template>
   <section class="alert-banner">
-    <div class="alert">
-      {{ frontmatter.alert }}
-    </div>
-    <div class="alert-button-container">
-      <a
-        v-if="frontmatter.alert_link && frontmatter.alert_link.indexOf('http') === 0"
-        :href="frontmatter.alert_link"
-        class="alert-button slide"
-      >
-        {{ frontmatter.alert_label || 'Read More' }} ➜
-      </a>
-      <a v-else :href="withBase(frontmatter.alert_link || '/blog/')" class="alert-button slide">
-        {{ frontmatter.alert_label || 'Read the Blog' }} ➜
-      </a>
-    </div>
+    <ScrollOnReveal origin="left" distance="40px" :duration="1200" :scale="1.0">
+      <div class="alert">
+        {{ frontmatter.alert }}
+      </div>
+    </ScrollOnReveal>
+    <ScrollOnReveal :delay="150" :scale="1.0">
+      <div class="alert-button-container">
+        <a
+          v-if="frontmatter.alert_link && frontmatter.alert_link.indexOf('http') === 0"
+          :href="frontmatter.alert_link"
+          class="alert-button"
+        >
+          {{ frontmatter.alert_label || 'Read More' }} ➜
+        </a>
+        <a v-else :href="withBase(frontmatter.alert_link || '/blog/')" class="alert-button">
+          {{ frontmatter.alert_label || 'Read the Blog' }} ➜
+        </a>
+      </div>
+    </ScrollOnReveal>
   </section>
 </template>
 
 <script setup lang="ts">
 import { useData, withBase } from 'vitepress'
+import ScrollOnReveal from '../ScrollOnReveal.vue'
 
 const { frontmatter } = useData()
 </script>

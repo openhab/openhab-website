@@ -1,17 +1,25 @@
 <template>
   <section class="alternativeto-banner">
-    <div class="text">
-      openHAB is the
-      <a target="_blank" href="https://alternativeto.net/tag/home-automation/?sort=likes" rel="noopener noreferrer">
-        Best home automation app
+    <ScrollOnReveal :delay="0" :scale="1.0">
+      <div class="text">
+        openHAB is the
+        <a target="_blank" href="https://alternativeto.net/tag/home-automation/?sort=likes" rel="noopener noreferrer">
+          Best home automation app
+        </a>
+        &nbsp;according to crowdsourced software recommendations on
+      </div>
+    </ScrollOnReveal>
+    <ScrollOnReveal :delay="150" :scale="1.0">
+      <a class="alternativeto-button" target="_blank" href="https://alternativeto.net/software/openhab/about/" rel="noopener noreferrer">
+        <img src="./images/alternativeTo.png" alt="AlternativeTo" />
       </a>
-      &nbsp;according to crowdsourced software recommendations on
-    </div>
-    <a class="alternativeto-button" target="_blank" href="https://alternativeto.net/software/openhab/about/" rel="noopener noreferrer">
-      <img src="./images/alternativeTo.png" alt="AlternativeTo" />
-    </a>
+    </ScrollOnReveal>
   </section>
 </template>
+
+<script setup lang="ts">
+import ScrollOnReveal from '../ScrollOnReveal.vue'
+</script>
 
 <style scoped>
 .alternativeto-banner {

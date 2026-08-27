@@ -1,7 +1,7 @@
 <template>
   <div class="posts-list page-content">
     <div class="content">
-      <ul class="posts">
+      <ScrollOnReveal tag="ul" classes="posts" selector=".post" :scale="1.0">
         <li v-for="post in posts" :key="post.url" class="post">
           <a :href="withBase(post.url)">
             <div class="post-frame">
@@ -20,14 +20,14 @@
             </div>
           </a>
         </li>
-      </ul>
+      </ScrollOnReveal>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import { withBase } from 'vitepress'
+import ScrollOnReveal from './ScrollOnReveal.vue'
 import { data as posts } from '../theme/posts.data'
 
 function formatDate(rawDate: string) {
@@ -39,11 +39,6 @@ function formatDate(rawDate: string) {
     day: 'numeric',
   })
 }
-
-onMounted(async () => {
-  const ScrollReveal = (await import('scrollreveal')).default
-  ScrollReveal().reveal('.post', { scale: 1.0 })
-})
 </script>
 
 <style scoped>

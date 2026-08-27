@@ -331,15 +331,6 @@ a[href*='.openhab.org']::after {
   box-shadow: rgba(10%, 10%, 10%, 25%) 0 0 10px;
 }
 
-/* Homepage navbar transparent overlay */
-.homepage .VPNav:not(.ready) {
-  opacity: 0;
-  background: transparent;
-  color: white;
-  border-bottom: none;
-  box-shadow: none;
-}
-
 /* Tip / Warning styling */
 .custom-block.tip {
   border-color: #2196f3 !important;

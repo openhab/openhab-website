@@ -2,15 +2,15 @@
   <div class="section2">
     <h2>Why openHAB?</h2>
     <div class="features">
-      <div class="feature">
+      <ScrollOnReveal classes="feature" :delay="0" :scale="1.0">
         <IntegrateEverythingIcon />
         <h3>Integrate Everything</h3>
         <p>
           With its <a :href="withBase('/docs/#a-deeper-dive-openhab-structure-for-advanced-users')">pluggable architecture</a>,
           openHAB supports more than <a :href="withBase('/addons/')">400 different technologies and systems</a> and thousands of devices!
         </p>
-      </div>
-      <div class="feature">
+      </ScrollOnReveal>
+      <ScrollOnReveal classes="feature" :delay="200" :scale="1.0">
         <RotatingGearsIcon />
         <h3>Automate with Ease</h3>
         <p>
@@ -24,8 +24,8 @@
           and
           <a :href="withBase('/docs/concepts/audio.html')">voice control</a>.
         </p>
-      </div>
-      <div class="feature">
+      </ScrollOnReveal>
+      <ScrollOnReveal classes="feature" :delay="400" :scale="1.0">
         <RunsEverywhereIcon />
         <h3>Runs Everywhere</h3>
         <p>
@@ -40,13 +40,14 @@
           <a :href="withBase('/docs/apps/ios.html')">iOS</a>,
           <a :href="withBase('/docs/apps/android.html')">Android</a> and others.
         </p>
-      </div>
+      </ScrollOnReveal>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { withBase } from 'vitepress'
+import ScrollOnReveal from '../ScrollOnReveal.vue'
 import IntegrateEverythingIcon from './IntegrateEverythingIcon.vue'
 import RotatingGearsIcon from './RotatingGearsIcon.vue'
 import RunsEverywhereIcon from './RunsEverywhereIcon.vue'

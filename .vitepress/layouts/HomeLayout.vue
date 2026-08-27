@@ -27,10 +27,6 @@ onMounted(async () => {
       const HeadroomModule = (await import('headroom.js')).default
       hr = new HeadroomModule(header as HTMLElement)
       hr.init()
-      setTimeout(() => {
-        header.classList.add('ready')
-        header.classList.remove('homepage')
-      }, 1500)
     } catch {
       // Ignore if headroom fails
     }

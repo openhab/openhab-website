@@ -1,7 +1,9 @@
 <template>
   <div class="featured-addons-section">
-    <h2>More than 3000 supported things!</h2>
-    <div class="logos">
+    <ScrollOnReveal :scale="1.0">
+      <h2>More than 3000 supported things!</h2>
+    </ScrollOnReveal>
+    <ScrollOnReveal classes="logos" selector=".logo-container" :interval="50" :scale="1.0">
       <a :href="withBase(addon.url)" v-for="addon in featuredAddons" :key="addon.url" class="logo-container">
         <img
           v-if="addon.logo"
@@ -10,25 +12,21 @@
           :alt="addon.label || 'Binding logo'"
         />
       </a>
-    </div>
-    <div class="addons-button-container">
-      <a :href="withBase('/addons/')" class="all-addons-button slide">Browse All Add-ons ➜</a>
-    </div>
+    </ScrollOnReveal>
+    <ScrollOnReveal classes="addons-button-container" :delay="200" :scale="1.0">
+      <a :href="withBase('/addons/')" class="all-addons-button">Browse All Add-ons ➜</a>
+    </ScrollOnReveal>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { withBase } from 'vitepress'
+import ScrollOnReveal from '../ScrollOnReveal.vue'
 import { data as allAddons } from '../../theme/addons.data'
 
 const featuredAddons = computed(() => {
   return (allAddons || []).filter((p) => p.logo && p.type === 'binding')
-})
-
-onMounted(async () => {
-  const ScrollReveal = (await import('scrollreveal')).default
-  ScrollReveal().reveal('.featured-logo', {})
 })
 </script>
 

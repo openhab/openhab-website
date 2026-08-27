@@ -7,10 +7,14 @@
         </parallax>
       </ClientOnly>
       <div class="vscode-text">
-        <h2 class="slide">Easy &amp;<br />comfortable<br />configuration<br />editing.</h2>
-        <a target="_blank" href="https://marketplace.visualstudio.com/items?itemName=openhab.openhab" class="get-extension-button slide" rel="noopener noreferrer">
-          Get the VS Code Extension ➜
-        </a>
+        <ScrollOnReveal :scale="1.0">
+          <h2>Easy &amp;<br />comfortable<br />configuration<br />editing.</h2>
+        </ScrollOnReveal>
+        <ScrollOnReveal :delay="200" :scale="1.0">
+          <a target="_blank" href="https://marketplace.visualstudio.com/items?itemName=openhab.openhab" class="get-extension-button" rel="noopener noreferrer">
+            Get the VS Code Extension ➜
+          </a>
+        </ScrollOnReveal>
       </div>
     </div>
   </div>
@@ -18,6 +22,7 @@
 
 <script setup lang="ts">
 import { withBase } from 'vitepress'
+import ScrollOnReveal from '../ScrollOnReveal.vue'
 import parallax from '@lucien144/vue3-parallaxy'
 </script>
 
