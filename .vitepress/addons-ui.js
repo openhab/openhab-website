@@ -1,1 +1,0 @@
-module.exports = [["ui/basic/","Basic UI"],["ui/cometvisu/","CometVisu Backend for openHAB"],["ui/habot/","HABot"],["ui/habpanel/","HABPanel"]]
