@@ -8,14 +8,10 @@
       according to crowdsourced software recommendations on
     </div>
     <a class="alternativeto-button" target="_blank" href="https://alternativeto.net/software/openhab/about/" rel="noopener noreferrer">
-      <img :src="withBase('/components/home/images/alternativeTo.png')" alt="AlternativeTo" />
+      <img src="./images/alternativeTo.png" alt="AlternativeTo" />
     </a>
   </section>
 </template>
-
-<script setup lang="ts">
-import { withBase } from 'vitepress'
-</script>
 
 <style scoped>
 .alternativeto-banner {

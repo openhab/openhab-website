@@ -3,7 +3,7 @@
     <div class="left">
       <div class="logos">
         <a target="_blank" href="https://www.openhabfoundation.org/" rel="noopener noreferrer">
-          <img class="foundation-logo" :src="withBase('/components/home/images/foundation-logo-dark.svg')" alt="openHAB Foundation" />
+          <img class="foundation-logo" src="./images/foundation-logo-dark.svg" alt="openHAB Foundation" />
         </a>
       </div>
     </div>
@@ -23,10 +23,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { withBase } from 'vitepress'
-</script>
 
 <style scoped>
 .section-opensource {

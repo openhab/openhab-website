@@ -3,7 +3,7 @@
     <div class="events-container">
       <ClientOnly>
         <parallax :speed-factor="0.15">
-          <img :src="withBase('/components/home/images/shd.jpg')" alt="event" />
+          <img src="./images/shd.jpg" alt="event" />
         </parallax>
       </ClientOnly>
       <div class="events-text">
