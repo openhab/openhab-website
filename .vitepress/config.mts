@@ -7,7 +7,6 @@ import fs from 'fs'
 
 // Load TextMate grammars
 import openhabDslGrammar from './grammars/openhab-dsl.tmLanguage.json' with { type: 'json' }
-import openhabRulesGrammar from './grammars/openhab-rules.tmLanguage.json' with { type: 'json' }
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -85,13 +84,12 @@ export default defineConfig({
   ],
   markdown: {
     languages: [
-      openhabDslGrammar as any,
-      openhabRulesGrammar as any,
+      openhabDslGrammar
     ],
     languageAlias: {
       shell: 'bash',
       sh: 'bash',
-      shell_session: 'bash',
+      shell_session: 'bash'
     },
     config(md) {
       md.use(tabsMarkdownPlugin)

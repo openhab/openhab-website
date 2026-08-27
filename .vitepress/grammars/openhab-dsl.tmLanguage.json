@@ -1,39 +1,20 @@
 {
-  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "openhab-dsl",
-  "aliases": ["dsl", "conf", "items", "openhab", "sitemap", "things"],
   "scopeName": "source.openhab-dsl",
+  "aliases": ["dsl", "things", "items", "rules", "sitemap", "xtend", "rulesdsl"],
   "patterns": [
-    {
-      "include": "#comments"
-    },
-    {
-      "include": "#strings"
-    },
-    {
-      "include": "#item-declarations"
-    },
-    {
-      "include": "#keywords"
-    },
-    {
-      "include": "#constants"
-    },
-    {
-      "include": "#icons"
-    },
-    {
-      "include": "#tags"
-    },
-    {
-      "include": "#numbers"
-    },
-    {
-      "include": "#operators"
-    },
-    {
-      "include": "#punctuation"
-    }
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#types-and-classes" },
+    { "include": "#item-declarations" },
+    { "include": "#keywords" },
+    { "include": "#functions" },
+    { "include": "#constants" },
+    { "include": "#icons" },
+    { "include": "#tags" },
+    { "include": "#numbers" },
+    { "include": "#operators" },
+    { "include": "#punctuation" }
   ],
   "repository": {
     "comments": {
@@ -75,33 +56,69 @@
         }
       ]
     },
+    "types-and-classes": {
+      "patterns": [
+        {
+          "match": "\\b(import)\\s+([a-zA-Z0-9_.]+(\\.[A-Z][a-zA-Z0-9_]*|\\*))",
+          "captures": {
+            "1": { "name": "keyword.control.import.openhab-dsl" },
+            "2": { "name": "entity.name.type.class.openhab-dsl" }
+          }
+        },
+        {
+          "match": "(?:\\b(instanceof|as|new|val|var)\\s+|(?:catch\\s*\\()\\s*)([A-Z][a-zA-Z0-9_]*)",
+          "captures": {
+            "1": { "name": "keyword.control.openhab-dsl" },
+            "2": { "name": "entity.name.type.class.openhab-dsl" }
+          }
+        },
+        {
+          "name": "entity.name.type.class.openhab-dsl",
+          "match": "\\b[A-Z][a-zA-Z0-9_]*(?=[.:])"
+        }
+      ]
+    },
     "item-declarations": {
       "match": "(?i)\\b(Color|Contact|DateTime|Dimmer|Group|Number|Player|Rollershutter|String|Switch|Location|Frame|Default|Text|Selection|Setpoint|Slider|Colorpicker|Chart|Webview|Image|Video|Item|Thing|Bridge|Time|Type)([\\w:\\(,\\)]*)\\s+([\\w.:\\\\]+)",
       "captures": {
-        "1": {
-          "name": "storage.type.openhab-dsl"
-        },
-        "2": {
-          "name": "storage.type.dimension.openhab-dsl"
-        },
-        "3": {
-          "name": "variable.other.declaration.openhab-dsl"
-        }
+        "1": { "name": "storage.type.openhab-dsl" },
+        "2": { "name": "support.type.dimension.openhab-dsl" },
+        "3": { "name": "variable.other.declaration.openhab-dsl" }
       }
     },
     "keywords": {
       "patterns": [
         {
-          "name": "storage.type.openhab-dsl",
-          "match": "\\b(Color|Contact|DateTime|Dimmer|Group|Number|Player|Rollershutter|String|Switch|Location|Image|Video)\\b"
+          "name": "keyword.control.rule.openhab-dsl",
+          "match": "\\b(rule|when|then|end)\\b"
+        },
+        {
+          "name": "keyword.other.trigger.openhab-dsl",
+          "match": "\\b(Time cron|Time is midnight|Time is noon|System started|System shuts down|received update|received command|changed to|changed from|changed|updated|triggered|Item|Thing|Channel|from|to|or|as)\\b"
         },
         {
           "name": "keyword.control.openhab-dsl",
-          "match": "\\b(Frame|Default|Text|Selection|Setpoint|Slider|Colorpicker|Chart|Webview|Mapview|Item|Thing|Bridge|Channels|Time|Type|Sitemap|sitemap|Strategies|Items)\\b"
+          "match": "\\b(if|else|while|do|for|return|in|instanceof|import|function|new|try|throw|catch|finally|break|continue|switch|case|default|synchronized|Frame|Default|Text|Selection|Setpoint|Slider|Colorpicker|Chart|Webview|Mapview|Item|Thing|Bridge|Channels|Time|Type|Sitemap|sitemap|Strategies|Items)\\b"
+        },
+        {
+          "name": "storage.type.openhab-dsl",
+          "match": "\\b(Color|Contact|DateTime|Dimmer|Group|Number|Player|Rollershutter|String|Switch|Location|Image|Video|var|val)\\b"
         },
         {
           "name": "support.type.dimension.openhab-dsl",
           "match": "\\b(Length|Temperature|Pressure|Speed|Intensity|Dimensionless|DimensionLess|Angle|Power|Energy|Illuminance)\\b"
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "name": "entity.name.function.openhab-dsl",
+          "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)(?=\\()"
+        },
+        {
+          "name": "entity.name.function.member.openhab-dsl",
+          "match": "\\b(toString|getInstance|intValue|doubleValue|floatValue|postUpdate|sendCommand)\\b"
         }
       ]
     },
@@ -113,7 +130,11 @@
         },
         {
           "name": "support.constant.openhab-dsl",
-          "match": "\\b(label|icon|item|mappings|minValue|maxValue|step|switchSupport|height|url|refresh|encoding|visibility|period|service|begin|end|legend|labelcolor|valuecolor|AVG|MIN|MAX|SUM|AND|OR|NAND|NOR|EQUAL)\\b"
+          "match": "\\b(label|icon|item|mappings|minValue|maxValue|step|switchSupport|height|url|refresh|encoding|visibility|period|service|begin|end|legend|labelcolor|valuecolor|AVG|MIN|MAX|SUM|AND|OR|NAND|NOR|EQUAL|INCREASE|DECREASE|NEXT|PREVIOUS|ON|OFF|OPEN|CLOSED|PLAY|PAUSE|REWIND|FASTFORWARD|STOP|MOVE|UP|DOWN|UNDEF|NULL|null)\\b"
+        },
+        {
+          "name": "support.type.primitive.openhab-dsl",
+          "match": "\\b(string|int|boolean|long|float|double|short|char|byte)\\b"
         }
       ]
     },
@@ -147,7 +168,7 @@
     },
     "operators": {
       "name": "keyword.operator.openhab-dsl",
-      "match": "(\\+|-|\\*|/|%|=|==|!=|<|<=|>|>=|&&|\\|\\||\\||&|\\^|~|\\?|:)"
+      "match": "(->|=>|===|!==|==|!=|<=|>=|\\+\\+|--|\\+=|-=|\\*=|/=|&&|\\|\\||\\+|-|\\*|/|%|=|<|>|\\||&|\\^|~|\\?|:)"
     },
     "punctuation": {
       "name": "punctuation.separator.openhab-dsl",
