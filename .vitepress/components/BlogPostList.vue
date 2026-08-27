@@ -41,12 +41,8 @@ function formatDate(rawDate: string) {
 }
 
 onMounted(async () => {
-  try {
-    const ScrollReveal = (await import('scrollreveal')).default
-    ScrollReveal().reveal('.post', { scale: 1.0 })
-  } catch {
-    // Ignore in SSR
-  }
+  const ScrollReveal = (await import('scrollreveal')).default
+  ScrollReveal().reveal('.post', { scale: 1.0 })
 })
 </script>
 

@@ -36,14 +36,10 @@ import { onMounted } from 'vue'
 import { withBase } from 'vitepress'
 
 onMounted(async () => {
-  try {
-    const ScrollReveal = (await import('scrollreveal')).default
-    const sr = ScrollReveal()
-    sr.reveal('.cloud-left-bkg-img', { origin: 'left', scale: 1.0, distance: '120px', duration: 1000 })
-    sr.reveal('.cloud-right-bkg-img', { origin: 'right', scale: 1.0, distance: '120px', duration: 1000 })
-  } catch {
-    // Ignore in SSR
-  }
+  const ScrollReveal = (await import('scrollreveal')).default
+  const sr = ScrollReveal()
+  sr.reveal('.cloud-left-bkg-img', { origin: 'left', scale: 1.0, distance: '120px', duration: 1000 })
+  sr.reveal('.cloud-right-bkg-img', { origin: 'right', scale: 1.0, distance: '120px', duration: 1000 })
 })
 </script>
 

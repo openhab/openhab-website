@@ -27,12 +27,8 @@ const featuredAddons = computed(() => {
 })
 
 onMounted(async () => {
-  try {
-    const ScrollReveal = (await import('scrollreveal')).default
-    ScrollReveal().reveal('.featured-logo', {})
-  } catch {
-    // Ignore in SSR
-  }
+  const ScrollReveal = (await import('scrollreveal')).default
+  ScrollReveal().reveal('.featured-logo', {})
 })
 </script>
 

@@ -28,20 +28,16 @@ import AlternativeToSection from './home/AlternativeToSection.vue'
 const { frontmatter } = useData()
 
 onMounted(async () => {
-  try {
-    const ScrollReveal = (await import('scrollreveal')).default
-    const sr = ScrollReveal()
-    sr.reveal('.feature', { scale: 1.0 }, 200)
-    sr.reveal('.slide', { scale: 1.0 })
-    sr.reveal('.slide-slow', { scale: 1.0, duration: 1000, delay: 500 })
-    sr.reveal('.slide-seq', { scale: 1.0, duration: 1000 }, 300)
-    sr.reveal('.slide-seq2', { scale: 1.0, duration: 1000 }, 300)
-    sr.reveal('.slide-seq3', { origin: 'left', distance: '10px', scale: 1.0, duration: 1000 }, 600)
-    sr.reveal('.slide-seq4', { scale: 1.0, viewFactor: 0.0 }, 200)
-    sr.reveal('.alert', { origin: 'left', distance: '40px', duration: 1200, scale: 1.0 })
-  } catch {
-    // Ignore in SSR
-  }
+  const ScrollReveal = (await import('scrollreveal')).default
+  const sr = ScrollReveal()
+  sr.reveal('.feature', { scale: 1.0 }, 200)
+  sr.reveal('.slide', { scale: 1.0 })
+  sr.reveal('.slide-slow', { scale: 1.0, duration: 1000, delay: 500 })
+  sr.reveal('.slide-seq', { scale: 1.0, duration: 1000 }, 300)
+  sr.reveal('.slide-seq2', { scale: 1.0, duration: 1000 }, 300)
+  sr.reveal('.slide-seq3', { origin: 'left', distance: '10px', scale: 1.0, duration: 1000 }, 600)
+  sr.reveal('.slide-seq4', { scale: 1.0, viewFactor: 0.0 }, 200)
+  sr.reveal('.alert', { origin: 'left', distance: '40px', duration: 1200, scale: 1.0 })
 })
 </script>
 

@@ -15,12 +15,8 @@ const el = ref<HTMLElement | null>(null)
 
 onMounted(async () => {
   if (el.value) {
-    try {
-      const ScrollReveal = (await import('scrollreveal')).default
-      ScrollReveal().reveal(el.value, { delay: 250 })
-    } catch {
-      // Ignore in SSR
-    }
+    const ScrollReveal = (await import('scrollreveal')).default
+    ScrollReveal().reveal(el.value, { delay: 250 })
   }
 })
 </script>

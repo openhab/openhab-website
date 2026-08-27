@@ -47,6 +47,7 @@ import parallax from '@lucien144/vue3-parallaxy'
   font-weight: 300;
   border: none;
   margin-top: 0;
+  margin-bottom: 2rem;
   text-shadow: 0px 0px 10px #666;
 }
 .get-extension-button {
@@ -67,10 +68,23 @@ import parallax from '@lucien144/vue3-parallaxy'
 }
 @media (max-width: 768px) {
   .vscode-text {
+    top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
+    height: 100%;
+    transform: none;
     background: rgba(0, 0, 0, 0.6);
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+  }
+  .vscode-text h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
   }
 }
 </style>
