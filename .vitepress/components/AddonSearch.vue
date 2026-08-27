@@ -20,18 +20,14 @@
           {{ addontype.title }}
         </h3>
         <p>{{ addontype.description }}</p>
-        <ul class="display-mode-toggle" v-if="!addontype.all">
-          <li>
-            <button :disabled="showAllAddons.indexOf(typeid) < 0" @click="switchDisplayMode(typeid, false)">
-              Featured
-            </button>
-          </li>
-          <li>
-            <button :disabled="showAllAddons.indexOf(typeid) >= 0" @click="switchDisplayMode(typeid, true)">
-              All
-            </button>
-          </li>
-        </ul>
+        <div class="display-mode-toggle" v-if="!addontype.all">
+          <button :disabled="showAllAddons.indexOf(typeid) < 0" @click="switchDisplayMode(typeid, false)">
+            Featured
+          </button>
+          <button :disabled="showAllAddons.indexOf(typeid) >= 0" @click="switchDisplayMode(typeid, true)">
+            All
+          </button>
+        </div>
         <ul class="addons">
           <li v-for="addon of galleryAddons[typeid]" class="addon" :key="addon.url">
             <a :href="withBase(addon.url)">
@@ -192,6 +188,10 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+.addon-search {
+  margin-top: 1.5rem;
+}
+
 .filter {
   width: 90%;
   font-size: 1.1rem;
@@ -216,12 +216,13 @@ h3.addon-type {
 }
 
 .display-mode-toggle {
-  list-style-type: none;
-  padding: 0.5rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 0.5rem;
+  padding: 0.5rem 0;
+  margin: 1rem 0;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
 }
 
 .display-mode-toggle button {
@@ -230,17 +231,24 @@ h3.addon-type {
   border: 1px solid var(--vp-c-brand-1, #ff6600);
   color: var(--vp-c-brand-1, #ff6600);
   font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 14px;
-  padding: 4px;
+  padding: 6px 12px;
   cursor: pointer;
   border-radius: 4px;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.display-mode-toggle button:hover:not([disabled]) {
+  background: var(--vp-c-bg-alt, #f0f0f0);
 }
 
 .display-mode-toggle button[disabled] {
   background: var(--vp-c-brand-1, #ff6600);
   color: #fff;
-  cursor: not-allowed;
+  cursor: default;
+  opacity: 1;
 }
 
 .addon-search em {
