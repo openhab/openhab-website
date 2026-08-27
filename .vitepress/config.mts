@@ -189,7 +189,7 @@ export default defineConfig({
   themeConfig: {
     logo: {
       light: '/openhab-logo-empowering.svg',
-      dark: '/openhab-logo-empowering.svg',
+      dark: '/openhab-logo-empowering-dark.svg',
     },
     siteTitle: false,
     socialLinks: [

@@ -19,7 +19,7 @@
       <div class="distro-tab" :class="{ selected: selectedDistro === 'deb' }" @click="selectDistro('deb')">
         <div>
           <img :src="withBase('/os/ubuntu.svg')" title="Ubuntu" alt="Ubuntu" />
-          <img :src="withBase('/os/debian.svg')" style="filter: grayscale(100%)" title="Debian" alt="Debian" />
+          <img :src="withBase('/os/debian.svg')" class="os-icon-debian" title="Debian" alt="Debian" />
           <img :src="withBase('/os/linuxmint.svg')" title="Linux Mint" alt="Linux Mint" />
           <img :src="withBase('/os/elementary.svg')" style="margin-left: 2px" title="Elementary" alt="Elementary" />...
         </div>
@@ -30,11 +30,12 @@
           <img :src="withBase('/os/redhat.svg')" title="RedHat" alt="RedHat" />
           <img
             :src="withBase('/os/opensuse.svg')"
-            style="margin-left: 2px; margin-bottom: 2px; filter: grayscale(100%) brightness(0)"
+            class="os-icon-opensuse"
+            style="margin-left: 2px; margin-bottom: 2px"
             title="openSUSE"
             alt="openSUSE"
           />
-          <img :src="withBase('/os/mageia.svg')" style="filter: grayscale(100%)" title="Mageia" alt="Mageia" />
+          <img :src="withBase('/os/mageia.svg')" class="os-icon-mageia" title="Mageia" alt="Mageia" />
           <img :src="withBase('/os/fedora.svg')" style="filter: grayscale(100%)" title="Fedora" alt="Fedora" />...
         </div>
         <div class="distro-label">RPM (.rpm packages)</div>

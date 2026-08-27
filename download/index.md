@@ -46,23 +46,27 @@ meta:
 }
 .apps-buttons {
   display: flex;
-  align-items: justify;
-  align-content: center;
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
 }
 @media (max-width: 480px) {
   .apps-buttons {
-    text-align: center;
-    align-self: center;
     flex-direction: column;
+    gap: 1rem;
   }
 }
 .acknowledgements-logos {
   display: flex;
   flex-wrap: wrap;
-  align-items: justify;
+  flex-direction: row;
+  align-items: center;
   align-content: center;
   justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
 }
 </style>
 
@@ -82,9 +86,9 @@ Looking for an earlier version of openHAB? Download directly from the links belo
 
 
 <div class="apps-buttons">
-  <a target="_blank" href="https://play.google.com/store/apps/details?id=org.openhab.habdroid"><img style="padding: 1em" height="40" src="/download/images/android.svg" /></a>
-  <a target="_blank" href="https://itunes.apple.com/us/app/openhab/id492054521?mt=8"><img style="padding: 1em" height="40" src="/download/images/ios.svg" /></a>
-  <a target="_blank" href="https://www.microsoft.com/en-us/store/p/openhab/9nmq39ctwxgt"><img style="padding: 1em" height="40" src="/download/images/win10.png" /></a>
+  <a target="_blank" href="https://play.google.com/store/apps/details?id=org.openhab.habdroid" rel="noopener noreferrer"><img height="48" src="/download/images/android.svg" alt="Get it on Google Play" /></a>
+  <a target="_blank" href="https://itunes.apple.com/us/app/openhab/id492054521?mt=8" rel="noopener noreferrer"><img height="48" src="/download/images/ios.svg" alt="Download on the App Store" /></a>
+  <a target="_blank" href="https://www.microsoft.com/en-us/store/p/openhab/9nmq39ctwxgt" rel="noopener noreferrer"><img height="48" src="/download/images/win10.png" alt="Get it from Microsoft" /></a>
 </div>
 
 
@@ -98,8 +102,8 @@ Looking for an earlier version of openHAB? Download directly from the links belo
 </ul>
 
 <div class="acknowledgements-logos">
-  <a target="_blank" href="https://www.jfrog.com"><img style="padding: 1em" height="50" src="/download/images/acknowledgements/jfrog.svg" /></a>
-  <a target="_blank" href="https://www.digitalocean.com"><img style="padding: 1em" height="50" src="/download/images/acknowledgements/digitalocean.png" /></a>
-  <a target="_blank" href="https://www.ej-technologies.com/products/jprofiler/overview.html"><img style="padding: 1em" height="50" src="/download/images/acknowledgements/jprofiler.png" /></a>
-  <a target="_blank" href="https://www.netlify.com"><img style="padding: 1em" height="50" src="/download/images/acknowledgements/netlify.svg" /></a>
+  <a target="_blank" href="https://www.jfrog.com" rel="noopener noreferrer"><img height="48" src="/download/images/acknowledgements/jfrog.svg" alt="JFrog" /></a>
+  <a target="_blank" href="https://www.digitalocean.com" rel="noopener noreferrer"><img height="48" src="/download/images/acknowledgements/digitalocean.png" alt="DigitalOcean" /></a>
+  <a target="_blank" href="https://www.ej-technologies.com/products/jprofiler/overview.html" rel="noopener noreferrer"><img height="48" src="/download/images/acknowledgements/jprofiler.png" alt="JProfiler" /></a>
+  <a target="_blank" href="https://www.netlify.com" rel="noopener noreferrer"><img height="48" src="/download/images/acknowledgements/netlify.svg" alt="Netlify" /></a>
 </div>

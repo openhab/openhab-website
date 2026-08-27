@@ -135,13 +135,42 @@ footer {
 .dark .section2 a,
 .dark .homepage .section2 a,
 .dark .section2 .feature a {
-  color: #ffffff !important;
+  color: #5599ff !important;
+}
+
+.dark .section2 a:hover,
+.dark .homepage .section2 a:hover,
+.dark .section2 .feature a:hover {
+  color: #88bbff !important;
+  text-decoration: underline !important;
+}
+
+/* Cloud section background matching images */
+.cloud-section,
+.homepage .cloud-section {
+  background-color: #f2f2f2;
 }
 
 /* Dark mode tweaks for cloud section */
 .dark .cloud-section,
 .dark .homepage .cloud-section {
   background-color: #0d0d0d;
+}
+
+.dark .cloud-section h2,
+.dark .homepage .cloud-section h2 {
+  color: var(--vp-c-brand-1, #ff6600) !important;
+}
+
+.dark .cloud-section a,
+.dark .homepage .cloud-section a {
+  color: var(--vp-c-brand-1, #ff6600) !important;
+}
+
+.dark .cloud-section a:hover,
+.dark .homepage .cloud-section a:hover {
+  color: var(--vp-c-brand-2, #e55d00) !important;
+  text-decoration: underline !important;
 }
 
 .dark .cloud-section .cloud-left-bkg-img,
@@ -273,5 +302,18 @@ footer {
     align-items: center !important;
     gap: 2.5rem !important;
   }
+}
+
+/* OS icons in download package tabs */
+.os-icon-debian,
+.os-icon-opensuse,
+.os-icon-mageia {
+  filter: grayscale(100%) brightness(0);
+}
+
+.dark .os-icon-debian,
+.dark .os-icon-opensuse,
+.dark .os-icon-mageia {
+  filter: brightness(0) invert(1) !important;
 }
 
