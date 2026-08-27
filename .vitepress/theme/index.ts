@@ -35,7 +35,6 @@ import PropOption from '../components/PropOption.vue'
 import PropOptions from '../components/PropOptions.vue'
 import ScrollOnReveal from '../components/ScrollOnReveal.vue'
 import ThingDocRenderer from '../components/ThingDocRenderer.vue'
-import OutboundLink from '../components/OutboundLink.vue'
 
 // Home Components
 import AlertBannerSection from '../components/home/AlertBannerSection.vue'
@@ -96,7 +95,6 @@ export default {
     app.component('PropOptions', PropOptions)
     app.component('ScrollOnReveal', ScrollOnReveal)
     app.component('ThingDocRenderer', ThingDocRenderer)
-    app.component('OutboundLink', OutboundLink)
 
     // Register home components
     app.component('AlertBannerSection', AlertBannerSection)

@@ -58,10 +58,10 @@ import RunsEverywhereIcon from './RunsEverywhereIcon.vue'
   font-family: 'Open Sans', sans-serif;
   background: var(--vp-c-bg, white);
   text-align: center;
-  padding: 4.5rem 1.5rem 3.5rem;
+  padding: 2.5rem 1.5rem 3.5rem;
 }
 .section2 h2 {
-  margin: 1rem 0 3rem;
+  margin: 0 0 2.5rem;
   text-align: center;
   font-family: 'Open Sans', sans-serif;
   font-weight: normal;

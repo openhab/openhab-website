@@ -2,9 +2,6 @@
   <div class="home-layout homepage">
     <div class="home-header">
       <Jumbotron />
-      <div class="after-jumbotron">
-        <div class="placeholder"></div>
-      </div>
     </div>
     <HomeSections />
   </div>
@@ -45,9 +42,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.after-jumbotron .placeholder {
-  height: 760px;
-}
 .home-layout {
   width: 100%;
 }

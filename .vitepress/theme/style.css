@@ -283,23 +283,24 @@ pre[class*='language-']::-webkit-scrollbar-track,
 .icon.outbound,
 .vp-external-link-icon {
   display: inline-block;
-  color: #aaa;
+  color: currentColor;
   vertical-align: middle;
   position: relative;
   top: -1px;
   margin-left: 0.25rem;
 }
 
-.vp-doc a[target='_blank']:not(:has(img)):not(.download-button):not(.read-more-button):not(.vp-sponsor-grid-item):not(.social-link)::after,
-.vp-doc a[href^='http://']:not([href*='openhab.org']):not(:has(img)):not(.download-button):not(.read-more-button)::after,
-.vp-doc a[href^='https://']:not([href*='openhab.org']):not(:has(img)):not(.download-button):not(.read-more-button)::after,
-.about-page a[target='_blank']:not(:has(img)):not(.download-button):not(.read-more-button)::after,
-.about-page a[href^='http://']:not([href*='openhab.org']):not(:has(img)):not(.download-button):not(.read-more-button)::after,
-.about-page a[href^='https://']:not([href*='openhab.org']):not(:has(img)):not(.download-button):not(.read-more-button)::after,
-.instructions a[target='_blank']::after,
-ol a[target='_blank']:not(:has(img)):not(.download-button)::after,
-ul a[target='_blank']:not(:has(img)):not(.download-button)::after,
-p a[target='_blank']:not(:has(img)):not(.download-button)::after {
+a[target='_blank']:not(:has(img)):not(:has(svg)):not(.download-button):not(.read-more-button):not(.vp-sponsor-grid-item):not(.social-link):not(.social-icons a):not(.alert-button):not(.alternativeto-button):not(.get-extension-button):not(.see-all-events-button):not(.join-us-button):not(.all-addons-button):not(.learn-how-button):not(.action-button):not(.demo-button):not(.VPNavBar a):not(.VPSocialLink):not(.VPSocialLinks a):not(.VPNav a):not(.nav-link),
+a[href^='http://']:not([href*='openhab.org']):not(:has(img)):not(:has(svg)):not(.download-button):not(.read-more-button):not(.vp-sponsor-grid-item):not(.social-link):not(.social-icons a):not(.alert-button):not(.alternativeto-button):not(.get-extension-button):not(.see-all-events-button):not(.join-us-button):not(.all-addons-button):not(.learn-how-button):not(.action-button):not(.demo-button):not(.VPNavBar a):not(.VPSocialLink):not(.VPSocialLinks a):not(.VPNav a):not(.nav-link),
+a[href^='https://']:not([href*='openhab.org']):not(:has(img)):not(:has(svg)):not(.download-button):not(.read-more-button):not(.vp-sponsor-grid-item):not(.social-link):not(.social-icons a):not(.alert-button):not(.alternativeto-button):not(.get-extension-button):not(.see-all-events-button):not(.join-us-button):not(.all-addons-button):not(.learn-how-button):not(.action-button):not(.demo-button):not(.VPNavBar a):not(.VPSocialLink):not(.VPSocialLinks a):not(.VPNav a):not(.nav-link) {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: baseline;
+}
+
+a[target='_blank']:not(:has(img)):not(:has(svg)):not(.download-button):not(.read-more-button):not(.vp-sponsor-grid-item):not(.social-link):not(.social-icons a):not(.alert-button):not(.alternativeto-button):not(.get-extension-button):not(.see-all-events-button):not(.join-us-button):not(.all-addons-button):not(.learn-how-button):not(.action-button):not(.demo-button):not(.VPNavBar a):not(.VPSocialLink):not(.VPSocialLinks a):not(.VPNav a):not(.nav-link)::after,
+a[href^='http://']:not([href*='openhab.org']):not(:has(img)):not(:has(svg)):not(.download-button):not(.read-more-button):not(.vp-sponsor-grid-item):not(.social-link):not(.social-icons a):not(.alert-button):not(.alternativeto-button):not(.get-extension-button):not(.see-all-events-button):not(.join-us-button):not(.all-addons-button):not(.learn-how-button):not(.action-button):not(.demo-button):not(.VPNavBar a):not(.VPSocialLink):not(.VPSocialLinks a):not(.VPNav a):not(.nav-link)::after,
+a[href^='https://']:not([href*='openhab.org']):not(:has(img)):not(:has(svg)):not(.download-button):not(.read-more-button):not(.vp-sponsor-grid-item):not(.social-link):not(.social-icons a):not(.alert-button):not(.alternativeto-button):not(.get-extension-button):not(.see-all-events-button):not(.join-us-button):not(.all-addons-button):not(.learn-how-button):not(.action-button):not(.demo-button):not(.VPNavBar a):not(.VPSocialLink):not(.VPSocialLinks a):not(.VPNav a):not(.nav-link)::after {
   display: inline-block;
   content: '';
   width: 14px;
@@ -307,7 +308,7 @@ p a[target='_blank']:not(:has(img)):not(.download-button)::after {
   margin-left: 4px;
   margin-right: 2px;
   vertical-align: middle;
-  background-color: #999;
+  background-color: currentColor;
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-40v-40h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z'/%3E%3Cpolygon points='45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9'/%3E%3C/svg%3E");
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-40v-40h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z'/%3E%3Cpolygon points='45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9'/%3E%3C/svg%3E");
   -webkit-mask-repeat: no-repeat;
@@ -320,9 +321,11 @@ p a[target='_blank']:not(:has(img)):not(.download-button)::after {
   top: -1px;
 }
 
-/* Hide outbound icon for links pointing to *.openhab.org */
+/* Hide outbound icon for links pointing to *.openhab.org, internal links, or anchor links */
 a[href*='.openhab.org'] .outbound,
-a[href*='.openhab.org']::after {
+a[href*='.openhab.org']::after,
+a[href^='/']::after,
+a[href^='#']::after {
   display: none !important;
 }
 

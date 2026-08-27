@@ -1,11 +1,11 @@
 <template>
-  <component :is="tag || 'div'" ref="el" :class="classes">
-    <slot></slot>
+  <component :is="tag" ref="el" :class="classes">
+    <slot />
   </component>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick, type ComponentPublicInstance } from 'vue'
 
 export interface ScrollRevealOptions {
   delay?: number
@@ -17,47 +17,56 @@ export interface ScrollRevealOptions {
   origin?: 'top' | 'right' | 'bottom' | 'left'
   scale?: number
   cleanup?: boolean
-  container?: any
+  container?: HTMLElement | string
   desktop?: boolean
   mobile?: boolean
   reset?: boolean
-  useDelay?: string
+  useDelay?: 'always' | 'onload' | 'once'
   viewFactor?: number
   viewOffset?: { top?: number; right?: number; bottom?: number; left?: number }
   afterReset?: (el: HTMLElement) => void
   afterReveal?: (el: HTMLElement) => void
   beforeReset?: (el: HTMLElement) => void
   beforeReveal?: (el: HTMLElement) => void
-  [key: string]: any
+  [key: string]: unknown
 }
 
-const props = withDefaults(
-  defineProps<{
-    tag?: string
-    classes?: string
-    delay?: number
-    duration?: number
-    distance?: string
-    origin?: 'top' | 'right' | 'bottom' | 'left'
-    scale?: number
-    interval?: number
-    viewFactor?: number
-    options?: ScrollRevealOptions
-    selector?: string
-  }>(),
-  {
-    tag: 'div',
-    classes: '',
-  }
-)
+interface Props {
+  tag?: string
+  classes?: string | string[] | Record<string, boolean>
+  delay?: number
+  duration?: number
+  distance?: string
+  origin?: 'top' | 'right' | 'bottom' | 'left'
+  scale?: number
+  interval?: number
+  viewFactor?: number
+  options?: ScrollRevealOptions
+  selector?: string
+}
 
-const el = ref<HTMLElement | null>(null)
+const props = withDefaults(defineProps<Props>(), {
+  tag: 'div',
+  classes: '',
+  options: () => ({}),
+})
+
+const el = ref<HTMLElement | ComponentPublicInstance | null>(null)
 let srInstance: any = null
+let observedElements: NodeListOf<Element> | HTMLElement[] = []
 
 onMounted(async () => {
-  if (!el.value) return
+  await nextTick()
+
+  const rawElement = el.value instanceof HTMLElement
+      ? el.value
+      : (el.value as ComponentPublicInstance)?.$el
+
+  if (!rawElement || typeof window === 'undefined') return
+
   try {
-    const ScrollReveal = (await import('scrollreveal')).default
+    const scrollRevealModule = await import('scrollreveal')
+    const ScrollReveal = scrollRevealModule.default || scrollRevealModule
     srInstance = ScrollReveal()
 
     const opts: ScrollRevealOptions = {
@@ -66,37 +75,35 @@ onMounted(async () => {
       ...(props.duration !== undefined ? { duration: props.duration } : {}),
       ...(props.distance !== undefined ? { distance: props.distance } : {}),
       ...(props.origin !== undefined ? { origin: props.origin } : {}),
-      ...(props.interval !== undefined ? { interval: props.interval } : {}),
       ...(props.viewFactor !== undefined ? { viewFactor: props.viewFactor } : {}),
       ...props.options,
     }
 
     if (props.selector) {
-      const targets = el.value.querySelectorAll(props.selector)
+      const targets = rawElement.querySelectorAll(props.selector)
       if (targets.length > 0) {
+        observedElements = targets
         srInstance.reveal(targets, opts, props.interval)
       }
     } else {
-      srInstance.reveal(el.value, opts, props.interval)
+      observedElements = [rawElement]
+      srInstance.reveal(rawElement, opts, props.interval)
     }
-  } catch {
-    // Ignore in SSR
+  } catch (error) {
+    // SSR fallback or missing client context
+    console.warn('[ScrollReveal] Initialization failed:', error)
   }
 })
 
 onUnmounted(() => {
-  if (srInstance && el.value) {
+  if (srInstance && observedElements.length > 0) {
     try {
-      if (props.selector) {
-        const targets = el.value.querySelectorAll(props.selector)
-        if (targets.length > 0) {
-          srInstance.clean(targets)
-        }
-      } else {
-        srInstance.clean(el.value)
-      }
+      srInstance.clean(observedElements)
     } catch {
-      // Ignore
+      // Ignored cleanup errors
+    } finally {
+      srInstance = null
+      observedElements = []
     }
   }
 })
