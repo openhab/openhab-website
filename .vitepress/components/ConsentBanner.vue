@@ -13,13 +13,15 @@
 import { ref, onMounted } from 'vue'
 import { withBase } from 'vitepress'
 
+const GA_ID = 'UA-47717934-1'
+
 const consentAlreadySet = ref(true)
 const consentValue = ref(-1)
 let fetchScriptElement: HTMLScriptElement | null = null
 let setupScriptElement: HTMLScriptElement | null = null
 
 function updateCookie(val: number) {
-  document.cookie = `Consent=${val}; path=/; max-age=31536000; ` + document.cookie
+  document.cookie = `Consent=${val}; path=/; max-age=31536000; SameSite=Lax`
   consentValue.value = val
   consentAlreadySet.value = true
 
@@ -39,10 +41,12 @@ function accept() {
 }
 
 function addGoogleAnalyticsScript() {
+  (window as any)[`ga-disable-${GA_ID}`] = false
+
   if (!fetchScriptElement) {
     fetchScriptElement = document.createElement('script')
     fetchScriptElement.setAttribute('async', 'true')
-    fetchScriptElement.setAttribute('src', 'https://www.googletagmanager.com/gtag/js?id=UA-47717934-1')
+    fetchScriptElement.setAttribute('src', `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`)
   }
 
   if (!setupScriptElement) {
@@ -51,7 +55,7 @@ function addGoogleAnalyticsScript() {
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'UA-47717934-1', { 'anonymize_ip': true });
+      gtag('config', '${GA_ID}', { 'anonymize_ip': true });
     `
   }
 
@@ -64,12 +68,21 @@ function addGoogleAnalyticsScript() {
 }
 
 function removeGoogleAnalyticsScript() {
+  (window as any)[`ga-disable-${GA_ID}`] = true
+
   if (fetchScriptElement && document.head.contains(fetchScriptElement)) {
     fetchScriptElement.remove()
   }
   if (setupScriptElement && document.head.contains(setupScriptElement)) {
     setupScriptElement.remove()
   }
+
+  document.cookie.split(';').forEach((cookie) => {
+    const name = cookie.split('=')[0].trim()
+    if (name.startsWith('_ga') || name.startsWith('_gid')) {
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+    }
+  })
 }
 
 onMounted(() => {
