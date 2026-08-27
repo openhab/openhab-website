@@ -2,9 +2,6 @@
   <div class="home-layout homepage">
     <div class="home-header">
       <Jumbotron />
-      <div class="after-jumbotron">
-        <div class="placeholder"></div>
-      </div>
     </div>
     <HomeSections />
   </div>
@@ -27,10 +24,6 @@ onMounted(async () => {
       const HeadroomModule = (await import('headroom.js')).default
       hr = new HeadroomModule(header as HTMLElement)
       hr.init()
-      setTimeout(() => {
-        header.classList.add('ready')
-        header.classList.remove('homepage')
-      }, 1500)
     } catch {
       // Ignore if headroom fails
     }
@@ -49,9 +42,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.after-jumbotron .placeholder {
-  height: 760px;
-}
 .home-layout {
   width: 100%;
 }

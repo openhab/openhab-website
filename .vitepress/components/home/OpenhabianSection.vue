@@ -6,12 +6,18 @@
       </small>
       <img class="openhabian-background" src="./images/pi_case.jpg" alt="raspberry pi" />
       <div class="openhabian-text">
-        <h2 class="slide-seq">Set up your own openHAB system in just a few steps</h2>
-        <p class="slide-seq">
-          Try the provided hassle-free "openHABian" image for the Raspberry Pi and other devices.
-          Flash an SD card, boot, and enjoy your up-to-date openHAB setup with conveniently pre-configured system settings and software.
-        </p>
-        <a :href="withBase('/docs/installation/openhabian.html')" class="learn-how-button slide-seq">Learn How ➜</a>
+        <ScrollOnReveal :delay="0" :duration="800" :scale="1.0">
+          <h2>Set up your own openHAB system in just a few steps</h2>
+        </ScrollOnReveal>
+        <ScrollOnReveal :delay="200" :duration="800" :scale="1.0">
+          <p>
+            Try the provided hassle-free "openHABian" image for the Raspberry Pi and other devices.
+            Flash an SD card, boot, and enjoy your up-to-date openHAB setup with conveniently pre-configured system settings and software.
+          </p>
+        </ScrollOnReveal>
+        <ScrollOnReveal :delay="350" :duration="800" :scale="1.0">
+          <a :href="withBase('/docs/installation/openhabian.html')" class="learn-how-button">Learn How ➜</a>
+        </ScrollOnReveal>
       </div>
     </div>
   </div>
@@ -19,6 +25,7 @@
 
 <script setup lang="ts">
 import { withBase } from 'vitepress'
+import ScrollOnReveal from '../ScrollOnReveal.vue'
 </script>
 
 <style scoped>

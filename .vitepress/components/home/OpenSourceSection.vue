@@ -1,28 +1,38 @@
 <template>
   <div class="section-opensource">
     <div class="left">
-      <div class="logos">
+      <ScrollOnReveal classes="logos" origin="left" distance="20px" :duration="800" :delay="100" :scale="1.0">
         <a target="_blank" href="https://www.openhabfoundation.org/" rel="noopener noreferrer">
           <img class="foundation-logo" src="./images/foundation-logo-dark.svg" alt="openHAB Foundation" />
         </a>
-      </div>
+      </ScrollOnReveal>
     </div>
     <div class="right">
       <h2>
-        <div class="slide-seq3">100% Open Source.</div>
-        <div class="slide-seq3 reliable">100% Reliable.</div>
+        <ScrollOnReveal origin="left" distance="15px" :duration="800" :delay="0" :scale="1.0">
+          <div>100% Open Source.</div>
+        </ScrollOnReveal>
+        <ScrollOnReveal origin="left" distance="15px" :duration="800" :delay="400" :scale="1.0">
+          <div class="reliable">100% Reliable.</div>
+        </ScrollOnReveal>
       </h2>
-      <p class="slide">
-        openHAB is developed in <a target="_blank" href="https://www.java.com/" rel="noopener noreferrer">Java™</a> and built on top of
-        <a target="_blank" href="https://karaf.apache.org/" rel="noopener noreferrer">Apache Karaf™</a>, an industry-grade
-        <a target="_blank" href="https://www.osgi.org/" rel="noopener noreferrer">OSGi®</a> runtime.<br />
-        openHAB and its development are supported by the
-        <a target="_blank" href="https://www.openhabfoundation.org/" rel="noopener noreferrer">openHAB Foundation</a>, a registered non-profit organisation.<br />
-        Without having a company behind openHAB, it will always stay absolutely vendor-neutral and never lock you in.
-      </p>
+      <ScrollOnReveal :duration="800" :delay="200" :scale="1.0">
+        <p>
+          openHAB is developed in <a target="_blank" href="https://www.java.com/" rel="noopener noreferrer">Java™</a> and built on top of
+          <a target="_blank" href="https://karaf.apache.org/" rel="noopener noreferrer">Apache Karaf™</a>, an industry-grade
+          <a target="_blank" href="https://www.osgi.org/" rel="noopener noreferrer">OSGi®</a> runtime.<br />
+          openHAB and its development are supported by the
+          <a target="_blank" href="https://www.openhabfoundation.org/" rel="noopener noreferrer">openHAB Foundation</a>, a registered non-profit organisation.<br />
+          Without having a company behind openHAB, it will always stay absolutely vendor-neutral and never lock you in.
+        </p>
+      </ScrollOnReveal>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import ScrollOnReveal from '../ScrollOnReveal.vue'
+</script>
 
 <style scoped>
 .section-opensource {

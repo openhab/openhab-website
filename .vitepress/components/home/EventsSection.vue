@@ -7,24 +7,32 @@
         </parallax>
       </ClientOnly>
       <div class="events-text">
-        <h2 class="slide-seq4">Let's Meet Up!</h2>
+        <ScrollOnReveal :scale="1.0" :viewFactor="0.0">
+          <h2>Let's Meet Up!</h2>
+        </ScrollOnReveal>
         <div class="upcoming-events" v-show="events.length > 0">
-          <h3 class="slide-seq4">Next event{{ events.length > 1 ? 's' : '' }}</h3>
-          <ul class="event-list slide-seq4">
+          <ScrollOnReveal :delay="200" :scale="1.0" :viewFactor="0.0">
+            <h3>Next event{{ events.length > 1 ? 's' : '' }}</h3>
+          </ScrollOnReveal>
+          <ScrollOnReveal tag="ul" classes="event-list" selector=".event" :interval="200" :scale="1.0" :viewFactor="0.0">
             <li v-for="item in events" :key="item.url" class="event">
               <div class="calendar">
                 <CalendarIcon :date="item.date" :end-date="item.end_date" />
               </div>
               <div class="event-info">
-                <a :href="item.link || withBase(item.url)" target="_blank" rel="noopener noreferrer">
-                  <h3 class="event-title">{{ item.title }}</h3>
-                </a>
+                <h3 class="event-title">
+                  <a :href="item.link || withBase(item.url)" target="_blank" rel="noopener noreferrer">
+                    {{ item.title }}
+                  </a>
+                </h3>
                 <div class="event-location">{{ item.location }}</div>
               </div>
             </li>
-          </ul>
+          </ScrollOnReveal>
         </div>
-        <a :href="withBase('/about/events.html')" class="see-all-events-button slide-seq4">See All Events ➜</a>
+        <ScrollOnReveal :delay="400" :scale="1.0" :viewFactor="0.0">
+          <a :href="withBase('/about/events.html')" class="see-all-events-button">See All Events ➜</a>
+        </ScrollOnReveal>
       </div>
     </div>
   </div>
@@ -33,6 +41,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { withBase } from 'vitepress'
+import ScrollOnReveal from '../ScrollOnReveal.vue'
 import parallax from '@lucien144/vue3-parallaxy'
 import CalendarIcon from '../CalendarIcon.vue'
 import { data as allEvents } from '../../theme/events.data'
@@ -66,25 +75,44 @@ const events = computed(() => {
 }
 .events-text {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  text-align: center;
+  top: 0;
+  bottom: 0;
   left: 0;
-  right: 60%;
+  right: 55%;
+  height: 100%;
   z-index: 12;
   padding: 3rem;
   background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
 }
 .events-text h2 {
   font-size: 2.5em;
   font-weight: 300;
   border: none;
   margin-top: 0;
+  margin-bottom: 0.5rem;
   text-shadow: 0px 0px 10px #666;
+}
+.upcoming-events {
+  width: 100%;
+  max-width: 520px;
+}
+.upcoming-events h3 {
+  margin: 0.5rem 0 1.25rem;
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: #eee;
+  border: none;
 }
 .event-list {
   padding-left: 0;
   list-style: none;
+  margin: 0 0 1.5rem 0;
 }
 .event {
   display: flex;
@@ -100,6 +128,13 @@ const events = computed(() => {
   color: #fff;
   font-family: 'Open Sans', sans-serif;
   font-size: 1.2rem;
+}
+.event-title a {
+  color: #fff;
+  text-decoration: none;
+}
+.event-title a:hover {
+  text-decoration: underline;
 }
 .event-location {
   font-weight: bold;
@@ -119,6 +154,12 @@ const events = computed(() => {
 .see-all-events-button:hover {
   background-color: #fff;
   color: black;
+}
+@media (max-width: 1024px) {
+  .events-text {
+    right: 40%;
+    padding: 2rem;
+  }
 }
 @media (max-width: 768px) {
   .events-text {

@@ -69,21 +69,22 @@ import { withBase } from 'vitepress'
 
 .jumbotron {
   background: var(--vp-c-brand-1, #ff6600);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 760px;
+  position: relative;
+  min-height: 640px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  padding: 4rem 1.5rem 2rem;
+  box-sizing: border-box;
 }
 .jumbotron-pattern {
   opacity: 0.1;
-  width: 100vw;
-  height: 760px;
+  width: 100%;
+  height: 100%;
   position: absolute;
+  top: 0;
+  left: 0;
   object-fit: cover;
   user-select: none;
 }
@@ -182,7 +183,7 @@ h2.lead {
   position: relative;
   margin-right: 20px;
   box-sizing: border-box;
-  margin-top: 60px;
+  margin-top: 0;
   z-index: 2;
 }
 .iframe-wrapper {
@@ -199,15 +200,22 @@ h2.lead {
 .hero-image {
   background: url(/hero3.jpg) bottom 0 left 50% / contain no-repeat;
   width: 95%;
-  height: 700px;
+  height: 100%;
+  max-height: 700px;
   position: absolute;
-  top: calc(100% - 700px);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   opacity: 0.5;
 }
 .dark .hero-image {
   background: url(/hero3-dark.jpg) bottom 0 left 50% / contain no-repeat !important;
 }
 @media (max-width: 1023px) {
+  .jumbotron {
+    min-height: auto;
+    padding: 3.5rem 1.5rem 2.5rem;
+  }
   .phone {
     display: none;
   }

@@ -1,21 +1,23 @@
 <template>
   <footer>
-    <a href="#app">
-      <img
-        :src="withBase(isDark ? '/openhab-logo-square-dark.svg' : '/openhab-logo-square.svg')"
-        class="footer-logo"
-        alt="openHAB logo"
-      />
-    </a>
-    <div class="legal">
+    <ScrollOnReveal :scale="0.5">
+      <a href="#app">
+        <img
+          :src="withBase(isDark ? '/openhab-logo-square-dark.svg' : '/openhab-logo-square.svg')"
+          class="footer-logo"
+          alt="openHAB logo"
+        />
+      </a>
+    </ScrollOnReveal>
+    <ScrollOnReveal classes="legal" :scale="1.0">
       <span class="copyright">Copyright © {{ year }} by the openHAB Community and the openHAB Foundation e.V.</span>
       <br />
       <span class="legal-links">
         <a :href="withBase('/privacy.html')">Privacy policy</a> |
         <a :href="withBase('/imprint.html')">Imprint</a>
       </span>
-    </div>
-    <div class="social-icons">
+    </ScrollOnReveal>
+    <ScrollOnReveal classes="social-icons" :duration="1000">
       <a href="https://x.com/openhab" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
         <svg class="social-icon x" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -31,34 +33,16 @@
           <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
         </svg>
       </a>
-    </div>
+    </ScrollOnReveal>
   </footer>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
 import { useData, withBase } from 'vitepress'
+import ScrollOnReveal from './ScrollOnReveal.vue'
 
 const { isDark } = useData()
-const srRef = ref<any>(null)
 const year = new Date().getFullYear()
-
-onMounted(async () => {
-  const ScrollReveal = (await import('scrollreveal')).default
-  const sr = ScrollReveal()
-  srRef.value = sr
-  sr.reveal('.footer-logo', { scale: 0.5 })
-  sr.reveal('.legal', { scale: 1.0 })
-  sr.reveal('.social-icons', { duration: 1000 })
-})
-
-onUnmounted(() => {
-  if (srRef.value) {
-    srRef.value.clean('.footer-logo')
-    srRef.value.clean('.legal')
-    srRef.value.clean('.social-icons')
-  }
-})
 </script>
 
 <style scoped>
