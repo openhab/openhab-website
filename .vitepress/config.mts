@@ -84,9 +84,10 @@ export default defineConfig({
   ignoreDeadLinks: true,
   head: [
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1' }],
-    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/openhab-logo-square.svg' }],
     ['link', { rel: 'shortcut icon', href: '/favicon.ico' }],
-    ['link', { rel: 'apple-touch-icon', href: '/apple-icon.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-icon.png' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:image', content: 'https://www.openhab.org/og-image.png' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
@@ -130,7 +131,7 @@ export default defineConfig({
       function escapeText(text: string) {
         return text
           .replace(/\{\{/g, '&#123;&#123;')
-          .replace(/\}\}/g, '&#125;&#125;')
+          .replace(/}}/g, '&#125;&#125;')
       }
 
       function escapeUnknownTags(html: string) {
@@ -205,12 +206,13 @@ export default defineConfig({
     },
     nav: [
       { text: 'Download', link: '/download/' },
-      { text: 'Documentation', link: '/docs/' },
-      { text: 'Add-ons', link: '/addons/' },
+      { text: 'Documentation', link: '/docs/', activeMatch: '^/docs/' },
+      { text: 'Add-ons', link: '/addons/', activeMatch: '^/addons/' },
       { text: 'Community', link: '/community/' },
-      { text: 'Blog', link: '/blog/' },
+      { text: 'Blog', link: '/blog/', activeMatch: '^/blog/' },
       {
         text: 'About',
+        activeMatch: '^/about/|^/privacy|^/imprint|^/artwork',
         items: [
           {
             text: 'Get Involved',
