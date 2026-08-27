@@ -35,7 +35,7 @@ img.illustration {
 image source: https://pixabay.com/en/teamwork-team-gear-gears-drive-2198961/
 license: CC0
 -->
-<img class="illustration" src="/about/images/teamwork-2198961_1920.png" />
+<img class="illustration" src="./images/teamwork-2198961_1920.png" />
 
 
 openHAB is a community effort and everyone can take part in that.
