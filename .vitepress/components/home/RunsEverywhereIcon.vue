@@ -5,7 +5,7 @@
     <img class="home-icon runs-everywhere" :class="{ current: current === 2 }" :src="withBase('/os/win10.svg')" alt="" />
     <img class="home-icon runs-everywhere" :class="{ current: current === 3 }" :src="withBase('/os/raspberry-pi.svg')" alt="" />
     <img class="home-icon runs-everywhere" :class="{ current: current === 4 }" :src="withBase('/os/docker.svg')" alt="" />
-    <img class="home-icon frame" :src="withBase('/components/home/images/icons/empty.png')" alt="" />
+    <img class="home-icon frame" src="./images/icons/empty.png" alt="" />
   </div>
 </template>
 

@@ -1,23 +1,22 @@
 <template>
   <div class="home-icon-container">
-    <img class="home-icon" :class="{ current: current === 0 }" :src="withBase('/components/home/images/icons/light.png')" alt="" />
-    <img class="home-icon" :class="{ current: current === 1 }" :src="withBase('/components/home/images/icons/temperature.png')" alt="" />
-    <img class="home-icon" :class="{ current: current === 2 }" :src="withBase('/components/home/images/icons/shutters.png')" alt="" />
-    <img class="home-icon" :class="{ current: current === 3 }" :src="withBase('/components/home/images/icons/camera.png')" alt="" />
-    <img class="home-icon" :class="{ current: current === 4 }" :src="withBase('/components/home/images/icons/lock.png')" alt="" />
-    <img class="home-icon" :class="{ current: current === 5 }" :src="withBase('/components/home/images/icons/key.png')" alt="" />
-    <img class="home-icon" :class="{ current: current === 6 }" :src="withBase('/components/home/images/icons/homecinema.png')" alt="" />
-    <img class="home-icon" :class="{ current: current === 7 }" :src="withBase('/components/home/images/icons/wifi.png')" alt="" />
-    <img class="home-icon" :class="{ current: current === 8 }" :src="withBase('/components/home/images/icons/tv.png')" alt="" />
-    <img class="home-icon" :class="{ current: current === 9 }" :src="withBase('/components/home/images/icons/washingmachine.png')" alt="" />
-    <img class="home-icon" :class="{ current: current === 10 }" :src="withBase('/components/home/images/icons/car.png')" alt="" />
-    <img class="home-icon frame" :src="withBase('/components/home/images/icons/empty.png')" alt="" />
+    <img class="home-icon" :class="{ current: current === 0 }" src="./images/icons/light.png" alt="" />
+    <img class="home-icon" :class="{ current: current === 1 }" src="./images/icons/temperature.png" alt="" />
+    <img class="home-icon" :class="{ current: current === 2 }" src="./images/icons/shutters.png" alt="" />
+    <img class="home-icon" :class="{ current: current === 3 }" src="./images/icons/camera.png" alt="" />
+    <img class="home-icon" :class="{ current: current === 4 }" src="./images/icons/lock.png" alt="" />
+    <img class="home-icon" :class="{ current: current === 5 }" src="./images/icons/key.png" alt="" />
+    <img class="home-icon" :class="{ current: current === 6 }" src="./images/icons/homecinema.png" alt="" />
+    <img class="home-icon" :class="{ current: current === 7 }" src="./images/icons/wifi.png" alt="" />
+    <img class="home-icon" :class="{ current: current === 8 }" src="./images/icons/tv.png" alt="" />
+    <img class="home-icon" :class="{ current: current === 9 }" src="./images/icons/washingmachine.png" alt="" />
+    <img class="home-icon" :class="{ current: current === 10 }" src="./images/icons/car.png" alt="" />
+    <img class="home-icon frame" src="./images/icons/empty.png" alt="" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { withBase } from 'vitepress'
 
 const current = ref(0)
 let timer: any = null

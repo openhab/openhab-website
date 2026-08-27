@@ -9,6 +9,51 @@ meta:
     content: a vendor and technology agnostic open source automation software for your home
 ---
 
+<style>
+.artwork-downloads {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 3rem;
+  margin: 3rem auto;
+  max-width: 850px;
+}
+
+.artwork-download-card a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  min-width: 260px;
+}
+
+.artwork-image-wrapper {
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+}
+
+.artwork-image-wrapper img {
+  max-height: 120px;
+  max-width: 100%;
+  height: auto;
+}
+
+.artwork-caption {
+  margin: 0 !important;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--vp-c-brand-1, #ff6600);
+}
+
+.artwork-download-card a:hover .artwork-caption {
+  text-decoration: underline;
+}
+</style>
+
 ## Our Logo
 
 Our logo is our most recognizable asset. We therefore ask you to respect our [trademark policy](/about/trademark) when you reuse it - please read through it in detail and do not hesitate to [reach out to us](/about/trademark.html#contact) in case of any doubts.
@@ -21,6 +66,7 @@ A special version is the "works with openHAB" logo, which is intended to be used
 
 ## Downloads
 
+<ClientOnly> 
 <div class="artwork-downloads">
   <div class="artwork-download-card">
     <a href="/openHAB-logo.zip">
@@ -39,3 +85,4 @@ A special version is the "works with openHAB" logo, which is intended to be used
     </a>
   </div>
 </div>
+</ClientOnly>

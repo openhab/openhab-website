@@ -4,7 +4,7 @@
       <small class="case-attribution">
         <a target="_blank" href="https://www.thingiverse.com/thing:3859848" rel="noopener noreferrer">3d printed case by sumpfing</a>
       </small>
-      <img class="openhabian-background" :src="withBase('/components/home/images/pi_case.jpg')" alt="raspberry pi" />
+      <img class="openhabian-background" src="./images/pi_case.jpg" alt="raspberry pi" />
       <div class="openhabian-text">
         <h2 class="slide-seq">Set up your own openHAB system in just a few steps</h2>
         <p class="slide-seq">

@@ -20,13 +20,9 @@
         </g>
       </svg>
     </div>
-    <img class="home-icon frame" :src="withBase('/components/home/images/icons/empty.png')" alt="" />
+    <img class="home-icon frame" src="./images/icons/empty.png" alt="" />
   </div>
 </template>
-
-<script setup lang="ts">
-import { withBase } from 'vitepress'
-</script>
 
 <style scoped>
 .home-icon-container {

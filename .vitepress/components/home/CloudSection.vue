@@ -22,10 +22,10 @@
     </div>
     <div class="cloud-bkg">
       <div class="cloud-left-bkg">
-        <img class="cloud-left-bkg-img" :src="withBase('/components/home/images/lock-bkg.png')" alt="" />
+        <img class="cloud-left-bkg-img" src="./images/lock-bkg.png" alt="" />
       </div>
       <div class="cloud-right-bkg">
-        <img class="cloud-right-bkg-img" :src="withBase('/components/home/images/cloud-bkg.png')" alt="" />
+        <img class="cloud-right-bkg-img" src="./images/cloud-bkg.png" alt="" />
       </div>
     </div>
   </div>
