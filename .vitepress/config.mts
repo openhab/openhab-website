@@ -57,17 +57,6 @@ function transformAddonSidebar(items: any[]): any[] {
 
 const noAddons = process.env.OH_NOADDONS
 
-let docsVersion: string
-if (!process.env.OH_DOCS_VERSION) {
-  docsVersion = 'Pull Request'
-} else {
-  docsVersion = process.env.OH_DOCS_VERSION
-    .replace('final-stable', 'Stable')
-    .replace('final-', '')
-    .replace('final', 'Latest')
-    .replace('.x', '')
-}
-
 const docsSidebar = safeRequire('./openhab-docs/.vuepress/docs-sidebar.js', [])
 const addonsBindings = transformAddonSidebar(safeRequire('./addons-bindings.js', []))
 const addonsIntegrations = transformAddonSidebar(safeRequire('./addons-integrations.js', []))
@@ -107,25 +96,62 @@ export default defineConfig({
     config(md) {
       md.use(tabsMarkdownPlugin)
 
+      // Pre-processing rule to clean up legacy Jekyll/Liquid syntax
+      md.core.ruler.before('normalize', 'clean_jekyll_syntax', (state) => {
+        state.src = state.src
+          // Remove Jekyll includes and tags: {% include ... %}, {% raw %}, etc.
+          .replace(/\{%\s*include\s+[^%]+\s*%\}/g, '')
+          .replace(/\{%[^{}%]*%\}/g, '')
+          // Replace {{base}} with the actual base path (or empty string if relative/root)
+          .replace(/\{\{\s*base\s*\}\}/g, '')
+          // Clean up Kramdown attribute syntax like {:target="_blank"} or {: .class}
+          .replace(/\{:[^}]+\}/g, '')
+          // Replace VuePress 1 webpack require() in component props like :src="require('./...')"
+          .replace(/:src="require\((['"])(.*?)\1\)"/g, 'src="$2"')
+      })
+
+      // Discover all custom Vue components in component directories
+      function getComponentTags(...dirs: string[]) {
+        const tags = new Set<string>()
+        for (const dir of dirs) {
+          const resolved = path.resolve(__dirname, dir)
+          if (!fs.existsSync(resolved)) continue
+          function scan(currentDir: string) {
+            for (const entry of fs.readdirSync(currentDir, { withFileTypes: true })) {
+              if (entry.isDirectory()) {
+                scan(path.join(currentDir, entry.name))
+              } else if (entry.isFile() && entry.name.endsWith('.vue')) {
+                const baseName = path.basename(entry.name, '.vue')
+                tags.add(baseName.toLowerCase())
+                tags.add(baseName.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase())
+              }
+            }
+          }
+          scan(resolved)
+        }
+        return tags
+      }
+
+      const HTML_TAGS = [
+        'a', 'abbr', 'address', 'area', 'article', 'aside', 'audio', 'b', 'base', 'bdi', 'bdo', 'blockquote',
+        'body', 'br', 'button', 'canvas', 'caption', 'cite', 'code', 'col', 'colgroup', 'data', 'datalist',
+        'dd', 'del', 'details', 'dfn', 'dialog', 'div', 'dl', 'dt', 'em', 'embed', 'fieldset', 'figcaption',
+        'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hgroup', 'hr',
+        'html', 'i', 'iframe', 'img', 'input', 'ins', 'kbd', 'label', 'legend', 'li', 'link', 'main', 'map',
+        'mark', 'math', 'menu', 'meter', 'nav', 'noscript', 'object', 'ol', 'optgroup', 'option',
+        'output', 'p', 'param', 'picture', 'pre', 'progress', 'q', 'rb', 'rp', 'rt', 'rtc', 'ruby', 's',
+        'samp', 'script', 'search', 'section', 'select', 'slot', 'small', 'source', 'span', 'strong', 'style',
+        'sub', 'summary', 'sup', 'svg', 'table', 'tbody', 'td', 'template', 'textarea', 'tfoot', 'th', 'thead',
+        'time', 'title', 'tr', 'track', 'u', 'ul', 'var', 'video', 'wbr',
+      ]
+
+      const BUILTIN_TAGS = ['clientonly', 'client-only', 'content', 'badge', 'tab', 'tabs', 'outboundlink', 'outbound-link']
+      const customComponents = getComponentTags('./components', '../components', './.vuepress/components', '../.vuepress/components')
+
       const KNOWN_TAGS = new Set([
-        'a', 'abbr', 'address', 'article', 'aside', 'audio', 'b', 'bdi', 'bdo', 'blockquote', 'br', 'button',
-        'canvas', 'caption', 'cite', 'code', 'col', 'colgroup', 'data', 'datalist', 'dd', 'del', 'details',
-        'dfn', 'dialog', 'div', 'dl', 'dt', 'em', 'embed', 'fieldset', 'figcaption', 'figure', 'footer',
-        'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'i', 'iframe', 'img', 'input',
-        'ins', 'kbd', 'label', 'legend', 'li', 'main', 'map', 'mark', 'menu', 'meter', 'nav', 'noscript',
-        'object', 'ol', 'optgroup', 'option', 'output', 'p', 'picture', 'pre', 'progress', 'q', 'rp', 'rt',
-        'ruby', 's', 'samp', 'section', 'select', 'small', 'source', 'span', 'strong', 'style', 'sub',
-        'summary', 'sup', 'table', 'tbody', 'td', 'template', 'textarea', 'tfoot', 'th', 'thead', 'time',
-        'tr', 'track', 'u', 'ul', 'var', 'video', 'wbr', 'svg', 'path', 'g', 'animatetransform', 'use',
-        'clientonly', 'client-only', 'editpagelink', 'edit-page-link', 'footer', 'docpreviousversions',
-        'doc-previous-versions', 'addonlogo', 'addon-logo', 'addonsearch', 'addon-search', 'blogpostlist',
-        'blog-post-list', 'eventslist', 'events-list', 'calendaricon', 'calendar-icon', 'communitytutorials',
-        'community-tutorials', 'consentbanner', 'consent-banner', 'homesections', 'home-sections',
-        'iconsetdisplay', 'iconset-display', 'inlineimage', 'inline-image', 'installinstructions',
-        'install-instructions', 'propblock', 'prop-block', 'propdescription', 'prop-description',
-        'propgroup', 'prop-group', 'propoption', 'prop-option', 'propoptions', 'prop-options',
-        'scrollonreveal', 'scroll-on-reveal', 'thingdocrenderer', 'thing-doc-renderer', 'tab', 'tabs',
-        'content', 'badge', 'vphome', 'vpdoc', 'vpnav', 'vpsidebar', 'vpfooter'
+        ...HTML_TAGS.map((t) => t.toLowerCase()),
+        ...BUILTIN_TAGS,
+        ...customComponents,
       ])
 
       function escapeText(text: string) {
@@ -135,11 +161,16 @@ export default defineConfig({
       }
 
       function escapeUnknownTags(html: string) {
-        return html.replace(/<(\/?)([a-zA-Z0-9_\-:]+)([^>]*)>/g, (match, closeSlash, tagName, rest) => {
+        // Matches opening, closing, or self-closing tags: <tag>, </tag>, <tag attr="val">, <tag/>
+        return html.replace(/<(\/?)([a-zA-Z][a-zA-Z0-9_\-:]*)([^>]*)>/g, (match, closeSlash, tagName, rest) => {
           const lowerName = tagName.toLowerCase()
+
+          // If it's a recognized HTML tag or Vue component, keep it as HTML
           if (KNOWN_TAGS.has(lowerName)) {
             return match
           }
+
+          // Otherwise, escape the angle brackets so it renders as plain MD / text
           return `&lt;${closeSlash}${tagName}${rest}&gt;`
         })
       }
@@ -150,20 +181,68 @@ export default defineConfig({
         return escapeText(rendered)
       }
 
-      const defaultHtmlInlineRender = md.renderer.rules.html_inline || ((tokens, idx) => tokens[idx].content)
-      md.renderer.rules.html_inline = (tokens, idx, options, env, self) => {
-        const content = tokens[idx].content
-        if (content.startsWith('<!--')) return content
-        const processed = escapeUnknownTags(content)
-        return escapeText(processed)
+      const defaultCodeInlineRender = md.renderer.rules.code_inline || ((tokens, idx, options, env, self) => self.renderToken(tokens, idx, options))
+      md.renderer.rules.code_inline = (tokens, idx, options, env, self) => {
+        const rendered = defaultCodeInlineRender(tokens, idx, options, env, self)
+        return escapeText(rendered)
       }
 
-      const defaultHtmlBlockRender = md.renderer.rules.html_block || ((tokens, idx) => tokens[idx].content)
-      md.renderer.rules.html_block = (tokens, idx, options, env, self) => {
-        const content = tokens[idx].content
-        if (content.startsWith('<!--')) return content
-        const processed = escapeUnknownTags(content)
-        return escapeText(processed)
+      // Post-processing rule to clean up unmatched / stray closing tags and balance unclosed elements
+      md.core.ruler.push('clean_unmatched_html', (state) => {
+        const VOID_TAGS = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'])
+
+        function processTokens(tokens: any[], openTags: string[] = []) {
+          for (const token of tokens) {
+            if (token.type === 'link_open') {
+              openTags.push('a')
+            } else if (token.type === 'link_close') {
+              const idx = openTags.lastIndexOf('a')
+              if (idx !== -1) openTags.splice(idx, 1)
+            } else if (token.type === 'html_inline' || token.type === 'html_block') {
+              token.content = token.content.replace(/<(\/?)([a-zA-Z][a-zA-Z0-9_\-:]*)([^>]*)>/g, (match: string, closeSlash: string, tagName: string, rest: string) => {
+                const lower = tagName.toLowerCase()
+                if (VOID_TAGS.has(lower) || rest.trim().endsWith('/')) {
+                  return match
+                }
+                if (closeSlash === '/') {
+                  const idx = openTags.lastIndexOf(lower)
+                  if (idx !== -1) {
+                    const unclosed = openTags.splice(idx)
+                    unclosed.shift()
+                    const closingPrefix = unclosed.reverse().map((t) => `</${t}>`).join('')
+                    return closingPrefix + match
+                  }
+                  return `&lt;/${tagName}${rest}&gt;`
+                } else {
+                  openTags.push(lower)
+                  return match
+                }
+              })
+            }
+            if (token.children) {
+              processTokens(token.children, openTags)
+            }
+          }
+        }
+
+        processTokens(state.tokens)
+      })
+
+      // Safe fence renderer: don't fail the build on invalid code fence content, log a warning instead
+      const defaultFenceRender = md.renderer.rules.fence
+      md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+        try {
+          if (defaultFenceRender) {
+            return defaultFenceRender(tokens, idx, options, env, self)
+          }
+          return self.renderToken(tokens, idx, options)
+        } catch (err: any) {
+          console.warn(`[markdown fence warning] Failed to highlight code fence:`, err?.message || err)
+          const token = tokens[idx]
+          const info = token.info ? md.utils.unescapeAll(token.info).trim() : ''
+          const lang = info ? info.split(/\s+/g)[0] : 'txt'
+          return `<div class="language-${lang}"><pre class="vp-code" v-pre><code>${md.utils.escapeHtml(token.content)}</code></pre></div>`
+        }
       }
     },
   },
