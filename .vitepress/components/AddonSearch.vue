@@ -40,7 +40,8 @@
                   :alt="addon.label"
                 />
                 <strong v-else>
-                  <img :src="withBase('/openhab-logo-square.svg')" width="60" alt="" /><br />{{ addon.label }}
+                  <img :src="withBase('/openhab-logo-square.svg')" width="60" alt="" />
+                  <span>{{ addon.label }}</span>
                 </strong>
               </div>
               <div class="type">{{ addon.label }}</div>
@@ -63,7 +64,8 @@
                 :alt="addon.label"
               />
               <strong v-else>
-                <img :src="withBase('/openhab-logo-square.svg')" width="60" alt="" /><br />{{ addon.label }}
+                <img :src="withBase('/openhab-logo-square.svg')" width="60" alt="" />
+                <span>{{ addon.label }}</span>
               </strong>
             </div>
             <div class="type">{{ addon.title }}</div>
@@ -261,10 +263,12 @@ h3.addon-type {
   display: flex;
   flex-wrap: wrap;
   padding-left: 0;
+  margin-left: 0 !important;
   gap: 10px;
 }
 
-.addons .addon {
+.addons .addon,
+.addons > li {
   width: 190px;
   height: 190px;
   border: 1px solid var(--vp-c-border, #eee);
@@ -273,6 +277,8 @@ h3.addon-type {
   background: var(--vp-c-bg-elv, #fff);
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.08);
   transition: all 0.3s;
+  overflow: hidden;
+  margin: 0 !important;
 }
 
 .addons .addon:hover {
@@ -282,9 +288,9 @@ h3.addon-type {
 }
 
 .addons .addon a {
+  position: relative;
   width: 100%;
   height: 100%;
-  padding: 8px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -292,27 +298,66 @@ h3.addon-type {
   text-decoration: none;
 }
 
+.addons .addon .version {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 2;
+}
+
+.addons .addon .version .v1 {
+  background: #ff6600;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
 .addons .addon a .main {
   flex-grow: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #ffffff;
+  padding: 8px;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.addons .addon a .main strong {
+  color: #333333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  gap: 4px;
 }
 
 .addons .addon a .main img {
   max-width: 160px;
   max-height: 120px;
   object-fit: contain;
+  margin: 0 auto;
+}
+
+.addons .addon a .main strong img {
+  margin: 0 auto;
 }
 
 .addons .addon a .type {
   font-weight: normal;
   font-size: 10pt;
   margin-top: auto;
+  padding: 6px 8px;
+  border-top: 1px solid var(--vp-c-border, #eee);
 }
 
 @media (max-width: 479px) {
-  .addons .addon {
+  .addons .addon,
+  .addons > li {
     width: 140px;
     height: 140px;
   }

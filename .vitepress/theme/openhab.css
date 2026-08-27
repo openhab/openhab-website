@@ -33,20 +33,33 @@
 }
 
 /* Addon search & badges */
-.addons .addon {
-  background: #ffffff;
+.addons .addon,
+.vp-doc .addons li {
+  margin: 0 !important;
+}
+
+.addons .addon a .main {
+  background-color: #ffffff !important;
+}
+
+.addons .addon a .main strong {
+  color: #333333 !important;
 }
 
 .dark .addons .addon {
   background: #181818;
 }
 
-.addon-logo {
-  background-color: #ffffff;
+.dark .addons .addon a .type {
+  border-top: 1px solid #333333;
 }
 
+.addon-logo,
 .dark .addon-logo {
-  background-color: #222222;
+  position: relative;
+  z-index: 2;
+  background-color: #ffffff !important;
+  border-radius: 8px;
 }
 
 .display-mode-toggle button {
@@ -69,17 +82,17 @@
   color: #dddddd;
 }
 
-/* Footer */
-footer {
+/* Site Footer */
+footer:not(.VPDocFooter) {
   background: #f7f7f7;
 }
 
-.dark footer {
+.dark footer:not(.VPDocFooter) {
   background: #000000 !important;
   border-top: none !important;
 }
 
-.dark footer .legal a {
+.dark footer:not(.VPDocFooter) .legal a {
   color: #aaaaaa !important;
 }
 
