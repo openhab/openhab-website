@@ -1,18 +1,17 @@
 # Contributing to the openHAB website
 
-This website is made with [VuePress](https://vuepress.vuejs.org/).
+This website is made with [VitePress](https://vitepress.dev/).
 It will be installed as part of the dev dependencies.
-For the used version of vuepress to work correctly, Node.js 16.20.0 or **older** is needed.
-Alternatively on newer versions [the legacy OpenSSL provider can be enabled as described in this StackOverflow thread](https://stackoverflow.com/questions/69692842/error-message-error0308010cdigital-envelope-routinesunsupported).
+Node.js 24 LTS or newer is required.
 For the Ruby scripts used by the website build, Ruby 3.3.11 is needed.
 If you are using a Node.js version manager like [fnm](https://github.com/Schniz/fnm), the provided `.node-version` file should automatically set the correct Node.js version needed.
 If you are using a Ruby version manager like [rvm](https://rvm.io/), running `rvm use` should automatically set the correct version according to the `.ruby-version` file.
 
 ## Editing
 
-Be careful not to edit anything in the folder vuepress as it is the folder that contains generated content.
-The folder that contains pages to be edited is called ".vuepress" (note the dot at the beginning of the folder name).
-You can alter layouts and components in `.vuepress/components`, or the navigation in `.vuepress/config.js` - check the VuePress docs for more details.
+Be careful not to edit anything in the folder `.vitepress/dist` as it is the folder that contains generated content.
+The configuration and theme files are located in `.vitepress` (note the dot at the beginning of the folder name).
+You can alter layouts and components in `.vitepress/components` or `.vitepress/layouts`, or the navigation in `.vitepress/config.mts`.
 
 Note: if you add a new component and reference it in a (Markdown) page with its custom tag, it might not work until you restart the dev server.
 
@@ -77,7 +76,7 @@ You can however build it manually with the command: `npm run build`.
 
 This will:
 
-1. Run `ruby prepare-website.rb` as above.
-2. Run `vuepress build` which will output the final static files in `vuepress`.
+1. Run `ruby scripts/prepare-website.rb` as above.
+2. Run `vitepress build` which will output the final static files in `.vitepress/dist`.
 
 The complete build will take between 2 and 5 minutes.

@@ -1,0 +1,11 @@
+# Vitepress
+.temp
+cache
+dist
+
+# openhab-docs clone
+openhab-docs
+
+# External contents
+addons-*
+thing-types.json

@@ -14,10 +14,10 @@ require_relative "lib/website_utils"
 DOCS_REPO_URL = "https://github.com/openhab/openhab-docs"
 DOCS_REPO_BRANCH = ENV.fetch("OH_DOCS_VERSION", "final").then { |v| (v.count(".") == 1) ? "#{v}.0" : v }
 
-DOCS_SRC = Pathname(".vuepress/openhab-docs")
+DOCS_SRC = Pathname(".vitepress/openhab-docs")
 DOCS_DST = Pathname("docs")
 ADDONS_DST = Pathname("addons")
-LOGOS_DST = Pathname(".vuepress/public/logos")
+LOGOS_DST = Pathname("public/logos")
 
 $verbose = false
 
@@ -79,6 +79,16 @@ puts "➡️ Migrating logos"
 LOGOS_DST.rmtree if LOGOS_DST.exist?
 FileUtils.cp_r(DOCS_SRC / "images/addons", LOGOS_DST) if Dir.exist?(DOCS_SRC / "images/addons")
 
+puts "➡️ Migrating iconsets"
+ICONSETS_DST = Pathname("public/iconsets/classic")
+ICONSETS_DST.rmtree if ICONSETS_DST.exist?
+FileUtils.mkdir_p(ICONSETS_DST)
+if Dir.exist?(DOCS_SRC / "docs/configuration/iconsets/classic/icons")
+  FileUtils.cp_r(DOCS_SRC.join("docs/configuration/iconsets/classic/icons/."), ICONSETS_DST)
+elsif Dir.exist?("docs/configuration/iconsets/classic/icons")
+  FileUtils.cp_r(Pathname("docs/configuration/iconsets/classic/icons/."), ICONSETS_DST)
+end
+
 puts "➡️ Copying pre-processed docs from openhab-docs"
 FileUtils.cp_r(DOCS_SRC.join("docs/."), DOCS_DST)
 
@@ -108,7 +118,7 @@ puts "➡️ Writing add-ons arrays to files for sidebar navigation"
                              .map { |path, title, children| create_addon_entry(path, title, children) }
   end
 
-  dest_file = ".vuepress/addons-#{type}.js"
+  dest_file = ".vitepress/addons-#{type}.js"
   puts "   ↪️ Writing #{dest_file} (#{module_exports.size} items)"
   File.write(dest_file, "module.exports = #{JSON.generate(module_exports)}")
 end
@@ -116,7 +126,7 @@ end
 if options[:prettify]
   # Make it easier to read the generated JS files during development
   puts "➡️ Formatting the generated sidebar navigation files"
-  system("npx prettier --write '.vuepress/addons-*.js' --print-width 300") # Format the generated JS files
+  system("npx prettier --write '.vitepress/addons-*.js' --print-width 300") # Format the generated JS files
 end
 
 puts "➡️ Fetching the latest XSD files"
@@ -130,7 +140,7 @@ SCHEMAS = [
 
 SCHEMAS.each do |url|
   filename = File.basename(URI.parse(url).path)
-  dest_path = ".vuepress/public/schemas/#{filename}"
+  dest_path = "public/schemas/#{filename}"
   puts "   ↪️ Fetching #{dest_path}"
   URI.open(url) do |remote_file|
     File.binwrite(dest_path, remote_file.read)
@@ -140,14 +150,14 @@ end
 # Clean-Ups required for repeated local build
 verbose "🧹 Cleaning existing JavaDoc ..."
 FileUtils.rm Dir.glob("javadoc-latest.*"), force: true
-FileUtils.rm_rf(".vuepress/public/javadoc/latest")
+FileUtils.rm_rf("public/javadoc/latest")
 
 # Publish latest Javadoc
 puts "➡️ Downloading and extracting latest Javadoc from Jenkins"
 begin
   `wget -nv https://ci.openhab.org/job/openHAB-JavaDoc/lastSuccessfulBuild/artifact/target/javadoc-latest.tgz`
   if File.exist?("javadoc-latest.tgz")
-    `tar xzvf javadoc-latest.tgz --strip 2 && mv apidocs/ .vuepress/public/javadoc/latest`
+    `tar xzvf javadoc-latest.tgz --strip 2 && mv apidocs/ public/javadoc/latest`
     FileUtils.rm "javadoc-latest.tgz"
     puts "✅ Downloaded and extracted Javadoc"
   else
@@ -160,7 +170,7 @@ end
 # Copy the thing-types.json file to the proper location
 thing_types_src = DOCS_SRC / ".vuepress/thing-types.json"
 if thing_types_src.exist?
-  FileUtils.cp(thing_types_src, ".vuepress")
+  FileUtils.cp(thing_types_src, ".vitepress")
   puts "✅ Copied Thing Types"
 else
   puts "⏩ Thing Types not found - skipping"

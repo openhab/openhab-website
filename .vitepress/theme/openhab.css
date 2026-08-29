@@ -1,0 +1,268 @@
+/* openHAB custom theme styles */
+
+/* Jumbotron & Hero */
+.jumbotron {
+  background-color: #f7f7f7;
+}
+
+.dark .jumbotron,
+.dark .page-header,
+.dark .blogindex-header,
+.dark .post-header {
+  background-color: #000000 !important;
+  border-bottom: 1px solid #202020 !important;
+}
+
+/* Post Cards & Topics */
+.posts-list .post-frame,
+.topics .topic {
+  border: 1px solid var(--vp-c-border);
+  background-color: var(--vp-c-bg-elv);
+  color: var(--vp-c-text-1);
+}
+
+.dark .posts-list .post-frame,
+.dark .topics .topic {
+  border-color: #444444 !important;
+  background-color: #181818 !important;
+  color: #dddddd !important;
+}
+
+.post-cover {
+  background-color: rgba(127, 51, 0, 0.667);
+}
+
+/* Addon search & badges */
+.addons .addon,
+.vp-doc .addons li {
+  margin: 0 !important;
+}
+
+.addons .addon a .main {
+  background-color: #ffffff !important;
+}
+
+.addons .addon a .main strong {
+  color: #333333 !important;
+}
+
+.dark .addons .addon {
+  background: #181818;
+}
+
+.dark .addons .addon a .type {
+  border-top: 1px solid #333333;
+}
+
+.addon-logo,
+.dark .addon-logo {
+  position: relative;
+  z-index: 2;
+  background-color: #ffffff !important;
+  border-radius: 8px;
+}
+
+.display-mode-toggle button {
+  background: inherit;
+}
+
+.display-mode-toggle button[disabled] {
+  background: #ff6600 !important;
+}
+
+.addon-search .filter {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  color: var(--vp-c-text-1);
+}
+
+.dark .addon-search .filter {
+  background: #232123;
+  border: 1px solid #444444;
+  color: #dddddd;
+}
+
+/* Site Footer */
+footer:not(.VPDocFooter) {
+  background: #f7f7f7;
+}
+
+.dark footer:not(.VPDocFooter) {
+  background: #000000 !important;
+  border-top: none !important;
+}
+
+.dark footer:not(.VPDocFooter) .legal a {
+  color: #aaaaaa !important;
+}
+
+/* Installation Wizard Tabs */
+.os-tab,
+.distro-tab,
+.version-tab {
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.dark .os-tab:hover,
+.dark .distro-tab:hover,
+.dark .version-tab:hover {
+  background: #202020 !important;
+}
+
+.dark .os-tab.selected,
+.dark .distro-tab.selected,
+.dark .version-tab.selected {
+  border-color: #806044 !important;
+}
+
+.dark .os-tab img,
+.dark .distro-tab img,
+.dark .version-tab img {
+  filter: invert() grayscale() brightness(100) opacity(0.8);
+}
+
+/* Dark mode tweaks for homepage sections */
+.dark .section2,
+.dark .homepage .section2 {
+  background: #111111;
+}
+
+.dark .section2 .gears,
+.dark .section2 .home-icon,
+.dark .homepage .section2 .gears,
+.dark .homepage .section2 .home-icon {
+  filter: invert(1);
+}
+
+.dark .section2 .feature h3,
+.dark .homepage .section2 .feature h3 {
+  color: #dddddd;
+}
+
+.dark .section2 p,
+.dark .homepage .section2 p {
+  color: #aaaaaa !important;
+}
+
+.dark .section2 a,
+.dark .homepage .section2 a,
+.dark .section2 .feature a {
+  color: #5599ff !important;
+}
+
+.dark .section2 a:hover,
+.dark .homepage .section2 a:hover,
+.dark .section2 .feature a:hover {
+  color: #88bbff !important;
+  text-decoration: underline !important;
+}
+
+/* Cloud section background matching images */
+.cloud-section,
+.homepage .cloud-section {
+  background-color: #f2f2f2;
+}
+
+/* Dark mode tweaks for cloud section */
+.dark .cloud-section,
+.dark .homepage .cloud-section {
+  background-color: #0d0d0d;
+}
+
+.dark .cloud-section h2,
+.dark .homepage .cloud-section h2 {
+  color: var(--vp-c-brand-1, #ff6600) !important;
+}
+
+.dark .cloud-section a,
+.dark .homepage .cloud-section a {
+  color: var(--vp-c-brand-1, #ff6600) !important;
+}
+
+.dark .cloud-section a:hover,
+.dark .homepage .cloud-section a:hover {
+  color: var(--vp-c-brand-2, #e55d00) !important;
+  text-decoration: underline !important;
+}
+
+.dark .cloud-section .cloud-left-bkg-img,
+.dark .cloud-section .cloud-right-bkg-img,
+.dark .homepage .cloud-section .cloud-left-bkg-img,
+.dark .homepage .cloud-section .cloud-right-bkg-img {
+  filter: invert(1);
+}
+
+.dark .cloud-section p,
+.dark .homepage .cloud-section p {
+  color: #aaaaaa;
+}
+
+.dark .homepage .featured-addons-section {
+  background: #181818;
+}
+
+.dark .homepage .featured-addons-section h2 {
+  color: #dddddd;
+}
+
+.dark .homepage .featured-addons-section .all-addons-button {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.dark .homepage .featured-addons-section .all-addons-button:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.dark .homepage .community {
+  background: #181818;
+}
+
+.dark .homepage .community .community-stat {
+  color: #aaaaaa;
+}
+
+.dark .homepage .community .join-us-button:hover {
+  color: #000000 !important;
+}
+
+.dark .homepage .community h2 {
+  color: #dddddd;
+}
+
+.dark .homepage .alternativeto-banner {
+  background-image: linear-gradient(#2c4961, #222222) !important;
+}
+
+/* Dark mode for tables */
+.dark table,
+.dark th,
+.dark td {
+  border-color: #444444 !important;
+}
+
+.dark tr:nth-child(2n) {
+  background-color: #181818;
+}
+
+.dark code {
+  color: #f7f7f7;
+  background-color: rgb(47, 53, 60);
+}
+
+
+/* OS icons in download package tabs */
+.os-icon-debian,
+.os-icon-opensuse,
+.os-icon-mageia {
+  filter: grayscale(100%) brightness(0);
+}
+
+.dark .os-icon-debian,
+.dark .os-icon-opensuse,
+.dark .os-icon-mageia {
+  filter: brightness(0) invert(1) !important;
+}
+
