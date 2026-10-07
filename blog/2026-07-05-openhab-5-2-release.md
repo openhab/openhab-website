@@ -271,6 +271,9 @@ Whether you write rules manually in text files or manage them via the Main UI, t
   You can now assign an ID and tags to a DSL rule, allowing for easier identification and organization.
 - **Main UI Code Tab:**<br/>
   Main UI now displays the source code for DSL rules.
+- **Global Variables can see Previously Defined Global Variables:**<br/>
+  Variables, defined before the first rule in a `.rules` file, can reference previously defined variables from the same file.
+  This allows assigning lambda to a global variable, which lambda uses variables, defined before the lambda.
 
 Here is an example of a rule with UID, tag, and condition:
 
