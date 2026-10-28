@@ -17,7 +17,7 @@
         <a :href="withBase('/imprint.html')">Imprint</a>
       </span>
     </ScrollOnReveal>
-    <ScrollOnReveal classes="social-icons" :duration="1000">
+    <ScrollOnReveal classes="social-icons" :duration="800">
       <a href="https://x.com/openhab" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
         <svg class="social-icon x" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -48,7 +48,6 @@ const year = new Date().getFullYear()
 <style scoped>
 footer {
   border-top: 1px solid var(--vp-c-divider, #eaecef);
-  margin-bottom: -2rem;
   background: var(--vp-c-bg-alt, #fafafc);
   padding: 3rem 2.5rem;
   text-align: center;
