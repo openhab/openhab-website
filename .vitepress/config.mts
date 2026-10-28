@@ -1,10 +1,10 @@
 import { DefaultTheme, defineConfig } from 'vitepress'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
-import { RssPlugin } from 'vitepress-plugin-rss'
 import { fileURLToPath } from 'url'
 import path from 'path'
 import fs from 'fs'
 import fallbackMissingImagesPlugin from './plugins/fallbackMissingImages'
+import { genFeed } from './plugins/genFeed.ts'
 
 // Load TextMate grammars
 import openhabDslGrammar from './grammars/openhab-dsl.tmLanguage.json' with { type: 'json' }
@@ -467,13 +467,6 @@ export default defineConfig({
   vite: {
     plugins: [
       fallbackMissingImagesPlugin(),
-      RssPlugin({
-        title: 'openHAB',
-        baseUrl: 'https://www.openhab.org',
-        description: 'openHAB News and Announcements',
-        filter: (post: any) => post.url?.startsWith('/blog/') && post.url !== '/blog/' && post.url !== '/blog/index.html',
-        copyright: 'Copyright by the openHAB Community and the openHAB Foundation e.V.'
-      }),
     ],
   },
   themeConfig: {
@@ -557,4 +550,5 @@ export default defineConfig({
       ],
     },
   },
+  buildEnd: genFeed
 })

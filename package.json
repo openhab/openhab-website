@@ -12,11 +12,12 @@
     "markdown-it": "^14.1.0"
   },
   "devDependencies": {
+    "@types/node": "^24.19.2",
+    "feed": "^6.0.0",
     "framework7-icons": "^5.0.5",
     "fs-extra": "^11.3.0",
     "vite-plugin-static-copy": "^2.3.1",
     "vitepress": "^1.6.4",
-    "vitepress-plugin-rss": "^0.2.1",
     "vitepress-plugin-tabs": "^0.5.0",
     "vue": "^3.5.40"
   },
