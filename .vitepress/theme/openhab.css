@@ -249,21 +249,25 @@ footer:not(.VPDocFooter) {
   filter: brightness(0) invert(1) !important;
 }
 
-/* Content max-width on large screens */
+/* Content max-width */
 :root {
-  --oh-content-max-width: 1275px;
+  --oh-content-max-width: 850px;
 }
 
 @media (min-width: 1440px) {
-  .blog-index .content-wrapper,
-  .blog-post .post-body,
-  .blog-post .post-title,
-  .about-page .content-wrapper:not(.full-width),
-  .VPDoc.has-sidebar .content-container,
-  .VPDoc.has-aside .content-container,
-  .VPDoc .content-container {
-    max-width: var(--oh-content-max-width) !important;
+  :root {
+    --oh-content-max-width: 1275px;
   }
+}
+
+.blog-index .content-wrapper,
+.blog-post .post-body,
+.blog-post .post-title,
+.about-page .content-wrapper:not(.full-width),
+.VPDoc.has-sidebar .content-container,
+.VPDoc.has-aside .content-container,
+.VPDoc .content-container {
+  max-width: var(--oh-content-max-width) !important;
 }
 
 

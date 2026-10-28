@@ -55,7 +55,7 @@ const { frontmatter } = useData()
   text-align: center;
 }
 .content-wrapper {
-  max-width: 900px;
+  max-width: var(--oh-content-max-width, 850px);
   margin: 2rem auto 4rem;
   padding: 0 1.5rem;
 }

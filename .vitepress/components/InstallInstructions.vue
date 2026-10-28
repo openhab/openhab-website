@@ -470,12 +470,15 @@ const homebrewPackageName = computed(() => {
 
 <style scoped>
 .instructions {
-  margin-top: 1rem;
-  margin-bottom: 0.3rem;
+  margin-top: 1.75rem;
+  margin-bottom: 1rem;
   font-size: 1.5rem;
   font-weight: 400;
   text-align: center;
   font-family: 'Open Sans', sans-serif;
+}
+.instructions:first-child {
+  margin-top: 1rem;
 }
 .os-tabs {
   display: flex;
@@ -515,7 +518,6 @@ const homebrewPackageName = computed(() => {
   flex-direction: row;
   justify-content: center;
   gap: 12px;
-  margin-top: 0.5rem;
 }
 .distro-tabs .distro-tab {
   width: 30%;
@@ -544,7 +546,6 @@ const homebrewPackageName = computed(() => {
   justify-content: center;
   align-items: stretch;
   gap: 12px;
-  margin-top: 0.5rem;
 }
 .version-tabs .version-tab {
   width: 20%;

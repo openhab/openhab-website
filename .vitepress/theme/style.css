@@ -615,7 +615,6 @@ img.inline-image,
 .VPDoc.has-sidebar .content-container,
 .VPDoc.has-aside .content-container,
 .VPDoc .content-container {
-  max-width: 100% !important;
   margin: 0 auto !important;
 }
 

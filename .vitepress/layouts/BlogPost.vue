@@ -81,13 +81,13 @@ const formattedDate = computed(() => {
   font-size: 2.5rem;
   margin: 0;
   text-align: center;
-  max-width: 900px;
+  max-width: var(--oh-content-max-width, 850px);
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
   line-height: 1.25;
 }
 
 .post-body {
-  max-width: 850px;
+  max-width: var(--oh-content-max-width, 850px);
   margin: 2rem auto 4rem;
   padding: 0 1.5rem;
 }
