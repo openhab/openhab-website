@@ -198,23 +198,6 @@ footer:not(.VPDocFooter) {
   color: #aaaaaa;
 }
 
-.dark .homepage .featured-addons-section {
-  background: #181818;
-}
-
-.dark .homepage .featured-addons-section h2 {
-  color: #dddddd;
-}
-
-.dark .homepage .featured-addons-section .all-addons-button {
-  color: #ffffff;
-  border-color: #ffffff;
-}
-
-.dark .homepage .featured-addons-section .all-addons-button:hover {
-  background-color: #ffffff;
-  color: #000000;
-}
 
 .dark .homepage .community {
   background: #181818;
@@ -265,4 +248,22 @@ footer:not(.VPDocFooter) {
 .dark .os-icon-mageia {
   filter: brightness(0) invert(1) !important;
 }
+
+/* Content max-width on large screens */
+:root {
+  --oh-content-max-width: 1275px;
+}
+
+@media (min-width: 1440px) {
+  .blog-index .content-wrapper,
+  .blog-post .post-body,
+  .blog-post .post-title,
+  .about-page .content-wrapper:not(.full-width),
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc.has-aside .content-container,
+  .VPDoc .content-container {
+    max-width: var(--oh-content-max-width) !important;
+  }
+}
+
 

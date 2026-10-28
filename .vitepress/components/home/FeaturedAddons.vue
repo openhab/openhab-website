@@ -54,17 +54,20 @@ const featuredAddons = computed(() => {
 
 <style scoped>
 .featured-addons-section {
-  background: var(--vp-c-bg, white);
+  background-color: #ffffff;
+  color: #2c3e50;
   display: flex;
   flex-direction: column;
-  padding: 2rem 0;
+  padding: 3rem 0;
 }
 .featured-addons-section h2 {
+  margin: 0 0 2.5rem;
   text-align: center;
   font-family: 'Open Sans', sans-serif;
   font-weight: normal;
   font-size: 2.5em;
   border: none;
+  color: #2c3e50;
 }
 .logos {
   padding: 0 5rem;
@@ -80,8 +83,6 @@ const featuredAddons = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
-  border-radius: 8px;
 }
 .featured-logo {
   margin: auto;
