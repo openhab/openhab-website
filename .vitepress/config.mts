@@ -120,6 +120,33 @@ const addonsTransformations = transformAddonSidebar(safeRequire('./addons-transf
 const addonsVoice = transformAddonSidebar(safeRequire('./addons-voice.js', []))
 const addonsUi = transformAddonSidebar(safeRequire('./addons-ui.js', []))
 
+function fallbackMissingImagesPlugin(): any {
+  const IMAGE_EXTENSIONS = /\.(png|jpe?g|gif|svg|webp|avif|ico|bmp|tiff?)$/i
+  return {
+    name: 'vite-plugin-fallback-missing-images',
+    enforce: 'pre',
+    resolveId(source: string, importer: string | undefined) {
+      if (importer && source.startsWith('.') && IMAGE_EXTENSIONS.test(source)) {
+        const cleanPath = source.split(/[?#]/)[0]
+        // Strip any Vite query params from importer if present
+        const importerFile = importer.split('?')[0]
+        const resolved = path.resolve(path.dirname(importerFile), cleanPath)
+        if (!fs.existsSync(resolved)) {
+          return `\0virtual:missing-image:${encodeURIComponent(source)}`
+        }
+      }
+      return null
+    },
+    load(id: string) {
+      if (id.startsWith('\0virtual:missing-image:')) {
+        const rawSource = decodeURIComponent(id.slice('\0virtual:missing-image:'.length))
+        return `export default ${JSON.stringify(rawSource)};`
+      }
+      return null
+    },
+  }
+}
+
 export default defineConfig({
   title: 'openHAB',
   description: 'openHAB - a vendor and technology agnostic open source automation software for your home',
@@ -144,6 +171,9 @@ export default defineConfig({
       shell: 'bash',
       sh: 'bash',
       shell_session: 'bash'
+    },
+    attrs: {
+      disable: true,
     },
     config(md) {
       md.use(tabsMarkdownPlugin)
@@ -301,6 +331,24 @@ export default defineConfig({
       md.core.ruler.push('clean_unmatched_html', (state) => {
         const VOID_TAGS = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'])
 
+        const closingTagCounts: Record<string, number> = {}
+        function countClosingTags(tokens: any[]) {
+          for (const token of tokens) {
+            if (token.type === 'link_close') {
+              closingTagCounts['a'] = (closingTagCounts['a'] || 0) + 1
+            } else if ((token.type === 'html_inline' || token.type === 'html_block') && !token.content.startsWith('<!--')) {
+              const matches = token.content.matchAll(/<\/([a-zA-Z][a-zA-Z0-9_\-:]*)[^>]*>/g)
+              for (const m of matches) {
+                const lower = m[1].toLowerCase()
+                closingTagCounts[lower] = (closingTagCounts[lower] || 0) + 1
+              }
+            }
+            if (token.children) countClosingTags(token.children)
+          }
+        }
+
+        countClosingTags(state.tokens)
+
         function processTokens(tokens: any[], openTags: string[] = []) {
           for (const token of tokens) {
             if (token.type === 'link_open') {
@@ -329,6 +377,10 @@ export default defineConfig({
                     }
                     return `&lt;/${tagName}${rest}&gt;`
                   } else {
+                    if (!closingTagCounts[lower] || closingTagCounts[lower] <= 0) {
+                      return `&lt;${tagName}${rest}&gt;`
+                    }
+                    closingTagCounts[lower]--
                     openTags.push(lower)
                     return match
                   }
@@ -440,6 +492,7 @@ export default defineConfig({
   },
   vite: {
     plugins: [
+      fallbackMissingImagesPlugin(),
       RssPlugin({
         title: 'openHAB',
         baseUrl: 'https://www.openhab.org',
