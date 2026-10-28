@@ -23,7 +23,7 @@
 import { computed } from 'vue'
 import { withBase } from 'vitepress'
 import ScrollOnReveal from '../ScrollOnReveal.vue'
-import { data as allAddons } from '../../theme/addons.data'
+import { data as allAddons } from '../../loaders/addons.data'
 
 const featuredBindingIds = [
   'astro',

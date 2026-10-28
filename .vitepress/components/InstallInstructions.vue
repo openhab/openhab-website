@@ -348,11 +348,11 @@ usermod -a -G openhab myownuser
         </li>
         <li v-if="selectedSystem === 'apple'">
           Open <em>System Preferences &gt; Keyboard &gt; Shortcuts</em> and check the <em>New Terminal at Folder</em> option under <em>Services</em>:<br />
-          <img class="img-center" :src="withBase('/components/images/macos-settings.png')" alt="" />
+          <img class="img-center" src="./images/macos-settings.png" alt="" />
         </li>
         <li v-if="selectedSystem === 'apple'">
           Using the Finder, find the folder with the extracted runtime, open its context menu and select <em>New Terminal at Folder</em>:<br /><br />
-          <img class="img-center" :src="withBase('/components/images/macos-contextmenu.png')" alt="" /><br />
+          <img class="img-center" src="./images/macos-contextmenu.png" alt="" /><br />
         </li>
         <li>
           <span v-if="selectedSystem !== 'win10'">Run <code>./start.sh</code></span>

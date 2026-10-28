@@ -120,6 +120,7 @@ const addonsTransformations = transformAddonSidebar(safeRequire('./addons-transf
 const addonsVoice = transformAddonSidebar(safeRequire('./addons-voice.js', []))
 const addonsUi = transformAddonSidebar(safeRequire('./addons-ui.js', []))
 
+// Prevent build or dev-server crashed caused by broken image imports
 function fallbackMissingImagesPlugin(): any {
   const IMAGE_EXTENSIONS = /\.(png|jpe?g|gif|svg|webp|avif|ico|bmp|tiff?)$/i
   return {
@@ -132,6 +133,10 @@ function fallbackMissingImagesPlugin(): any {
         const importerFile = importer.split('?')[0]
         const resolved = path.resolve(path.dirname(importerFile), cleanPath)
         if (!fs.existsSync(resolved)) {
+          this.warn({
+            message: `Missing image asset: "${source}" could not be resolved at "${resolved}".`,
+            id: importerFile,
+          })
           return `\0virtual:missing-image:${encodeURIComponent(source)}`
         }
       }
@@ -497,7 +502,7 @@ export default defineConfig({
         title: 'openHAB',
         baseUrl: 'https://www.openhab.org',
         description: 'openHAB News and Announcements',
-        filter: (post: any) => post.filepath && post.filepath.startsWith('blog/'),
+        filter: (post: any) => post.url?.startsWith('/blog/') && post.url !== '/blog/' && post.url !== '/blog/index.html',
         copyright: 'Copyright by the openHAB Community and the openHAB Foundation e.V.'
       }),
     ],

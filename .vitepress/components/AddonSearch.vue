@@ -100,7 +100,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useData, withBase } from 'vitepress'
-import { data as allAddons } from '../theme/addons.data'
+import { data as allAddons } from '../loaders/addons.data'
 
 const { frontmatter } = useData()
 

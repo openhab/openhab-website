@@ -66,7 +66,6 @@ A special version is the "works with openHAB" logo, which is intended to be used
 
 ## Downloads
 
-<ClientOnly> 
 <div class="artwork-downloads">
   <div class="artwork-download-card">
     <a href="/openHAB-logo.zip">
@@ -85,4 +84,3 @@ A special version is the "works with openHAB" logo, which is intended to be used
     </a>
   </div>
 </div>
-</ClientOnly>

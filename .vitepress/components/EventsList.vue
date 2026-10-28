@@ -60,7 +60,7 @@
 import { computed } from 'vue'
 import { withBase } from 'vitepress'
 import CalendarIcon from './CalendarIcon.vue'
-import { data as allEvents } from '../theme/events.data'
+import { data as allEvents } from '../loaders/events.data'
 
 const upcomingEvents = computed(() => {
   const now = new Date()

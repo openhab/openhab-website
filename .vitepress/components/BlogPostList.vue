@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import { withBase } from 'vitepress'
 import ScrollOnReveal from './ScrollOnReveal.vue'
-import { data as posts } from '../theme/posts.data'
+import { data as posts } from '../loaders/posts.data'
 
 function formatDate(rawDate: string) {
   if (!rawDate) return ''

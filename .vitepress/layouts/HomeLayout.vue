@@ -12,8 +12,6 @@ import { onMounted, onUnmounted } from 'vue'
 
 import Jumbotron from '../components/home/Jumbotron.vue'
 import HomeSections from '../components/HomeSections.vue'
-import Footer from '../components/Footer.vue'
-import ConsentBanner from '../components/ConsentBanner.vue'
 
 let hr: any = null
 

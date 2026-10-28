@@ -44,7 +44,7 @@ import { withBase } from 'vitepress'
 import ScrollOnReveal from '../ScrollOnReveal.vue'
 import parallax from '@lucien144/vue3-parallaxy'
 import CalendarIcon from '../CalendarIcon.vue'
-import { data as allEvents } from '../../theme/events.data'
+import { data as allEvents } from '../../loaders/events.data'
 
 const events = computed(() => {
   const now = new Date()
