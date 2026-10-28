@@ -23,7 +23,7 @@ const props = defineProps<{
 }>()
 
 const imgHeight = computed(() => props.height || '1.5em')
-const imgVerticalAlign = computed(() => props.verticalAlign || 'middle')
+const imgVerticalAlign = computed(() => props.verticalAlign || 'text-bottom')
 </script>
 
 <style scoped>

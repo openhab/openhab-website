@@ -170,7 +170,7 @@ end
 # Copy the thing-types.json file to the proper location
 thing_types_src = DOCS_SRC / ".vuepress/thing-types.json"
 if thing_types_src.exist?
-  FileUtils.cp(thing_types_src, ".vitepress")
+  FileUtils.cp(thing_types_src, "public/thing-types.json")
   puts "✅ Copied Thing Types"
 else
   puts "⏩ Thing Types not found - skipping"

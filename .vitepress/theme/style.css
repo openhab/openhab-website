@@ -523,11 +523,16 @@ img.img-beside-text-left {
 }
 
 /* 6. Inline images */
+.vp-doc img,
 .vp-doc img.inline-image,
 img.inline-image,
 .inline-image {
-  display: inline-block !important;
-  vertical-align: middle;
+  display: inline-block;
+}
+
+.vp-doc img.inline-image,
+img.inline-image,
+.inline-image {
   max-width: none !important;
   margin: 0 0.15em !important;
 }

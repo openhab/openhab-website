@@ -26,6 +26,7 @@ import CommunityTutorials from '../components/CommunityTutorials.vue'
 import ConsentBanner from '../components/ConsentBanner.vue'
 import HomeSections from '../components/HomeSections.vue'
 import IconsetDisplay from '../components/IconsetDisplay.vue'
+import F7Icon from '../components/F7Icon.vue'
 import InlineImage from '../components/InlineImage.vue'
 import InstallInstructions from '../components/InstallInstructions.vue'
 import PropBlock from '../components/PropBlock.vue'
@@ -85,6 +86,8 @@ export default {
     app.component('ConsentBanner', ConsentBanner)
     app.component('HomeSections', HomeSections)
     app.component('IconsetDisplay', IconsetDisplay)
+    app.component('F7Icon', F7Icon)
+    app.component('f7-icon', F7Icon)
     app.component('InlineImage', InlineImage)
     app.component('InstallInstructions', InstallInstructions)
     app.component('PropBlock', PropBlock)

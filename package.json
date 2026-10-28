@@ -13,6 +13,7 @@
     "scrollreveal": "^4.0.9"
   },
   "devDependencies": {
+    "framework7-icons": "^5.0.5",
     "fs-extra": "^11.3.0",
     "vite-plugin-static-copy": "^2.3.1",
     "vitepress": "^1.6.4",
@@ -33,5 +34,9 @@
     "build-local-stable": "OH_DOCS_VERSION=final-stable npm run build-local"
   },
   "author": "openHAB",
-  "license": "EPL-2.0"
+  "license": "EPL-2.0",
+  "allowScripts": {
+    "esbuild@0.25.12": true,
+    "esbuild@0.21.5": true
+  }
 }

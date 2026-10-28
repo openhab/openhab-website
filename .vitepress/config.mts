@@ -344,9 +344,46 @@ export default defineConfig({
         processTokens(state.tokens)
       })
 
-      // Safe fence renderer: don't fail the build on invalid code fence content, log a warning instead
+      // Detect openHAB DSL / Rules code snippets and safely render fences
       const defaultFenceRender = md.renderer.rules.fence
       md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+        const token = tokens[idx]
+        const str = token.content
+        const rawInfo = token.info ? md.utils.unescapeAll(token.info).trim() : ''
+        const lang = rawInfo.split(/\s+/g)[0]
+        const restInfo = rawInfo.slice(lang.length)
+
+        if (!['nginx', 'bash', 'python', 'js', 'javascript', 'groovy', 'yaml', 'ruby', 'rb'].includes(lang)) {
+          let newLang = lang
+          /* Simple heuristics to detect rules & other openHAB DSL code snippets and override the language */
+          if (str.match(/\b(?:Color|Contact|Dimmer|Group|Number|Player|Rollershutter|Switch|Location|Frame|Default|Text|Group|Selection|Setpoint|Slider|Colorpicker|Chart|Webview|Mapview|Image|Video|Item|Thing|Bridge|Time|Type|Sitemap|sitemap)\b/)) {
+            if (!str.match(/\b(?:private|public|protected|class|implements|extends|thing-type|thing-description|channel-type)\b/)) {
+              newLang = 'dsl'
+            }
+          }
+          if (str.match(/\b(?:String|DateTime)\b/) && lang !== 'java' && lang !== 'xml') {
+            newLang = 'dsl'
+          }
+          if (
+            (str.match(/\brule\b/) && str.match(/\bwhen\b/) && str.match(/\bthen\b/) && str.match(/\bend\b/)) ||
+            str.match(/received update/) ||
+            str.match(/changed.*(?:from|to)/) ||
+            str.match(/Channel.*triggered/) ||
+            str.match(/\bval\b/) ||
+            str.match(/\bvar\b/)
+          ) {
+            newLang = 'rules'
+          }
+          if (newLang === 'shell' || newLang === 'sh' || newLang === 'shell_session') newLang = 'bash'
+          if (newLang === 'conf') newLang = 'dsl'
+          if (newLang === 'JSON') newLang = 'json'
+          if (newLang === 'Xtend') newLang = 'xtend'
+
+          if (newLang !== lang) {
+            token.info = newLang + restInfo
+          }
+        }
+
         try {
           if (defaultFenceRender) {
             return defaultFenceRender(tokens, idx, options, env, self)
@@ -354,10 +391,9 @@ export default defineConfig({
           return self.renderToken(tokens, idx, options)
         } catch (err: any) {
           console.warn(`[markdown fence warning] Failed to highlight code fence:`, err?.message || err)
-          const token = tokens[idx]
           const info = token.info ? md.utils.unescapeAll(token.info).trim() : ''
-          const lang = info ? info.split(/\s+/g)[0] : 'txt'
-          return `<div class="language-${lang}"><pre class="vp-code" v-pre><code>${md.utils.escapeHtml(token.content)}</code></pre></div>`
+          const fallbackLang = info ? info.split(/\s+/g)[0] : 'txt'
+          return `<div class="language-${fallbackLang}"><pre class="vp-code" v-pre><code>${md.utils.escapeHtml(token.content)}</code></pre></div>`
         }
       }
     },
@@ -366,9 +402,39 @@ export default defineConfig({
     template: {
       transformAssetUrls: {
         includeAbsolute: false,
+        tags: {
+          video: ['src', 'poster'],
+          source: ['src'],
+          img: ['src'],
+          image: ['xlink:href', 'href'],
+          use: ['xlink:href', 'href'],
+          InlineImage: ['src'],
+          'inline-image': ['src'],
+        },
       },
       compilerOptions: {
-        isCustomElement: (tag) => tag.includes('-'),
+        isCustomElement: (tag) => {
+          const lower = tag.toLowerCase()
+          if (
+            [
+              'f7-icon',
+              'f7icon',
+              'inline-image',
+              'inlineimage',
+              'client-only',
+              'clientonly',
+              'plugin-tabs',
+              'plugintabs',
+              'plugin-tabs-tab',
+              'plugintabstab',
+              'outbound-link',
+              'outboundlink',
+            ].includes(lower)
+          ) {
+            return false
+          }
+          return tag.includes('-')
+        },
       },
     },
   },

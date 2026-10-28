@@ -27,3 +27,5 @@ javadoc-*
 apidocs
 docs
 public/logos
+public/iconsets
+public/thing-types.json

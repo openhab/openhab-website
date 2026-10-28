@@ -1,7 +1,7 @@
 {
   "name": "openhab-dsl",
   "scopeName": "source.openhab-dsl",
-  "aliases": ["dsl", "things", "items", "rules", "sitemap", "xtend", "rulesdsl"],
+  "aliases": ["dsl", "conf", "openhab", "things", "items", "rules", "sitemap", "xtend", "rulesdsl"],
   "patterns": [
     { "include": "#comments" },
     { "include": "#strings" },
@@ -83,7 +83,7 @@
       "captures": {
         "1": { "name": "storage.type.openhab-dsl" },
         "2": { "name": "support.type.dimension.openhab-dsl" },
-        "3": { "name": "variable.other.declaration.openhab-dsl" }
+        "3": { "name": "entity.name.type.class.openhab-dsl" }
       }
     },
     "keywords": {
@@ -172,7 +172,7 @@
     },
     "punctuation": {
       "name": "punctuation.separator.openhab-dsl",
-      "match": "[{}[\\],.:;()]"
+      "match": "[{}\\[\\],.:;()]"
     }
   }
 }

@@ -25,8 +25,30 @@ import { withBase } from 'vitepress'
 import ScrollOnReveal from '../ScrollOnReveal.vue'
 import { data as allAddons } from '../../theme/addons.data'
 
+const featuredBindingIds = [
+  'astro',
+  'bluetooth',
+  'homekit',
+  'hue',
+  'knx',
+  'kodi',
+  'matter',
+  'mqtt',
+  'nest',
+  'shelly',
+  'sonos',
+  'tradfri',
+  'zigbee',
+  'zwave',
+]
+
 const featuredAddons = computed(() => {
-  return (allAddons || []).filter((p) => p.logo && p.type === 'binding')
+  const addons = allAddons || []
+  const featured = featuredBindingIds
+    .map((id) => addons.find((p) => p.id === id && p.type === 'binding' && p.logo))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p))
+
+  return featured.length > 0 ? featured : addons.filter((p) => p.logo && p.type === 'binding')
 })
 </script>
 
@@ -58,6 +80,8 @@ const featuredAddons = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #ffffff;
+  border-radius: 8px;
 }
 .featured-logo {
   margin: auto;
