@@ -508,6 +508,10 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+:where(.v-scroll-reveal) {
+  display: flow-root;
+}
+
 @media (scripting: none) {
   .v-sr-hidden {
     opacity: 1 !important;

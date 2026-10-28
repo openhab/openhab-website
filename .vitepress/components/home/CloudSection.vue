@@ -21,16 +21,12 @@
       </ScrollOnReveal>
     </div>
     <div class="cloud-bkg">
-      <div class="cloud-left-bkg">
-        <ScrollOnReveal origin="left" distance="120px" :duration="800" :delay="400" :scale="1.0">
-          <img class="cloud-left-bkg-img" src="./images/lock-bkg.png" alt="" />
-        </ScrollOnReveal>
-      </div>
-      <div class="cloud-right-bkg">
-        <ScrollOnReveal origin="right" distance="120px" :duration="800" :delay="400" :scale="1.0">
-          <img class="cloud-right-bkg-img" src="./images/cloud-bkg.png" alt="" />
-        </ScrollOnReveal>
-      </div>
+      <ScrollOnReveal classes="cloud-left-bkg" selector=".cloud-left-bkg-img" origin="left" distance="120px" :duration="800" :delay="400" :scale="1.0">
+        <img class="cloud-left-bkg-img" src="./images/lock-bkg.png" alt="" />
+      </ScrollOnReveal>
+      <ScrollOnReveal classes="cloud-right-bkg" selector=".cloud-right-bkg-img" origin="right" distance="120px" :duration="800" :delay="400" :scale="1.0">
+        <img class="cloud-right-bkg-img" src="./images/cloud-bkg.png" alt="" />
+      </ScrollOnReveal>
     </div>
   </div>
 </template>
