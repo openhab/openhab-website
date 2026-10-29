@@ -75,7 +75,7 @@ export default {
       window.addEventListener = function (type: string, listener: any, options?: any) {
         if (type === 'resize' && typeof listener === 'function' && listener.name === 'closeScreenOnTabletWindow') {
           const wrapped = function () {
-            if (window.outerWidth > 1128) {
+            if (window.outerWidth > 1060) {
               listener()
             }
           }

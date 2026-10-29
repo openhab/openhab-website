@@ -581,8 +581,7 @@ export default defineConfig({
             ],
           },
         ],
-      },
-      { text: 'GitHub', link: 'https://github.com/openhab' },
+      }
     ],
     sidebar: {
       '/docs/': docsSidebar.length > 0 ? docsSidebar : [

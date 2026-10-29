@@ -633,7 +633,7 @@ img.inline-image,
    Also see ./index.ts
    ========================================================================== */
 
-@media (max-width: 1128px) {
+@media (max-width: 1060px) {
   .VPNavBarMenu {
     display: none !important;
   }
@@ -647,7 +647,7 @@ img.inline-image,
   }
 }
 
-@media (min-width: 768px) and (max-width: 1128px) {
+@media (min-width: 768px) and (max-width: 1060px) {
   .VPNavScreen {
     display: block !important;
   }
