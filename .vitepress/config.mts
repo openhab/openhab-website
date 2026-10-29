@@ -28,6 +28,49 @@ function safeRequire(filePath: string, fallback: any = []) {
   return fallback
 }
 
+// Helper to extract page title from Markdown FrontMatter or first H1 heading
+function getPageTitle(relPath: string): string | undefined {
+  const cleanPath = relPath.replace(/^\/+/, '').replace(/\/+$/, '')
+  const roots = [
+    path.resolve(__dirname, '../docs'),
+    path.resolve(__dirname, 'openhab-docs/docs')
+  ]
+
+  const candidates: string[] = []
+  for (const root of roots) {
+    if (!cleanPath) {
+      candidates.push(path.join(root, 'index.md'), path.join(root, 'README.md'))
+    } else {
+      candidates.push(
+        path.join(root, `${cleanPath}.md`),
+        path.join(root, cleanPath, 'index.md'),
+        path.join(root, cleanPath, 'README.md')
+      )
+    }
+  }
+
+  for (const file of candidates) {
+    if (fs.existsSync(file)) {
+      try {
+        const content = fs.readFileSync(file, 'utf-8')
+        const fmMatch = content.match(/^---\s*[\r\n]+([\s\S]*?)[\r\n]+---/)
+        if (fmMatch) {
+          const titleMatch = fmMatch[1].match(/^title:\s*(?:["'](.*?)["']|(.*))$/m)
+          const title = (titleMatch?.[1] || titleMatch?.[2])?.trim()
+          if (title) return title
+        }
+        const h1Match = content.match(/^#\s+(.*)$/m)
+        if (h1Match?.[1]) {
+          return h1Match[1].trim()
+        }
+      } catch {
+        // ignore read error
+      }
+    }
+  }
+  return undefined
+}
+
 // Convert VuePress docs sidebar structure to VitePress sidebar items
 function transformDocsSidebar(items: any[]): DefaultTheme.SidebarItem[] {
   if (!Array.isArray(items)) return []
@@ -40,7 +83,8 @@ function transformDocsSidebar(items: any[]): DefaultTheme.SidebarItem[] {
     if (typeof item === 'string') {
       const p = item.trim()
       const link = p === '' ? '/docs/' : (p.startsWith('/') ? p : ('/docs/' + p)).replace(/\/+/g, '/')
-      const text = p === '' ? 'Introduction' : p.split('/').pop()?.replace(/[_-]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+      const slugText = p === '' ? 'Introduction' : p.split('/').filter(Boolean).pop()?.replace(/[_-]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+      const text = getPageTitle(p) || slugText
       return { text, link }
     }
     if (item && typeof item === 'object') {
@@ -60,9 +104,12 @@ function transformDocsSidebar(items: any[]): DefaultTheme.SidebarItem[] {
         collapsed = true
       }
 
+      const link = item.path || item.link ? (item.path || item.link).replace(/\/+/g, '/') : undefined
+      const text = item.title || item.text || (link ? getPageTitle(link.replace(/^\/docs\/?/, '')) : undefined)
+
       return {
-        text: item.title || item.text,
-        link: item.path || item.link ? (item.path || item.link).replace(/\/+/g, '/') : undefined,
+        text,
+        link,
         items: children ? transformDocsSidebar(children) : undefined,
         collapsed,
       }
