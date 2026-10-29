@@ -200,7 +200,10 @@ onMounted(async () => {
   padding: 0.8rem 1rem 0.8rem 2.5rem;
   border: 1px solid var(--vp-c-border, #ccc);
   border-radius: 2rem;
-  background: var(--vp-c-bg-elv, #fff) url(/images/search.svg) 0.7rem 1rem no-repeat;
+  background-color: var(--vp-c-bg-elv, #fff);
+  background-image: url(/images/search.svg);
+  background-position: 0.8rem center;
+  background-repeat: no-repeat;
   outline: none;
   color: var(--vp-c-text-1, #000);
 }
