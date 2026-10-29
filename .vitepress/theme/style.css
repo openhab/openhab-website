@@ -628,4 +628,27 @@ img.inline-image,
   padding-right: 0 !important;
 }
 
+/* ==========================================================================
+   Collapse navbar on narrow screens (<= 1128px)
+   Also see ./index.ts
+   ========================================================================== */
 
+@media (max-width: 1128px) {
+  .VPNavBarMenu {
+    display: none !important;
+  }
+
+  .VPNavBarHamburger {
+    display: flex !important;
+  }
+
+  .VPNavBarExtra {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1128px) {
+  .VPNavScreen {
+    display: block !important;
+  }
+}

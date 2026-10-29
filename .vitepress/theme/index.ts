@@ -65,6 +65,35 @@ export default {
     enhanceAppWithTabs(app)
     app.config.globalProperties.$withBase = (url: string) => url
 
+    // Hook into the default closeScreenOnTabletWindow resize listener to avoid prematurely closing the mobile screen menu on wider screens
+    // => We've increased the breakpoint to switch to the mobile menu on wider screens than default, see style.css
+    if (typeof window !== 'undefined') {
+      const origAddEventListener = window.addEventListener
+      const origRemoveEventListener = window.removeEventListener
+      const listenerMap = new WeakMap<Function, Function>()
+
+      window.addEventListener = function (type: string, listener: any, options?: any) {
+        if (type === 'resize' && typeof listener === 'function' && listener.name === 'closeScreenOnTabletWindow') {
+          const wrapped = function () {
+            if (window.outerWidth > 1128) {
+              listener()
+            }
+          }
+          listenerMap.set(listener, wrapped)
+          return origAddEventListener.call(window, type, wrapped, options)
+        }
+        return origAddEventListener.apply(this, arguments as any)
+      }
+
+      window.removeEventListener = function (type: string, listener: any, options?: any) {
+        if (type === 'resize' && typeof listener === 'function' && listenerMap.has(listener)) {
+          const wrapped = listenerMap.get(listener)!
+          return origRemoveEventListener.call(window, type, wrapped, options)
+        }
+        return origRemoveEventListener.apply(this, arguments as any)
+      }
+    }
+
     // Register layouts
     app.component('HomeLayout', HomeLayout)
     app.component('AboutPage', AboutPage)
