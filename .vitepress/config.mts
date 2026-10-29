@@ -306,11 +306,18 @@ export default defineConfig({
         'time', 'title', 'tr', 'track', 'u', 'ul', 'var', 'video', 'wbr',
       ]
 
+      const SVG_TAGS = [
+        'svg', 'path', 'g', 'circle', 'rect', 'line', 'polyline', 'polygon', 'ellipse',
+        'text', 'tspan', 'use', 'defs', 'symbol', 'clippath', 'mask', 'pattern',
+        'lineargradient', 'radialgradient', 'stop', 'image', 'marker'
+      ]
+
       const BUILTIN_TAGS = ['clientonly', 'client-only', 'content', 'badge', 'tab', 'tabs', 'outboundlink', 'outbound-link', 'plugintabs', 'plugintabstab', 'plugin-tabs', 'plugin-tabs-tab']
       const customComponents = getComponentTags('./components', '../components', './.vuepress/components', '../.vuepress/components')
 
       const KNOWN_TAGS = new Set([
         ...HTML_TAGS.map((t) => t.toLowerCase()),
+        ...SVG_TAGS.map((t) => t.toLowerCase()),
         ...BUILTIN_TAGS,
         ...customComponents,
       ])
