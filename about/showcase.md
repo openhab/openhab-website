@@ -2,6 +2,7 @@
 sidebar: false
 layout: AboutPage
 title: Showcase & How-tos
+fullWidth: true
 meta:
   - name: og:title
     content: openHAB Showcase & How-tos

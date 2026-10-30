@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "strict": true,
+    "jsx": "preserve",
+    "lib": ["esnext", "dom"]
+  },
+  "exclude": [
+    "**/node_modules/**",
+    "**/dist/**",
+  ]
+}
