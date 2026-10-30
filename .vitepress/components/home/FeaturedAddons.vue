@@ -117,7 +117,7 @@ const featuredAddons = computed(() => {
 }
 @media (max-width: 768px) {
   .logos {
-    padding: 0;
+    padding: 0 1.5rem;
   }
   .logo-container {
     width: 90px;

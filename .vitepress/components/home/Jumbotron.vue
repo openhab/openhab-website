@@ -216,6 +216,9 @@ h2.lead {
     min-height: auto;
     padding: 3.5rem 1.5rem 2.5rem;
   }
+  .hero-content {
+    margin: 0;
+  }
   .phone {
     display: none;
   }

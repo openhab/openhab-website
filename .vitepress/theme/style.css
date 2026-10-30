@@ -553,14 +553,26 @@ img.inline-image,
   text-decoration: none !important;
 }
 
+.VPDoc {
+  padding-bottom: 40px !important;
+}
+
+@media (min-width: 960px) {
+  .VPDoc {
+    padding-bottom: 0 !important;
+  }
+
+  .VPDoc .content {
+    padding-bottom: 40px !important;
+  }
+}
+
 /* ==========================================================================
    Full page width in documentation and add-ons with nav on screen borders
    ========================================================================== */
 
-@media (min-width: 960px) {
-  .VPNavBar.has-sidebar .container {
-    max-width: 100% !important;
-  }
+.VPNavBar .container {
+  max-width: 100% !important;
 }
 
 @media (min-width: 1440px) {
@@ -648,6 +660,10 @@ img.inline-image,
 }
 
 @media (min-width: 768px) and (max-width: 1060px) {
+  .VPNavBar .wrapper {
+    padding: 0 16px 0 32px !important;
+  }
+
   .VPNavScreen {
     display: block !important;
   }

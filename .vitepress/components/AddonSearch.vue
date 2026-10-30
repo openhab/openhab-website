@@ -195,7 +195,7 @@ onMounted(async () => {
 }
 
 .filter {
-  width: 90%;
+  width: 100%;
   font-size: 1.1rem;
   padding: 0.8rem 1rem 0.8rem 2.5rem;
   border: 1px solid var(--vp-c-border, #ccc);
@@ -264,6 +264,7 @@ h3.addon-type {
 .addons {
   list-style-type: none;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   padding-left: 0;
   margin-left: 0 !important;
