@@ -29,15 +29,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useData } from 'vitepress'
+import { data as versionsData } from '../loaders/versions.data'
 
 const { page, theme } = useData()
 
-const currentVersion = ref('Pull Request')
-const stableVersion = ref('')
-const latestVersion = ref('')
-const previousVersions = ref<any[]>([])
+const currentVersion = computed(() => (theme.value as any).docsVersion || 'Pull Request')
+const stableVersion = computed(() => versionsData.currentVersion)
+const latestVersion = computed(() => versionsData.currentSnapshotVersion)
+const previousVersions = computed(() => versionsData.previousVersions)
 const archiveDropdownOpen = ref(false)
 
 function siteUrl(version: any) {
@@ -54,21 +55,6 @@ function siteUrl(version: any) {
   }
   return null
 }
-
-onMounted(async () => {
-  currentVersion.value = (theme.value as any).docsVersion || 'Latest'
-  try {
-    // Attempt to load download page frontmatter if present
-    const downloadData = await import('../../download/index.md')
-    if (downloadData && downloadData.frontmatter) {
-      stableVersion.value = downloadData.frontmatter.currentVersion || ''
-      latestVersion.value = (downloadData.frontmatter.currentSnapshotVersion || '').replace('-SNAPSHOT', '')
-      previousVersions.value = downloadData.frontmatter.previousVersions || []
-    }
-  } catch {
-    // Fallback if not loaded
-  }
-})
 </script>
 
 <style scoped>

@@ -17,7 +17,7 @@ export { data }
 export default createContentLoader('addons/**/*.md', {
   transform(raw): Addon[] {
     return raw
-      .filter(({ url }) => url !== '/addons/' && url !== '/addons/readme.html' && url !== '/addons/index.html')
+      .filter(({ frontmatter }) => Boolean(frontmatter.id))
       .map(({ url, frontmatter }) => ({
         url,
         id: frontmatter.id,

@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { withBase } from 'vitepress'
 
 const GA_ID = 'UA-47717934-1'
@@ -86,6 +86,8 @@ function removeGoogleAnalyticsScript() {
 }
 
 onMounted(() => {
+  (window as any).gaOptout = reject
+
   const cookies = document.cookie
   const hasConsent = cookies.split('; ').some((cookie) => cookie.startsWith('Consent='))
   consentAlreadySet.value = hasConsent
@@ -99,6 +101,12 @@ onMounted(() => {
     if (consentValue.value === 1) {
       addGoogleAnalyticsScript()
     }
+  }
+})
+
+onUnmounted(() => {
+  if ((window as any).gaOptout === reject) {
+    delete (window as any).gaOptout
   }
 })
 </script>

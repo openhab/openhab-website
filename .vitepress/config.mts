@@ -104,7 +104,12 @@ function transformDocsSidebar(items: any[]): DefaultTheme.SidebarItem[] {
         collapsed = true
       }
 
-      const link = item.path || item.link ? (item.path || item.link).replace(/\/+/g, '/') : undefined
+      const rawLink = item.path || item.link
+      const link = rawLink
+        ? /^https?:\/\//.test(rawLink)
+          ? rawLink
+          : rawLink.replace(/\/+/g, '/')
+        : undefined
       const text = item.title || item.text || (link ? getPageTitle(link.replace(/^\/docs\/?/, '')) : undefined)
 
       return {
@@ -180,6 +185,9 @@ export default defineConfig({
     ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-icon.png' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:image', content: 'https://www.openhab.org/og-image.png' }],
+    ['link', { rel: 'alternate', type: 'application/rss+xml', title: 'openHAB Blog (RSS)', href: '/rss.xml' }],
+    ['link', { rel: 'alternate', type: 'application/atom+xml', title: 'openHAB Blog (Atom)', href: '/feed.atom' }],
+    ['link', { rel: 'alternate', type: 'application/json', title: 'openHAB Blog (JSON)', href: '/feed.json' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
     ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap' }],
@@ -602,6 +610,12 @@ export default defineConfig({
         { text: 'User Interface', collapsed: true, items: addonsUi },
       ],
     },
+    docsVersion: process.env.OH_DOCS_VERSION === 'final-stable'
+      ? 'Stable'
+      : process.env.OH_DOCS_VERSION === 'final'
+        ? 'Latest'
+        : 'Pull Request',
+  } as DefaultTheme.Config & { docsVersion: string },
   },
   buildEnd: genFeed
 })

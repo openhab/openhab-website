@@ -575,6 +575,25 @@ img.inline-image,
   max-width: 100% !important;
 }
 
+@media (min-width: 960px) {
+  .VPSidebar {
+    top: calc(var(--vp-layout-top-height, 0px) + var(--vp-nav-height)) !important;
+    padding-top: 24px !important;
+  }
+
+  .VPSidebar .curtain {
+    display: none !important;
+  }
+
+  .VPNavBar.has-sidebar .title {
+    background-color: var(--vp-sidebar-bg-color) !important;
+  }
+
+  .dark .VPNavBar.has-sidebar .title {
+    background-color: #000000 !important;
+  }
+}
+
 @media (min-width: 1440px) {
   .VPNavBar.has-sidebar .title {
     padding-left: 32px !important;
