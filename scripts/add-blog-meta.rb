@@ -34,8 +34,8 @@ def process_file(src, dst)
 
       og_title = line.gsub("title: ", "").gsub("\n", "") if in_frontmatter && line =~ /^title:/
 
-      # detect if meta: block already exists in frontmatter to avoid duplicate insertion
-      meta_present = true if in_frontmatter && line =~ /^\s*meta:/
+      # detect if head: block already exists in frontmatter to avoid duplicate insertion
+      meta_present = true if in_frontmatter && line =~ /^\s*(?:head|meta):/
 
       if in_frontmatter && line =~ /^excerpt:/
         og_description = line.gsub("excerpt: ", "").gsub("\n", "").gsub("[", "").gsub("]", "").gsub(%r{\(http[:/\-0-9A-Za-z\.]+\)}, "")
@@ -54,15 +54,21 @@ def process_file(src, dst)
         if in_frontmatter
           # Add OpenGraph tags
           unless meta_present
-            out.puts "meta:"
-            out.puts "  - name: twitter:card"
-            out.puts "    content: summary_large_image"
-            out.puts "  - property: og:title"
-            out.puts "    content: \"#{og_title.gsub('"', '\\"')}\""
-            out.puts "  - property: og:description"
-            out.puts "    content: #{og_description}"
-            out.puts "  - property: og:image" if og_image
-            out.puts "    content: https://www.openhab.org#{og_image}" if og_image
+            out.puts "head:"
+            out.puts "  - - meta"
+            out.puts "    - name: twitter:card"
+            out.puts "      content: summary_large_image"
+            out.puts "  - - meta"
+            out.puts "    - property: og:title"
+            out.puts "      content: \"#{og_title.gsub('"', '\\"')}\""
+            out.puts "  - - meta"
+            out.puts "    - property: og:description"
+            out.puts "      content: #{og_description}"
+            if og_image
+              out.puts "  - - meta"
+              out.puts "    - property: og:image"
+              out.puts "      content: https://www.openhab.org#{og_image}"
+            end
 
             # Add feed meta tags, when something relevant is available
             if !fm_author.nil? || !og_image.nil?

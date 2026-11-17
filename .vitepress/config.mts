@@ -616,6 +616,31 @@ export default defineConfig({
         ? 'Latest'
         : 'Pull Request',
   } as DefaultTheme.Config & { docsVersion: string },
+  /**
+   * Converts Vuepress {@code frontmatter.meta} entries into Vitepress {@code frontmatter.head <meta>} tags.
+   * @param pageData
+   */
+  transformPageData(pageData) {
+    const meta = pageData.frontmatter?.meta
+    if (Array.isArray(meta)) {
+      pageData.frontmatter.head ??= []
+      for (const entry of meta) {
+        if (!entry || typeof entry !== 'object' || !entry.content) continue
+        const attrs: Record<string, string> = { content: String(entry.content) }
+        if (entry.property) {
+          attrs.property = String(entry.property)
+        } else if (entry.name) {
+          if (String(entry.name).startsWith('og:')) {
+            attrs.property = String(entry.name)
+          } else {
+            attrs.name = String(entry.name)
+          }
+        } else {
+          continue
+        }
+        pageData.frontmatter.head.push(['meta', attrs])
+      }
+    }
   },
   buildEnd: genFeed
 })

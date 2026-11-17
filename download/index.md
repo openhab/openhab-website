@@ -30,11 +30,13 @@ previousVersions:
     website: https://v30.openhab.org/
   - version: "2.5"
     website: https://v2.openhab.org/
-meta:
-  - name: og:title
-    content: Download openHAB
-  - name: og:description
-    content: a vendor and technology agnostic open source automation software for your home
+head:
+  - - meta
+    - property: og:title
+      content: Download openHAB
+  - - meta
+    - property: og:description
+      content: a vendor and technology agnostic open source automation software for your home
 ---
 
 <style>

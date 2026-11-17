@@ -2,11 +2,13 @@
 sidebar: false
 layout: AboutPage
 title: openHAB Trademark Policy
-meta:
-  - name: og:title
-    content: openHAB Trademark Policy
-  - name: og:description
-    content: a vendor and technology agnostic open source automation software for your home
+head:
+  - - meta
+    - property: og:title
+      content: openHAB Trademark Policy
+  - - meta
+    - property: og:description
+      content: a vendor and technology agnostic open source automation software for your home
 ---
 
 <small>_Effective as of March 1, 2023_</small>

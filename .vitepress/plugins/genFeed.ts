@@ -3,15 +3,30 @@ import { writeFileSync } from 'fs'
 import { type SiteConfig, createContentLoader } from 'vitepress'
 import { Feed } from 'feed'
 
+function findHeadMeta(post: any, key: string): string | undefined {
+  const head = post.frontmatter.head
+  if (Array.isArray(head)) {
+    const match = head.find(
+      (item: any) =>
+        Array.isArray(item) &&
+        item[0] === 'meta' &&
+        item[1] &&
+        (item[1].property === key || item[1].name === key)
+    )
+    if (match?.[1]?.content) return match[1].content
+  }
+  return post.frontmatter.meta?.find(
+    (m: any) => m.property === key || m.name === key
+  )?.content
+}
+
 function resolveDescription(post: any): string {
   if (post.frontmatter.description) {
     return post.frontmatter.description
   }
 
-  // Look for og:description inside meta frontmatter
-  const ogDesc = post.frontmatter.meta?.find(
-    (m: any) => m.property === 'og:description' || m.name === 'description'
-  )?.content
+  // Look for og:description or description inside head/meta frontmatter
+  const ogDesc = findHeadMeta(post, 'og:description') || findHeadMeta(post, 'description')
 
   if (ogDesc) return ogDesc
 
@@ -31,7 +46,7 @@ function resolveImage(post: any, baseUrl: string): string | undefined {
   const img =
     post.frontmatter.feed?.image ||
     post.frontmatter.previewimage ||
-    post.frontmatter.meta?.find((m: any) => m.property === 'og:image')?.content
+    findHeadMeta(post, 'og:image')
 
   if (!img) return undefined
   return img.startsWith('http') ? img : `${baseUrl}${img}`

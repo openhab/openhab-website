@@ -2,11 +2,13 @@
 sidebar: false
 layout: AboutPage
 title: Feed Overview
-meta:
-  - name: og:title
-    content: openHAB Feed overview
-  - name: og:description
-    content: Feeds provided from and for the openHAB smarthome system
+head:
+  - - meta
+    - property: og:title
+      content: openHAB Feed overview
+  - - meta
+    - property: og:description
+      content: Feeds provided from and for the openHAB smarthome system
 ---
 
 This is an overview of the different feeds, openHAB is offering

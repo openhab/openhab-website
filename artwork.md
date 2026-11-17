@@ -2,11 +2,13 @@
 sidebar: false
 layout: AboutPage
 title: openHAB Artwork
-meta:
-  - name: og:title
-    content: openHAB Artwork
-  - name: og:description
-    content: a vendor and technology agnostic open source automation software for your home
+head:
+  - - meta
+    - property: og:title
+      content: openHAB Artwork
+  - - meta
+    - property: og:description
+      content: a vendor and technology agnostic open source automation software for your home
 ---
 
 <style>

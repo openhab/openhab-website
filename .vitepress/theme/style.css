@@ -513,7 +513,10 @@ img.img-beside-text-left {
   max-width: 100%;
 }
 
-.vp-doc small {
+.vp-doc p[align="center"] small,
+.vp-doc div[align="center"] small,
+.vp-doc img + small,
+.vp-doc p:has(> img) > small {
   display: block;
   text-align: center;
   color: var(--vp-c-text-2, #666);

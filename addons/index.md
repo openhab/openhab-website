@@ -33,11 +33,13 @@ initial_gallery:
     description: "These add-ons allow users to interact with openHAB using additional user interfaces."
     featured: ["basic", "habpanel", "habot", "cometvisu"]
     all: true
-meta:
-  - name: og:title
-    content: openHAB Add-ons
-  - name: og:description
-    content: a vendor and technology agnostic open source automation software for your home
+head:
+  - - meta
+    - property: og:title
+      content: openHAB Add-ons
+  - - meta
+    - property: og:description
+      content: a vendor and technology agnostic open source automation software for your home
 ---
 
 <h1 class="welcome">Add-on Reference</h1>

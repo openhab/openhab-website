@@ -3,11 +3,13 @@ sidebar: false
 layout: AboutPage
 title: Showcase & How-tos
 fullWidth: true
-meta:
-  - name: og:title
-    content: openHAB Showcase & How-tos
-  - name: og:description
-    content: a vendor and technology agnostic open source automation software for your home
+head:
+  - - meta
+    - property: og:title
+      content: openHAB Showcase & How-tos
+  - - meta
+    - property: og:description
+      content: a vendor and technology agnostic open source automation software for your home
 ---
 
 <style>
