@@ -70,8 +70,16 @@ const events = computed(() => {
 .events-container {
   position: relative;
   width: 100%;
+  height: clamp(450px, 38vw, 600px);
   overflow: hidden;
-  min-height: 400px;
+}
+
+.events-container :deep(img) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 .events-text {
   position: absolute;
