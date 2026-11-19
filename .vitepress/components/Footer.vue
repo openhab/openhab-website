@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer :class="{ 'has-sidebar': hasSidebar }">
     <ScrollOnReveal :scale="0.5">
       <a href="#app">
         <img
@@ -39,9 +39,11 @@
 
 <script setup lang="ts">
 import { useData, withBase } from 'vitepress'
+import { useSidebar } from 'vitepress/theme'
 import ScrollOnReveal from './ScrollOnReveal.vue'
 
 const { isDark } = useData()
+const { hasSidebar } = useSidebar()
 const year = new Date().getFullYear()
 </script>
 
@@ -97,9 +99,16 @@ footer {
   color: #777;
 }
 
+@media (min-width: 960px) {
+  footer.has-sidebar {
+    padding-left: calc(var(--vp-sidebar-width) + 2.5rem);
+  }
+}
+
 @media print {
   footer {
     background-color: transparent;
+    padding-left: 2.5rem;
   }
   .social-icons,
   .legal-links,

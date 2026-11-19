@@ -16,7 +16,7 @@
       <div class="dropdown-wrapper" :class="{ archiveDropdownOpen }">
         <a class="dropdown-title" @click="archiveDropdownOpen = !archiveDropdownOpen">
           <span class="title">Archived</span>
-          <span class="arrow down"></span>
+          <span class="vpi-chevron-down chevron-icon" :class="{ open: archiveDropdownOpen }" aria-hidden="true"></span>
         </a>
         <ul class="nav-dropdown" v-show="archiveDropdownOpen">
           <li v-for="version in previousVersions" :key="version.version" class="dropdown-item">
@@ -99,10 +99,19 @@ function siteUrl(version: any) {
   margin-top: 0.5rem;
 }
 .dropdown-title {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-size: 13px;
   color: var(--vp-c-text-2, #666);
   cursor: pointer;
+}
+.chevron-icon {
+  font-size: 14px;
+  transition: transform 0.25s;
+}
+.chevron-icon.open {
+  transform: rotate(-90deg);
 }
 .nav-dropdown {
   list-style: none;
