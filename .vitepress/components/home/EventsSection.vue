@@ -74,6 +74,9 @@ const events = computed(() => {
   overflow: hidden;
 }
 
+.events-container :deep(.parallaxy) {
+  height: calc(100% + 120px);
+}
 .events-container :deep(img) {
   width: 100%;
   height: 100%;
