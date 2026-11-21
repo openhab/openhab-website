@@ -588,22 +588,22 @@ img.inline-image,
     display: none !important;
   }
 
-  .VPNavBar.has-sidebar .title {
+  .VPNavBar.has-sidebar .container > .title {
     background-color: var(--vp-sidebar-bg-color) !important;
   }
 
-  .dark .VPNavBar.has-sidebar .title {
+  .dark .VPNavBar.has-sidebar .container > .title {
     background-color: #000000 !important;
   }
 }
 
 @media (min-width: 1440px) {
-  .VPNavBar.has-sidebar .title {
+  .VPNavBar.has-sidebar .container > .title {
     padding-left: 32px !important;
     width: var(--vp-sidebar-width) !important;
   }
 
-  .VPNavBar.has-sidebar .content {
+  .VPNavBar.has-sidebar .container > .content {
     padding-right: 32px !important;
     padding-left: var(--vp-sidebar-width) !important;
   }
