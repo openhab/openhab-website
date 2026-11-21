@@ -9,6 +9,23 @@ tags:
   - news
 excerpt: >-
   A new major release of openHAB is here! openHAB 5.0 comes with a lot of exciting new features and improvements, including Matter support, a new Python Scripting add-on and a ton of other enhancements.
+head:
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - property: og:title
+      content: "openHAB 5.0 Release"
+  - - meta
+    - property: og:description
+      content: "A new major release of openHAB is here! openHAB 5.0 comes with a lot of exciting new features and improvements, including Matter support, a new Python Scripting add-on and a ton of other enhancements."
+  - - meta
+    - property: og:image
+      content: "https://www.openhab.org/uploads/2025-07-21-openhab-5-0-release/header.webp"
+feed:
+  image: "https://www.openhab.org/uploads/2025-07-21-openhab-5-0-release/header.webp"
+  author:
+    - name: "Florian Hotze and others"
 ---
 
 A new major release of openHAB is here!

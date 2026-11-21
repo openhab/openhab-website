@@ -9,6 +9,23 @@ tags:
   - news
 excerpt: >-
   A new major release has arrived! openHAB 4 brings some exciting new features and several improvements for our users as well as our developers!
+head:
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - property: og:title
+      content: "openHAB 4.0 Release"
+  - - meta
+    - property: og:description
+      content: "A new major release has arrived! openHAB 4 brings some exciting new features and several improvements for our users as well as our developers!"
+  - - meta
+    - property: og:image
+      content: "https://www.openhab.org/uploads/2023-07-23-openhab-4-0-release/header.jpg"
+feed:
+  image: "https://www.openhab.org/uploads/2023-07-23-openhab-4-0-release/header.jpg"
+  author:
+    - name: "Florian Hotze and others"
 ---
 A new major release has arrived! openHAB 4 brings some exciting new features and several improvements for our users as well as our developers!
 

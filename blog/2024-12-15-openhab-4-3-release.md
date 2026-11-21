@@ -10,6 +10,23 @@ tags:
 excerpt: >-
   We are pleased to announce the release of openHAB 4.3!
   This traditional winter release introduces numerous new features and enhancements to the openHAB ecosystem, paving the way for our next major release.
+head:
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - property: og:title
+      content: "openHAB 4.3 Release"
+  - - meta
+    - property: og:description
+      content: "We are pleased to announce the release of openHAB 4.3! This traditional winter release introduces numerous new features and enhancements to the openHAB ecosystem, paving the way for our next major release."
+  - - meta
+    - property: og:image
+      content: "https://www.openhab.org/uploads/2024-12-15-openhab-4-3-release/header.webp"
+feed:
+  image: "https://www.openhab.org/uploads/2024-12-15-openhab-4-3-release/header.webp"
+  author:
+    - name: "Florian Hotze and others"
 ---
 
 We are pleased to announce the release of openHAB 4.3!

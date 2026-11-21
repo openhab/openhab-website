@@ -1,94 +1,60 @@
 # frozen_string_literal: true
 
 # Adds the OpenGraph & Twitter meta tags to the blog articles
+require "date"
 require "fileutils"
+require "json"
 require "pathname"
 require "tmpdir"
+require "yaml"
 
 REPO_ROOT = Pathname(__dir__).parent.realpath
 
+DEFAULT_DESCRIPTION = "a vendor and technology agnostic open source automation software for your home"
+SITE = "https://www.openhab.org"
+
+def clean_description(text)
+  text.to_s
+      .gsub(/\[([^\]]*)\]\([^)]*\)/, '\1') # markdown links -> link text
+      .gsub("&colon;", ":")
+      .gsub(/\s+/, " ")
+      .strip
+end
+
+def absolute_url(path)
+  path.start_with?("/") ? "#{SITE}#{path}" : path
+end
+
 def process_file(src, dst)
-  in_frontmatter = false
-  parsing_multiline_excerpt = false
-  og_title = "openHAB"
-  og_description = "a vendor and technology agnostic open source automation software for your home"
-  og_image = nil
+  content = File.read(src)
+  match = content.match(/\A(---\r?\n)(.*?)(^---\r?\n)/m)
+  return File.write(dst, content) unless match
 
-  # Feed Meta
-  fm_author = nil
-  meta_present = false
+  frontmatter = YAML.safe_load(match[2], permitted_classes: [Date, Time]) || {}
+  # Leave posts that already have head: or meta: untouched
+  return File.write(dst, content) if frontmatter.key?("head") || frontmatter.key?("meta")
 
-  File.open(dst, "w+") do |out|
-    File.open(src).each do |line|
-      # FIXME: require "yaml" and parse properly one day...
-      if parsing_multiline_excerpt
-        if line =~ /^  /
-          og_description += " "
-          og_description += line.gsub(/^  /, "").gsub("\n", "")
-          next
-        else
-          og_description.strip!
-          parsing_multiline_excerpt = false
-        end
-      end
+  og_title = frontmatter["title"].to_s.strip
+  og_title = "openHAB" if og_title.empty?
+  og_description = clean_description(frontmatter["excerpt"])
+  og_description = DEFAULT_DESCRIPTION if og_description.empty?
+  og_image = frontmatter["previewimage"]&.to_s
+  author = frontmatter["author"]&.to_s
 
-      og_title = line.gsub("title: ", "").gsub("\n", "") if in_frontmatter && line =~ /^title:/
+  # JSON strings are valid YAML double-quoted scalars, so this is always safe
+  meta = +"head:\n"
+  meta << "  - - meta\n    - name: twitter:card\n      content: summary_large_image\n"
+  meta << "  - - meta\n    - property: og:title\n      content: #{og_title.to_json}\n"
+  meta << "  - - meta\n    - property: og:description\n      content: #{og_description.to_json}\n"
+  meta << "  - - meta\n    - property: og:image\n      content: #{absolute_url(og_image).to_json}\n" if og_image
 
-      # detect if head: block already exists in frontmatter to avoid duplicate insertion
-      meta_present = true if in_frontmatter && line =~ /^\s*(?:head|meta):/
-
-      if in_frontmatter && line =~ /^excerpt:/
-        og_description = line.gsub("excerpt: ", "").gsub("\n", "").gsub("[", "").gsub("]", "").gsub(%r{\(http[:/\-0-9A-Za-z\.]+\)}, "")
-        if og_description == ">-"
-          og_description = ""
-          parsing_multiline_excerpt = true
-          next
-        end
-      end
-
-      og_image = line.gsub("previewimage: ", "").gsub("\n", "") if in_frontmatter && line =~ /^previewimage:/
-
-      fm_author = line.gsub("author: ", "").gsub("\n", "") if in_frontmatter && line =~ /^author:/
-
-      if line =~ /^---$/
-        if in_frontmatter
-          # Add OpenGraph tags
-          unless meta_present
-            out.puts "head:"
-            out.puts "  - - meta"
-            out.puts "    - name: twitter:card"
-            out.puts "      content: summary_large_image"
-            out.puts "  - - meta"
-            out.puts "    - property: og:title"
-            out.puts "      content: \"#{og_title.gsub('"', '\\"')}\""
-            out.puts "  - - meta"
-            out.puts "    - property: og:description"
-            out.puts "      content: #{og_description}"
-            if og_image
-              out.puts "  - - meta"
-              out.puts "    - property: og:image"
-              out.puts "      content: https://www.openhab.org#{og_image}"
-            end
-
-            # Add feed meta tags, when something relevant is available
-            if !fm_author.nil? || !og_image.nil?
-              out.puts "feed:"
-              out.puts "  image: https://www.openhab.org#{og_image}" if og_image
-              out.puts "  author:"
-              out.puts "    - name: #{fm_author}"
-            end
-          end
-
-          in_frontmatter = false
-        else
-          in_frontmatter = true
-          meta_present = false
-        end
-      end
-
-      out.puts line
-    end
+  if author || og_image
+    meta << "feed:\n"
+    meta << "  image: #{absolute_url(og_image).to_json}\n" if og_image
+    meta << "  author:\n    - name: #{author.to_json}\n" if author
   end
+
+  File.write(dst, content.sub(match[0]) { "#{match[1]}#{match[2]}#{meta}#{match[3]}" })
 end
 
 puts "➡️ Adding metadata to blog posts"

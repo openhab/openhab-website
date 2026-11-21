@@ -9,6 +9,23 @@ tags:
   - news
 excerpt: >-
   Can you believe it's already been a year since the major release of openHAB 5.0? We are thrilled to introduce openHAB 5.2, packed with exciting new features, plenty of bug fixes and amazing new AI features!
+head:
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - property: og:title
+      content: "openHAB 5.2 Release"
+  - - meta
+    - property: og:description
+      content: "Can you believe it's already been a year since the major release of openHAB 5.0? We are thrilled to introduce openHAB 5.2, packed with exciting new features, plenty of bug fixes and amazing new AI features!"
+  - - meta
+    - property: og:image
+      content: "https://www.openhab.org/uploads/2026-07-05-openhab-5-2-release/header.webp"
+feed:
+  image: "https://www.openhab.org/uploads/2026-07-05-openhab-5-2-release/header.webp"
+  author:
+    - name: "Florian Hotze and others"
 ---
 
 Can you believe it's already been a year since the major release of openHAB 5.0?

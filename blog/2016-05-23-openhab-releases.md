@@ -11,6 +11,23 @@ tags:
 modified_time: '2016-05-23T00:00:00.001+02:00'
 excerpt_separator: <!-- more -->
 previewimage : /uploads/2016-05_building.jpg
+head:
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - property: og:title
+      content: "openHAB 2.0 beta3 Release"
+  - - meta
+    - property: og:description
+      content: "a vendor and technology agnostic open source automation software for your home"
+  - - meta
+    - property: og:image
+      content: "https://www.openhab.org/uploads/2016-05_building.jpg"
+feed:
+  image: "https://www.openhab.org/uploads/2016-05_building.jpg"
+  author:
+    - name: "Kai Kreuzer"
 ---
 
 Some time has passed since the openHAB 2.0 beta2 release and a lot development efforts were done - so it was clearly time to [release openHAB 2.0 beta3](https://github.com/openhab/openhab-distro/releases/tag/2.0.0.b3). I see that many openHAB contributors and users are moving over from 1.x by looking at the activity in our forum and there has been very positive feedback regarding the stability.

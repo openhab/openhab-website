@@ -95,6 +95,7 @@ export async function genFeed(config: SiteConfig): Promise<void> {
       guid: postUrl,
       date: new Date(post.frontmatter.date),
       description: resolveDescription(post),
+      ...(post.frontmatter.feed?.author ? { author: post.frontmatter.feed.author } : {}),
       ...(imageUrl ? { image: imageUrl } : {})
     })
   }

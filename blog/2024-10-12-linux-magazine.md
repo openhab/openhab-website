@@ -10,6 +10,23 @@ tags:
 excerpt: >-
   Introducing openHAB in the Linux Magazine - I am excited to share my openHAB introduction article in the Linux Magazine,
   explaining the basic concepts of openHAB, briefly reviewing its history and guiding step-by-step through installation and first setup!
+head:
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - property: og:title
+      content: "openHAB @ Linux Magazine"
+  - - meta
+    - property: og:description
+      content: "Introducing openHAB in the Linux Magazine - I am excited to share my openHAB introduction article in the Linux Magazine, explaining the basic concepts of openHAB, briefly reviewing its history and guiding step-by-step through installation and first setup!"
+  - - meta
+    - property: og:image
+      content: "https://www.openhab.org/uploads/2024-10-12-linux-magazine/header.webp"
+feed:
+  image: "https://www.openhab.org/uploads/2024-10-12-linux-magazine/header.webp"
+  author:
+    - name: "Florian Hotze"
 ---
 ## Introducing openHAB in the Linux Magazine
 

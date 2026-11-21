@@ -11,6 +11,23 @@ excerpt: >-
   A full year has passed since openHAB 2.4 and a lot has happened meanwhile. A
   new release is overdue and we are happy to announce the new 2.5 release to all
   of you today!
+head:
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - property: og:title
+      content: "openHAB 2.5 Release"
+  - - meta
+    - property: og:description
+      content: "A full year has passed since openHAB 2.4 and a lot has happened meanwhile. A new release is overdue and we are happy to announce the new 2.5 release to all of you today!"
+  - - meta
+    - property: og:image
+      content: "https://www.openhab.org/uploads/lights.jpg"
+feed:
+  image: "https://www.openhab.org/uploads/lights.jpg"
+  author:
+    - name: "Kai Kreuzer"
 ---
 A full year has passed since openHAB 2.4 and a lot has happened meanwhile. A new release is overdue and we are happy to announce the new 2.5 release to all of you today!
 

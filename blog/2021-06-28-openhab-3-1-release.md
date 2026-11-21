@@ -9,6 +9,23 @@ tags:
   - news
 excerpt: >-
   Our summer release openHAB 3.1 is out! It improves many details over 3.0 and again comes with a huge list of new add-ons.
+head:
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - property: og:title
+      content: "openHAB 3.1 Release"
+  - - meta
+    - property: og:description
+      content: "Our summer release openHAB 3.1 is out! It improves many details over 3.0 and again comes with a huge list of new add-ons."
+  - - meta
+    - property: og:image
+      content: "https://www.openhab.org/uploads/2021-06_summer.jpg"
+feed:
+  image: "https://www.openhab.org/uploads/2021-06_summer.jpg"
+  author:
+    - name: "Kai Kreuzer"
 ---
 Our summer release openHAB 3.1 is out! It improves many details over 3.0 and again comes with a huge list of new add-ons.
 

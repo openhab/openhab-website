@@ -12,6 +12,23 @@ excerpt: >-
   your MQTT capable device into openHAB. If your device follows any supported
   MQTT convention, it got even simpler with full auto-discovery of all device
   capabilities.
+head:
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - property: og:title
+      content: "MQTT Arrives in the Modern openHAB 2.x Architecture"
+  - - meta
+    - property: og:description
+      content: "The new MQTT bindings allow an easy point and click configuration to include your MQTT capable device into openHAB. If your device follows any supported MQTT convention, it got even simpler with full auto-discovery of all device capabilities."
+  - - meta
+    - property: og:image
+      content: "https://www.openhab.org/uploads/mqttblog.jpg"
+feed:
+  image: "https://www.openhab.org/uploads/mqttblog.jpg"
+  author:
+    - name: "David Graeff"
 ---
 openHAB 2.4 brings a few noticeable features, one of them is a new way of integrating your MQTT devices. What is MQTT actually? And how does the new implementation differ from what was already available?
 

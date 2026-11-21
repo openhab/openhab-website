@@ -9,6 +9,23 @@ tags:
 modified_time: '2016-12-15T12:00:00.001+02:00'
 excerpt_separator: <!-- more -->
 previewimage : /uploads/2016-12_takeoff.jpg
+head:
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - property: og:title
+      content: "The openHAB Foundation is Ready for Takeoff!"
+  - - meta
+    - property: og:description
+      content: "a vendor and technology agnostic open source automation software for your home"
+  - - meta
+    - property: og:image
+      content: "https://www.openhab.org/uploads/2016-12_takeoff.jpg"
+feed:
+  image: "https://www.openhab.org/uploads/2016-12_takeoff.jpg"
+  author:
+    - name: "Kai Kreuzer"
 ---
 
 Since the inception of the idea to start a nonprofit organization around openHAB, some time has passed and we have been working intensively on making it happen!
