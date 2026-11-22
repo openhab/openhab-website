@@ -9,6 +9,23 @@ tags:
   - news
 excerpt: >-
   The next major release has arrived with openHAB 3! This is exciting news for our community, as it makes openHAB more modern, simpler and yet more powerful.
+head:
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - property: og:title
+      content: "openHAB 3.0 Release"
+  - - meta
+    - property: og:description
+      content: "The next major release has arrived with openHAB 3! This is exciting news for our community, as it makes openHAB more modern, simpler and yet more powerful."
+  - - meta
+    - property: og:image
+      content: "https://www.openhab.org/uploads/wintertrees.jpg"
+feed:
+  image: "https://www.openhab.org/uploads/wintertrees.jpg"
+  author:
+    - name: "Kai Kreuzer and Yannick Schaus"
 ---
 The next major release has arrived with openHAB 3! This is exciting news for our community, as it makes openHAB more modern, simpler and yet more powerful.
 

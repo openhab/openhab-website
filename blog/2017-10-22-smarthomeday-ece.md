@@ -11,6 +11,23 @@ tags:
 modified_time: '2017-10-31T00:00:00.001+00:00'
 previewimage : /uploads/2017-10_smarthomeday.jpg
 excerpt_separator: <!-- more -->
+head:
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - property: og:title
+      content: "Smart Home Day @ EclipseCon Europe 2017"
+  - - meta
+    - property: og:description
+      content: "a vendor and technology agnostic open source automation software for your home"
+  - - meta
+    - property: og:image
+      content: "https://www.openhab.org/uploads/2017-10_smarthomeday.jpg"
+feed:
+  image: "https://www.openhab.org/uploads/2017-10_smarthomeday.jpg"
+  author:
+    - name: "Kai Kreuzer"
 ---
 
 Similar to every year since 2006, [EclipseCon Europe 2017](https://www.eclipsecon.org/europe2017/) took place at the end of October in Ludwigsburg, Germany, and it was packed with great talks and content all around the Eclipse universe.

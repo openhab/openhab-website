@@ -2,11 +2,13 @@
 sidebar: false
 layout: AboutPage
 title: openHAB Trademark Policy - Frequently Asked Questions
-meta:
-  - name: og:title
-    content: openHAB Trademark Policy FAQ
-  - name: og:description
-    content: a vendor and technology agnostic open source automation software for your home
+head:
+  - - meta
+    - property: og:title
+      content: openHAB Trademark Policy FAQ
+  - - meta
+    - property: og:description
+      content: a vendor and technology agnostic open source automation software for your home
 ---
 
 This document answers some of frequently asked questions (FAQs) about the openHAB's trademarks and their allowable uses. Be sure to review our [Trademark Policy](/about/trademark), which outlines important requirements for any uses of openHAB marks.

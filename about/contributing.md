@@ -2,11 +2,13 @@
 sidebar: false
 layout: AboutPage
 title: Contribute
-meta:
-  - name: og:title
-    content: Contribute to openHAB
-  - name: og:description
-    content: a vendor and technology agnostic open source automation software for your home
+head:
+  - - meta
+    - property: og:title
+      content: Contribute to openHAB
+  - - meta
+    - property: og:description
+      content: a vendor and technology agnostic open source automation software for your home
 ---
 
 <style>

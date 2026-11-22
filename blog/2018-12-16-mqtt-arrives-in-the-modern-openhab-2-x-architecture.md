@@ -12,6 +12,23 @@ excerpt: >-
   your MQTT capable device into openHAB. If your device follows any supported
   MQTT convention, it got even simpler with full auto-discovery of all device
   capabilities.
+head:
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - property: og:title
+      content: "MQTT Arrives in the Modern openHAB 2.x Architecture"
+  - - meta
+    - property: og:description
+      content: "The new MQTT bindings allow an easy point and click configuration to include your MQTT capable device into openHAB. If your device follows any supported MQTT convention, it got even simpler with full auto-discovery of all device capabilities."
+  - - meta
+    - property: og:image
+      content: "https://www.openhab.org/uploads/mqttblog.jpg"
+feed:
+  image: "https://www.openhab.org/uploads/mqttblog.jpg"
+  author:
+    - name: "David Graeff"
 ---
 openHAB 2.4 brings a few noticeable features, one of them is a new way of integrating your MQTT devices. What is MQTT actually? And how does the new implementation differ from what was already available?
 
@@ -25,9 +42,7 @@ If you haven't heard about MQTT yet, it is probably time to have a [look](https:
 > 
 > Information is organized in a hierarchy of topics."
 
-<p align="center">
-<img src="/uploads/2018-12_esh_mqtt-MQTT-Overview.png" title="MQTT Overview with Broker and clients">
-</p>
+![MQTT Overview with Broker and Clients](/uploads/2018-12_esh_mqtt-mqtt-overview.png)
 
 In recent years MQTT got a lot of attention for the Internet of Things,
 Maker and DIY culture as well as home automation purposes.
@@ -52,9 +67,11 @@ What happens on the MQTT level for the command topic is:
 
 <ol>
   <li>The target device <b>subscribes</b> to the command topic <code>home/office/lamp/set</code>:
-<p align="center"> <img src="/uploads/2018-12_esh_mqtt-mqttpublishsubscribe1.png" alt="MQTT Command Topic Subscribe"> </p>
+    <p align="center"><img src="/uploads/2018-12_esh_mqtt-mqttpublishsubscribe1.png" alt="MQTT Command Topic Subscribe" /></p>
+  </li>
   <li>openHAB <b>publishes</b> via the MQTT connection to the command topic <code>home/office/lamp/set</code>:
-<p align="center"> <img src="/uploads/2018-12_esh_mqtt-mqttpublishsubscribe2.png" alt="MQTT Command Topic Publish"> </p>
+    <p align="center"><img src="/uploads/2018-12_esh_mqtt-mqttpublishsubscribe2.png" alt="MQTT Command Topic Publish" /></p>
+  </li>
 </ol>
 
 MQTT doesn't restrict you on what to publish as topic values and it is not part of the standard how to express a boolean or enumeration value.

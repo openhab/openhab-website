@@ -5,11 +5,13 @@ layout: HomeLayout
 # alert_link: /blog/
 # alert_label: Read More
 pageClass: homepage
-meta:
-  - name: og:title
-    content: openHAB
-  - name: og:description
-    content: a vendor and technology agnostic open source automation software for your home
+head:
+  - - meta
+    - property: og:title
+      content: openHAB
+  - - meta
+    - property: og:description
+      content: a vendor and technology agnostic open source automation software for your home
 ---
 
 <HomeSections />

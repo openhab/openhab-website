@@ -9,6 +9,23 @@ tags:
   - news
 excerpt: >-
   As usual before christmas, we are happy to announce a new release of openHAB, that brings many additions, improvements and fixes!
+head:
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - property: og:title
+      content: "openHAB 4.1 Release"
+  - - meta
+    - property: og:description
+      content: "As usual before christmas, we are happy to announce a new release of openHAB, that brings many additions, improvements and fixes!"
+  - - meta
+    - property: og:image
+      content: "https://www.openhab.org/uploads/2023-12-22-openhab-4-1-release/header.jpg"
+feed:
+  image: "https://www.openhab.org/uploads/2023-12-22-openhab-4-1-release/header.jpg"
+  author:
+    - name: "Florian Hotze and others"
 ---
 The first minor release of openHAB 4 has arrived! openHAB 4.1 brings several improvements and bugfixes as well as some nice additions!
 

@@ -9,6 +9,23 @@ tags:
   - news
 excerpt: >- 
   "My call to action for our community: Keep in mind (at every occasion) that we have marketing goals. Let's turn interested people into amateurs and turn amateurs into community members. Let's grow the community!"
+head:
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - property: og:title
+      content: "Why should we – as the openHAB community – be present at events?"
+  - - meta
+    - property: og:description
+      content: "\"My call to action for our community: Keep in mind (at every occasion) that we have marketing goals. Let's turn interested people into amateurs and turn amateurs into community members. Let's grow the community!\""
+  - - meta
+    - property: og:image
+      content: "https://www.openhab.org/uploads/190606_why_be_present.jpg"
+feed:
+  image: "https://www.openhab.org/uploads/190606_why_be_present.jpg"
+  author:
+    - name: "Stephan Luckow"
 ---
 My call to action for our community: Keep in mind (at every occasion) that we have marketing goals. Let's turn interested people into amateurs and turn amateurs into community members. Let's grow the community!
 

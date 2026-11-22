@@ -11,6 +11,23 @@ tags:
   - eclipsecon
   - smarthomeday
 excerpt: ' '
+head:
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+  - - meta
+    - property: og:title
+      content: "Smart Home Day @ EclipseCon Europe 2018"
+  - - meta
+    - property: og:description
+      content: "a vendor and technology agnostic open source automation software for your home"
+  - - meta
+    - property: og:image
+      content: "https://www.openhab.org/uploads/2018-10_ludwigsburg.jpg"
+feed:
+  image: "https://www.openhab.org/uploads/2018-10_ludwigsburg.jpg"
+  author:
+    - name: "Kai Kreuzer"
 ---
 Another year has passed and [EclipseCon Europe 2018](https://www.eclipsecon.org/europe2018/) took place in Ludwigsburg, Germany - and with it, our second edition of a colocated [Smart Home Day](https://www.eclipsecon.org/europe2018/smarthome).
 
